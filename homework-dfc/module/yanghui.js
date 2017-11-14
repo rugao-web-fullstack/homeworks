@@ -3,9 +3,7 @@ module.exports = function(n){
 	for(var i=0;i<n;i++){
 		arr[i] = [];
 	}
-	if(n<0){
-		console.log('输入错误');
-	}else if(n>2){
+	if(n>=1){
 		for(var i=0;i<n;i++){
 			for(var j=0;j<i+1;j++){
 				if(j==0||j==i){
