@@ -5,6 +5,6 @@ var  rl = readline.createInterface({
 	output:process.stdout
 });
 rl.question("请输入行数:",function(answer){
-	yanghui(answer);
-    	rl.close();
+	console.log(yanghui(answer));
+	rl.close();
 });
