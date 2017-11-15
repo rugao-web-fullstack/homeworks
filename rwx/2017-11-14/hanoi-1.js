@@ -1,6 +1,8 @@
 function mv(n, src, des, moves) {
     moves.push([n, src, des]);
-    console.log("at " + n + " layer, from " + src + " to " + des);
+    if (process.env.NODE_DEBUG) {
+        console.log("at " + n + " layer, from " + src + " to " + des);        
+    }
 }
 
 function hanoi(n, src, mid, des, moves) {
