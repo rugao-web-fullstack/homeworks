@@ -14,5 +14,5 @@ module.exports = function(m) {
 			}
 		}
 	}
-    return array
+    return array;
 }
