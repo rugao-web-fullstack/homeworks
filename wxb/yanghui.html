@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>杨辉三角</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <!--<script src="js/jquery-3.2.1.js"></script>-->
+</head>
+<body>
+
+<script>
+    function array(i, j) {
+        if (j == 0) {
+            return 1;
+        } else if (i == j) {
+            return 1;
+        } else {
+            return array(i - 1, j - 1) + array(i - 1, j);
+        }
+    }
+
+    function yanghui(n) {
+        for (var i = 0; i < n; i++) {
+            for (var j = 0; j <= i; j++) {
+                document.write(array(i, j)+" ");
+            }
+            document.write("<br/>");
+        }
+    }
+
+    var n=prompt("请输入杨辉三角的行数：");
+    yanghui(n);
+</script>
+</head>
+</body>
+</html>
+
+
