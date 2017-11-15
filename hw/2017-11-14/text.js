@@ -1,9 +1,9 @@
-const Fib= require('./Fibonacci');
+const Fib = require('./fibonacci');
 const readline = require('readline');
 var rl = readline.createInterface({
 	input:process.stdin,
 	output:process.stdout
 });
-rl.question("请输入需要的输出长度：",function(n){
+rl.question('Please enter what you want:', function(n){
 	console.log(Fib(n));
 })
