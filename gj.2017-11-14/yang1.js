@@ -5,6 +5,7 @@ function evaluate(r, c) {
     if (r == c) return 1;
     return evaluate(r - 1, c - 1) + evaluate(r - 1, c);
 }
+
 function y(n) {
     var res = [];
     for (var i = 0; i < n; i++) {
