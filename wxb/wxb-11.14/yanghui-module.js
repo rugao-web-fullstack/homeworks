@@ -1,21 +1,21 @@
-var array1 = new Array();
+var array = new Array();
 module.exports = function yanghui(n) {
-    function array(i, j) {
+    function add(i, j) {
         if (j == 0) {
             return 1;
         } else if (i == j) {
             return 1;
         } else {
-            return array(i - 1, j - 1) + array(i - 1, j);
+            return add(i - 1, j - 1) + add(i - 1, j);
         }
     }
 
     for (var i = 0; i < n; i++) {
         for (var j = 0; j <= i; j++) {
-            array1.push(array(i, j));
+            array.push(add(i, j));
         }
         // documen"<br/>");
-        array1.push(" ");
+        array.push(" ");
     }
-    return array1;
+    return array;
 }
