@@ -1,5 +1,4 @@
 //杨辉三角
-
 function evaluate(r, c) {
     if (c == 0) return 1;
     if (r == c) return 1;
@@ -16,5 +15,4 @@ function y(n) {
     }
     return res;
 }
-
 module.exports = y;
