@@ -10,6 +10,7 @@ module.exports=function fib(n) {
     }
     for (var i=0;i<n;i++) {
         array.push(fn(i));
-        console.log(array[i]);
+        // console.log(array[i]);
     }
+    return array;
 };
