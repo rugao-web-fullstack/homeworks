@@ -6,10 +6,10 @@ const server = net.createServer((socket) => {
 	socket.write('closeServer!\n');
 	socket.on('data', (data) => {
 		if(data == "close"){
-			socket.end("断开与服务器连接/n");
+			socket.end("断开与服务器连接！/n");
 		}
 		if(data == "closeServer"){
-            socket.end("服务器已关闭/n");
+            socket.end("服务器已关闭！/n");
 			process.exit();
         }
 	});
