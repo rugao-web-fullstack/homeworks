@@ -1,7 +1,7 @@
 const User = require("./user").User;
 const Message = require("./message").Message;
 const EventEmitter = require('events');
-var readline = require('readline');
+const readline = require('readline');
 const emitter = new EventEmitter();
 const user = new User(emitter);
 const message = new Message(emitter);
