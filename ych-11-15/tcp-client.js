@@ -4,7 +4,6 @@ const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
-
 const client = new net.Socket();
 client.connect(8080, "localhost", () => {
     rl.on("line", (line) => {
