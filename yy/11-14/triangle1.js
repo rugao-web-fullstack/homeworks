@@ -1,6 +1,6 @@
 function evaluate(r,c){
-	if (c===0) return 1;
-	if (r===c) return 1;
+	if (c === 0) return 1;
+	if (r === c) return 1;
 	return evaluate(r-1,c-1)+evaluate(r-1,c);
 }
 
