@@ -1,14 +1,10 @@
 function Message(e) {
 	this.e = e;
-	e.on('user_register', (user, arr) => {
-		this.onUserRegister(user, arr);
+	e.on('user_register', (user) => {
+		this.onUserRegister(user);
 	})
 }
-Message.prototype.onUserRegister = function(user, arr) {
-	arr.push({
-		'username': user.username,
-		'pwd': user.pwd,
-	});
+Message.prototype.onUserRegister = function(user) {
 	console.log('注册成功！');
 }
 exports.Message = Message;

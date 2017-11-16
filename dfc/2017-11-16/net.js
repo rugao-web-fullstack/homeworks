@@ -50,10 +50,14 @@ const server = net.createServer((socket) => {
 			} else if(reg_flag === 2) {
 				pwd = Data;
 				reg_flag = 1;
-				user.register(username, pwd, users);
+				user.register(username, pwd);
+				users.push({
+					'username' : username,
+					'pwd' : pwd
+				})
 				flag = 0;
 				socket.write("注册成功\n");
-				socket.write("用户名：" + users[users.length - 1].username + "\n密码：" + users[users.length - 1].pwd + "\n");
+				socket.write("用户名：" + username + "\n密码：" + pwd + "\n");
 				Show();
 			}
 		}
