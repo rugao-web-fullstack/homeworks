@@ -1,4 +1,4 @@
-tion Message(e) {
+function Message(e) {
 	this.e = e;
 	e.on('user_register', (user, arr) => {
 		this.onUserRegister(user, arr);
