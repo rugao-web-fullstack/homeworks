@@ -9,8 +9,7 @@ function hanoi(n, a, b, c, moves) {
 	if (n == 1) {
 		move(n, a, c, moves);
 		return;
-	}
-	else {
+	} else {
 		hanoi(n - 1, a, c, b, moves);
 		move(n, a, c, moves);
 		hanoi(n - 1, b, a, c, moves);
