@@ -12,7 +12,7 @@ const server = http.createServer((req, res) => {
 	setInterval(() => {
 		let date = "" + new Date() + "\n";
 		res.write(Buffer.from(date));
-	},100);
+	}, 100);
 	//res.setHeader("Content-Type", "text-plain");
 	//res.end("Hello world");
 });
