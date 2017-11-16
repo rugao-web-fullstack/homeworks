@@ -8,7 +8,7 @@ var user = new User(emiter);
 var message = new Message(emiter, arr);
 var socks = new Array();
 
-var server = tcp.createServer((socket) = > {
+var server = tcp.createServer((socket) => {
     socket.write('请输入用户名密码和邮箱，用&隔开\n');
 socket.on('data', function (data) {
     var msg = data.toString();
@@ -22,14 +22,12 @@ socket.on('data', function (data) {
 });
 
 
-})
-;
+});
 server.listen(process.env.NODE_PORT || 8080);
-server.on('connection', (socket) = > {
+server.on('connection', (socket) => {
     socks.push(socket);
 
-})
-;
+});
 
 function Sends(send, rinfo) {
     for (var i = 0; i < socks.length; i++) {

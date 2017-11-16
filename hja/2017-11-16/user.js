@@ -8,7 +8,7 @@ User.prototype.register = function (username, password, email) {
     this.password = password;
     this.email = email;
     this.event.emit('register', this);
-}
+};
 User.m = '123';
 exports.User = User;
 
