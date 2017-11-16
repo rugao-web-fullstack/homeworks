@@ -10,9 +10,9 @@ module.exports = function (num) {
         if(n == 1){
             Move(a, b);
         }else{
-            Han(a, c, b, n-1);
+            Han(a, c, b, n - 1);
             Move(a, b);
-            Han(c, b, a, n-1);
+            Han(c, b, a, n - 1);
         }
     }
 
