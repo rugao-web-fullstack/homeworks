@@ -2,16 +2,14 @@ function yang(row) {
     //---定义数组
     var arr = new Array();
     //---循环遍历
-    for(var i = 0;i < row;i++){
-        if(i === 0){
+    for(var i = 0; i < row; i++) {
+        if(i === 0) {
             arr.push(1);
-        }
-        else if(i === 1){
+        } else if(i === 1) {
             arr = new Array();
             arr.push(1);
             arr.push(1);
-        }
-        else{
+        } else {
             //--新建数组
             var arr2 = new Array();
             //--开头一个1
