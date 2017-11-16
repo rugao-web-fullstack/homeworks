@@ -1,20 +1,15 @@
-var step = 0;
 var arr = [];
-
-function hanoi(num) {
-    move("1", "3", num);
+function hunt(n) {
+    hanoi(n, "a", "b", "c");
     return arr;
 }
-
-function move(start, end, move_num) {
-    if (move_num == 1) {
-        arr.push("第" + (++step) + "步 " + start + "---->" + end);
+function hanoi(n, a, b, c) {
+    if (n === 1) {
+        arr.push([n,a,c]);
     } else {
-        var other = "123".replace(start, "").replace(end, "");
-        move(start, other, move_num - 1);
-        move(start, end, 1);
-        move(other, end, move_num - 1);
+        hanoi(n - 1, a, c, b);
+        arr.push([n,a,c]);
+        hanoi(n - 1, b, a, c);
     }
 }
-
-module.exports = hanoi;
+module.exports = hunt;
