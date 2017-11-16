@@ -4,7 +4,7 @@ module.exports = function gitFib(n) {
 	while (i <= n) {
 		if (i == 1 || i == 2) {
 			fibarr.push(1);
-		}else {
+		} else {
 			fibarr.push(fibarr[i - 2] + fibarr[i - 3]);
 		}
 		i++;
