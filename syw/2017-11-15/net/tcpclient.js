@@ -6,17 +6,17 @@ const rl = readline.createInterface({
 });
 
 const client = new net.Socket();
-client.connect(8080,"localhost",() => {
-    rl.on("line",(line) => {
+client.connect(8080, "localhost", () => {
+    rl.on("line", (line) => {
         client.write(line);
     })
 })
-client.on("data",(data) => {
+client.on("data", (data) => {
     console.log(data.toString());
 })
-client.on("end",() => {
+client.on("end", () => {
     process.exit();
 })
-client.on("error",(err) => {
+client.on("error", (err) => {
     process.exit();
 }) 
