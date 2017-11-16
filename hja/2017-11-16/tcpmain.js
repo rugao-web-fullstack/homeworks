@@ -1,11 +1,11 @@
 var tcp = require('net');
-var arr = new Array();
+var userArr = new Array();
 var User = require('./user.js').User;
 var Message = require('./message.js').Message;
 var EventEmit = require('events');
 var emiter = new EventEmit();
 var user = new User(emiter);
-var message = new Message(emiter, arr);
+var message = new Message(emiter, userArr);
 var socks = new Array();
 
 var server = tcp.createServer((socket) => {
@@ -16,7 +16,7 @@ socket.on('data', function (data) {
     var pwd = msg.split('&')[1];
     var email = msg.split('&')[2].split('\r\n')[0];
     user.register(name, pwd, email);
-    var send = Buffer.from(arr[0]);
+    var send = Buffer.from(userArr[0]);
     Sends(send, socket);
 
 });

@@ -1,4 +1,4 @@
-function Message(event, arr) {
+function Message(event, userArr) {
 
     this.event = event;
     console.log('创建message对象');
@@ -6,8 +6,8 @@ function Message(event, arr) {
     this.event.on('register', (user) => {
         console.log('register事件触发');
     var x = this.email(user);
-    arr.splice(0, 1);
-    arr.push(x);
+    userArr.splice(0, 1);
+    userArr.push(x);
 });
 }
 
