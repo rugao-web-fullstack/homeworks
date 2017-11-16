@@ -1,10 +1,10 @@
 const net = require("net");
 const EventEmitter = require('events');
 const User = require('./user.js').User;
-const Event_register = require('./event_register.js').Register;
+const Message = require('./event_register.js').Message;
 const emitter = new EventEmitter();
 const user = new User(emitter);
-const event_register = new Event_register(emitter);
+const message = new Message(emitter);
 let users = [];
 const server = net.createServer((socket) => {
 	let flag = 0;
@@ -12,10 +12,13 @@ const server = net.createServer((socket) => {
 	let username = '';
 	let pwd = '';
 	//  let repwd = '';
-	socket.write("请输入序号执行指令\n");
-	socket.write("1.注册\n");
-	socket.write("2.打印用户列表\n");
-	socket.write("3.退出程序\n");
+	function Show() {
+		socket.write("请输入序号执行指令\n");
+		socket.write("1.注册\n");
+		socket.write("2.打印用户列表\n");
+		socket.write("3.退出程序\n");
+	}
+	Show();
 	socket.on('data', (data) => {
 		var Data = data.toString().replace(/[\r\n]/g, '');
 		console.log(Data);
@@ -32,10 +35,7 @@ const server = net.createServer((socket) => {
 						socket.write(i + 1 + "." + users[i].username + '\n');
 					}
 					flag = 0;
-					socket.write("请输入序号执行指令\n");
-					socket.write("1.注册\n");
-					socket.write("2.打印用户列表\n");
-					socket.write("3.退出程序\n");
+					Show();
 				} else if(flag === 3) {
 					socket.end();
 				}
@@ -54,10 +54,7 @@ const server = net.createServer((socket) => {
 				flag = 0;
 				socket.write("注册成功\n");
 				socket.write("用户名：" + users[users.length - 1].username + "\n密码：" + users[users.length - 1].pwd + "\n");
-				socket.write("请输入序号执行指令\n");
-				socket.write("1.注册\n");
-				socket.write("2.打印用户列表\n");
-				socket.write("3.退出程序\n");
+				Show();
 			}
 		}
 	})

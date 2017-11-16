@@ -1,14 +1,14 @@
-function Register(e) {
+tion Message(e) {
 	this.e = e;
 	e.on('user_register', (user, arr) => {
-		this.inputUser(user, arr);
+		this.onUserRegister(user, arr);
 	})
 }
-Register.prototype.inputUser = function(user, arr) {
+Message.prototype.onUserRegister = function(user, arr) {
 	arr.push({
 		'username': user.username,
 		'pwd': user.pwd,
 	});
 	console.log('注册成功！');
 }
-exports.Register = Register;
+exports.Message = Message;
