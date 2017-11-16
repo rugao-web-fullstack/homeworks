@@ -1,6 +1,6 @@
-var n = process.argv.splice(2)[0];
+﻿var n = process.argv.splice(2)[0];
 var fbnc = require("./fbnc.js");
-if(n<=0){
+if (n<=0){
 	console.log("input error");
 	return 0;
 }
