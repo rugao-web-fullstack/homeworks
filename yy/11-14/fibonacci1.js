@@ -12,7 +12,7 @@ function fibonacci(n) {
   }
 }
 
-module.exports=function(x) {
+module.exports = function(x) {
   let res = [];
   for (var i = 0; i < x; i++) {
     res[i] = fibonacci(i);
