@@ -1,5 +1,5 @@
 function hnt(n, a, b, c){
-    if(n===1){
+    if (n===1){
         console.log("Move "+ n +" from "+ a +" to "+ c );
     }else{
         hnt(n-1, a, c, b);
