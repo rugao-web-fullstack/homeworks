@@ -9,11 +9,11 @@ function login(socket) {
             let userName = data.split(" ")[0];
             let password = data.split(" ")[1];
             if (userArr.checkUser(userName, password)) {
-                if(userArr[userName].isOnline()){
+                if (userArr[userName].isOnline()) {
                     socket.write("该账户已经登陆!\n");
                     socket.removeListener("data", fn);
                     socket.emit("mainPage");
-                }else{
+                } else {
                     socket.removeListener("data", fn);
                     socket.write("账户登录成功!\n");
                     userArr[userName].online(socket); //用户上线.
