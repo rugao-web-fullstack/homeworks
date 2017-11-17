@@ -31,7 +31,7 @@ User.prototype.reciveMail = function (sender, mailMessage) {
     var obj = {}
     obj.sender = sender;
     obj.mailMessage = mailMessage;
-    obj.time = new Date().toLocaleDateString();
+    obj.time = new Date().toLocaleString();
     this.mail.push(obj);
 }
 
