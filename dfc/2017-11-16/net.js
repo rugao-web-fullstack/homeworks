@@ -3,15 +3,16 @@ const EventEmitter = require('events');
 const User = require('./user.js').User;
 const Message = require('./event_register.js').Message;
 const emitter = new EventEmitter();
+let sockets = [];
+let users = [];
 const user = new User(emitter);
 const message = new Message(emitter);
-let users = [];
 const server = net.createServer((socket) => {
 	let flag = 0;
 	let reg_flag = 1;
 	let username = '';
 	let pwd = '';
-	//  let repwd = '';
+	sockets.push(socket);
 	function Show() {
 		socket.write("请输入序号执行指令\n");
 		socket.write("1.注册\n");
@@ -55,6 +56,7 @@ const server = net.createServer((socket) => {
 					'username' : username,
 					'pwd' : pwd
 				})
+				emitter.emit("user-register", socket, users);
 				flag = 0;
 				socket.write("注册成功\n");
 				socket.write("用户名：" + username + "\n密码：" + pwd + "\n");

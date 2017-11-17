@@ -1,10 +1,10 @@
-function User(e) {
-	this.e = e;
-	console.log('user:register');
+function User(event) {
+	this.event = event;
+	console.log("user: constructor");
 }
-User.prototype.register = function(username, pwd) {
+User.prototype.register = function(username, password) {
+	console.log("user: register");
 	this.username = username;
-	this.pwd = pwd;
-	this.e.emit('user_register', this);
-}
+	this.password = password;
+};
 exports.User = User;
