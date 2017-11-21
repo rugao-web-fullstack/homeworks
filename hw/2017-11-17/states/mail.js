@@ -214,31 +214,19 @@ Mail.prototype.getMailList = function (socket) {
     	return mails;
 }
 
-//主页面接收用户输入的函数
-//@param {*} machine 
-//@param {*} socket 
-//@param {*} data 
 Mail.prototype.stateReadHome = function (machine, socket, data) {
     	socket.write('\n请输入你要查看的邮件ID:\n');
-    	let user = UserManager.getUserBySocket(socket);
-    	console.log("user");
-    	console.log(user);
-    	if (!user) {
-        	socket.write("你尚未登录!");
-        	return;
-    	}
-    	let mails = MailManager.get(user.email);
-    	console.log("mails");
-    	console.log(mails);
-    	if (!mails || mails.length < 1) {
-        	socket.write("你邮件列表为空!");
-        	return; 
-    	}
+    	let mails = this.getMailList(socket);
     	for(let i = 0; i < mails.length; i++) {
         	socket.write("id: " + i + ', 标题: ' + mails[i].mail.title + "\n");
     	}
     	machine.action = 'wait';
 }
+
+//主页面接收用户输入的函数
+//@param {*} machine 
+//@param {*} socket 
+//@param {*} data 
 
 Mail.prototype.stateReadWait = function (machine, socket, data) {
     	console.log("state read wait");
