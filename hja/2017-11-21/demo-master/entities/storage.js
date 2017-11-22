@@ -3,6 +3,10 @@ const util = require('util');
 
 function Storage(filename) {
     this.filename = filename;
+    this.create();
+}
+Storage.prototype.create = function () {
+    const ws = fs.createWriteStream(this.filename);
 }
 
 Storage.prototype.save = function (json, callback) {
@@ -26,15 +30,13 @@ Storage.prototype.read = function (callback) {
     rs.on("end", function () {
         try {
             let maxLength = 0;
-            for (let i = 0; i < data.length; i++) {
+            for(let i = 0; i < data.length; i++) {
                 maxLength += data[i].length;
-                // console.log("chunk" + data[i]);
+
             }
-            // console.log('data.length' + data.length);
+
             let str = String(Buffer.concat(data, maxLength));
-            // console.log("str = ");
-            // console.log(str);
-            // console.log(str.length);
+
             if (str.length) {
                 let json = JSON.parse(str);
                 callback(false, json);
