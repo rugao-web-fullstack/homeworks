@@ -1,10 +1,12 @@
 let users = {};
 const path = require("path");
 const fs = require("fs");
+const Storage = require("./storage.js").Storage;
 const filename = "../data/user.json";
 const FILENAME = path.resolve(path.dirname(__filename), filename);
 
 let sockets = {}
+let storage = new Storage(FILENAME);
 
 function User(username, password) {
     this.username = username;
@@ -90,15 +92,16 @@ function writeFile(callback) {
         }
     }
     var str = JSON.stringify(arr);
-    fs.writeFile(FILENAME, str, function (err) {
-        if (callback) {
+
+    storage.save(str,function(err){
+        if(callback){
             callback(err);
         }
     });
 }
 //将用户数组从文件中读取出来
 function readFile(callback) {
-    fs.readFile(FILENAME, (err, data)=> {
+    storage.read((err, data)=> {
         if (data) {
             var arr = JSON.parse(data);
             var username = "";
