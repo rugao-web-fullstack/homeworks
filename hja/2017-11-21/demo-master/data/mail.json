@@ -1,0 +1,127 @@
+{
+  "ui1": [
+    {
+      "read": false,
+      "mail": {
+        "sender": "ui2",
+        "receiver": "ui1",
+        "title": "yti",
+        "body": "dedfe"
+      }
+    },
+    {
+      "read": false,
+      "mail": {
+        "sender": "ui2",
+        "receiver": "ui1",
+        "title": "con",
+        "body": "concon\n\rconceeeeee"
+      }
+    },
+    {
+      "read": false,
+      "mail": {
+        "sender": "ui2",
+        "receiver": "ui1",
+        "title": "con",
+        "body": "daeoudhaoi"
+      }
+    },
+    {
+      "read": false,
+      "mail": {
+        "sender": "ui2",
+        "receiver": "ui1",
+        "title": "wwww",
+        "body": "dwadaw"
+      }
+    },
+    {
+      "read": false,
+      "mail": {
+        "sender": "ui2",
+        "receiver": "ui1",
+        "title": "i",
+        "body": "dawdawd"
+      }
+    },
+    {
+      "read": false,
+      "mail": {
+        "sender": "ui4",
+        "receiver": "ui1",
+        "title": "wwwww",
+        "body": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
+      }
+    }
+  ],
+  "ui2": [
+    {
+      "read": false,
+      "mail": {
+        "sender": "ui1",
+        "receiver": "ui2",
+        "title": "wo",
+        "body": "fqwwheidf"
+      }
+    },
+    {
+      "read": false,
+      "mail": {
+        "sender": "ui1",
+        "receiver": "ui2",
+        "title": "wew",
+        "body": "con"
+      }
+    },
+    {
+      "read": false,
+      "mail": {
+        "sender": "ui4",
+        "receiver": "ui2",
+        "title": "we",
+        "body": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwww\n\rwewewewewewewe"
+      }
+    },
+    {
+      "read": false,
+      "mail": {
+        "sender": "ui1",
+        "receiver": "ui2",
+        "title": "ww",
+        "body": "eraerarw\n\rawrwara\n\rawrawraw\n\rdawawrfaw"
+      }
+    }
+  ],
+  "ui3": [
+    {
+      "read": false,
+      "mail": {
+        "sender": "ui1",
+        "receiver": "ui3",
+        "title": "waed",
+        "body": "co"
+      }
+    },
+    {
+      "read": false,
+      "mail": {
+        "sender": "ui1",
+        "receiver": "ui3",
+        "title": "ww",
+        "body": "eraerarw\n\rawrwara\n\rawrawraw"
+      }
+    }
+  ],
+  "ui5": [
+    {
+      "read": false,
+      "mail": {
+        "sender": "ui1",
+        "receiver": "ui5",
+        "title": "www",
+        "body": "fdaerarfarfaefaefae"
+      }
+    }
+  ]
+}
