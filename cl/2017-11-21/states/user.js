@@ -1,5 +1,3 @@
-const fs = require('fs'); 
-const rs = fs.createReadStream("./user.txt");
 let states = require("../states").states;
 const UserManager = require('../entities/user').User;
 
@@ -25,15 +23,25 @@ User.prototype.login = function (machine, socket, data) {
     input = input.split(" ");
     if (input.length === 2) {
         // User Register
-        if (UserManager.login(socket, input[0], input[1])) {
-            socket.write('\n登录成功！\n');
+        // if (UserManager.login(socket, input[0], input[1])) {
+        //     socket.write('\n登录成功！\n');
+        //     machine.state = states.USER_LOGIN;
+        //     machine.action = '';
+        //     machine.process(socket, data);
+        //     // socket.emit(states.USER_LOGIN, state, socket, null);
+        // } else {
+        //     socket.write('\n用户名或者密码不匹配！\n');
+        // }
+        UserManager.login(socket,input[0],input[1],function (error) {
+            if(error){
+                socket.write('登陆失败\n');
+                return;
+            }
+            socket.write('登录成功\n');
             machine.state = states.USER_LOGIN;
             machine.action = '';
-            machine.process(socket, data);
-            // socket.emit(states.USER_LOGIN, state, socket, null);
-        } else {
-            socket.write('\n用户名或者密码不匹配！\n');
-        }
+            machine.process(socket,data);
+        })
     } else {
         socket.write("输入错误!");
     }
@@ -91,26 +99,27 @@ User.prototype.loginWait = function (machine, socket, data) {
 }
 
 User.prototype.register = function (machine, socket, data) {
-const ws = fs.createWriteStream("./user.txt");
-let a = String(rs.read());
+    let $this = this;
     let input = machine.getCleanedString(socket, data);
     input = input.split(" ");
     if (input.length === 2) {
         // User Register
-        if (UserManager.register(socket, input[0], input[1])) {
-            socket.write('\n注册成功！\n');
-            this.loginWait(machine, socket, data);
-	    
-		ws.write(a + "username: " + input[0] +", password: " + input[1]);
-		ws.end("\n");
-		ws.on("finished", () => {
-			console.log("write finished");
-		});
-        } else {
-            socket.write('\n用户已经存在！\n');
-        }
+        // if (UserManager.register(socket, input[0], input[1])) {
+        //     socket.write('\n注册成功！\n');
+        //     this.loginWait(machine, socket, data);
+        // } else {
+        //     socket.write('\n用户已经存在！\n');
+        // }
+        UserManager.register(socket,input[0],input[1],function (error){
+                if(error){
+                    socket.write('注册失败\n');
+                    return;
+                }
+                socket.write('注册成功!\n');
+                $this.loginWait(machine, socket, data);
+        });
     } else {
-        socket.write("输入错误!");
+        socket.write("输入错误!\n");
     }
 };
 
