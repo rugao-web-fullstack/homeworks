@@ -1,5 +1,6 @@
-const User = require('./user').User;
+const User = require("./user").User;
 let mails = {};
+
 
 function Mail(sender, receiver, title, body) {
     this.sender = sender;
@@ -16,9 +17,19 @@ Mail.send = function (sender, receiver, title, body) {
         read: false,
         receiver: new Mail(sender, receiver, title, body)
     });
-    console.log(mails);
 };
+
+Mail.write = function (socket, sender, receiver, title, body) {
+    if (!User.isReceiverExist()) {
+        return false;
+    }
+    Mail.addMail(receiver, title, body);
+    return true;
+};
+
+
 Mail.list = function (receiver) {
     return mails[receiver];
-}
+};
+
 exports.Mail = Mail;
