@@ -12,35 +12,34 @@ function User(socket) {
         });
 }
 
-User.prototype.notLoginHome = function (machine, socket, data) {
+User.prototype.notLoginHome = function(machine, socket, data) {
     console.log("inside user not login");
     socket.write("欢迎来到XXX邮件系统！请选择:\n\t1.用户注册\n\t2.用户登录\n");
     machine.action = 'wait';
 }
 
-User.prototype.login = function (machine, socket, data) {
+User.prototype.login = function(machine, socket, data) {
     let input = machine.getCleanedString(socket, data);
     input = input.split(" ");
     if (input.length === 2) {
         // User Register
-		UserManager.login(socket, input[0], input[1], (err) => {
-			if (err) {
+        UserManager.login(socket, input[0], input[1], (err) => {
+            if (err) {
                 console.log(err);
-				socket.write('\n用户名或者密码不匹配！\n')
-                return ;
+                socket.write('\n用户名或者密码不匹配！\n')
+                return;
             }
-			socket.write('\n登录成功！\n');
+            socket.write('\n登录成功！\n');
             machine.state = states.USER_LOGIN;
             machine.action = '';
             machine.process(socket, data);
-            // socket.emit(states.USER_LOGIN, state, socket, null);
-		});
+        });
     } else {
         socket.write("输入错误!");
     }
 };
 
-User.prototype.notLoginWait = function (machine, socket, data) {
+User.prototype.notLoginWait = function(machine, socket, data) {
     let input = machine.getCleanedString(socket, data);
     console.log("input = " + input);
     switch (input) {
@@ -58,7 +57,7 @@ User.prototype.notLoginWait = function (machine, socket, data) {
     }
 }
 
-User.prototype.stateNotLogin = function (machine, socket, data) {
+User.prototype.stateNotLogin = function(machine, socket, data) {
     console.log("inside not login");
     if (!machine.action) {
         console.log("inside not login home");
@@ -81,37 +80,37 @@ User.prototype.stateNotLogin = function (machine, socket, data) {
     }
 };
 
-User.prototype.registerWait = function (machine, socket, data) {
+User.prototype.registerWait = function(machine, socket, data) {
     socket.write('\n请输入注册邮箱和密码，格式： 邮箱 密码\n');
     machine.action = 'register';
 }
 
-User.prototype.loginWait = function (machine, socket, data) {
+User.prototype.loginWait = function(machine, socket, data) {
     socket.write('\n请输入登录邮箱和密码，格式： 邮箱 密码\n');
     machine.action = 'login';
 }
 
-User.prototype.register = function (machine, socket, data) {
+User.prototype.register = function(machine, socket, data) {
     let input = machine.getCleanedString(socket, data);
     input = input.split(" ");
     if (input.length === 2) {
         // User Register
-		UserManager.register(socket, input[0], input[1], (err) => {
-			if (err) {
-				console.log(err);
-				socket.write('\n用户已经存在！\n');
-				console.log("regist err");
-				return;
-			}
-			socket.write('\n注册成功！\n');
+        UserManager.register(socket, input[0], input[1], (err) => {
+            if (err) {
+                console.log(err);
+                socket.write('\n用户已经存在！\n');
+                console.log("regist err");
+                return;
+            }
+            socket.write('\n注册成功！\n');
             this.loginWait(machine, socket, data);
-		});
+        });
     } else {
         socket.write("输入错误!");
     }
 };
 
-User.prototype.stateLogin = function (machine, socket, data) {
+User.prototype.stateLogin = function(machine, socket, data) {
     console.log("inside login");
     if (!machine.action) {
         console.log("inside not login home");
@@ -127,11 +126,11 @@ User.prototype.stateLogin = function (machine, socket, data) {
     }
 };
 
-User.prototype.loginHome = function (machine, socket, data) {
+User.prototype.loginHome = function(machine, socket, data) {
     socket.write("\n你已经成功登录邮件系统\n\t1.编写邮件\n\t2.查看邮件\n请输入：")
     machine.action = "wait";
 };
-User.prototype.homeWaite = function (machine, socket, data) {
+User.prototype.homeWaite = function(machine, socket, data) {
     let input = machine.getCleanedString(socket, data);
     console.log("input = " + input);
     switch (input) {
@@ -147,7 +146,7 @@ User.prototype.homeWaite = function (machine, socket, data) {
             socket.write("mail read");
             machine.state = states.MAIL_READ;
             machine.action = '';
-            socket.emit(states.MAIL_READ, machine, socket, data);            
+            socket.emit(states.MAIL_READ, machine, socket, data);
             break;
         default:
             console.log("inside not login wait default");

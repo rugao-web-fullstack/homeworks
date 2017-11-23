@@ -5,8 +5,7 @@ const Storage = require("./storage").Storage;
 const FILENAME = "../data/mail.json";
 const storage = new Storage(path.resolve(path.dirname(__filename), FILENAME));
 
-let mails = {
-};
+let mails = {};
 
 function Mail(sender, receiver, title, body) {
     this.sender = sender;
@@ -15,7 +14,7 @@ function Mail(sender, receiver, title, body) {
     this.body = body;
 }
 
-Mail.send = function (sender, receiver, title, body, cb) {
+Mail.send = function(sender, receiver, title, body, cb) {
     console.log("inside send")
     storage.read((error, mails) => {
         if (error) {
@@ -23,11 +22,11 @@ Mail.send = function (sender, receiver, title, body, cb) {
             cb(error);
             return;
         }
-	if (!mails) {
+        if (!mails) {
             mails = {};
         }
         if (!mails[receiver]) {
-            mails[receiver] = [];//初始化为数组
+            mails[receiver] = []; //初始化为数组
         }
         let mail = new Mail(sender, receiver, title, body);
 
@@ -42,13 +41,14 @@ Mail.send = function (sender, receiver, title, body, cb) {
                 return;
             }
             let receiverSocket = UserManager.getSocket(receiver);
+
             receiverSocket.emit(states.MAIL_NEW, sender, mail);
             cb(false);
         })
     });
 };
 
-Mail.get = function (user, cb) {
+Mail.get = function(user, cb) {
     storage.read((error, mails) => {
         if (error) {
             cb(error);
