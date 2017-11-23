@@ -5,9 +5,10 @@ function Storage(filename) {
     this.filename = filename;
     this.create();
 }
+
 Storage.prototype.create = function () {
     const ws = fs.createWriteStream(this.filename);
-}
+};
 
 Storage.prototype.save = function (json, callback) {
     const ws = fs.createWriteStream(this.filename);
@@ -30,7 +31,7 @@ Storage.prototype.read = function (callback) {
     rs.on("end", function () {
         try {
             let maxLength = 0;
-            for(let i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 maxLength += data[i].length;
 
             }
