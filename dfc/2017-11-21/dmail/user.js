@@ -8,30 +8,32 @@ const path = require('path');
 const Storage = require('./storage').Storage;
 const storage = new Storage(path.resolve(path.dirname(__filename), filename));
 
-function User(event) {
+function User(event, userlist) {
 	this.event = event;
+	this.userlist = userlist;
 	console.log("user: constructor");
 }
-User.prototype.register = function (username, password, socket, userlist) {
+User.prototype.register = function (username, password, socket) {
 	console.log("user: register");
 	storage.read((error, users) => {
 		if (error) {
 			console.error(error.stack);
 			return;
 		}
+		console.log(users);
 		users.push({
 			'username': username,
-			'password': password,
-			'socket': socket
+			'password': password
 		});
 		let userarr = [];
 		for (let i = 0; i < users.length; i++) {
-			userlist.push(users[i]);
+			let userid = users[i].username;
+			this.userlist.push({
+				userid: ''
+			});
 			userarr.push(users[i]);
-			if (users[i].socket !== '') {
-				userarr[i].socket = '';
-			}
 		}
+		this.userlist[username] = socket;
 		storage.save(userarr, (error) => {
 			if (error) {
 				console.error(error.stack);
@@ -42,7 +44,7 @@ User.prototype.register = function (username, password, socket, userlist) {
 		});
 	});
 };
-User.prototype.login = function (username, password, socket, userlist) {
+User.prototype.login = function (username, password, socket) {
 	console.log("user: login");
 	storage.read((error, users) => {
 		if (error) {
@@ -52,23 +54,20 @@ User.prototype.login = function (username, password, socket, userlist) {
 		var user = findUser(username);
 		if (user) {
 			if (user.password === password) {
-				if (userlist.length === 0) {
+				if (this.userlist.length === 0) {
 					console.log('用户表还是空的');
-					console.log(userlist);
+					console.log(this.userlist);
 					for (let i = 0; i < users.length; i++) {
-						if (users[i].username === username) {
-							users[i].socket = socket;
-						}
-						userlist.push(users[i]);
+						let userid = users[i].username;
+						this.userlist.push({
+							userid: ''
+						});
 					}
+					this.userlist[username] = socket;
 				} else {
 					console.log('用户表有东西了');
-					console.log(userlist);
-					for (let i = 0; i < users.length; i++) {
-						if (userlist[i].username === username) {
-							userlist[i].socket = socket;
-						}
-					}
+					console.log(this.userlist);
+					this.userlist[username] = socket;
 				}
 				emitter.emit("user-login", socket, true);
 			} else {

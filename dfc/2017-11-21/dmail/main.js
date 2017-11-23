@@ -3,8 +3,7 @@ const EventEmitter = require('events');
 const emitter = new EventEmitter();
 const User = require('./user').User;
 const Mail = require('./mail').Mail;
-const mail = new Mail(emitter);
-
+let mail = new Mail(emitter);
 //指令列表
 let commands = [{
 	act: 'signin',
@@ -37,8 +36,7 @@ let commands = [{
 	mes: '您已成功登出\n'
 }];
 let sockets = [];//登录用户列表
-var users = [];//注册用户列
-let testflag = '我是标志';
+let users = [];//注册用户列
 const server = net.createServer((socket) => {
 	let flag = 0;//初始化程序入口为选择程序入口
 	let username = '';
@@ -87,8 +85,7 @@ const server = net.createServer((socket) => {
 						socket.write('此功能不支持离线使用，请输入signin注册或login登录\n');
 					} else {
 						socket.write(commands[3].mes);
-						let usermail = [];//用户邮件列表
-						emitter.emit('read-maillist', findUser(username), usermail);
+						emitter.emit('read-maillist', username, socket);
 						flag = 4;
 					}
 					break;
@@ -98,7 +95,7 @@ const server = net.createServer((socket) => {
 					break;
 				case 'logout':
 					socket.write(commands[5].mes);
-					findUser(username).socket = '';
+					users[username] = '';
 					username = '';
 
 					break;
@@ -116,12 +113,11 @@ const server = net.createServer((socket) => {
 					let register_flag = true;
 					inputs = Data.split(",");
 					if (inputs.length === 2) {
-						let user = new User(emitter, users);
-						if (findUser(username)) {
+						if (users[inputs[0]]) {
 							emitter.emit("user-register", socket, false);
 						} else {
 							users = [];
-							user.register(inputs[0], inputs[1], socket, users);
+							user.register(inputs[0], inputs[1], socket);
 							username = inputs[0];
 							flag = 0;
 						}
@@ -132,10 +128,10 @@ const server = net.createServer((socket) => {
 				case 2:
 					inputs = Data.split(",");
 					if (inputs.length === 2) {
-						let user = new User(emitter);
+						let user = new User(emitter, users);
 						flag = 0;
 						username = inputs[0];
-						user.login(inputs[0], inputs[1], socket, users);
+						user.login(inputs[0], inputs[1], socket);
 					} else {
 						socket.write('您输入的内容格式有误，请重新输入\n');
 					}
@@ -143,9 +139,8 @@ const server = net.createServer((socket) => {
 				case 3:
 					inputs = Data.split(",");
 					if (inputs.length === 3) {
-						if (findUser(inputs[0])) {
-							let usermail = [];//用户邮件列表
-							emitter.emit('send-mail', findUser(inputs[0]), username, inputs[1], inputs[2], usermail);
+						if (users[inputs[0]]) {
+							emitter.emit('send-mail', inputs[0], username, inputs[1], inputs[2], users[inputs[0]]);
 							send_flag = false;
 							flag = 0;
 							socket.write('邮件发送成功\n');
@@ -160,7 +155,8 @@ const server = net.createServer((socket) => {
 					let cho = parseInt(Data);
 					if (cho !== NaN) {
 						let usermail = [];//用户邮件列表
-						emitter.emit('read-mailcontent', findUser(username), usermail, cho);
+						console.log(cho + '///////////////////')
+						emitter.emit('read-mailcontent', username, socket, cho);
 						flag = 0;
 					} else {
 						socket.write('您输入的内容格式有误，请重新输入\n');
@@ -182,12 +178,3 @@ let port = process.env.NODE_PORT || 8080;
 server.listen(port, () => {
 	console.log('Dmail服务开启');
 });
-function findUser(username) {
-	for (let i = 0; i < users.length; i++) {
-		if (username === users[i].username) {
-			console.log(users[i].socket);
-			return users[i];
-		}
-	}
-	return false;
-}

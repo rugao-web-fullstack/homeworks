@@ -35,7 +35,7 @@ Storage.prototype.read = function (callback) {
                 json = JSON.parse(str);
                 callback(false, json);
             } else {
-                callback(false, {});
+                callback(false, []);
             }
         } catch (e) {
             callback(e);
