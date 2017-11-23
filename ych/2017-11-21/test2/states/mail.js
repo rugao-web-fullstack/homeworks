@@ -129,7 +129,7 @@ Mail.prototype.stateWriteTitleWait = function (machine, socket, data) {
  * @param {*} data 
  */
 Mail.prototype.stateWriteBodyWait = function (machine, socket, data) {
-    socket.write("请输入邮件内容:\n")
+    socket.write("请输入邮件内容:\n");
     machine.action = 'body';
 };
 
@@ -141,13 +141,17 @@ Mail.prototype.getTitle = function (machine, socket, data) {
 
 Mail.prototype.getAddress = function (machine, socket, data) {
     let address = machine.getCleanedString(socket, data);
-    if (!UserManager.isAddress(address)) {
-        socket.write("地址不存在！请重新输入:\n");
-        return;
-    }
-    this.address = address;
-    socket.write("地址更新成功！当前地址是: " + this.address + "\n")
-    this.stateWriteHome(machine, socket, data);
+    UserManager.isAddress(address, (error) => {
+        if (error) {
+            this.address = address;
+            socket.write("地址更新成功！当前地址是: " + this.address + "\n")
+            this.stateWriteHome(machine, socket, data);
+        } else {
+            socket.write("地址不存在！请重新输入:\n");
+            return;
+        }
+    });
+
 };
 
 Mail.prototype.getBody = function (machine, socket, data) {
@@ -168,14 +172,13 @@ Mail.prototype.getBody = function (machine, socket, data) {
 
 Mail.prototype.sendMail = function (machine, socket, data) {
     let user = UserManager.getUserBySocket(socket);
-    if (!MailManager.send(
-        user.email,
-        this.address,
-        this.title,
-        this.body.join("\n\r"))) {
-        return socket.write("发送失败！\n");
-    }
-    return socket.write("邮件发送成功！\n");
+    MailManager.send(user,this.address,this.title,this.body.join("\n\r"),(error) => {
+        if(error){
+            return socket.write("发送失败！\n");
+        }else{
+            return socket.write("邮件发送成功！\n");
+        }
+    });
 };
 
 Mail.prototype.onNewMail = function (socket, sender, mail) {
@@ -212,7 +215,7 @@ Mail.prototype.getMailList = function (socket) {
         socket.write("你尚未登录!");
         return null;
     }
-    let mails = MailManager.get(user.email);
+    let mails = MailManager.get(user);
     console.log("mails");
     console.log(mails);
 

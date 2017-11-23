@@ -22,7 +22,7 @@ Storage.prototype.read = function (callback) {
     rs.on("end", function () {
         try {
             let maxLength = 0;
-            for(let i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 maxLength += data[i].length;
                 console.log("chunk" + data[i]);
             }
