@@ -54,15 +54,17 @@ function write(callback) {
 function read(callback) {
     storage.read((err, data) => {
         if (data) {
-            var arr = JSON.parse(data);
-            var username = "";
-            var password = "";
-            for (var i = 0; i < arr.length; i++) {
-                username = arr[i].username;
-                password = arr[i].password;
+            // console.log("data: "+data);
+            // ----data: {"username":"1223157723@qq.com","password":"weixinbo"},{"username":"1914047375@qq.com","password":"xinbo"}
+            for (var k in data) {
+                // console.log("data[k]:"+data[k]+":"+data[k].username);
+                // ---data[k]:{"username":"1223157723@qq.com","password":"weixinbo"}
+                var username = data[k].split(",")[0].split(":")[1];
+                var password = data[k].split(",")[1].split(":")[1];
                 users[username] = {
                     socket: null,
-                    user: new User(username, password)
+                    user: new User(username,
+                        password)
                 };
             }
         }
