@@ -1,31 +1,33 @@
-var fs = require('fs');
-var path = require('path');
-var filePath = path.resolve('..');
+var fs = require("fs");
+var path = require("path");
 
-function fileDisplay(filePath) {
+
+var filePath = path.resolve("./../");
+
+
+
+function file(filePath) {
     fs.readdir(filePath, function (err, files) {
         if (err) {
             console.warn(err);
         } else {
             files.forEach(function (filename) {
-                var filedir = path.join(filePath, filename);
-                fs.stat(filedir, function (eror, stats) {
-                    if (eror) {
-                        console.log('获取文件失败');
+                //获取当前文件的绝对路径
+                var filedirname = path.join(filePath, filename);
+                fs.stat(filedirname, function (err, stats) {
+                    if (err) {
+                        console.warn(err);
                     } else {
-                        var isFile = stats.isFile();//是文件  
-                        var isDir = stats.isDirectory();//是文件夹  
-                        if (isFile) {
-                            console.log(filedir);
-                        }
+                        var isDir = stats.isDirectory();
                         if (isDir) {
-                            fileDisplay(filedir);//递归，如果是文件夹，就继续遍历该文件夹下面的文件  
+                            console.log(filedirname);
+                            file(filedirname);
                         }
                     }
-                })
+                });
             });
         }
     });
 }
 
-fileDisplay(filePath);
+file(filePath);
