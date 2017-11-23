@@ -4,7 +4,9 @@ const path = require("path");
 const storage = new Storage(path.resolve(path.dirname(__filename), filename));
 
 
-let users = {};
+let users = {
+
+};
 
 let sockets = [];
 
@@ -53,13 +55,19 @@ User.login = function (socket, username, password, cb) {
             if (UsersInfo[username].user.username === username && UsersInfo[username].user.password === password) {
                 cb(false);
                 //---此时往sockets里加东西
+                for (let i = 0; i < sockets.length; i++) {
+                    if (sockets[i].nowUser === username) {
+                        sockets[i].socket = socket;
+                    }
+                }
                 sockets.push({
                     socket: socket,
                     nowUser: username
                 });
                 console.log(sockets);
                 return;
-            } else {
+            }
+            else {
                 cb(true);
             }
         }
@@ -69,7 +77,7 @@ User.login = function (socket, username, password, cb) {
 
 /**
  * 判断当前地址是不是有用户拥有
- * @param {*} address
+ * @param {*} address 
  */
 User.isAddress = function (address, cb) {
     console.log('isAdress\n');
@@ -94,7 +102,7 @@ User.isAddress = function (address, cb) {
 
 /**
  * 根据地址获取用户socket
- * @param {*} address
+ * @param {*} address 
  */
 User.getSocket = function (address) {
     for (var k in sockets) {
@@ -109,7 +117,7 @@ User.getSocket = function (address) {
 
 /**
  * 根据socket获取用户
- * @param {*} address
+ * @param {*} address 
  */
 User.getUserBySocket = function (socket, cb) {
     storage.read(function (error, UserInfo) {

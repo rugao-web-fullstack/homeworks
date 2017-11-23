@@ -21,5 +21,4 @@ const server = net.createServer(function (socket) {
 let port = process.env.NODE_PORT || 8080;
 server.listen(port, () => {
     console.log("Server started at: " + port);
-})
-;
+});

@@ -3,12 +3,8 @@ const util = require('util');
 
 function Storage(filename) {
     this.filename = filename;
-    this.create();
-}
 
-Storage.prototype.create = function () {
-    const ws = fs.createWriteStream(this.filename);
-};
+}
 
 Storage.prototype.save = function (json, callback) {
     const ws = fs.createWriteStream(this.filename);

@@ -142,7 +142,7 @@ Mail.prototype.getTitle = function (machine, socket, data) {
 Mail.prototype.getAddress = function (machine, socket, data) {
     let address = machine.getCleanedString(socket, data);
     UserManager.isAddress(address, (error) => {
-        if(error){
+        if (error) {
             socket.write("地址不存在！请重新输入:\n");
             return;
         }
@@ -171,15 +171,15 @@ Mail.prototype.getBody = function (machine, socket, data) {
 
 Mail.prototype.sendMail = function (machine, socket, data) {
     var $this = this;
-    UserManager.getUserBySocket(socket,function (error,userObj) {
-        if(error){
+    UserManager.getUserBySocket(socket, function (error, userObj) {
+        if (error) {
             socket.write('发送失败\n');
         }
         //--获取用户对像
         console.log(userObj.email);
         let email = userObj.email;
-        MailManager.send(userObj.email,$this.address,$this.title,$this.body.join("\n\r"),function(error){
-            if(error){
+        MailManager.send(userObj.email, $this.address, $this.title, $this.body.join("\n\r"), function (error) {
+            if (error) {
                 socket.write('发送失败\n');
                 return;
             }
@@ -217,30 +217,30 @@ Mail.prototype.stateRead = function (machine, socket, data) {
 }
 
 Mail.prototype.getMailList = function (socket, cb) {
-    UserManager.getUserBySocket(socket,function (error,userObj) {
-       console.log(cb.toString());
-       if(error){
-           cb(error);
-           return null;
-       }
-       console.log('现在进来了\n');
-       if(!userObj){
-           socket.write('你尚未登录\n');
-           return null;
-       }
-       MailManager.get(userObj.email,(error,mails) => {
-           if(error){
-               cb(error);
-               return;
-           }
-           if (!mails || mails.length < 1) {
+    UserManager.getUserBySocket(socket, function (error, userObj) {
+        console.log(cb.toString());
+        if (error) {
+            cb(error);
+            return null;
+        }
+        console.log('现在进来了\n');
+        if (!userObj) {
+            socket.write('你尚未登录\n');
+            return null;
+        }
+        MailManager.get(userObj.email, (error, mails) => {
+            if (error) {
+                cb(error);
+                return;
+            }
+            if (!mails || mails.length < 1) {
                 socket.write("你邮件列表为空!");
                 cb(false, null);
                 return;
             }
             cb(false, mails);
             return;
-       })
+        })
 
     });
 
@@ -274,14 +274,14 @@ Mail.prototype.stateReadWait = function (machine, socket, data) {
     console.log("state read wait");
     let index = machine.getCleanedString(socket, data);
     console.log("input = " + index);
-    this.getMailList(socket,(error,mails) => {
-        if(error){
+    this.getMailList(socket, (error, mails) => {
+        if (error) {
             socket.write('出错\n');
         }
         if (!mails) {
             return false;
         }
-    try {
+        try {
             index = parseInt(index);
             if (index < mails.length && index >= 0) {
                 let email = mails[index].mail;
