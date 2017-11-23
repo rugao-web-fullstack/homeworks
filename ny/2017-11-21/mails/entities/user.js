@@ -16,7 +16,6 @@ function User(username, password) {
 }
 
 User.register = function (socket, username, password, cb) {
-    console.log('现在在注册函数\n');
     storage.read(function (error, UsersInfo) {
         if (error) {
             cb(error);
@@ -48,7 +47,8 @@ User.login = function (socket, username, password, cb) {
         }
         if (UsersInfo[username]) {
             console.log('存在');
-            if (UsersInfo[username].user.username === username && UsersInfo[username].user.password === password) {
+            let user = UsersInfo[username].user;
+            if (user.username === username && user.password === password) {
                 cb(false);
                 sockets.push({
                     socket: socket,

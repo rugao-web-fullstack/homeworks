@@ -2,16 +2,15 @@ let states = require("../states").states;
 const UserManager = require('../entities/user').User;
 //判断states状态  
 function User(socket) {
-    socket.on(states.USER_NOT_LOGIN,//未注册登录 页面执行步骤1
+    socket.on(states.USER_NOT_LOGIN,
         (machine, socket, data) => {
             this.stateNotLogin(machine, socket, data);
         });
-    socket.on(states.USER_LOGIN,//登录后
+    socket.on(states.USER_LOGIN,
         (machine, socket, data) => {
             this.stateLogin(machine, socket, data);
         });
 }
-//未注册登录--开始选择登录或者注册 页面执行步骤3
 User.prototype.notLoginHome = function (machine, socket, data) {
     console.log("inside user not login");
     socket.write("欢迎来到XXX邮件系统！请选择:\n\t1.用户注册\n\t2.用户登录\n");
@@ -23,11 +22,11 @@ User.prototype.notLoginWait = function (machine, socket, data) {
     let input = machine.getCleanedString(socket, data);
     console.log("input = " + input);
     switch (input) {
-        case '1': //--注册
+        case '1':
             console.log("inside not login wait 1");
             this.registerWait(machine, socket, data);
             break;
-        case '2'://--登录
+        case '2':
             console.log("inside not login wait 2");
             this.loginWait(machine, socket, data);
             break;
@@ -39,20 +38,20 @@ User.prototype.notLoginWait = function (machine, socket, data) {
 //未注册登录--判断action值 执行不同对data的处理
 User.prototype.stateNotLogin = function (machine, socket, data) {
     console.log("inside not login");
-    if (!machine.action) {  //action=“” 选择登录或者注册 页面执行步骤2
+    if (!machine.action) {
         console.log("inside not login home");
         this.notLoginHome(machine, socket, data);
     } else {
         console.log("inside not login else");
         switch (machine.action) {
-            case 'register'://注册action
+            case 'register':
                 this.register(machine, socket, data);
                 break;
-            case 'login'://登录action
+            case 'login':
                 console.log("inside login");
                 this.login(machine, socket, data);
                 break;
-            case 'wait': //wait
+            case 'wait':
                 console.log("inside not login wait");
                 this.notLoginWait(machine, socket, data);
                 break;
@@ -93,7 +92,7 @@ User.prototype.login = function (machine, socket, data) {
     input = input.split(" ");
     if (input.length === 2) {
         // User Register
-        UserManager.login(socket, input[0], input[1] ,(err) =>{
+        UserManager.login(socket, input[0], input[1], (err) =>{
             if(err){
                 socket.write('\n用户名或者密码不匹配！\n');
                 return;
@@ -102,7 +101,6 @@ User.prototype.login = function (machine, socket, data) {
             machine.state = states.USER_LOGIN;
             machine.action = '';
             machine.process(socket, data);
-            // socket.emit(states.USER_LOGIN, state, socket, null);
         })  
     } else {
         socket.write("输入错误!");
@@ -111,7 +109,7 @@ User.prototype.login = function (machine, socket, data) {
 //登录后判断action
 User.prototype.stateLogin = function (machine, socket, data) {
     console.log("inside login");
-    if (!machine.action) {//action = “ ”
+    if (!machine.action) {
         console.log("inside not login home");
         this.loginHome(machine, socket, data);
     } else {
@@ -134,14 +132,14 @@ User.prototype.homeWaite = function (machine, socket, data) {
     let input = machine.getCleanedString(socket, data);
     console.log("input = " + input);
     switch (input) {
-        case '1':   //触发写邮件事件
+        case '1':
             console.log("inside mail write");
             socket.write("mail write");
             machine.state = states.MAIL_WRITE;
             machine.action = '';
             socket.emit(states.MAIL_WRITE, machine, socket, data);
             break;
-        case '2':  //触发读邮件事件
+        case '2':
             console.log("inside mail write");
             socket.write("mail read");
             machine.state = states.MAIL_READ;

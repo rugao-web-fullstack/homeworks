@@ -189,15 +189,6 @@ Mail.prototype.sendMail = function (machine, socket, data) {
             machine.process(socket, null);
         });
     });
-
-    // if (!MailManager.send(
-    //     user.email,
-    //     this.address,
-    //     this.title,
-    //     this.body.join("\n\r"))) {
-    //     return socket.write("发送失败！\n");
-    // }
-    // return socket.write("邮件发送成功！\n");
 };
 
 Mail.prototype.onNewMail = function (socket, sender, mail) {
