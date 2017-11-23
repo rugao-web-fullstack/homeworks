@@ -152,11 +152,11 @@ const server = net.createServer((socket) => {
 					}
 					break;
 				case 4:
-					let cho = parseInt(Data);
-					if (cho !== NaN) {
+					let mailNum = parseInt(Data);
+					if (mailNum !== NaN) {
 						let usermail = [];//用户邮件列表
-						console.log(cho + '///////////////////')
-						emitter.emit('read-mailcontent', username, socket, cho);
+						console.log(mailNum + '///////////////////')
+						emitter.emit('read-mailcontent', username, socket, mailNum);
 						flag = 0;
 					} else {
 						socket.write('您输入的内容格式有误，请重新输入\n');

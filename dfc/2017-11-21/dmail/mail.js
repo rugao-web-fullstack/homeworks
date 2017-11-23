@@ -26,19 +26,14 @@ Mail.prototype.sendMail = function (username, senduser, title, content, socket) 
         }
 
         date = new Date();
-        date = date.toLocaleString();
-        let maillist = [];
-        for (let i = 0; i < mails.length; i++) {
-            maillist.push(mails[i]);
-        }
-        maillist.push({
+        mails.push({
             'user': username,
             'senduser': senduser,
             'title': title,
             'content': content,
             'date': date
         });
-        storage.save(maillist, (error) => {
+        storage.save(mails, (error) => {
             if (error) {
                 console.error(error.stack);
                 return;
@@ -66,7 +61,7 @@ Mail.prototype.readMailList = function (username, socket) {
     });
 
 }
-Mail.prototype.readMailContent = function (username, socket, cho) {
+Mail.prototype.readMailContent = function (username, socket, mailNum) {
     storage.read((error, mail) => {
         if (error) {
             console.log(error.stack);
@@ -77,8 +72,8 @@ Mail.prototype.readMailContent = function (username, socket, cho) {
         for (let i = 0; i < mail.length; i++) {
             if (username === mail[i].user) {
                 flag++;
-                if (flag === cho) {
-                    socket.write(cho + '.标题：' + mail[i].title + '\t发件人:' + mail[i].senduser + '\t发送时间:' + mail[i].date + '\n');
+                if (flag === mailNum) {
+                    socket.write(mailNum + '.标题：' + mail[i].title + '\t发件人:' + mail[i].senduser + '\t发送时间:' + mail[i].date + '\n');
                     socket.write(mail[i].content + '\n');
                     return;
                 }
