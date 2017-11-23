@@ -5,10 +5,10 @@ const rs = fs.createReadStream("double.txt");
 const buf = Buffer.allocUnsafe(8);
 
 //---buf.writeDoubleBE
-buf.writeDoubleBE(0xdeadbeefcafebabe,0);
+buf.writeDoubleBE(0xdeadbeefcafebabe, 0);
 ws.write(buf);
 
 //---buf.readDoubleBE
-rs.on("data",function (data) {
+rs.on("data", function (data) {
     console.log(buf.readDoubleBE(data));
 });

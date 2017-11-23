@@ -6,7 +6,7 @@ const read = require("./entities/user").read;
 let sockets = [];
 
 
-read(()=>{
+read(() => {
     const server = net.createServer(function (socket) {
         let machine = new Machine();
         sockets.push(socket);

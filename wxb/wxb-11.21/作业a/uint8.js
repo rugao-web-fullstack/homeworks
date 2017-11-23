@@ -5,11 +5,11 @@ const rs = fs.createReadStream("uint8.txt");
 const buf = Buffer.allocUnsafe(4);
 
 //---buf.writeUInt8
-buf.writeUInt8(0x3,0);
+buf.writeUInt8(0x3, 0);
 ws.write(buf);
 
 //---buf.readUInt8
-rs.on("data",function (data) {
+rs.on("data", function (data) {
     console.log(buf.readUInt8(data));
 });
 

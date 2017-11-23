@@ -15,7 +15,7 @@ function User(username, password) {
 }
 
 User.register = function (socket,
-    username, password) {
+                          username, password) {
     if (users[username]) {
         return false;
     }
@@ -28,7 +28,7 @@ User.register = function (socket,
 };
 
 User.login = function (socket,
-    username, password) {
+                       username, password) {
     console.log("user manager login");
     if (!users[username]) {
         return false;
@@ -43,16 +43,16 @@ function write(callback) {
     var str;
     for (var k in users) {
         // console.log("k: "+k+" users: "+users[k].user.username+users[k].user.password);
-        str = '{"username'+'":"'+users[k].user.username+'",'+'"password"'+':"'+users[k].user.password+'"}';
+        str = '{"username' + '":"' + users[k].user.username + '",' + '"password"' + ':"' + users[k].user.password + '"}';
         userarr.push(str);
     }
     //console.log(userarr);//---[ '{"1223157723@qq.com":"weixinbo"}','{"32323232@qq.com":"weixinbo"}' ]
 
-    storage.save(userarr,callback);
+    storage.save(userarr, callback);
 }
 
 function read(callback) {
-    storage.read((err, data)=> {
+    storage.read((err, data) => {
         if (data) {
             var arr = JSON.parse(data);
             var username = "";
@@ -61,8 +61,8 @@ function read(callback) {
                 username = arr[i].username;
                 password = arr[i].password;
                 users[username] = {
-                    socket:null,
-                    user:new User(username, password)
+                    socket: null,
+                    user: new User(username, password)
                 };
             }
         }
@@ -113,6 +113,6 @@ User.getUserBySocket = function (socket) {
 }
 
 exports.User = User;
-exports.write=write;
-exports.read=read;
+exports.write = write;
+exports.read = read;
 // module.exports.User = User;

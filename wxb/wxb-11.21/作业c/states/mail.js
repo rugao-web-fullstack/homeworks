@@ -1,9 +1,10 @@
 let states = require("../states").states;
 const UserManager = require('../entities/user').User;
 const MailManager = require('../entities/mail').Mail;
+
 /**
  * 用于处理邮件与用户的交互
- * @param {*} socket 
+ * @param {*} socket
  */
 function Mail(socket) {
     this.title = '';
@@ -25,9 +26,9 @@ function Mail(socket) {
 
 /**
  * 邮件写状态下，基本的接收入口
- * @param {*} machine 
- * @param {*} socket 
- * @param {*} data 
+ * @param {*} machine
+ * @param {*} socket
+ * @param {*} data
  */
 Mail.prototype.stateWrite = function (machine, socket, data) {
     console.log("state write");
@@ -56,9 +57,9 @@ Mail.prototype.stateWrite = function (machine, socket, data) {
 
 /**
  * 写邮件的主页面
- * @param {*} machine 
- * @param {*} socket 
- * @param {*} data 
+ * @param {*} machine
+ * @param {*} socket
+ * @param {*} data
  */
 Mail.prototype.stateWriteHome = function (machine, socket, data) {
     socket.write('\n请输入你要修改的内容，\n\t1.收件人地址\n\t2.标题\n\t3.正文内容\n\t4.发送邮件\n');
@@ -68,9 +69,9 @@ Mail.prototype.stateWriteHome = function (machine, socket, data) {
 
 /**
  * 主页面接收用户输入的函数
- * @param {*} machine 
- * @param {*} socket 
- * @param {*} data 
+ * @param {*} machine
+ * @param {*} socket
+ * @param {*} data
  */
 Mail.prototype.stateWriteWait = function (machine, socket, data) {
     console.log("state write");
@@ -101,9 +102,9 @@ Mail.prototype.stateWriteWait = function (machine, socket, data) {
 }
 /**
  * 写邮件时，接收地址输入的函数
- * @param {*} machine 
- * @param {*} socket 
- * @param {*} data 
+ * @param {*} machine
+ * @param {*} socket
+ * @param {*} data
  */
 Mail.prototype.stateWriteAddressWait = function (machine, socket, data) {
     socket.write("请输入接收用户的地址:\n")
@@ -113,9 +114,9 @@ Mail.prototype.stateWriteAddressWait = function (machine, socket, data) {
 
 /**
  * 写邮件时，接收标题输入的函数
- * @param {*} machine 
- * @param {*} socket 
- * @param {*} data 
+ * @param {*} machine
+ * @param {*} socket
+ * @param {*} data
  */
 Mail.prototype.stateWriteTitleWait = function (machine, socket, data) {
     socket.write("请输入标题:\n")
@@ -124,9 +125,9 @@ Mail.prototype.stateWriteTitleWait = function (machine, socket, data) {
 
 /**
  * 写邮件时，接收正文输入的函数
- * @param {*} machine 
- * @param {*} socket 
- * @param {*} data 
+ * @param {*} machine
+ * @param {*} socket
+ * @param {*} data
  */
 Mail.prototype.stateWriteBodyWait = function (machine, socket, data) {
     socket.write("请输入邮件内容:\n")
@@ -196,9 +197,9 @@ Mail.prototype.onNewMail = function (socket, sender, mail) {
 
 /**
  * 邮件读状态下，基本的接收入口
- * @param {*} machine 
- * @param {*} socket 
- * @param {*} data 
+ * @param {*} machine
+ * @param {*} socket
+ * @param {*} data
  */
 Mail.prototype.stateRead = function (machine, socket, data) {
     console.log("state read");
@@ -227,7 +228,7 @@ Mail.prototype.getMailList = function (socket, cb) {
     MailManager.get(user.email, (error, mails) => {
         if (error) {
             console.error(error);
-            cb(error)
+            cb(error);
             return;
         }
         console.log("mails");
@@ -263,9 +264,9 @@ Mail.prototype.stateReadHome = function (machine, socket, data) {
 
 /**
  * 主页面接收用户输入的函数
- * @param {*} machine 
- * @param {*} socket 
- * @param {*} data 
+ * @param {*} machine
+ * @param {*} socket
+ * @param {*} data
  */
 Mail.prototype.stateReadWait = function (machine, socket, data) {
     console.log("state read wait");
