@@ -9,6 +9,6 @@ writeBuff.writeInt8(-10, 9);
 writeBuff.writeFloatBE(1.23, 10);
 writeBuff.writeDoubleBE(-1.23, 14);
 
-ws.end(writeBuff, function () {
-    console.log("导入成功");
+ws.end(writeBuff, function() {
+	console.log("导入成功");
 });
