@@ -19,6 +19,7 @@ function fileDisplay(filePath) {
                             console.log(filedir);
                         }
                         if (isDir) {
+                        	console.log(filedir);
                             fileDisplay(filedir);
                         }
                     }
