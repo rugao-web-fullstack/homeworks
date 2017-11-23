@@ -3,11 +3,23 @@ const emitter = new EventEmitter();
 const Message = require('./message').Message;
 const message = new Message(emitter);
 const fs = require('fs');
-const filename = "./fileUsers.json";
+const filename = "./data/fileUsers.json";
 const path = require('path');
 const Storage = require('./storage').Storage;
 const storage = new Storage(path.resolve(path.dirname(__filename), filename));
-
+fs.exists("./data/fileUsers.json", function(exists) {  
+    if(exists){
+        console.log('用户信息表已存在');
+    }else{
+        fs.writeFile('./data/fileUsers.json','',function(err){
+            if(err){
+                throw err;
+                return;
+            }
+            console.log('创建用户信息表成功');
+        });
+    }
+}); 
 function User(event, userlist) {
 	this.event = event;
 	this.userlist = userlist;
@@ -20,21 +32,31 @@ User.prototype.register = function (username, password, socket) {
 			console.error(error.stack);
 			return;
 		}
-		console.log(users);
 		users.push({
 			'username': username,
 			'password': password
 		});
-		let userarr = [];
-		for (let i = 0; i < users.length; i++) {
-			let userid = users[i].username;
+		console.log(this.userlist.length + '---------------')
+		if(this.userlist.length === 0){
+			for (let i = 0; i < users.length; i++) {
+				let userid = users[i].username;
+				this.userlist.push({
+					userid: ''
+				});
+			}
+			this.userlist[username] = socket;
+		}else{
+			console.log(this.userlist.length + '--*--------')
+			console.log(username + '--*--------')
+			console.log(socket + '--*--------')
 			this.userlist.push({
-				userid: ''
+				username: ''
 			});
-			userarr.push(users[i]);
+			this.userlist[username] = socket;
+			console.log(this.userlist.length + '----*---------')
+			console.log(this.userlist[username])
 		}
-		this.userlist[username] = socket;
-		storage.save(userarr, (error) => {
+		storage.save(users, (error) => {
 			if (error) {
 				console.error(error.stack);
 				return;

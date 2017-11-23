@@ -3,6 +3,8 @@ const EventEmitter = require('events');
 const emitter = new EventEmitter();
 const User = require('./user').User;
 const Mail = require('./mail').Mail;
+const fs = require('fs');
+
 let mail = new Mail(emitter);
 //指令列表
 let commands = [{
@@ -57,7 +59,7 @@ const server = net.createServer((socket) => {
 					socket.write("\n");
 					break;
 				case 'signin':
-					if (username === '') {
+					if (!users[username]) {
 						socket.write(commands[0].mes);
 						flag = 1;
 					} else {
@@ -65,7 +67,7 @@ const server = net.createServer((socket) => {
 					}
 					break;
 				case 'login':
-					if (username === '') {
+					if (!users[username]) {
 						socket.write(commands[1].mes);
 						flag = 2;
 					} else {
@@ -73,7 +75,7 @@ const server = net.createServer((socket) => {
 					}
 					break;
 				case 'send':
-					if (username === '') {
+					if (!users[username]) {
 						socket.write('此功能不支持离线使用，请输入signin注册或login登录\n');
 					} else {
 						socket.write(commands[2].mes);
@@ -81,7 +83,7 @@ const server = net.createServer((socket) => {
 					}
 					break;
 				case 'mail':
-					if (username === '') {
+					if (!users[username]) {
 						socket.write('此功能不支持离线使用，请输入signin注册或login登录\n');
 					} else {
 						socket.write(commands[3].mes);
@@ -100,7 +102,7 @@ const server = net.createServer((socket) => {
 
 					break;
 				case 'test':
-					console.log(users[1].socket);
+					console.log(users);
 					break;
 				default:
 					socket.write(Data + "不是Dmail系统有效指令，输入命令:help获取指令列表！\n");
@@ -116,7 +118,6 @@ const server = net.createServer((socket) => {
 						if (users[inputs[0]]) {
 							emitter.emit("user-register", socket, false);
 						} else {
-							users = [];
 							let user = new User(emitter, users);
 							user.register(inputs[0], inputs[1], socket);
 							username = inputs[0];
@@ -140,13 +141,14 @@ const server = net.createServer((socket) => {
 				case 3:
 					inputs = Data.split(",");
 					if (inputs.length === 3) {
+						console.log(users[inputs[0]]);
 						if (users[inputs[0]]) {
 							emitter.emit('send-mail', inputs[0], username, inputs[1], inputs[2], users[inputs[0]]);
 							send_flag = false;
 							flag = 0;
 							socket.write('邮件发送成功\n');
 						} else {
-							socket.write('该账号不存在，请重新输入\n');
+							socket.write('该账号或对方不在线不存在，请重新输入\n');
 						}
 					} else {
 						socket.write('您输入的内容格式有误，请重新输入\n');
