@@ -16,7 +16,7 @@ Storage.prototype.save = function (json, callback) {
     });
 };
 
-Storage.prototype.read = function (callback) { 
+Storage.prototype.read = function (callback) {
     let data = [];
     const rs = fs.createReadStream(this.filename);
     rs.on("data", function (chunk) {
@@ -25,7 +25,7 @@ Storage.prototype.read = function (callback) {
     rs.on("end", function () {
         try {
             let maxLength = 0;
-            for(let i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 maxLength += data[i].length;
                 // console.log("chunk" + data[i]);
             }

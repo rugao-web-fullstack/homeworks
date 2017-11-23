@@ -41,13 +41,13 @@ Mail.send = function (sender, receiver, title, body, cb) {
                 return;
             }
             let receiverSocket = UserManager.getSocket(receiver);
-            if(receiverSocket){
+            if (receiverSocket) {
                 receiverSocket.emit(states.MAIL_NEW, sender, mail);
                 cb(false);
                 return;
             }
-                cb(false);
-                return;
+            cb(false);
+            return;
 
         });
     });
