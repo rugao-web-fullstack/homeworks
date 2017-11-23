@@ -23,15 +23,15 @@ User.prototype.login = function (machine, socket, data) {
     input = input.split(" ");
     if (input.length === 2) {
 
-        UserManager.login(socket,input[0],input[1],function (error) {
-            if(error){
+        UserManager.login(socket, input[0], input[1], function (error) {
+            if (error) {
                 socket.write('登陆失败\n');
                 return;
             }
             socket.write('登录成功\n');
             machine.state = states.USER_LOGIN;
             machine.action = '';
-            machine.process(socket,data);
+            machine.process(socket, data);
         })
     } else {
         socket.write("输入错误!");
@@ -95,13 +95,13 @@ User.prototype.register = function (machine, socket, data) {
     input = input.split(" ");
     if (input.length === 2) {
 
-        UserManager.register(socket,input[0],input[1],function (error){
-                if(error){
-                    socket.write('注册失败\n');
-                    return;
-                }
-                socket.write('注册成功!\n');
-                $this.loginWait(machine, socket, data);
+        UserManager.register(socket, input[0], input[1], function (error) {
+            if (error) {
+                socket.write('注册失败\n');
+                return;
+            }
+            socket.write('注册成功!\n');
+            $this.loginWait(machine, socket, data);
         });
     } else {
         socket.write("输入错误!\n");
@@ -144,7 +144,7 @@ User.prototype.homeWaite = function (machine, socket, data) {
             socket.write("mail read");
             machine.state = states.MAIL_READ;
             machine.action = '';
-            socket.emit(states.MAIL_READ, machine, socket, data);            
+            socket.emit(states.MAIL_READ, machine, socket, data);
             break;
         default:
             console.log("inside not login wait default");

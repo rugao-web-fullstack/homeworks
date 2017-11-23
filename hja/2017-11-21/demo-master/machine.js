@@ -4,8 +4,8 @@ function Machine() {
     this.state = states.USER_NOT_LOGIN;
     this.action = '';
 }
-
-Machine.prototype.process = function (socket, data) {
+Machine.prototype.process = function (socket,
+    data) {
     let input = this.getCleanedString(data);
     switch (this.state) {
         case states.MAIL_WRITE:
@@ -27,10 +27,11 @@ Machine.prototype.process = function (socket, data) {
     }
 };
 
-Machine.prototype.getCleanedString = function (socket, data) {
+Machine.prototype.getCleanedString = function (socket,
+    data) {
     let input = String(data);
     input = input.replace(/(\n|\r)+$/, '');
     return input;
-};
+}
 
 exports.Machine = Machine;
