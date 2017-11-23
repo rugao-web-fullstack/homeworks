@@ -102,7 +102,6 @@ User.prototype.login = function (machine, socket, data) {
             machine.state = states.USER_LOGIN;
             machine.action = '';
             machine.process(socket, data);
-            // socket.emit(states.USER_LOGIN, state, socket, null);
         })
     } else {
         socket.write("输入错误!");

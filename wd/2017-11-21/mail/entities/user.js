@@ -39,24 +39,10 @@ User.register = function (socket, username, password, cb) {
             cb(false);
         });
     });
-    // if (users[username]) {
-    //     return false;
-    // }
-    // users[username] = {
-    //     socket: socket,
-    //     user: new User(username,
-    //         password)
-    // };
-    // return true;
 };
 
 User.login = function (socket, username, password, cb) {
     console.log("user manager login");
-    // if (!users[username]) {
-    //     return false;
-    // }
-    // let user = users[username].user;
-    // return user.password === password;
     storage.read(function (error, UsersInfo) {
         if (error) {
             cb(error);
@@ -104,12 +90,6 @@ User.isAddress = function (address, cb) {
             }
         }
     });
-    // for (var k in users) {
-    //     if (users[k].user.email === address) {
-    //         return true;
-    //     }
-    // }
-    // return false;
 }
 
 /**
@@ -123,12 +103,6 @@ User.getSocket = function (address) {
         }
     }
     return null;
-    // for (var k in users) {
-    //     if (users[k].user.email === address) {
-    //         return users[k].socket
-    //     }
-    // }
-    // return null;
 };
 
 
@@ -155,34 +129,6 @@ User.getUserBySocket = function (socket, cb) {
         cb(false, null);
         return;
     })
-    //根据socket获取username
-    // for(var i in sockets){
-    //     if(sockets[i].socket===socket){
-    //         //---读取
-    //         storage.read(function (error,UserInfo) {
-    //             if(error){
-    //                 cb(error);
-    //                 return;
-    //             }
-    //             for(var k in UserInfo){
-    //                 if(UserInfo[k].user.username===sockets[i].nowUser){
-    //                     //---此时执行回调
-    //                     cb(false,UserInfo[k].user);
-    //                     return;
-    //                 }
-    //             }
-    //         })
-    //     }
-    // }
-    // cb(false,null);
-    // return;
-    // for (var k in users) {
-    //     if (users[k].socket === socket) {
-    //         return users[k].user
-    //     }
-    // }
-    // return null;
 }
 
 exports.User = User;
-// module.exports.User = User;
