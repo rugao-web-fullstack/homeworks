@@ -1,9 +1,6 @@
 let states = require("../states").states;
 const UserManager = require('../entities/user').User;
 const MailManager = require('../entities/mail').Mail;
-const fs=require("fs");
-const rs=fs.createReadStream("mail.txt");
-let a = String(rs.read());
 /**
  * 用于处理邮件与用户的交互
  * @param {*} socket 
@@ -138,41 +135,30 @@ Mail.prototype.stateWriteBodyWait = function (machine, socket, data) {
 
 Mail.prototype.getTitle = function (machine, socket, data) {
     this.title = machine.getCleanedString(socket, data);
-    fs.appendFile('./mail.txt', " 邮件标题："+this.title, function (err) {
-        
-        });
-    socket.write("标题更新成功！当前标题是: " + this.title + "\n");
-    
+    socket.write("标题更新成功！当前标题是: " + this.title + "\n")
     this.stateWriteHome(machine, socket, data);
 };
 
 Mail.prototype.getAddress = function (machine, socket, data) {
     let address = machine.getCleanedString(socket, data);
-    if (!UserManager.isAddress(address)) {
-        socket.write("地址不存在！请重新输入:\n");
-        return;
-    }
-    this.address = address;
-    fs.appendFile('./mail.txt', "邮件地址："+this.address, function (err) {
-        
-        });
-    socket.write("地址更新成功！当前地址是: " + this.address + "\n");
-    
-    this.stateWriteHome(machine, socket, data);
+    UserManager.isAddress(address, (err) => {
+        if (err) {
+            socket.write("地址不存在！请重新输入:\n");
+            return;
+        }
+        this.address = address;
+        socket.write("地址更新成功！当前地址是: " + this.address + "\n")
+        this.stateWriteHome(machine, socket, data);
+    })
+
 };
 
 Mail.prototype.getBody = function (machine, socket, data) {
     let input = machine.getCleanedString(socket, data);
     if (input === '.exit') {
-        fs.appendFile('./mail.txt', " 邮件内容：" + this.body, function (err) {
-            
-            });
         socket.write("正文更新成功！当前正文内容是:\n");
         for (let i = 0; i < this.body.length; i++) {
             socket.write(this.body[i] + "\n\r");
-            // fs.appendFile('./mail.txt', " "+this.body[i], function (err) {
-                
-            //     });
         }
         socket.write("===正文结束===\n");
         this.stateWriteHome(machine, socket, data);
@@ -184,18 +170,34 @@ Mail.prototype.getBody = function (machine, socket, data) {
 
 
 Mail.prototype.sendMail = function (machine, socket, data) {
-    let user = UserManager.getUserBySocket(socket);
-    if (!MailManager.send(
-        user.email,
-        this.address,
-        this.title,
-        this.body.join("\n\r"))) {
-        return socket.write("发送失败！\n");
-    }
-    fs.appendFile('./mail.txt', "\n", function (err) {
-        
+    UserManager.getUserBySocket(socket, (error, userObj) => {
+        if (error) {
+            cb(error);
+            socket.write("发送失败！\n");
+            return;
+        }
+        let email = userObj.email;
+        MailManager.send(email, this.address, this.title, this.body.join("\n\r"), (error) => {
+            if (error) {
+                console.error(error.stack);
+                socket.write("发送失败！\n");
+                return
+            }
+            socket.write("邮件发送成功！\n");
+            machine.state = states.USER_LOGIN;
+            machine.action = '';
+            machine.process(socket, null);
         });
-    return socket.write("邮件发送成功！\n");
+    });
+
+    // if (!MailManager.send(
+    //     user.email,
+    //     this.address,
+    //     this.title,
+    //     this.body.join("\n\r"))) {
+    //     return socket.write("发送失败！\n");
+    // }
+    // return socket.write("邮件发送成功！\n");
 };
 
 Mail.prototype.onNewMail = function (socket, sender, mail) {
@@ -224,33 +226,46 @@ Mail.prototype.stateRead = function (machine, socket, data) {
     }
 }
 
-Mail.prototype.getMailList = function (socket) {
-    let user = UserManager.getUserBySocket(socket);
-    console.log("user");
-    console.log(user);
-    if (!user) {
-        socket.write("你尚未登录!");
-        return null;
-    }
-    let mails = MailManager.get(user.email);
-    console.log("mails");
-    console.log(mails);
-
-    if (!mails || mails.length < 1) {
-        socket.write("你邮件列表为空!");
-        return null;
-    }
-    console.log("return mails");
-    return mails;
+Mail.prototype.getMailList = function (socket, cb) {
+    UserManager.getUserBySocket(socket, (error, userObj) => {
+        if (error) {
+            cb(error);
+            return;
+        }
+        if (!userObj) {
+            socket.write("你尚未登录!");
+            return null;
+        }
+        MailManager.get(userObj.email, (error, mails) => {
+            if (error) {
+                cb(error);
+                return;
+            }
+            if (!mails || mails.length < 1) {
+                socket.write("你邮件列表为空!");
+                cb(false, null);
+                return;
+            }
+            console.log("return mails");
+            cb(false, mails);
+            return;
+        });
+    });
 }
 
 Mail.prototype.stateReadHome = function (machine, socket, data) {
     socket.write('\n请输入你要查看的邮件ID:\n');
-    let mails = this.getMailList(socket);
-    for (let i = 0; i < mails.length; i++) {
-        socket.write("id: " + i + ', 标题: ' + mails[i].mail.title + "\n");
-    }
-    machine.action = 'wait';
+    this.getMailList(socket, (error, mails) => {
+        if (error) {
+            cb(error);
+            return;
+        }
+        for (let i = 0; i < mails.length; i++) {
+            socket.write("id: " + i + ', 标题: ' + mails[i].mail.title + "\n");
+        }
+        machine.action = 'wait';
+    });
+
 }
 
 
@@ -264,37 +279,43 @@ Mail.prototype.stateReadWait = function (machine, socket, data) {
     console.log("state read wait");
     let index = machine.getCleanedString(socket, data);
     console.log("input = " + index);
-    let mails = this.getMailList(socket);
-    console.log("mail list:");
-    console.log(mails);
-    if (!mails) {
-        return false;
-    }
-    try {
-        index = parseInt(index);
-        if (index < mails.length && index >= 0) {
-            let email = mails[index].mail;
-            mails[index].read = true;
-            console.log(mails[index]);
-            console.log(email);
-            let id = index;
-            socket.write("\n=========================邮件详情=======================\n");
-            socket.write("id: " + id + "\n");
-            socket.write("发送地址: " + email.sender + "\n");
-            socket.write("接收地址: " + email.receiver + "\n");
-            socket.write("标题: " + email.title + "\n");
-            socket.write("内容详情:\n");
-            socket.write("\n=========================邮件内容=======================\n");
-            socket.write(email.body);
-            socket.write("\n\r");
-            socket.write("\n=========================邮件结束=======================\n");
-        } else {
-            socket.write('\n输入ID无法处理或者超出范围！\n');
+    this.getMailList(socket, (error, mails) => {
+        if (error) {
+            socket.write('出错\n');
         }
-    } catch (e) {
-        console.log(e.stack);
-        console.log('on error parse');
-    }
+        if (!mails) {
+            return false;
+        }
+        try {
+            index = parseInt(index);
+            if (index < mails.length && index >= 0) {
+                let email = mails[index].mail;
+                mails[index].read = true;
+                console.log(mails[index]);
+                console.log(email);
+                let id = index;
+                socket.write("\n=========================邮件详情=======================\n");
+                socket.write("id: " + id + "\n");
+                socket.write("发送地址: " + email.sender + "\n");
+                socket.write("接收地址: " + email.receiver + "\n");
+                socket.write("标题: " + email.title + "\n");
+                socket.write("内容详情:\n");
+                socket.write("\n=========================邮件内容=======================\n");
+                socket.write(email.body);
+                socket.write("\n\r");
+                socket.write("\n=========================邮件结束=======================\n");
+                machine.state = states.USER_LOGIN;
+                machine.action = '';
+                machine.process(socket, null);
+            } else {
+                socket.write('\n输入ID无法处理或者超出范围！\n');
+            }
+        } catch (e) {
+            console.log(e.stack);
+            console.log('on error parse');
+        }
+    });
+
 }
 
 exports.Mail = Mail;
