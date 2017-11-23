@@ -53,13 +53,19 @@ User.login = function (socket, username, password, cb) {
             if (UsersInfo[username].user.username === username && UsersInfo[username].user.password === password) {
                 cb(false);
                 //---此时往sockets里加东西
+                for (let i = 0; i < sockets.length; i++) {
+                    if (sockets[i].nowUser === username) {
+                        sockets[i].socket = socket;
+                    }
+                }
                 sockets.push({
                     socket: socket,
                     nowUser: username
                 });
                 console.log(sockets);
                 return;
-            } else {
+            }
+            else {
                 cb(true);
             }
         }

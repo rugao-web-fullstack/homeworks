@@ -50,10 +50,10 @@ Mail.send = function (sender, receiver, title, body, cb) {
     cb(false);
     return;
 
-})
-    ;
-})
-    ;
+});
+
+});
+
 };
 
 Mail.get = function (user, cb) {
@@ -63,8 +63,7 @@ Mail.get = function (user, cb) {
             return;
         }
         return cb(false, mails[user]);
-})
-    ;
+});
 
 };
 
