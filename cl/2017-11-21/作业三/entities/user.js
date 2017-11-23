@@ -22,7 +22,7 @@ User.register = function (socket, username, password,cb) {
            return;
        }
        if(users[username]){
-           console.log('用户存在');
+           console.log('账户已经存在');
            cb(true);
            return;
        }
@@ -44,16 +44,22 @@ User.login = function (socket, username, password, cb) {
             cb(error);
             return;
         }
+        console.log(users[username]);//{ username: '123', password: '123' }        
+        console.log(users[username].username);//123
         if(!users[username]){
+            console.log('帐号不存在');
             cb(true);
             return;
         }
         if(users[username].password === password){
             cb(false);
+            console.log(socket);
+            console.log(sockets);
             sockets.push({
                 socket:socket,
                 username:username
             })
+            console.log(sockets);
             return;
         }
         else{
@@ -78,6 +84,7 @@ User.isAddress = function (address,cb) {
                 cb(true);
                 return;
             }else{
+                console.log('cunzai');
                 cb(false);
                 return;
             }
@@ -96,7 +103,12 @@ User.getSocket = function (address) {
         }
     }
     return null;
-
+    // for (var k in users) {
+    //     if (users[k].user.email === address) {
+    //         return users[k].socket
+    //     }
+    // }
+    // return null;
 };
 
 

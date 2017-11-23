@@ -150,7 +150,13 @@ Mail.prototype.getAddress = function (machine, socket, data) {
         socket.write("地址更新成功！当前地址是: " + this.address + "\n");
         this.stateWriteHome(machine, socket, data);
     });
-  
+    // if (!UserManager.isAddress(address)) {
+    //     socket.write("地址不存在！请重新输入:\n");
+    //     return;
+    // }
+    // this.address = address;
+    // socket.write("地址更新成功！当前地址是: " + this.address + "\n");
+    // this.stateWriteHome(machine, socket, data);
 };
 
 Mail.prototype.getBody = function (machine, socket, data) {
