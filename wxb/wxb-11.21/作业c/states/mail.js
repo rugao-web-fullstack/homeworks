@@ -272,37 +272,41 @@ Mail.prototype.stateReadWait = function (machine, socket, data) {
     console.log("state read wait");
     let index = machine.getCleanedString(socket, data);
     console.log("input = " + index);
-    let mails = this.getMailList(socket);
-    console.log("mail list:");
-    console.log(mails);
-    if (!mails) {
-        return false;
-    }
-    try {
-        index = parseInt(index);
-        if (index < mails.length && index >= 0) {
-            let email = mails[index].mail;
-            mails[index].read = true;
-            console.log(mails[index]);
-            console.log(email);
-            let id = index;
-            socket.write("\n=========================邮件详情=======================\n");
-            socket.write("id: " + id + "\n");
-            socket.write("发送地址: " + email.sender + "\n");
-            socket.write("接收地址: " + email.receiver + "\n");
-            socket.write("标题: " + email.title + "\n");
-            socket.write("内容详情:\n");
-            socket.write("\n=========================邮件内容=======================\n");
-            socket.write(email.body);
-            socket.write("\n\r");
-            socket.write("\n=========================邮件结束=======================\n");
-        } else {
-            socket.write('\n输入ID无法处理或者超出范围！\n');
+    this.getMailList(socket, (error, mails) => {
+        if (error) {
+            console.log(error);
+            return
         }
-    } catch (e) {
-        console.log(e.stack);
-        console.log('on error parse');
-    }
+        if (!mails) {
+            return false;
+        }
+        try {
+            index = parseInt(index);
+            if (index < mails.length && index >= 0) {
+                let email = mails[index].mail;
+                mails[index].read = true;
+                console.log(mails[index]);
+                console.log(email);
+                let id = index;
+                socket.write("\n=========================邮件详情=======================\n");
+                socket.write("id: " + id + "\n");
+                socket.write("发送地址: " + email.sender + "\n");
+                socket.write("接收地址: " + email.receiver + "\n");
+                socket.write("标题: " + email.title + "\n");
+                socket.write("内容详情:\n");
+                socket.write("\n=========================邮件内容=======================\n");
+                socket.write(email.body);
+                socket.write("\n\r");
+                socket.write("\n=========================邮件结束=======================\n");
+            } else {
+                socket.write('\n输入ID无法处理或者超出范围！\n');
+            }
+        } catch (e) {
+            console.log(e.stack);
+            console.log('on error parse');
+        }
+    });
+
 }
 
 exports.Mail = Mail;

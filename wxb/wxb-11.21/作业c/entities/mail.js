@@ -14,12 +14,16 @@ function Mail(sender, receiver, title, body) {
 }
 
 Mail.send = function (sender, receiver, title, body, cb) {
-    console.log("inside send")
+    // console.log("inside send");
     storage.read((error, mails) => {
         if (error) {
             console.log(error.stack);
             cb(error);
             return;
+        }
+
+        if (!mails) {
+            mails = {};
         }
 
         if (!mails[receiver]) {

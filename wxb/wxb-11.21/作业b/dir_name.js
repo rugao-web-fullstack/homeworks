@@ -19,6 +19,10 @@ function file(filePath) {
                         console.warn(err);
                     } else {
                         //---如果是文件夹则输出并继续往下遍历
+                        var isFile = stats.isFile();
+                        if (isFile) {
+                            console.log(filename);
+                        }
                         var isDir = stats.isDirectory();
                         if (isDir) {
                             console.log(filedir);
