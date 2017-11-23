@@ -21,7 +21,6 @@ function Mail(sender, receiver, title, body) {
 Mail.send = function (sender, receiver, title, body, cb) {
     storage.read((error, mails) => {
         if (error) {
-            console.log(error.stack);
             cb(error);
             return;
         }
@@ -45,9 +44,16 @@ Mail.send = function (sender, receiver, title, body, cb) {
                 cb(error);
                 return;
             }
-            let receiverSocket = UserManager.getSocket(receiver)
-            receiverSocket.emit(states.MAIL_NEW, sender, mail);
+
+            let receiverSocket = UserManager.getSocket(receiver);
+            if (receiverSocket) {
+                receiverSocket.emit(states.MAIL_NEW, sender, mail);
+                cb(false);
+                return;
+            }
             cb(false);
+            return;
+
         })
     });
 };
