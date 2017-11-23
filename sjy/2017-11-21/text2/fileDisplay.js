@@ -13,9 +13,7 @@ function fileDisplay(filePath) {
 					} else {
 						var isFile = stats.isFile();
 						var isDir = stats.isDirectory();
-						if (isFile) {
-							console.log(filedir);
-						}
+						console.log(filedir);
 						if (isDir) {
 							fileDisplay(filedir);
 						}
