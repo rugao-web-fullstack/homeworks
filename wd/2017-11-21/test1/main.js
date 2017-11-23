@@ -17,20 +17,20 @@ ws.end(writeBuff, function () {
 
     rs.on("readable", function () {
         var data = rs.read();
-        if(data){
+        if (data) {
             readBuff.push(data);
         }
-    })
+    });
 
     rs.on("end", function () {
         readBuff = Buffer.concat(readBuff);
         console.log("从文件中读取出来的值为：");
-        console.log("UInt32 = " +readBuff.readInt32BE(0));
-        console.log("Int32 = " +readBuff.readInt32BE(4));
-        console.log("UInt8 = " +readBuff.readUInt8(8));
-        console.log("Int8 = " +readBuff.readInt8(9));
-        console.log("Float = " +readBuff.readFloatBE(10));
-        console.log("Double = " +readBuff.readDoubleBE(14));
+        console.log("UInt32 = " + readBuff.readInt32BE(0));
+        console.log("Int32 = " + readBuff.readInt32BE(4));
+        console.log("UInt8 = " + readBuff.readUInt8(8));
+        console.log("Int8 = " + readBuff.readInt8(9));
+        console.log("Float = " + readBuff.readFloatBE(10));
+        console.log("Double = " + readBuff.readDoubleBE(14));
     })
 
-})
+});
