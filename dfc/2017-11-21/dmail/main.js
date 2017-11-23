@@ -117,6 +117,7 @@ const server = net.createServer((socket) => {
 							emitter.emit("user-register", socket, false);
 						} else {
 							users = [];
+							let user = new User(emitter, users);
 							user.register(inputs[0], inputs[1], socket);
 							username = inputs[0];
 							flag = 0;
