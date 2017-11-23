@@ -214,32 +214,33 @@ Mail.prototype.stateRead = function (machine, socket, data) {
 }
 
 Mail.prototype.getMailList = function (socket, cb) {
-    let user = UserManager.getUserBySocket(socket);
-    console.log("user");
-    console.log(user);
-    if (!user) {
-        socket.write("你尚未登录!");
-        return null;
-    }
-    MailManager.get(user.email, (error, mails) => {
+    UserManager.getUserBySocket(socket, function (error, userObject) {
         if (error) {
-            console.error(error);
-            cb(error)
-            return;
+            cb(error);
+            return null;
         }
-        console.log("mails");
-        console.log(mails);
-
-        if (!mails || mails.length < 1) {
-            socket.write("你邮件列表为空!");
-            cb(false, null);
-            return;
+        if (!userObject) {
+            socket.write("你尚未登录!");
+            return null;
         }
-        console.log("return mails");
-        cb(false, mails);
-        return;
+        MailManager.get(userObject.email, (error, mails) => {
+            if (error) {
+                console.error(error);
+                cb(error)
+                return;
+            }
+            console.log("mails");
+            console.log(mails);
+            if (!mails || mails.length < 1) {
+                socket.write("你邮件列表为空!");
+                cb(false, null);
+                return;
+            }
+            console.log("return mails");
+            cb(false, mails);
+            return;
+        });
     });
-
 }
 
 Mail.prototype.stateReadHome = function (machine, socket, data) {

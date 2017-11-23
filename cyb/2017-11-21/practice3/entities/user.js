@@ -50,8 +50,9 @@ User.login = function (socket, username, password, cb) {
             return;
         }
         if (users[username]) {
-            console.log('存在');
-            if (users[username].user.username === username && users[username].user.password === password) {
+            console.log('users[username]存在');
+            let a = users[username].user;
+            if (a.username === username && a.password === password) {
                 cb(false);
                 for (let i = 0; i < sockets.length; i++) {
                     if (sockets[i].nowUser === username) {
