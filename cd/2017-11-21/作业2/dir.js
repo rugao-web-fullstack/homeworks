@@ -1,7 +1,7 @@
 var fs = require('fs');  
 var path = require('path');  
   
-var filePath = path.resolve('/home/eastwood');  
+var filePath = path.resolve('..');  
   
 fileDisplay(filePath);  
   
