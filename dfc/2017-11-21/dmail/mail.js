@@ -3,19 +3,7 @@ const filename = "./data/fileMails.json";
 const path = require('path');
 const Storage = require('./storage').Storage;
 const storage = new Storage(path.resolve(path.dirname(__filename), filename));
-fs.exists("./data/fileMails.json", function(exists) {  
-    if(exists){
-        console.log('邮件表已存在');
-    }else{
-        fs.writeFile('./data/fileMails.json','',function(err){
-            if(err){
-                throw err;
-                return;
-            }
-            console.log('创建邮件表成功');
-        });
-    }
-}); 
+
 function Mail(event, maillist) {
     this.event = event;
     console.log('mail: constructor');

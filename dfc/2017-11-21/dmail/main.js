@@ -4,7 +4,45 @@ const emitter = new EventEmitter();
 const User = require('./user').User;
 const Mail = require('./mail').Mail;
 const fs = require('fs');
-
+fs.exists("./data", function(exists) {  
+    if(exists){
+        console.log('文件夹已存在');
+    }else{
+        fs.mkdir('./data',function(err, data){
+            if(err){
+                throw err;
+                return;
+			}
+			fs.exists("./data/fileUsers.json", function(exists) {  
+				if(exists){
+					console.log('用户信息表已存在');
+				}else{
+					fs.writeFile('./data/fileUsers.json','',function(err){
+						if(err){
+							throw err;
+							return;
+						}
+						console.log('创建用户信息表成功');
+					});
+				}
+			}); 
+			fs.exists("./data/fileMails.json", function(exists) {  
+				if(exists){
+					console.log('邮件表已存在');
+				}else{
+					fs.writeFile('./data/fileMails.json','',function(err){
+						if(err){
+							throw err;
+							return;
+						}
+						console.log('创建邮件表成功');
+					});
+				}
+			}); 
+			console.log('创建数据文件夹成功');
+        });
+    }
+}); 
 let mail = new Mail(emitter);
 //指令列表
 let commands = [{

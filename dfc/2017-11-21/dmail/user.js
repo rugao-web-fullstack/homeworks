@@ -7,19 +7,7 @@ const filename = "./data/fileUsers.json";
 const path = require('path');
 const Storage = require('./storage').Storage;
 const storage = new Storage(path.resolve(path.dirname(__filename), filename));
-fs.exists("./data/fileUsers.json", function(exists) {  
-    if(exists){
-        console.log('用户信息表已存在');
-    }else{
-        fs.writeFile('./data/fileUsers.json','',function(err){
-            if(err){
-                throw err;
-                return;
-            }
-            console.log('创建用户信息表成功');
-        });
-    }
-}); 
+
 function User(event, userlist) {
 	this.event = event;
 	this.userlist = userlist;
