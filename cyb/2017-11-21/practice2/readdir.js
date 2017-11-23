@@ -1,18 +1,31 @@
-const fs = require("fs");
-const path = require("path");
+var fs = require("fs");
+var path = require("path");
 
-const dirname = path.join(__dirname, "dir");
-
-function tranverse(dirname) {
-    const dir = fs.readdirSync(dirname);
-    for (let i = 0; i < dir.length; i++) {
-        let filename = path.join(dirname, dir[i]);
-        let stats = fs.statSync(filename);
-        if (stats.isDirectory()) {
-            tranverse(filename);
+var filePath = path.resolve('..');
+//把一个路径或者路径片段解析成一个绝对路径，返回解析后的路径字符串
+FileDisplay(filePath);
+function FileDisplay(filePath) {
+    fs.readdir(filePath, function (err, files) {
+        if (err) {
+            console.warn(err);
         } else {
-            console.log(filename);
+            files.forEach(function (filename) {
+                var dir = path.join(filePath, filename);
+                fs.stat(dir, function (error, stats) {//获取文件信息
+                    if (error) {
+                        console.warn('获取失败。。。');
+                    } else {//判断是文件还是目录
+                        var isFile = stats.isFile();
+                        var isDirectory = stats.isDirectory();
+                        if (isFile) {
+                            console.log(dir);
+                        }
+                        if (isDirectory) {
+                            FileDisplay(dir);
+                        }
+                    }
+                })
+            });
         }
-    }
+    });
 }
-tranverse(dirname);
