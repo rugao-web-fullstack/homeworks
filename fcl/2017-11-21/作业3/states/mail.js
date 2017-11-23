@@ -151,7 +151,7 @@ Mail.prototype.getAddress = function (machine, socket, data) {
         socket.write("地址更新成功！当前地址是: " + this.address + "\n")
         this.stateWriteHome(machine, socket, data);
     });
-  
+
 };
 
 Mail.prototype.getBody = function (machine, socket, data) {
@@ -171,21 +171,21 @@ Mail.prototype.getBody = function (machine, socket, data) {
 
 
 Mail.prototype.sendMail = function (machine, socket, data) {
-    UserManager.getUserBySocket(socket,(error, user)=>{
-         console.log("sendmail" + user)   
-        if(error){
+    UserManager.getUserBySocket(socket, (error, user) => {
+        console.log("sendmail" + user)
+        if (error) {
             socket.write("sb");
             return;
         }
-        
-        MailManager.send(user.email,this.address, this.title, this.body.join("\n\r"), (error) => {
-              if (error) {
-                   socket.write("发送失败！\n");
-                   return
-               }
-               socket.write("邮件发送成功！\n");
+
+        MailManager.send(user.email, this.address, this.title, this.body.join("\n\r"), (error) => {
+            if (error) {
+                socket.write("发送失败！\n");
+                return
+            }
+            socket.write("邮件发送成功！\n");
         });
-    });    
+    });
 };
 
 Mail.prototype.onNewMail = function (socket, sender, mail) {
@@ -210,7 +210,7 @@ Mail.prototype.stateRead = function (machine, socket, data) {
 }
 
 Mail.prototype.getMailList = function (socket, cb) {
-    let user = UserManager.getUserBySocket(socket, (user,error) => {
+    let user = UserManager.getUserBySocket(socket, (user, error) => {
         if (error) {
             console.error(error);
             cb(error)
@@ -244,7 +244,7 @@ Mail.prototype.getMailList = function (socket, cb) {
     });
 
 
-    
+
 
 }
 

@@ -21,8 +21,8 @@ User.prototype.login = function (machine, socket, data) {
     let input = machine.getCleanedString(socket, data);
     input = input.split(" ");
     if (input.length === 2) {
-        UserManager.login(socket, input[0], input[1],(error,users)=>{
-            if(error){
+        UserManager.login(socket, input[0], input[1], (error, users) => {
+            if (error) {
                 console.error(error.stack);
                 socket.write('\n用户名或者密码不匹配！\n');
                 return;
@@ -85,7 +85,7 @@ User.prototype.loginWait = function (machine, socket, data) {
 User.prototype.register = function (machine, socket, data) {
     let input = machine.getCleanedString(socket, data);
     input = input.split(" ");
-    if(input.length===2){
+    if (input.length === 2) {
         //用户注册
         UserManager.register(socket, input[0], input[1], (error, users) => {
             if (error) {
@@ -97,7 +97,7 @@ User.prototype.register = function (machine, socket, data) {
             console.log("注册成功");
             this.loginWait(machine, socket, data);
         });
-    }else {
+    } else {
         socket.write("输入错误!");
     }
 };
@@ -131,7 +131,7 @@ User.prototype.homeWaite = function (machine, socket, data) {
             socket.write("mail read");
             machine.state = states.MAIL_READ;
             machine.action = '';
-            socket.emit(states.MAIL_READ, machine, socket, data);            
+            socket.emit(states.MAIL_READ, machine, socket, data);
             break;
         default:
             break;

@@ -11,10 +11,10 @@ function User(username, password) {
     this.password = password;
 }
 
-let sockets=[];
+let sockets = [];
 let users = {};
 
-User.register = function (socket,username, password,cb) {
+User.register = function (socket, username, password, cb) {
     storage.read((error, users) => {
         if (error) {
             console.log(error.stack);
@@ -22,28 +22,28 @@ User.register = function (socket,username, password,cb) {
             return;
         }
         users[username] = {
-           user: new User(username,password)
-         };
-      //  users[username].push(user);
+            user: new User(username, password)
+        };
+        //  users[username].push(user);
         storage.save(users, (error) => {
             if (error) {
                 cb(error);
-               
+
             }
             cb(false);
         })
     });
 };
 
-User.login = function (socket,username, password , cb) {
+User.login = function (socket, username, password, cb) {
     storage.read((error, users) => {
         if (error) {
             cb(error);
             return;
         }
-      
-        if(password===users[username].user.password){
-            sockets.push({socket:socket,username:username});
+
+        if (password === users[username].user.password) {
+            sockets.push({ socket: socket, username: username });
             return cb(false, users);
         }
         //进行用户名和密码匹配的判断
@@ -68,7 +68,7 @@ User.isAddress = function (address, cb) {
                 return;
             }
         }
-      
+
     });
 }
 
@@ -76,7 +76,7 @@ User.isAddress = function (address, cb) {
  * 根据地址获取用户socket
  * @param {*} address 
  */
-User.getSocket = function (address,users) {
+User.getSocket = function (address, users) {
     storage.read((error, users) => {
         if (error) {
             cb(error);
@@ -84,7 +84,7 @@ User.getSocket = function (address,users) {
         }
         for (var k in users) {
             if (users[k].user === address) {
-                cb(false,users);
+                cb(false, users);
             }
         }
     });
@@ -94,29 +94,29 @@ User.getSocket = function (address,users) {
  * 根据socket获取用户
  * @param {*} address 
  */
-User.getUserBySocket = function (socket,cb) {
-    storage.read((error,users) => {
-       
+User.getUserBySocket = function (socket, cb) {
+    storage.read((error, users) => {
+
         console.log(typeof error)
         console.log(users);
         if (error) {
-          console.log("xxxxxxxxxxxxxxx")    
+            console.log("xxxxxxxxxxxxxxx")
             return;
         }
         for (var i in sockets) {
             if (sockets[i].socket === socket) {
                 for (var k in users) {
-console.log("woyaode username"+ users[k].user.username)
-console.log("woyao de socket"+ sockets[i].username)
-                   if (users[k].user.username === sockets[i].username) {
-console.log("user found!");
-                       cb(false, user[k].user);
-                       break;
-                   }
+                    console.log("woyaode username" + users[k].user.username)
+                    console.log("woyao de socket" + sockets[i].username)
+                    if (users[k].user.username === sockets[i].username) {
+                        console.log("user found!");
+                        cb(false, user[k].user);
+                        break;
+                    }
                 }
             }
         }
-        cb(false,null);
+        cb(false, null);
         return;
     })
 }
