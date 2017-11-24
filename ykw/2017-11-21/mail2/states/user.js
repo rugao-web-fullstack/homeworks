@@ -1,15 +1,15 @@
 let states = require("../states").states;
 const UserManager = require('../entities/user').User;
 
+
 function User(socket) {
-    socket.on(states.USER_NOT_LOGIN,
-        (machine, socket, data) => {
-            this.stateNotLogin(machine, socket, data);
-        });
-    socket.on(states.USER_LOGIN,
-        (machine, socket, data) => {
-            this.stateLogin(machine, socket, data);
-        });
+    socket.on(states.USER_NOT_LOGIN, (machine, socket, data) => {
+        this.stateNotLogin(machine, socket, data);
+    });
+
+    socket.on(states.USER_LOGIN, (machine, socket, data) => {
+        this.stateLogin(machine, socket, data);
+    });
 }
 
 User.prototype.notLoginHome = function (machine, socket, data) {
@@ -23,19 +23,18 @@ User.prototype.login = function (machine, socket, data) {
     input = input.split(" ");
     if (input.length === 2) {
         // User Register
-        UserManager.login(socket, input[0], input[1], (err) => {
-            if (err) {
+        UserManager.login(socket, input[0], input[1], (error) => {
+            if (error) {
                 socket.write('\n用户名或者密码不匹配！\n');
                 return;
-            } else {
-                socket.write('\n登录成功！\n');
-                machine.state = states.USER_LOGIN;
-                machine.action = '';
-                machine.process(socket, data);
             }
-
-        })
-    } 
+            socket.write('\n登录成功！\n');
+            machine.state = states.USER_LOGIN;
+            machine.action = '';
+            machine.process(socket, data);
+            // socket.emit(states.USER_LOGIN, state, socket, null);
+        });
+    }
 };
 
 User.prototype.notLoginWait = function (machine, socket, data) {
@@ -89,21 +88,18 @@ User.prototype.loginWait = function (machine, socket, data) {
     machine.action = 'login';
 }
 
-User.prototype.register = function (machine, socket, data, cb) {
-    let $this = this;
+User.prototype.register = function (machine, socket, data) {
     let input = machine.getCleanedString(socket, data);
     input = input.split(" ");
     if (input.length === 2) {
         // User Register
-        UserManager.register(socket, input[0], input[1], (err) => {
-            if (err) {
-                socket.write('\n注册成功！\n');
-                $this.loginWait(machine, socket, data);
+        UserManager.register(socket, input[0], input[1], (error) => {
+            if (error) {
+                socket.write('\n用户已经存在！\n');
                 return;
             }
-            // socket.write('\n用户已经存在！\n');
-            // return;
-
+            socket.write('\n注册成功！\n');
+            this.loginWait(machine, socket, data);
         })
     }
 };

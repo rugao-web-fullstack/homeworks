@@ -13,10 +13,14 @@ function file(filePath) {
                     if (error) {
                         console.warn(error);
                     } else {
-                        var isDir = stats.isDirectory();
+                        var isDir = stats.isDirectory(); //文件夹
+                        var isFile = stats.isFile();  //文件
                         if (isDir) {
                             console.log(filedirname);
                             file(filedirname);
+                        }
+                        if(isFile){
+                            console.log(filedirname);
                         }
                     }
                 });

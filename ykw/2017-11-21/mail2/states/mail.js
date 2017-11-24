@@ -1,3 +1,4 @@
+
 let states = require("../states").states;
 const UserManager = require('../entities/user').User;
 const MailManager = require('../entities/mail').Mail;
@@ -61,7 +62,7 @@ Mail.prototype.stateWrite = function (machine, socket, data) {
  * @param {*} data 
  */
 Mail.prototype.stateWriteHome = function (machine, socket, data) {
-    socket.write('\n请输入你要修改的内容，\n\t1.收件人地址\n\t2.标题\n\t3.正文内容\n\t4.发送邮件\n');
+    socket.write('\n请输入你要修改的内容，\n\t1.收件人地址\n\t2.标题\n\t3.正文内容\n\t4.发送邮件\n\teixt退出\n');
     machine.action = 'wait';
 }
 
@@ -141,13 +142,16 @@ Mail.prototype.getTitle = function (machine, socket, data) {
 
 Mail.prototype.getAddress = function (machine, socket, data) {
     let address = machine.getCleanedString(socket, data);
-    if (!UserManager.isAddress(address)) {
-        socket.write("地址不存在！请重新输入:\n");
-        return;
-    }
-    this.address = address;
-    socket.write("地址更新成功！当前地址是: " + this.address + "\n")
-    this.stateWriteHome(machine, socket, data);
+    UserManager.isAddress(address, (error) => {
+    console.log("ccccc");
+        if (error) {
+            socket.write("地址不存在！请重新输入:\n");
+            return;
+        }
+        this.address = address;
+        socket.write("地址更新成功！当前地址是: " + this.address + "\n")
+        this.stateWriteHome(machine, socket, data);
+    })
 };
 
 Mail.prototype.getBody = function (machine, socket, data) {
@@ -167,27 +171,22 @@ Mail.prototype.getBody = function (machine, socket, data) {
 
 
 Mail.prototype.sendMail = function (machine, socket, data) {
-    let user = UserManager.getUserBySocket(socket);
-
-    MailManager.send(user.email,
-        this.address,
-        this.title,
-        this.body.join("\n\r"), (error) => {
+    UserManager.getUserBySocket(socket, (error, user) => {
+        if (error) {
+            console.log("aaa");
+            socket.write("发送失败！\n");
+        }
+        console.log(user);
+        MailManager.send(user.email, this.address, this.title, this.body.join("\n\r"), (error) => {
             if (error) {
+                console.log("bbb");
                 console.error(error.stack);
                 socket.write("发送失败！\n");
                 return
             }
             socket.write("邮件发送成功！\n");
         });
-    // if (!MailManager.send(
-    //     user.email,
-    //     this.address,
-    //     this.title,
-    //     this.body.join("\n\r"))) {
-    //     return socket.write("发送失败！\n");
-    // }
-    // return socket.write("邮件发送成功！\n");
+    });
 };
 
 Mail.prototype.onNewMail = function (socket, sender, mail) {
@@ -217,32 +216,31 @@ Mail.prototype.stateRead = function (machine, socket, data) {
 }
 
 Mail.prototype.getMailList = function (socket, cb) {
-    let user = UserManager.getUserBySocket(socket);
-    console.log("user");
-    console.log(user);
-    if (!user) {
-        socket.write("你尚未登录!");
-        return null;
-    }
-    MailManager.get(user.email, (error, mails) => {
-        if (error) {
-            console.error(error);
-            cb(error)
-            return;
+    UserManager.getUserBySocket(socket,(error,user) => {
+        if(error){
+            socket.write("你尚未登录!");
+            return null;
         }
-        console.log("mails");
-        console.log(mails);
-
-        if (!mails || mails.length < 1) {
-            socket.write("你邮件列表为空!");
-            cb(false, null);
+        MailManager.get(user.email, (error, mails) => {
+            if (error) {
+                console.error(error);
+                cb(error)
+                return;
+            }
+            console.log("mails");
+            console.log(mails);
+    
+            if (!mails || mails.length < 1) {
+                socket.write("你邮件列表为空!");
+                cb(false, null);
+                return;
+            }
+            console.log("return mails");
+            cb(false, mails);
             return;
-        }
-        console.log("return mails");
-        cb(false, mails);
-        return;
-    });
-
+        });
+       
+    })
 }
 
 Mail.prototype.stateReadHome = function (machine, socket, data) {
