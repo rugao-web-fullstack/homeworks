@@ -2,8 +2,6 @@ const FILENAME = "../data/user.json";
 const path = require("path");
 const Storage = require("./storage").Storage;
 const storage = new Storage(path.resolve(path.dirname(__filename), FILENAME));
-const fs = require("fs");
-const rs = fs.createReadStream(path.resolve(path.dirname(__filename), FILENAME));
 
 let users = {
 };
@@ -47,34 +45,29 @@ User.register = function (socket, username, password, cb) {
 };
 
 User.login = function (socket, username, password, cb) {
-
-    rs.on("data", (chunk) => {
-        console.log("on data");
-    })
-    rs.on("readable", () => {
-        let userString = String(rs.read());
-        let userJson = JSON.parse(userString);
+    storage.read((error, userJson) => {
+        if (error) {
+            console.log(error.stack);
+            cb(error);
+            return;
+        }
         if (!userJson[username]) {
-            // console.log("111");
             cb(true);
-        } else if (userJson[username]) {
-            console.log(userJson[username]);
+        }
+        else if (userJson[username]) {
             let user = userJson[username][0];
-            console.log(user.password);
-            console.log(password);
             if (user.password === password) {
                 sockets[username] = [];
                 sockets[username].push({
                     username: username,
                     socket: socket
                 });
-                console.log(sockets);
                 cb(false);
             } else {
                 cb(true);
             }
         }
-    });
+    })
 };
 
 
@@ -83,11 +76,30 @@ User.login = function (socket, username, password, cb) {
  * @param {*} address 
  */
 User.isAddress = function (address, cb) {
-    var data = fs.readFile(path.resolve(path.dirname(__filename), FILENAME), function (err, data) {
-        if (err)
-            console.log('读取文件时发生错误！');
+    // var data = fs.readFile(path.resolve(path.dirname(__filename), FILENAME), function (err, data) {
+    //     if (err)
+    //         console.log('读取文件时发生错误！');
+    //     else {
+    //         let userJson = JSON.parse(data.toString());
+    // for (var k in userJson) {
+    //     if (k === address) {
+    //         if (userJson[k].username === address) {
+    //             cb(false);
+    //             return;
+    //         }
+    //         // console.log(userJson[k]);
+    //     }
+    // }
+    // cb(true);
+    //     }
+    // });
+    storage.read((error, userJson) => {
+        if (error) {
+            console.log(error.stack);
+            cb(error);
+            return;
+        }
         else {
-            let userJson = JSON.parse(data.toString());
             for (var k in userJson) {
                 if (k === address) {
                     if (userJson[k].username === address) {

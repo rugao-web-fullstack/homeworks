@@ -1,6 +1,11 @@
 let states = require("../states").states;
 const UserManager = require('../entities/user').User;
 const MailManager = require('../entities/mail').Mail;
+const FILENAME = "../data/mail.json";
+const path = require("path");
+const Storage = require("../entities/storage").Storage;
+const storage = new Storage(path.resolve(path.dirname(__filename), FILENAME));
+
 /**
  * 用于处理邮件与用户的交互
  * @param {*} socket 
@@ -172,10 +177,10 @@ Mail.prototype.getBody = function (machine, socket, data) {
 
 Mail.prototype.sendMail = function (machine, socket, data) {
     let user = UserManager.getUserBySocket(socket);
-    MailManager.send(user,this.address,this.title,this.body.join("\n\r"),(error) => {
-        if(error){
+    MailManager.send(user, this.address, this.title, this.body.join("\n\r"), (error) => {
+        if (error) {
             return socket.write("发送失败！\n");
-        }else{
+        } else {
             return socket.write("邮件发送成功！\n");
         }
     });
@@ -224,12 +229,20 @@ Mail.prototype.getMailList = function (socket) {
         return null;
     }
     console.log("return mails");
-    return mails;
 }
 
 Mail.prototype.stateReadHome = function (machine, socket, data) {
     socket.write('\n请输入你要查看的邮件ID:\n');
-    let mails = this.getMailList(socket);
+    let mails = this.getMailList(socket, (error, mails) => {
+        if (error) {
+            console.log(error);
+            return;
+        } else {
+            console.log("111" + mails);
+            return mails;
+        }
+
+    });
     for (let i = 0; i < mails.length; i++) {
         socket.write("id: " + i + ', 标题: ' + mails[i].mail.title + "\n");
     }
@@ -247,9 +260,15 @@ Mail.prototype.stateReadWait = function (machine, socket, data) {
     console.log("state read wait");
     let index = machine.getCleanedString(socket, data);
     console.log("input = " + index);
-    let mails = this.getMailList(socket);
+    let mails = this.getMailList(socket, (error, mails) => {
+        if (error) {
+            console.log(error);
+            return;
+        } else {
+            return mails;
+        }
+    });
     console.log("mail list:");
-    console.log(mails);
     if (!mails) {
         return false;
     }

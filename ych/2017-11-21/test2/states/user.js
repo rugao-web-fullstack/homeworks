@@ -23,11 +23,13 @@ User.prototype.login = function (machine, socket, data) {
     input = input.split(" ");
     if (input.length === 2) {
         // User Register
+        // socket.write("111");
         UserManager.login(socket, input[0], input[1], (error) => {
             if (error) {
                 socket.write('\n用户名或者密码不匹配！\n');
                 return;
             } else {
+
                 socket.write('\n登录成功！\n');
                 machine.state = states.USER_LOGIN;
                 machine.action = '';
@@ -35,6 +37,7 @@ User.prototype.login = function (machine, socket, data) {
                 // socket.emit(states.USER_LOGIN, state, socket, null);
             }
         });
+        // socket.write("222");
     } else {
         socket.write("输入错误!");
     }
