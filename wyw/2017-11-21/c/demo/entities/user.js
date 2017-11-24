@@ -21,15 +21,6 @@ function User(username, password) {
 
 User.register = function (socket,
     username, password, cb) {
-    // if (users[username]) {
-    //     return false;
-    // }
-    // users[username] = {
-    //     socket: socket,
-    //     user: new User(username,
-    //         password)
-    // };
-    // return true;
     storage.read((error, users) => {
         if (error) {
             console.log(error.stack);
@@ -44,16 +35,7 @@ User.register = function (socket,
             cb(true);
             return;
         }
-        // users[username] = [];
-        // if (users[username]) {
-        //     return false;
-        // }
-        // users[username] = {
-        //     socket: socket,
-        //     user: new User(username,
-        //         password)
-        // };
-
+       
         let user = new User(
             username, password);
 
@@ -143,4 +125,3 @@ User.getUserBySocket = function (socket) {
 }
 
 exports.User = User;
-// module.exports.User = User;

@@ -22,7 +22,6 @@ User.prototype.login = function (machine, socket, data) {
     let input = machine.getCleanedString(socket, data);
     input = input.split(" ");
     if (input.length === 2) {
-        // User Register
         UserManager.login(socket, input[0], input[1],(error)=>{
             if(error){
                 socket.write('\n用户名或者密码不匹配！\n');
@@ -93,15 +92,10 @@ User.prototype.register = function (machine, socket, data) {
     let input = machine.getCleanedString(socket, data);
     input = input.split(" ");
     if (input.length === 2) {
-        // User Register
         UserManager.register(socket, input[0], input[1],(error) => {
             if(error){
                 socket.write('\n注册失败！\n');
                 this.notLoginHome(machine, socket, data);
-                // machine.state = USER_NOT_LOGIN;
-                // machine.action = "";
-                // machine.process(socket,data);
-               // return;
             }else{
                 socket.write('\n注册成功！\n');
                 this.loginWait(machine, socket, data);

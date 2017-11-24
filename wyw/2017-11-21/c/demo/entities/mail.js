@@ -10,7 +10,6 @@ const Storage = require("./storage").Storage;
 const storage = new Storage(
     path.resolve(
         path.dirname(__filename), FILENAME));
-//
 
 function Mail(sender, receiver, title, body) {
     this.sender = sender;
