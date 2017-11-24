@@ -4,7 +4,7 @@ function Machine() {
     this.state = states.USER_NOT_LOGIN;
     this.action = '';
 }
-Machine.prototype.process = function (socket,
+Machine.prototype.process = function(socket,
     data) {
     let input = this.getCleanedString(data);
     switch (this.state) {
@@ -27,7 +27,7 @@ Machine.prototype.process = function (socket,
     }
 };
 
-Machine.prototype.getCleanedString = function (socket,
+Machine.prototype.getCleanedString = function(socket,
     data) {
     let input = String(data);
     input = input.replace(/(\n|\r)+$/, '');

@@ -9,7 +9,6 @@ buf.writeFloatBE(0x24, 0);
 ws.write(buf);
 
 //---buf.readFloatBE
-rs.on("data", function (data) {
+rs.on("data", function(data) {
     console.log(buf.readFloatBE(data));
 });
-

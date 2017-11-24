@@ -3,7 +3,7 @@ const StateUser = require('./states/user').User;
 const StateMailer = require('./states/mail').Mail;
 const Machine = require("./machine").Machine;
 let sockets = []; //存储链接用户
-const server = net.createServer(function (socket) {
+const server = net.createServer(function(socket) {
     let machine = new Machine();
 
     sockets.push(socket);
@@ -11,7 +11,7 @@ const server = net.createServer(function (socket) {
     new StateMailer(socket);
     console.log("socket connected!");
     machine.process(socket, null);
-    socket.on('data', function (data) {
+    socket.on('data', function(data) {
         console.log(data);
         console.log(String(data));
         console.log("data received!");

@@ -14,7 +14,7 @@ function Mail(sender, receiver, title, body) {
     this.body = body;
 }
 
-Mail.send = function (sender, receiver, title, body, cb) {
+Mail.send = function(sender, receiver, title, body, cb) {
     storage.read((error, mails) => {
         if (error) {
             console.log(error.stack);
@@ -48,7 +48,7 @@ Mail.send = function (sender, receiver, title, body, cb) {
     });
 };
 
-Mail.get = function (user, cb) {
+Mail.get = function(user, cb) {
     storage.read((error, mails) => {
         if (error) {
             cb(error);

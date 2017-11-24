@@ -9,6 +9,6 @@ buf.writeUInt8(0x1, 0);
 ws.write(buf);
 
 //---buf.readUInt32BE(offset[, noAssert])
-rs.on("data", function (data) {
+rs.on("data", function(data) {
     console.log(buf.readUInt8(data));
 });

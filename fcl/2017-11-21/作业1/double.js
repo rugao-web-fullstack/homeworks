@@ -9,6 +9,6 @@ buf.writeDoubleBE(0x1, 0);
 ws.write(buf);
 
 //---buf.readUInt32BE(offset[, noAssert])
-rs.on("data", function (data) {
+rs.on("data", function(data) {
     console.log(buf.readDoubleBE(data));
 });

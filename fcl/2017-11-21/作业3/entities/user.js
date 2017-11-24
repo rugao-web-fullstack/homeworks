@@ -13,9 +13,9 @@ function User(username, password) {
     this.password = password;
 }
 
-User.register = function (socket, username, password, cb) {
+User.register = function(socket, username, password, cb) {
     console.log('register\n');
-    storage.read(function (error, users) {
+    storage.read(function(error, users) {
         if (error) {
             cb(error);
             return;
@@ -26,7 +26,7 @@ User.register = function (socket, username, password, cb) {
         }
         users[username] = new User(username, password);
 
-        storage.save(users, function (error) {
+        storage.save(users, function(error) {
             if (error) {
                 cb(error);
             }
@@ -35,8 +35,8 @@ User.register = function (socket, username, password, cb) {
     });
 };
 
-User.login = function (socket, username, password, cb) {
-    storage.read(function (error, users) {
+User.login = function(socket, username, password, cb) {
+    storage.read(function(error, users) {
         if (error) {
             cb(error);
             return;
@@ -51,7 +51,7 @@ User.login = function (socket, username, password, cb) {
         });
         if (users[username].password === password) {
             cb(false);
-           
+
             return;
         } else {
             cb(true);
@@ -60,9 +60,9 @@ User.login = function (socket, username, password, cb) {
 };
 
 
-User.isAddress = function (address, cb) {
+User.isAddress = function(address, cb) {
     console.log('isAdress\n');
-    storage.read(function (error, users) {
+    storage.read(function(error, users) {
         if (error) {
             cb(error);
             return;
@@ -80,7 +80,7 @@ User.isAddress = function (address, cb) {
 };
 
 
-User.getSocket = function (address) {
+User.getSocket = function(address) {
     for (var k in sockets) {
         if (sockets[k].username === address) {
             return sockets[k].socket;
@@ -90,8 +90,8 @@ User.getSocket = function (address) {
 };
 
 
-User.getUserBySocket = function (socket, cb) {
-    storage.read(function (error, users) {
+User.getUserBySocket = function(socket, cb) {
+    storage.read(function(error, users) {
         if (error) {
             cb(error);
             return;

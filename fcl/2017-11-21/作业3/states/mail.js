@@ -1,4 +1,3 @@
-
 let states = require("../states").states;
 const UserManager = require('../entities/user').User;
 const MailManager = require('../entities/mail').Mail;
@@ -22,7 +21,7 @@ function Mail(socket) {
 }
 
 
-Mail.prototype.stateWrite = function (machine, socket, data) {
+Mail.prototype.stateWrite = function(machine, socket, data) {
     if (!machine.action) {
         this.stateWriteHome(machine, socket, data);
     } else {
@@ -46,14 +45,14 @@ Mail.prototype.stateWrite = function (machine, socket, data) {
 }
 
 
-Mail.prototype.stateWriteHome = function (machine, socket, data) {
+Mail.prototype.stateWriteHome = function(machine, socket, data) {
     socket.write('\n请输入你要修改的内容，\n\t1.收件人地址\n\t2.标题\n\t3.正文内容\n\t4.发送邮件\n');
     machine.action = 'wait';
 }
 
 
 
-Mail.prototype.stateWriteWait = function (machine, socket, data) {
+Mail.prototype.stateWriteWait = function(machine, socket, data) {
     let input = machine.getCleanedString(socket, data);
     switch (input) {
         case '1':
@@ -79,32 +78,32 @@ Mail.prototype.stateWriteWait = function (machine, socket, data) {
     }
 }
 
-Mail.prototype.stateWriteAddressWait = function (machine, socket, data) {
+Mail.prototype.stateWriteAddressWait = function(machine, socket, data) {
     socket.write("请输入接收用户的地址:\n")
     machine.action = 'address';
 };
 
 
-Mail.prototype.stateWriteTitleWait = function (machine, socket, data) {
+Mail.prototype.stateWriteTitleWait = function(machine, socket, data) {
     socket.write("请输入标题:\n")
     machine.action = 'title';
 };
 
-Mail.prototype.stateWriteBodyWait = function (machine, socket, data) {
+Mail.prototype.stateWriteBodyWait = function(machine, socket, data) {
     socket.write("请输入邮件内容:\n")
     machine.action = 'body';
 };
 
-Mail.prototype.getTitle = function (machine, socket, data) {
+Mail.prototype.getTitle = function(machine, socket, data) {
     this.title = machine.getCleanedString(socket, data);
     socket.write("标题更新成功！当前标题是: " + this.title + "\n")
     this.stateWriteHome(machine, socket, data);
 };
 
-Mail.prototype.getAddress = function (machine, socket, data) {
+Mail.prototype.getAddress = function(machine, socket, data) {
     let address = machine.getCleanedString(socket, data);
     UserManager.isAddress(address, (error) => {
-        if(error){
+        if (error) {
             socket.write("地址不存在！请重新输入:\n");
             return;
         }
@@ -114,7 +113,7 @@ Mail.prototype.getAddress = function (machine, socket, data) {
     });
 };
 
-Mail.prototype.getBody = function (machine, socket, data) {
+Mail.prototype.getBody = function(machine, socket, data) {
     let input = machine.getCleanedString(socket, data);
     if (input === '.exit') {
         socket.write("正文更新成功！当前正文内容是:\n");
@@ -130,13 +129,13 @@ Mail.prototype.getBody = function (machine, socket, data) {
 };
 
 
-Mail.prototype.sendMail = function (machine, socket, data) {
-    UserManager.getUserBySocket(socket,function (error,user) {
-        if(error){
+Mail.prototype.sendMail = function(machine, socket, data) {
+    UserManager.getUserBySocket(socket, function(error, user) {
+        if (error) {
             socket.write('error\n');
         }
-        MailManager.send(user.email,this.address,this.title,this.body.join("\n\r"),function(error){
-            if(error){
+        MailManager.send(user.email, this.address, this.title, this.body.join("\n\r"), function(error) {
+            if (error) {
                 socket.write('发送失败\n');
                 return;
             }
@@ -144,15 +143,15 @@ Mail.prototype.sendMail = function (machine, socket, data) {
         })
     });
 
- 
+
 };
 
-Mail.prototype.onNewMail = function (socket, sender, mail) {
+Mail.prototype.onNewMail = function(socket, sender, mail) {
     socket.write("你有来自<" + sender + ">的一封新邮件！\n");
 };
 
 
-Mail.prototype.stateRead = function (machine, socket, data) {
+Mail.prototype.stateRead = function(machine, socket, data) {
     console.log("state read");
     if (!machine.action) {
         this.stateReadHome(machine, socket, data);
@@ -165,37 +164,37 @@ Mail.prototype.stateRead = function (machine, socket, data) {
     }
 }
 
-Mail.prototype.getMailList = function (socket, cb) {
-    UserManager.getUserBySocket(socket,function (error,userObj) {
-       
-       if(error){
-           cb(error);
-           return null;
-       }
-       if(!userObj){
-           socket.write('你尚未登录\n');
-           return null;
-       }
-       MailManager.get(userObj.email,(error,mails) => {
-           if(error){
-               cb(error);
-               return;
-           }
-           if (!mails || mails.length < 1) {
+Mail.prototype.getMailList = function(socket, cb) {
+    UserManager.getUserBySocket(socket, function(error, userObj) {
+
+        if (error) {
+            cb(error);
+            return null;
+        }
+        if (!userObj) {
+            socket.write('你尚未登录\n');
+            return null;
+        }
+        MailManager.get(userObj.email, (error, mails) => {
+            if (error) {
+                cb(error);
+                return;
+            }
+            if (!mails || mails.length < 1) {
                 socket.write("你邮件列表为空!");
                 cb(false, null);
                 return;
             }
             cb(false, mails);
             return;
-       })
+        })
 
     });
-  
+
 
 }
 
-Mail.prototype.stateReadHome = function (machine, socket, data) {
+Mail.prototype.stateReadHome = function(machine, socket, data) {
     socket.write('\n请输入你要查看的邮件ID:\n');
     this.getMailList(socket, (error, mails) => {
         if (error) {
@@ -213,18 +212,18 @@ Mail.prototype.stateReadHome = function (machine, socket, data) {
 
 
 
-Mail.prototype.stateReadWait = function (machine, socket, data) {
+Mail.prototype.stateReadWait = function(machine, socket, data) {
     console.log("state read wait");
     let index = machine.getCleanedString(socket, data);
     console.log("input = " + index);
-    this.getMailList(socket,(error,mails) => {
-        if(error){
+    this.getMailList(socket, (error, mails) => {
+        if (error) {
             socket.write('出错\n');
         }
         if (!mails) {
             return false;
         }
-    try {
+        try {
             index = parseInt(index);
             if (index < mails.length && index >= 0) {
                 let email = mails[index].mail;
