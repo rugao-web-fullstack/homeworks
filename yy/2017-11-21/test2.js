@@ -2,7 +2,7 @@ var fs = require('fs');
 var path = require('path');
 
 // 解析需要遍历的文件夹
-var filePath = path.resolve('E:');
+var filePath = path.resolve('..');
 
 // 调用文件遍历方法
 fileDisplay(filePath);
