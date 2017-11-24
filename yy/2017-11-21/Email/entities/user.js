@@ -22,12 +22,12 @@ User.register = function (socket, username, password, cb) {
             cb(error);
             return;
         }
-        //如果user.json文件中还没有users
+        // 如果user.json文件中还没有users
         if (!users) {
             console.log('新创建users');
             users = {};
         }
-        //已经 存在该用户
+        // 已经存在该用户
         if (users[username]) {
             socket.write('用户名已存在！请不要重复注册！');
             cb(true);

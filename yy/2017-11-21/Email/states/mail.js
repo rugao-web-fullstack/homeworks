@@ -223,7 +223,7 @@ Mail.prototype.stateRead = function (machine, socket, data) {
         }
     }
 }
-//根据邮件的接受者获取到mails中其对应的邮件
+// 根据邮件的接受者获取到mails中其对应的邮件
 Mail.prototype.getMailList = function (socket, cb) {
     let Sender;
     UserManager.getUserBySocket(socket, (error, user) => {
