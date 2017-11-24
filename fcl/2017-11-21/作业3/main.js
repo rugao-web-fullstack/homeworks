@@ -2,7 +2,7 @@ const net = require("net");
 const StateUser = require('./states/user').User;
 const StateMailer = require('./states/mail').Mail;
 const Machine = require("./machine").Machine;
-let sockets = []; //存储链接用户
+let sockets = [];
 const server = net.createServer(function(socket) {
     let machine = new Machine();
 

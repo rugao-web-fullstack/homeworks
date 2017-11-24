@@ -39,7 +39,6 @@ User.prototype.login = function(machine, socket, data) {
 
 User.prototype.notLoginWait = function(machine, socket, data) {
     let input = machine.getCleanedString(socket, data);
-    console.log("input = " + input);
     switch (input) {
         case '1':
             this.registerWait(machine, socket, data);
@@ -100,15 +99,11 @@ User.prototype.register = function(machine, socket, data) {
 };
 
 User.prototype.stateLogin = function(machine, socket, data) {
-    console.log("inside login");
     if (!machine.action) {
-        console.log("inside not login home");
         this.loginHome(machine, socket, data);
     } else {
-        console.log("inside not login else");
         switch (machine.action) {
             case 'wait':
-                console.log("inside not login wait");
                 this.homeWaite(machine, socket, data);
                 break;
         }
@@ -121,24 +116,20 @@ User.prototype.loginHome = function(machine, socket, data) {
 };
 User.prototype.homeWaite = function(machine, socket, data) {
     let input = machine.getCleanedString(socket, data);
-    console.log("input = " + input);
     switch (input) {
         case '1':
-            console.log("inside mail write");
             socket.write("mail write");
             machine.state = states.MAIL_WRITE;
             machine.action = '';
             socket.emit(states.MAIL_WRITE, machine, socket, data);
             break;
         case '2':
-            console.log("inside mail write");
             socket.write("mail read");
             machine.state = states.MAIL_READ;
             machine.action = '';
             socket.emit(states.MAIL_READ, machine, socket, data);
             break;
         default:
-            console.log("inside not login wait default");
             break;
     }
 }

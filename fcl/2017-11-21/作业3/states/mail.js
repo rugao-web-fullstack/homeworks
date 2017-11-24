@@ -25,7 +25,6 @@ Mail.prototype.stateWrite = function(machine, socket, data) {
     if (!machine.action) {
         this.stateWriteHome(machine, socket, data);
     } else {
-        console.log("inside not login else");
         switch (machine.action) {
             case 'address':
                 this.getAddress(machine, socket, data);
@@ -37,7 +36,6 @@ Mail.prototype.stateWrite = function(machine, socket, data) {
                 this.getBody(machine, socket, data);
                 break;
             case 'wait':
-                console.log("inside not login wait");
                 this.stateWriteWait(machine, socket, data);
                 break;
         }
@@ -82,6 +80,7 @@ Mail.prototype.stateWriteAddressWait = function(machine, socket, data) {
     socket.write("请输入接收用户的地址:\n")
     machine.action = 'address';
 };
+
 
 
 Mail.prototype.stateWriteTitleWait = function(machine, socket, data) {
@@ -130,11 +129,13 @@ Mail.prototype.getBody = function(machine, socket, data) {
 
 
 Mail.prototype.sendMail = function(machine, socket, data) {
-    UserManager.getUserBySocket(socket, function(error, user) {
+    var self = this;
+    UserManager.getUserBySocket(socket, function(error, userObj) {
         if (error) {
-            socket.write('error\n');
+            socket.write('发送失败\n');
         }
-        MailManager.send(user.email, this.address, this.title, this.body.join("\n\r"), function(error) {
+        let email = userObj.email;
+        MailManager.send(userObj.email, self.address, self.title, self.body.join("\n\r"), function(error) {
             if (error) {
                 socket.write('发送失败\n');
                 return;
@@ -152,9 +153,8 @@ Mail.prototype.onNewMail = function(socket, sender, mail) {
 
 
 Mail.prototype.stateRead = function(machine, socket, data) {
-    console.log("state read");
     if (!machine.action) {
-        this.stateReadHome(machine, socket, data);
+        console.log("state write home");
     } else {
         switch (machine.action) {
             case 'wait':
@@ -213,9 +213,7 @@ Mail.prototype.stateReadHome = function(machine, socket, data) {
 
 
 Mail.prototype.stateReadWait = function(machine, socket, data) {
-    console.log("state read wait");
     let index = machine.getCleanedString(socket, data);
-    console.log("input = " + index);
     this.getMailList(socket, (error, mails) => {
         if (error) {
             socket.write('出错\n');

@@ -61,7 +61,6 @@ User.login = function(socket, username, password, cb) {
 
 
 User.isAddress = function(address, cb) {
-    console.log('isAdress\n');
     storage.read(function(error, users) {
         if (error) {
             cb(error);
