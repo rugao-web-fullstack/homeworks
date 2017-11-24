@@ -1,5 +1,6 @@
 let states = require("../states").states;
 const UserManager = require('../entities/user').User;
+const writeFile = require('../entities/user').writeFile;
 
 function User(socket) {
     socket.on(states.USER_NOT_LOGIN,
@@ -23,21 +24,16 @@ User.prototype.login = function (machine, socket, data) {
     input = input.split(" ");
     if (input.length === 2) {
         // User Register
-        // socket.write("111");
-        UserManager.login(socket, input[0], input[1], (error) => {
-            if (error) {
-                socket.write('\n用户名或者密码不匹配！\n');
-                return;
-            } else {
-
+        UserManager.login(socket, input[0], input[1], (err) => {
+            if (!err) {
                 socket.write('\n登录成功！\n');
                 machine.state = states.USER_LOGIN;
                 machine.action = '';
                 machine.process(socket, data);
-                // socket.emit(states.USER_LOGIN, state, socket, null);
+            } else {
+                socket.write('\n用户名或者密码不匹配！\n');
             }
         });
-        // socket.write("222");
     } else {
         socket.write("输入错误!");
     }
@@ -99,15 +95,15 @@ User.prototype.register = function (machine, socket, data) {
     input = input.split(" ");
     if (input.length === 2) {
         // User Register
-        UserManager.register(socket, input[0], input[1], (error) => {
-            if (error) {
+        UserManager.register(socket, input[0], input[1], (err) => {
+            if (!err) {
+                socket.write('\n注册成功！\n');
+                this.loginWait(machine, socket, data);
+            } else {
                 socket.write('\n用户已经存在！\n');
-                console.log("error");
-                return;
             }
-            socket.write('\n注册成功！\n');
-            this.loginWait(machine, socket, data);
-        });
+        })
+
     } else {
         socket.write("输入错误!");
     }

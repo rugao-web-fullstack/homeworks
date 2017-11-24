@@ -1,152 +1,110 @@
-const FILENAME = "../data/user.json";
 const path = require("path");
-const Storage = require("./storage").Storage;
-const storage = new Storage(path.resolve(path.dirname(__filename), FILENAME));
+const fs = require("fs");
+const Storage = require("./storage.js").Storage;
+const filename = "../data/user.json";
+const FILENAME = path.resolve(path.dirname(__filename), filename);
 
-let users = {
-};
-let sockets = {
+let sockets = {}
+let storage = new Storage(FILENAME);
 
-};
 function User(username, password) {
     this.username = username;
     this.email = username;
     this.password = password;
 }
 
-User.register = function (socket, username, password, cb) {
-
-    storage.read((error, users) => {
-        if (error) {
-            console.log(error.stack);
-            cb(error);
+User.register = function (socket, username, password, callback) {
+    storage.read(function (err, users) {
+        if (err) {
+            callback(err);
             return;
+        }
+        if (!users) {
+            users = {}
         }
         if (users[username]) {
-            // console.log("111");
-            cb(true);
-        }
-        if (!users[username]) {
-            users[username] = [];
-            users[username].push({
-                username: username,
-                password: password
-            });
-            cb(false);
-        }
-        storage.save(users, (error) => {
-            if (error) {
-                cb(error);
-                return;
-            }
-        });
-
-    });
-};
-
-User.login = function (socket, username, password, cb) {
-    storage.read((error, userJson) => {
-        if (error) {
-            console.log(error.stack);
-            cb(error);
+            callback(new Error("用户已经被注册"));
             return;
         }
-        if (!userJson[username]) {
-            cb(true);
+        users[username] = new User(username, password);
+
+        storage.save(users, (error) => {
+            callback(error);
+        })
+    })
+}
+
+User.login = function (socket, username, password, callback) {
+
+    storage.read(function (error, users) {
+
+        if (error) {
+            callback(error);
+            return;
         }
-        else if (userJson[username]) {
-            let user = userJson[username][0];
-            if (user.password === password) {
-                sockets[username] = [];
-                sockets[username].push({
-                    username: username,
-                    socket: socket
-                });
-                cb(false);
-            } else {
-                cb(true);
-            }
+        if (!users[username]) {
+            callback(new Error("用户不存在"));
+            return;
+        }
+        let user = users[username];
+        if (user.password === password) {
+
+            sockets[username] = socket;
+            callback(null);
+
+            return;
+        } else {
+            callback(new Error("账号密码输入错误"));
         }
     })
-};
-
+}
 
 /**
  * 判断当前地址是不是有用户拥有
  * @param {*} address 
  */
-User.isAddress = function (address, cb) {
-    // var data = fs.readFile(path.resolve(path.dirname(__filename), FILENAME), function (err, data) {
-    //     if (err)
-    //         console.log('读取文件时发生错误！');
-    //     else {
-    //         let userJson = JSON.parse(data.toString());
-    // for (var k in userJson) {
-    //     if (k === address) {
-    //         if (userJson[k].username === address) {
-    //             cb(false);
-    //             return;
-    //         }
-    //         // console.log(userJson[k]);
-    //     }
-    // }
-    // cb(true);
-    //     }
-    // });
-    storage.read((error, userJson) => {
-        if (error) {
-            console.log(error.stack);
-            cb(error);
-            return;
-        }
-        else {
-            for (var k in userJson) {
-                if (k === address) {
-                    if (userJson[k].username === address) {
-                        cb(false);
-                        return;
-                    }
-                    // console.log(userJson[k]);
-                }
+User.isAddress = function (address, callback) {
+    storage.read((error, users) => {
+        for (var k in users) {
+            if (users[k].email === address) {
+                callback(null);
+                return;
             }
-            cb(true);
         }
-    });
+        callback(new Error());
+    })
 }
 
 /**
  * 根据地址获取用户socket
  * @param {*} address 
  */
-User.getSocket = function (address) {
+User.getSocket = function (address, callback) {
+    console.log(sockets);
     for (var k in sockets) {
-        console.log(k);
-        // console.log("111");
-        console.log("address=" + address);
-        console.log(sockets[k][0]);
-        console.log(sockets[k][0].username);
-        if (sockets[k][0].username === address) {
-            console.log("111");
-            return sockets[k][0].socket;
+        if (k === address) {
+            return sockets[k];
         }
     }
-    return null;
 }
-
 
 /**
  * 根据socket获取用户
  * @param {*} address 
  */
-User.getUserBySocket = function (socket) {
-    for (var k in sockets) {
-        console.log("111");
-        if (sockets[k][0].socket === socket) {
-            return sockets[k][0].username;
+User.getUserBySocket = function (socket, callback) {
+
+    storage.read((error, users) => {
+        for (var k in sockets) {
+            if (sockets[k] === socket) {
+                console.log(users[k]);
+                callback(null, users[k]);
+                return;
+            }
         }
-    }
-    return null;
+        callback(new Error("没有找到用户"));
+    })
+
 }
 
 exports.User = User;
-// module.exports.User = User;
