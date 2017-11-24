@@ -112,7 +112,7 @@ User.prototype.register = function (machine, socket, data) {
         // }
         UserManager.register(socket, input[0], input[1], function (error) {
             if (error) {
-                socket.write('注册失败\n');
+                socket.write('用户已经存在\n');
                 return;
             }
             socket.write('注册成功!\n');
