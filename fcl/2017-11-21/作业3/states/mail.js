@@ -48,8 +48,6 @@ Mail.prototype.stateWriteHome = function(machine, socket, data) {
     machine.action = 'wait';
 }
 
-
-
 Mail.prototype.stateWriteWait = function(machine, socket, data) {
     let input = machine.getCleanedString(socket, data);
     switch (input) {
@@ -130,12 +128,11 @@ Mail.prototype.getBody = function(machine, socket, data) {
 
 Mail.prototype.sendMail = function(machine, socket, data) {
     var self = this;
-    UserManager.getUserBySocket(socket, function(error, userObj) {
+    UserManager.getUserBySocket(socket, function(error, userssss) {
         if (error) {
-            socket.write('发送失败\n');
+            socket.write('error\n');
         }
-        let email = userObj.email;
-        MailManager.send(userObj.email, self.address, self.title, self.body.join("\n\r"), function(error) {
+        MailManager.send(userssss.email, self.address, self.title, self.body.join("\n\r"), function(error) {
             if (error) {
                 socket.write('发送失败\n');
                 return;
@@ -143,8 +140,6 @@ Mail.prototype.sendMail = function(machine, socket, data) {
             socket.write('发送成功\n');
         })
     });
-
-
 };
 
 Mail.prototype.onNewMail = function(socket, sender, mail) {
