@@ -4,7 +4,45 @@ const emitter = new EventEmitter();
 const User = require('./user').User;
 const Mail = require('./mail').Mail;
 const fs = require('fs');
-
+fs.exists("./data", function (exists) {
+	if (exists) {
+		console.log('文件夹已存在');
+	} else {
+		fs.mkdir('./data', function (err, data) {
+			if (err) {
+				throw err;
+				return;
+			}
+			fs.exists("./data/fileUsers.json", function (exists) {
+				if (exists) {
+					console.log('用户信息表已存在');
+				} else {
+					fs.writeFile('./data/fileUsers.json', '', function (err) {
+						if (err) {
+							throw err;
+							return;
+						}
+						console.log('创建用户信息表成功');
+					});
+				}
+			});
+			fs.exists("./data/fileMails.json", function (exists) {
+				if (exists) {
+					console.log('邮件表已存在');
+				} else {
+					fs.writeFile('./data/fileMails.json', '', function (err) {
+						if (err) {
+							throw err;
+							return;
+						}
+						console.log('创建邮件表成功');
+					});
+				}
+			});
+			console.log('创建数据文件夹成功');
+		});
+	}
+});
 let mail = new Mail(emitter);
 //指令列表
 let commands = [{
@@ -36,17 +74,18 @@ let commands = [{
 	act: 'logout',
 	des: '登出当前账号Dmail邮件系统。\n',
 	mes: '您已成功登出\n'
-}];
-let sockets = [];//登录用户列表
-let users = [];//注册用户列
+}
+];
+let sockets = []; //登录用户列表
+let users = []; //注册用户列
 const server = net.createServer((socket) => {
-	let flag = 0;//初始化程序入口为选择程序入口
+	let flag = 0; //初始化程序入口为选择程序入口
 	let username = '';
 	socket.write("\n\n\n\n\n");
 	socket.write('欢迎使用Dmail系统！\n');
 	socket.write('输入命令:help获取指令列表！\n');
 	socket.on('data', (data) => {
-		var Data = data.toString().replace(/[\r\n]/g, '');//指令解析
+		var Data = data.toString().replace(/[\r\n]/g, ''); //指令解析
 		let inputs = '';
 		if (flag === 0) {
 			//根据指令修改程序入口标记
@@ -157,7 +196,7 @@ const server = net.createServer((socket) => {
 				case 4:
 					let mailNum = parseInt(Data);
 					if (mailNum !== NaN) {
-						let usermail = [];//用户邮件列表
+						let usermail = []; //用户邮件列表
 						console.log(mailNum + '///////////////////')
 						emitter.emit('read-mailcontent', username, socket, mailNum);
 						flag = 0;
