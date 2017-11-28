@@ -3,10 +3,9 @@ var uuid = require('uuid/v4');
 var url = require('url');
 var qs = require('querystring');
 var session = {};
-//
+
 http.createServer(function (req, res) {
     var user;
-    // var sid;
     var parsedUrl = url.parse(req.url);
     var query = qs.parse(parsedUrl.query);
     if (query.sid) {
