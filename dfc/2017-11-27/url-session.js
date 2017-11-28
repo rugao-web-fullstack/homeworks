@@ -4,17 +4,17 @@ var qs = require('querystring');
 var url = require('url');
 var session = {};
 
-http.createServer(function(req, res) {
+http.createServer(function (req, res) {
 	var user;
 	var sid;
 
 	var query = qs.parse(url.parse(req.url).query);
-	if(query.sid) {
+	if (query.sid) {
 		user = session[query.sid];
 	}
 	console.log(user);
 	// 生成
-	if(!user) {
+	if (!user) {
 		// 登录,产生用户信息
 		var user = {
 			id: uuid(),

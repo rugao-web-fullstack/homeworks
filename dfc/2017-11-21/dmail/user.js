@@ -13,10 +13,10 @@ function User(event, userlist) {
 	this.userlist = userlist;
 	console.log("user: constructor");
 }
-User.prototype.register = function(username, password, socket) {
+User.prototype.register = function (username, password, socket) {
 	console.log("user: register");
 	storage.read((error, users) => {
-		if(error) {
+		if (error) {
 			console.error(error.stack);
 			return;
 		}
@@ -25,8 +25,8 @@ User.prototype.register = function(username, password, socket) {
 			'password': password
 		});
 		console.log(this.userlist.length + '---------------')
-		if(this.userlist.length === 0) {
-			for(let i = 0; i < users.length; i++) {
+		if (this.userlist.length === 0) {
+			for (let i = 0; i < users.length; i++) {
 				let userid = users[i].username;
 				this.userlist.push({
 					userid: ''
@@ -45,7 +45,7 @@ User.prototype.register = function(username, password, socket) {
 			console.log(this.userlist[username])
 		}
 		storage.save(users, (error) => {
-			if(error) {
+			if (error) {
 				console.error(error.stack);
 				return;
 			}
@@ -54,20 +54,20 @@ User.prototype.register = function(username, password, socket) {
 		});
 	});
 };
-User.prototype.login = function(username, password, socket) {
+User.prototype.login = function (username, password, socket) {
 	console.log("user: login");
 	storage.read((error, users) => {
-		if(error) {
+		if (error) {
 			console.error(error.stack);
 			return;
 		}
 		var user = findUser(username);
-		if(user) {
-			if(user.password === password) {
-				if(this.userlist.length === 0) {
+		if (user) {
+			if (user.password === password) {
+				if (this.userlist.length === 0) {
 					console.log('用户表还是空的');
 					console.log(this.userlist);
-					for(let i = 0; i < users.length; i++) {
+					for (let i = 0; i < users.length; i++) {
 						let userid = users[i].username;
 						this.userlist.push({
 							userid: ''
@@ -89,8 +89,8 @@ User.prototype.login = function(username, password, socket) {
 		}
 
 		function findUser(username) {
-			for(let i = 0; i < users.length; i++) {
-				if(username === users[i].username) {
+			for (let i = 0; i < users.length; i++) {
+				if (username === users[i].username) {
 					return users[i];
 				}
 			}
