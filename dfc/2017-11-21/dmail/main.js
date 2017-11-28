@@ -4,100 +4,101 @@ const emitter = new EventEmitter();
 const User = require('./user').User;
 const Mail = require('./mail').Mail;
 const fs = require('fs');
-fs.exists("./data", function(exists) {  
-    if(exists){
-        console.log('文件夹已存在');
-    }else{
-        fs.mkdir('./data',function(err, data){
-            if(err){
-                throw err;
-                return;
+fs.exists("./data", function(exists) {
+	if(exists) {
+		console.log('文件夹已存在');
+	} else {
+		fs.mkdir('./data', function(err, data) {
+			if(err) {
+				throw err;
+				return;
 			}
-			fs.exists("./data/fileUsers.json", function(exists) {  
-				if(exists){
+			fs.exists("./data/fileUsers.json", function(exists) {
+				if(exists) {
 					console.log('用户信息表已存在');
-				}else{
-					fs.writeFile('./data/fileUsers.json','',function(err){
-						if(err){
+				} else {
+					fs.writeFile('./data/fileUsers.json', '', function(err) {
+						if(err) {
 							throw err;
 							return;
 						}
 						console.log('创建用户信息表成功');
 					});
 				}
-			}); 
-			fs.exists("./data/fileMails.json", function(exists) {  
-				if(exists){
+			});
+			fs.exists("./data/fileMails.json", function(exists) {
+				if(exists) {
 					console.log('邮件表已存在');
-				}else{
-					fs.writeFile('./data/fileMails.json','',function(err){
-						if(err){
+				} else {
+					fs.writeFile('./data/fileMails.json', '', function(err) {
+						if(err) {
 							throw err;
 							return;
 						}
 						console.log('创建邮件表成功');
 					});
 				}
-			}); 
+			});
 			console.log('创建数据文件夹成功');
-        });
-    }
-}); 
+		});
+	}
+});
 let mail = new Mail(emitter);
 //指令列表
 let commands = [{
-	act: 'signin',
-	des: '注册Dmail邮件系统。\n',
-	mes: '请输入您想注册的的账号密码，并用‘，’隔开：\n'
-},
-{
-	act: 'login',
-	des: '登录Dmail邮件系统。\n',
-	mes: '请输入您的账号密码，并用‘,’隔开：\n'
-},
-{
-	act: 'send',
-	des: '发送邮件到指定Dmail系统用户\n',
-	mes: '请输入收信人的用户名，邮件标题以及邮件内容，并用‘,’隔开：\n'
-},
-{
-	act: 'mail',
-	des: '读取个人邮件箱。\n',
-	mes: '您的历史收件信息如下：(*输入序号打开邮件)\n'
-},
-{
-	act: 'close',
-	des: '退出Dmail邮件系统。\n',
-	mes: '期待您的下一次使用！\n'
-},
-{
-	act: 'logout',
-	des: '登出当前账号Dmail邮件系统。\n',
-	mes: '您已成功登出\n'
-}];
-let sockets = [];//登录用户列表
-let users = [];//注册用户列
+		act: 'signin',
+		des: '注册Dmail邮件系统。\n',
+		mes: '请输入您想注册的的账号密码，并用‘，’隔开：\n'
+	},
+	{
+		act: 'login',
+		des: '登录Dmail邮件系统。\n',
+		mes: '请输入您的账号密码，并用‘,’隔开：\n'
+	},
+	{
+		act: 'send',
+		des: '发送邮件到指定Dmail系统用户\n',
+		mes: '请输入收信人的用户名，邮件标题以及邮件内容，并用‘,’隔开：\n'
+	},
+	{
+		act: 'mail',
+		des: '读取个人邮件箱。\n',
+		mes: '您的历史收件信息如下：(*输入序号打开邮件)\n'
+	},
+	{
+		act: 'close',
+		des: '退出Dmail邮件系统。\n',
+		mes: '期待您的下一次使用！\n'
+	},
+	{
+		act: 'logout',
+		des: '登出当前账号Dmail邮件系统。\n',
+		mes: '您已成功登出\n'
+	}
+];
+let sockets = []; //登录用户列表
+let users = []; //注册用户列
 const server = net.createServer((socket) => {
-	let flag = 0;//初始化程序入口为选择程序入口
+	let flag = 0; //初始化程序入口为选择程序入口
 	let username = '';
 	socket.write("\n\n\n\n\n");
 	socket.write('欢迎使用Dmail系统！\n');
 	socket.write('输入命令:help获取指令列表！\n');
 	socket.on('data', (data) => {
-		var Data = data.toString().replace(/[\r\n]/g, '');//指令解析
+		var Data = data.toString().replace(/[\r\n]/g, ''); //指令解析
 		let inputs = '';
-		if (flag === 0) {
+		if(flag === 0) {
 			//根据指令修改程序入口标记
-			switch (Data) {
+			switch(Data) {
 				case 'help':
 					console.log('help');
-					for (let i = 0; i < commands.length; i++) {
+					for(let i = 0; i < commands.length; i++) {
 						socket.write(commands[i].act + ':\t' + commands[i].des);
 					}
 					socket.write("\n");
 					break;
 				case 'signin':
-					if (!users[username]) {
+					if(!users[username]) {
 						socket.write(commands[0].mes);
 						flag = 1;
 					} else {
@@ -105,7 +106,7 @@ const server = net.createServer((socket) => {
 					}
 					break;
 				case 'login':
-					if (!users[username]) {
+					if(!users[username]) {
 						socket.write(commands[1].mes);
 						flag = 2;
 					} else {
@@ -113,7 +114,7 @@ const server = net.createServer((socket) => {
 					}
 					break;
 				case 'send':
-					if (!users[username]) {
+					if(!users[username]) {
 						socket.write('此功能不支持离线使用，请输入signin注册或login登录\n');
 					} else {
 						socket.write(commands[2].mes);
@@ -121,7 +122,7 @@ const server = net.createServer((socket) => {
 					}
 					break;
 				case 'mail':
-					if (!users[username]) {
+					if(!users[username]) {
 						socket.write('此功能不支持离线使用，请输入signin注册或login登录\n');
 					} else {
 						socket.write(commands[3].mes);
@@ -148,12 +149,12 @@ const server = net.createServer((socket) => {
 			}
 		} else {
 			//根据入口标记执行对应程序
-			switch (flag) {
+			switch(flag) {
 				case 1:
 					let register_flag = true;
 					inputs = Data.split(",");
-					if (inputs.length === 2) {
-						if (users[inputs[0]]) {
+					if(inputs.length === 2) {
+						if(users[inputs[0]]) {
 							emitter.emit("user-register", socket, false);
 						} else {
 							let user = new User(emitter, users);
@@ -167,7 +168,7 @@ const server = net.createServer((socket) => {
 					break;
 				case 2:
 					inputs = Data.split(",");
-					if (inputs.length === 2) {
+					if(inputs.length === 2) {
 						let user = new User(emitter, users);
 						flag = 0;
 						username = inputs[0];
@@ -178,9 +179,9 @@ const server = net.createServer((socket) => {
 					break;
 				case 3:
 					inputs = Data.split(",");
-					if (inputs.length === 3) {
+					if(inputs.length === 3) {
 						console.log(users[inputs[0]]);
-						if (users[inputs[0]]) {
+						if(users[inputs[0]]) {
 							emitter.emit('send-mail', inputs[0], username, inputs[1], inputs[2], users[inputs[0]]);
 							send_flag = false;
 							flag = 0;
@@ -194,8 +195,8 @@ const server = net.createServer((socket) => {
 					break;
 				case 4:
 					let mailNum = parseInt(Data);
-					if (mailNum !== NaN) {
-						let usermail = [];//用户邮件列表
+					if(mailNum !== NaN) {
+						let usermail = []; //用户邮件列表
 						console.log(mailNum + '///////////////////')
 						emitter.emit('read-mailcontent', username, socket, mailNum);
 						flag = 0;
@@ -208,9 +209,9 @@ const server = net.createServer((socket) => {
 			}
 		}
 	});
-	socket.on('close', function () {
+	socket.on('close', function() {
 		console.log("client disconnected");
-		for (var i = 0; i < users.length; i++) {
+		for(var i = 0; i < users.length; i++) {
 			users[i].socket = '';
 		}
 	});
