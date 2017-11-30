@@ -7,19 +7,7 @@ const filename = "./data/fileUsers.json";
 const path = require('path');
 const Storage = require('./storage').Storage;
 const storage = new Storage(path.resolve(path.dirname(__filename), filename));
-fs.exists("./data/fileUsers.json", function(exists) {  
-    if(exists){
-        console.log('用户信息表已存在');
-    }else{
-        fs.writeFile('./data/fileUsers.json','',function(err){
-            if(err){
-                throw err;
-                return;
-            }
-            console.log('创建用户信息表成功');
-        });
-    }
-}); 
+
 function User(event, userlist) {
 	this.event = event;
 	this.userlist = userlist;
@@ -37,7 +25,7 @@ User.prototype.register = function (username, password, socket) {
 			'password': password
 		});
 		console.log(this.userlist.length + '---------------')
-		if(this.userlist.length === 0){
+		if (this.userlist.length === 0) {
 			for (let i = 0; i < users.length; i++) {
 				let userid = users[i].username;
 				this.userlist.push({
@@ -45,7 +33,7 @@ User.prototype.register = function (username, password, socket) {
 				});
 			}
 			this.userlist[username] = socket;
-		}else{
+		} else {
 			console.log(this.userlist.length + '--*--------')
 			console.log(username + '--*--------')
 			console.log(socket + '--*--------')
@@ -99,6 +87,7 @@ User.prototype.login = function (username, password, socket) {
 		} else {
 			socket.write('该账号不存在，请重新输入\n');
 		}
+
 		function findUser(username) {
 			for (let i = 0; i < users.length; i++) {
 				if (username === users[i].username) {
