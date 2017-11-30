@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-11-30 20:25:27
+Date: 2017-11-30 21:17:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,12 +20,12 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `email`;
 CREATE TABLE `email` (
-  `eid` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) DEFAULT NULL,
-  `content` varchar(255) DEFAULT NULL,
-  `sender` varchar(255) DEFAULT NULL,
-  `receiver` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`eid`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `sender` varchar(255) NOT NULL,
+  `receiver` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -37,10 +37,10 @@ CREATE TABLE `email` (
 -- ----------------------------
 DROP TABLE IF EXISTS `mailbox`;
 CREATE TABLE `mailbox` (
-  `mid` int(11) NOT NULL AUTO_INCREMENT,
-  `eid` int(11) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`mid`)
+  ` id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  PRIMARY KEY (` id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -52,11 +52,10 @@ CREATE TABLE `mailbox` (
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `uid` int(100) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `mid` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`uid`)
+  `id` int(100) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
