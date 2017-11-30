@@ -1,7 +1,7 @@
 var http = require('http');
 var uuid = require('uuid/v4');
-var url = require('url');
-var qs = require('querystring');
+var url = require("url");
+var qs = require("querystring");
 var session = {};
 
 http.createServer(function (req, res) {
@@ -9,23 +9,22 @@ http.createServer(function (req, res) {
 	var sid;
 	var parsedUrl = url.parse(req.url);
 	var query = qs.parse(parsedUrl.query);
-	if(query.sid){
+
+	if (query.sid) {
 		user = session[query.sid];
 	}
-
 	if (!user) {
-		var user = {
+		user = {
 			id: uuid(),
-			username: "user-" + new Date().getTime(),
+			username: "user" + new Date().getTime(),
 			password: "password"
 		}
 		var sid = uuid();
 		session[sid] = user;
-		var redirectUrl = "/?sid=" + sid;
 		res.writeHead(301, {
-		        "Location": redirectUrl
+			"Location": "/?sid=" + sid,
 		});
 	}
-	res.write("your name is " + user.username);
+	res.write("hello:" + user.username);
 	res.end();
 }).listen(8080);
