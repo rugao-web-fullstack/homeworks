@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-11-30 19:56:06
+Date: 2017-11-30 21:15:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,12 +20,12 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message` (
-  `messageId` int(10) NOT NULL AUTO_INCREMENT,
-  `senderId` int(10) NOT NULL,
-  `receiverId` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `sender` varchar(50) NOT NULL,
+  `receiver` varchar(50) NOT NULL,
   `title` varchar(50) DEFAULT NULL,
   `body` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`messageId`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -33,10 +33,24 @@ CREATE TABLE `message` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for users
+-- Table structure for messagebox
 -- ----------------------------
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
+DROP TABLE IF EXISTS `messagebox`;
+CREATE TABLE `messagebox` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of messagebox
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
@@ -45,5 +59,5 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of users
+-- Records of user
 -- ----------------------------
