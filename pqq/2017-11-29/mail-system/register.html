@@ -25,7 +25,20 @@
             border: 1px navajowhite solid;
             text-align: center;
         }
-        
+        span{
+            font-size: 18px;
+            height: 22px;
+
+        }
+        input[type='text'],input[type='password']{
+            border: gray;
+            border-radius: 4px;
+            width: 120px;
+            height: 22px;
+
+            font-size: 16px;
+        }
+
 
    
     
@@ -41,9 +54,12 @@
         <form method="POST" class="reg">
             <span>用户名</span>
             <input type="text" name="username" placeholder="填写用户名">
+            <br/>
+
 
             <span>密码</span>
             <input type="passsword" name="password" placeholder="填写密码">
+            <br/>
 
             <input type="submit" value="注册" id="sub">
         
