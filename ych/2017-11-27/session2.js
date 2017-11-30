@@ -9,7 +9,7 @@ http.createServer(function (req, res) {
 	var sid;
 	var parsedUrl = url.parse(req.url);
 	var query = qs.parse(parsedUrl.query);
-	if(query.sid){
+	if (query.sid) {
 		user = session[query.sid];
 	}
 
@@ -23,7 +23,7 @@ http.createServer(function (req, res) {
 		session[sid] = user;
 		var redirectUrl = "/?sid=" + sid;
 		res.writeHead(301, {
-		        "Location": redirectUrl
+			"Location": redirectUrl
 		});
 	}
 	res.write("your name is " + user.username);
