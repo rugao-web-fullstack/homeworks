@@ -1,0 +1,30 @@
+.title{
+    margin:50px auto;
+    width:100%;
+    border-bottom:1px dotted #000;
+    text-align: center;
+    padding-bottom:16px;
+}
+div.center{
+    width:1000px;
+    margin:20px auto;
+    border:1px solid #000;
+    text-align: center;
+}div.center span{
+    margin-right:30px;
+    font-size:20px;
+}
+.center input[type='text'],.center input[type='password']{
+    height:38px;
+    width:500px;
+    margin:20px auto;
+}
+.center input[type='button']{
+    height:40px;
+    width:100px;
+    margin-right:20px;
+}
+.center a[type='button']{
+    height:40px;
+    width:100px;
+}
