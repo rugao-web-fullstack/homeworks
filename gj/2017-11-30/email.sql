@@ -24,13 +24,13 @@ DROP TABLE IF EXISTS `mail`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mail` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `sender` varchar(64) NOT NULL,
-  `reseaver` varchar(64) NOT NULL,
-  `title` varchar(1000) NOT NULL,
-  `content` varchar(10000) NOT NULL,
+  `sender` varchar(64) COLLATE utf8_bin NOT NULL,
+  `reseaver` varchar(64) COLLATE utf8_bin NOT NULL,
+  `title` varchar(1000) COLLATE utf8_bin NOT NULL,
+  `content` varchar(10000) COLLATE utf8_bin NOT NULL,
   `iread` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='邮件列表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='邮件列表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,27 +43,27 @@ LOCK TABLES `mail` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `mail-mailaddress`
+-- Table structure for table `mail-mailbox`
 --
 
-DROP TABLE IF EXISTS `mail-mailaddress`;
+DROP TABLE IF EXISTS `mail-mailbox`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mail-mailaddress` (
+CREATE TABLE `mail-mailbox` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `mailaddress` varchar(64) NOT NULL,
+  `mailbox` int(64) NOT NULL,
   `mail` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='邮件-邮件地址';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `mail-mailaddress`
+-- Dumping data for table `mail-mailbox`
 --
 
-LOCK TABLES `mail-mailaddress` WRITE;
-/*!40000 ALTER TABLE `mail-mailaddress` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mail-mailaddress` ENABLE KEYS */;
+LOCK TABLES `mail-mailbox` WRITE;
+/*!40000 ALTER TABLE `mail-mailbox` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mail-mailbox` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -91,27 +91,27 @@ LOCK TABLES `user` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `user_mailaddress`
+-- Table structure for table `user_mailbox`
 --
 
-DROP TABLE IF EXISTS `user_mailaddress`;
+DROP TABLE IF EXISTS `user_mailbox`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_mailaddress` (
+CREATE TABLE `user_mailbox` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `mailaddress` varchar(64) NOT NULL,
+  `mailbox` int(64) NOT NULL,
   `username` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='用户-绑定邮箱列表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user_mailaddress`
+-- Dumping data for table `user_mailbox`
 --
 
-LOCK TABLES `user_mailaddress` WRITE;
-/*!40000 ALTER TABLE `user_mailaddress` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_mailaddress` ENABLE KEYS */;
+LOCK TABLES `user_mailbox` WRITE;
+/*!40000 ALTER TABLE `user_mailbox` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_mailbox` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -123,4 +123,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-30 23:59:02
+-- Dump completed on 2017-12-01  1:05:40
