@@ -42,30 +42,6 @@ LOCK TABLES `email_message` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `mail`
---
-
-DROP TABLE IF EXISTS `mail`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mail` (
-  `id` int(10) NOT NULL,
-  `email_address` varchar(255) DEFAULT NULL,
-  `email` int(10) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `mail`
---
-
-LOCK TABLES `mail` WRITE;
-/*!40000 ALTER TABLE `mail` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mail` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `mail_box`
 --
 
@@ -87,6 +63,30 @@ CREATE TABLE `mail_box` (
 LOCK TABLES `mail_box` WRITE;
 /*!40000 ALTER TABLE `mail_box` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mail_box` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `received_mails`
+--
+
+DROP TABLE IF EXISTS `received_mails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `received_mails` (
+  `id` int(10) NOT NULL,
+  `mailbox` varchar(255) DEFAULT NULL,
+  `email` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `received_mails`
+--
+
+LOCK TABLES `received_mails` WRITE;
+/*!40000 ALTER TABLE `received_mails` DISABLE KEYS */;
+/*!40000 ALTER TABLE `received_mails` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -122,5 +122,5 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-01 17:21:05
+-- Dump completed on 2017-12-01 17:29:10
 
