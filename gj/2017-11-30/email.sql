@@ -52,9 +52,9 @@ DROP TABLE IF EXISTS `mail-mailbox`;
 CREATE TABLE `mail-mailbox` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `mailbox` int(64) NOT NULL,
-  `mail` varchar(64) NOT NULL,
+  `mail` varchar(64) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='邮件-邮件地址';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='邮件-邮件地址';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,10 +75,10 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `username` varchar(64) NOT NULL,
-  `password` varchar(62) NOT NULL,
+  `username` varchar(64) CHARACTER SET latin1 NOT NULL,
+  `password` varchar(62) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='用户表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,9 +100,9 @@ DROP TABLE IF EXISTS `user_mailbox`;
 CREATE TABLE `user_mailbox` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `mailbox` int(64) NOT NULL,
-  `username` varchar(64) NOT NULL,
+  `username` varchar(64) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='用户-绑定邮箱列表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户-绑定邮箱列表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,4 +123,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-01  1:05:40
+-- Dump completed on 2017-12-01  1:34:35
