@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : local
-Source Server Version : 50520
+Source Server         : data
+Source Server Version : 50720
 Source Host           : localhost:3306
-Source Database       : mydb
+Source Database       : email
 
 Target Server Type    : MYSQL
-Target Server Version : 50520
+Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2017-12-01 11:17:30
+Date: 2017-12-01 10:29:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,13 +20,14 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `mail`;
 CREATE TABLE `mail` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `sender` varchar(50) NOT NULL,
-  `receiver` varchar(50) NOT NULL,
-  `title` varchar(50) DEFAULT NULL,
-  `body` varchar(255) DEFAULT NULL,
+  `id` int(12) NOT NULL AUTO_INCREMENT,
+  `receiver` varchar(64) NOT NULL,
+  `sender` varchar(64) NOT NULL,
+  `title` varchar(64) NOT NULL,
+  `content` varchar(1000) NOT NULL,
+  `is_read` tinyint(12) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of mail
@@ -37,9 +38,8 @@ CREATE TABLE `mail` (
 -- ----------------------------
 DROP TABLE IF EXISTS `mailbox`;
 CREATE TABLE `mailbox` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `mailbox` varchar(20) NOT NULL,
-  `user` varchar(20) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -48,18 +48,18 @@ CREATE TABLE `mailbox` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for mail_mailbox
+-- Table structure for mail_emailbox
 -- ----------------------------
-DROP TABLE IF EXISTS `mail_mailbox`;
-CREATE TABLE `mail_mailbox` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `mailbox` int(10) NOT NULL,
-  `mail` int(10) NOT NULL,
+DROP TABLE IF EXISTS `mail_emailbox`;
+CREATE TABLE `mail_emailbox` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mailbox` int(64) NOT NULL,
+  `mail` int(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of mail_mailbox
+-- Records of mail_emailbox
 -- ----------------------------
 
 -- ----------------------------
@@ -67,11 +67,11 @@ CREATE TABLE `mail_mailbox` (
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `user` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `id` int(12) NOT NULL AUTO_INCREMENT,
+  `username` varchar(32) NOT NULL,
+  `password` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
