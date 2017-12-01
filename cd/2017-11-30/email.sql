@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 30/11/2017 21:53:47
+ Date: 01/12/2017 15:20:20
 */
 
 SET NAMES utf8mb4;
@@ -22,20 +22,22 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `email`;
 CREATE TABLE `email`  (
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `email_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for email_message
+-- ----------------------------
+DROP TABLE IF EXISTS `email_message`;
+CREATE TABLE `email_message`  (
   `eid` int(10) NOT NULL,
-  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `sender` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `receiver` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `content` varchar(2550) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`eid`) USING BTREE,
-  INDEX `sender`(`sender`) USING BTREE,
-  INDEX `receiver`(`receiver`) USING BTREE,
-  INDEX `email`(`email`) USING BTREE,
-  INDEX `email_address`(`email`) USING BTREE,
-  CONSTRAINT `email_receive` FOREIGN KEY (`receiver`) REFERENCES `user` (`username`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `emial_send` FOREIGN KEY (`sender`) REFERENCES `user` (`username`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `email_address` FOREIGN KEY (`email`) REFERENCES `user` (`email`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  `email_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `sender` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `receiver` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `email_title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `email_content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`eid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -43,15 +45,10 @@ CREATE TABLE `email`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `id` int(10) NOT NULL,
-  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `user_send`(`username`) USING BTREE,
-  INDEX `email`(`email`) USING BTREE,
-  CONSTRAINT `user_receive` FOREIGN KEY (`username`) REFERENCES `email` (`receiver`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `user_send` FOREIGN KEY (`username`) REFERENCES `email` (`sender`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  `uid` int(10) NOT NULL,
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`uid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
