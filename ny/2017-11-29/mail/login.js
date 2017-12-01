@@ -15,8 +15,9 @@ module.exports = function (req, res) {
 						console.log("密码不正确！");
 						res.redirect('/');
 					} else {
+						res.clearCookie('name');
 						res.cookie('name', username);
-						console.log("user "+username+" login in");
+						console.log("user " + username + " login in");
 						res.redirect('/mail');
 					}
 				});

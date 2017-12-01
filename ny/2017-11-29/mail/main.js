@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var login = require("./login");
 var register = require("./register");
 var mailbox = require("./mailbox");
+var writeMail = require("./writeMail");
 var app = express();
 
 nunjucks.configure('html', {
@@ -16,6 +17,7 @@ app.use(cookieParser());
 app.post('/login', login);
 app.post('/register', register);
 app.post('/mailbox', mailbox);
+app.post('/writeMail', writeMail);
 
 app.get('/', function (req, res) {
 	res.render("index.html");
