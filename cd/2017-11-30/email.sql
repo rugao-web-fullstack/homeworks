@@ -49,8 +49,10 @@ DROP TABLE IF EXISTS `mail_box`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mail_box` (
-  `username` varchar(255) DEFAULT NULL,
-  `email_address` varchar(255) DEFAULT NULL
+  `id` int(10) NOT NULL,
+  `user` int(10) DEFAULT NULL,
+  `email_address` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -96,4 +98,5 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-01 16:19:02
+-- Dump completed on 2017-12-01 16:52:30
+
