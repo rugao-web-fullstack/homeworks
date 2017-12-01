@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50515
 File Encoding         : 65001
 
-Date: 2017-12-01 09:04:09
+Date: 2017-12-01 13:40:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -41,6 +41,18 @@ CREATE TABLE `email_box` (
   KEY `owner` (`owner`),
   CONSTRAINT `owner` FOREIGN KEY (`owner`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_sinhala_ci;
+
+-- ----------------------------
+-- Table structure for email_emailbox
+-- ----------------------------
+DROP TABLE IF EXISTS `email_emailbox`;
+CREATE TABLE `email_emailbox` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `emailbox` int(64) NOT NULL,
+  `email` int(64) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 -- ----------------------------
 -- Table structure for user
