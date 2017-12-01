@@ -27,7 +27,7 @@ CREATE TABLE `mail` (
   `sender` varchar(64) NOT NULL,
   `receiver` varchar(64) NOT NULL,
   `title` varchar(64) NOT NULL,
-  `mainbody` varchar(100) NOT NULL,
+  `body` varchar(100) NOT NULL,
   `isRead` varchar(20) NOT NULL,
   `createdAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -55,7 +55,6 @@ CREATE TABLE `mailbox` (
   `user` int(20) NOT NULL,
   `address` varchar(64) NOT NULL,
   `mailSum` int(100) DEFAULT 0,
-  `notRead` int(50) DEFAULT 0,
   `createdAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
