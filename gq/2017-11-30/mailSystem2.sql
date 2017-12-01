@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.20, for Linux (x86_64)
 --
--- Host: localhost    Database: mailSystem
+-- Host: localhost    Database: mailSystem2
 -- ------------------------------------------------------
 -- Server version	5.7.20-0ubuntu0.16.04.1
 
@@ -24,13 +24,14 @@ DROP TABLE IF EXISTS `mail`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mail` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `sender` varchar(20) NOT NULL,
-  `receiver` varchar(20) NOT NULL,
+  `sender` varchar(64) NOT NULL,
+  `receiver` varchar(64) NOT NULL,
+  `title` varchar(64) NOT NULL,
+  `content` varchar(100) NOT NULL,
   `status` varchar(20) DEFAULT 'false',
-  `title` varchar(100) NOT NULL,
-  `content` varchar(300) NOT NULL,
+  `time` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,51 +44,51 @@ LOCK TABLES `mail` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `receiveBox`
+-- Table structure for table `mailbox`
 --
 
-DROP TABLE IF EXISTS `receiveBox`;
+DROP TABLE IF EXISTS `mailbox`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `receiveBox` (
+CREATE TABLE `mailbox` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  KEY `id` (`id`),
-  CONSTRAINT `receivebox_ibfk_1` FOREIGN KEY (`id`) REFERENCES `user` (`id`),
-  CONSTRAINT `receivebox_ibfk_2` FOREIGN KEY (`id`) REFERENCES `mail` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `user` int(20) NOT NULL,
+  `address` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `receiveBox`
+-- Dumping data for table `mailbox`
 --
 
-LOCK TABLES `receiveBox` WRITE;
-/*!40000 ALTER TABLE `receiveBox` DISABLE KEYS */;
-/*!40000 ALTER TABLE `receiveBox` ENABLE KEYS */;
+LOCK TABLES `mailbox` WRITE;
+/*!40000 ALTER TABLE `mailbox` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mailbox` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `sendBox`
+-- Table structure for table `mailreceive`
 --
 
-DROP TABLE IF EXISTS `sendBox`;
+DROP TABLE IF EXISTS `mailreceive`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `sendBox` (
+CREATE TABLE `mailreceive` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  KEY `id` (`id`),
-  CONSTRAINT `sendbox_ibfk_1` FOREIGN KEY (`id`) REFERENCES `user` (`id`),
-  CONSTRAINT `sendbox_ibfk_2` FOREIGN KEY (`id`) REFERENCES `mail` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `mail` int(20) NOT NULL,
+  `mailbox` int(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `sendBox`
+-- Dumping data for table `mailreceive`
 --
 
-LOCK TABLES `sendBox` WRITE;
-/*!40000 ALTER TABLE `sendBox` DISABLE KEYS */;
-/*!40000 ALTER TABLE `sendBox` ENABLE KEYS */;
+LOCK TABLES `mailreceive` WRITE;
+/*!40000 ALTER TABLE `mailreceive` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mailreceive` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -98,12 +99,12 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
-  `address` varchar(20) NOT NULL,
   `password` varchar(64) NOT NULL,
+  `address` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,4 +125,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-01 15:08:51
+-- Dump completed on 2017-12-01 17:30:01
