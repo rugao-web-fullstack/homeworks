@@ -50,7 +50,7 @@ DROP TABLE IF EXISTS `emailBox`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `emailBox` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userId` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
   `address` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -74,8 +74,8 @@ DROP TABLE IF EXISTS `emailEmailBox`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `emailEmailBox` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `emailId` int(11) NOT NULL,
-  `emailBoxID` int(11) NOT NULL,
+  `email` int(11) NOT NULL,
+  `emailBox` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
