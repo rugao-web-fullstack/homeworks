@@ -52,6 +52,7 @@ DROP TABLE IF EXISTS `mailbox`;
 CREATE TABLE `mailbox` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `address` varchar(64) NOT NULL,
+  `user` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -66,27 +67,27 @@ LOCK TABLES `mailbox` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `recivermail`
+-- Table structure for table `recivered_mail`
 --
 
-DROP TABLE IF EXISTS `recivermail`;
+DROP TABLE IF EXISTS `recivered_mail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `recivermail` (
+CREATE TABLE `recivered_mail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   KEY `id` (`id`),
-  CONSTRAINT `recivermail_ibfk_1` FOREIGN KEY (`id`) REFERENCES `mail` (`id`),
-  CONSTRAINT `recivermail_ibfk_2` FOREIGN KEY (`id`) REFERENCES `mailbox` (`id`)
+  CONSTRAINT `recivered_mail_ibfk_1` FOREIGN KEY (`id`) REFERENCES `mail` (`id`),
+  CONSTRAINT `recivered_mail_ibfk_2` FOREIGN KEY (`id`) REFERENCES `mailbox` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `recivermail`
+-- Dumping data for table `recivered_mail`
 --
 
-LOCK TABLES `recivermail` WRITE;
-/*!40000 ALTER TABLE `recivermail` DISABLE KEYS */;
-/*!40000 ALTER TABLE `recivermail` ENABLE KEYS */;
+LOCK TABLES `recivered_mail` WRITE;
+/*!40000 ALTER TABLE `recivered_mail` DISABLE KEYS */;
+/*!40000 ALTER TABLE `recivered_mail` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -101,7 +102,7 @@ CREATE TABLE `user` (
   `username` varchar(64) NOT NULL,
   `password` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,6 +111,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'w','1');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -122,4 +124,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-01 16:38:15
+-- Dump completed on 2017-12-01 17:09:20
