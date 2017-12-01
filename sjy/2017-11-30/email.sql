@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.5.4.1deb2ubuntu2
 -- http://www.phpmyadmin.net
 --
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `mail` (
   `id` int(11) NOT NULL,
-  `theme` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
   `body` varchar(255) NOT NULL,
   `receiver` varchar(255) NOT NULL,
   `sender` varchar(255) NOT NULL
