@@ -51,7 +51,7 @@ DROP TABLE IF EXISTS `email_mailbox`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `email_mailbox` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  'mailb ' INT(255) DEFAULT NULL,
+  'mailbox ' INT(255) DEFAULT NULL,
   `mail` INT(255) DEFAULT NULL,
    
   PRIMARY KEY (`id`)
