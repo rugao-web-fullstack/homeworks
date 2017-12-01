@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `mail`;
 CREATE TABLE `mail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(20) NOT NULL,
-  `text` varchar(1000) NOT NULL,
+  `body` TEXT NOT NULL,
   `sender` varchar(20) NOT NULL,
   `receiver` varchar(20) NOT NULL,
   `createdAt` datetime DEFAULT NULL,
@@ -51,7 +51,7 @@ DROP TABLE IF EXISTS `mailbox`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mailbox` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user` varchar(20) NOT NULL,
+  `user` int(20) NOT NULL,
   `address` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -75,8 +75,8 @@ DROP TABLE IF EXISTS `mailbox_mail`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mailbox_mail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `address` varchar(20) NOT NULL,
-  `mail` varchar(60) NOT NULL,
+  `mailbox` int(20) NOT NULL,
+  `mail` int(60) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -98,7 +98,7 @@ DROP TABLE IF EXISTS `mailbox_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mailbox_user` (
-  `user` varchar(20) NOT NULL,
+  `user` int(20) NOT NULL,
   `address` varchar(60) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
