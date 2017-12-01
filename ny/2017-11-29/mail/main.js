@@ -1,8 +1,10 @@
 var express = require('express');
 var nunjucks = require('nunjucks');
 var bodyParser  = require("body-parser"); 
+var cookieParser = require('cookie-parser');
 var login = require("./login");
 var register = require("./register");
+var mailbox = require("./mailbox");
 var app = express();
 
 nunjucks.configure('html', {
@@ -10,8 +12,10 @@ nunjucks.configure('html', {
 	express: app
 });
 app.use(bodyParser.urlencoded({ extended: false })); 
+app.use(cookieParser());
 app.post('/login', login);
 app.post('/register', register);
+app.post('/mailbox', mailbox);
 
 app.get('/', function (req, res) {
 	res.render("index.html");

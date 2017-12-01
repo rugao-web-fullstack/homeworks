@@ -23,13 +23,3 @@ module.exports = function (req, res) {
 		});
 	}, "mydb");
 }
-function userInsert(req, res, name, pwd) {
-	base(function (con) {
-		var sql = "INSERT INTO user (user , password) values ('" + name + "', '" + pwd + "')";
-		con.query(sql, function (err, result){
-			if (err) throw err;
-			console.log("use registed");
-			res.redirect('/');
-		});
-	}, "mydb");
-}
