@@ -24,8 +24,8 @@ DROP TABLE IF EXISTS `email_message`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `email_message` (
   `id` int(10) NOT NULL,
-  `sender` varchar(255) DEFAULT NULL,
-  `receiver` varchar(255) DEFAULT NULL,
+  `sender_address` varchar(255) DEFAULT NULL,
+  `receiver_address` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `content` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
@@ -98,5 +98,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-01 16:52:30
-
+-- Dump completed on 2017-12-01 17:05:58
