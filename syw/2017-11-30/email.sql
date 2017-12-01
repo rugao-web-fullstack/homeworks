@@ -19,14 +19,13 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `email`;
 CREATE TABLE `email` (
-  `mailID` int(11) NOT NULL,
   `senderID` int(255) DEFAULT NULL,
   `sendername` varchar(255) DEFAULT NULL,
   `receiverID` varchar(255) DEFAULT NULL,
   `receivername` varchar(255) DEFAULT NULL,
-  `emailtitle` varchar(255) DEFAULT NULL,
-  `emailcontent` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`mailID`)
+  `title` varchar(255) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -37,11 +36,10 @@ CREATE TABLE `email` (
 -- Table structure for emailadd
 -- ----------------------------
 DROP TABLE IF EXISTS `emailadd`;
-CREATE TABLE `emailbox` (
+CREATE TABLE `emailadd` (
   `userID` varchar(255) NOT NULL,
-  `mailID` int(11) NOT NULL,
-  `emailtitle` varchar(255) DEFAULT NULL,
-  `emailcontent` varchar(255) DEFAULT NULL
+  `title` varchar(255) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -52,10 +50,10 @@ CREATE TABLE `emailbox` (
 -- Table structure for email_emailadd
 -- ----------------------------
 DROP TABLE IF EXISTS `email_emailadd`;
-CREATE TABLE `email_emailbox` (
-  `mailID` int(11) NOT NULL,
-  `emailtitle` varchar(255) DEFAULT NULL,
-  `emailcontent` varchar(255) DEFAULT NULL,
+CREATE TABLE `email_emailadd` (
+  
+  `title` varchar(255) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`mailID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -68,10 +66,10 @@ CREATE TABLE `email_emailbox` (
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `userID` int(11) NOT NULL,
+  `ID` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`userID`)
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -82,11 +80,11 @@ CREATE TABLE `user` (
 -- Table structure for user_emailadd
 -- ----------------------------
 DROP TABLE IF EXISTS `user_emailadd`;
-CREATE TABLE `user_emailbox` (
+CREATE TABLE `user_emailadd` (
   `userID` int(11) DEFAULT NULL,
   `mailID` int(11) DEFAULT NULL,
-  `emailtitle` varchar(255) DEFAULT NULL,
-  `emailcontent` varchar(255) DEFAULT NULL
+  `title` varchar(255) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
