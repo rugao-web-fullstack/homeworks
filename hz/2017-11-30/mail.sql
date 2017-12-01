@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-11-30 21:24:53
+Date: 2017-12-01 11:47:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -38,13 +38,27 @@ CREATE TABLE `email` (
 DROP TABLE IF EXISTS `mailbox`;
 CREATE TABLE `mailbox` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `emailaddress` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `user` varchar(255) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of mailbox
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for mail_mailbox
+-- ----------------------------
+DROP TABLE IF EXISTS `mail_mailbox`;
+CREATE TABLE `mail_mailbox` (
+  `id` int(11) NOT NULL,
+  `mailbox` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of mail_mailbox
 -- ----------------------------
 
 -- ----------------------------
