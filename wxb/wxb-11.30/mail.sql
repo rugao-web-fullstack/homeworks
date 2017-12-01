@@ -24,8 +24,9 @@ DROP TABLE IF EXISTS `mail`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mail` (
   `mail_id` int(11) NOT NULL AUTO_INCREMENT,
-  `sender_mail_address` varchar(60) DEFAULT NULL,
-  `mail_title` varchar(45) DEFAULT NULL,
+  `sender` varchar(50) DEFAULT NULL,
+  `receiver` varchar(50) DEFAULT NULL,
+  `title` varchar(50) DEFAULT NULL,
   `mail_content` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`mail_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -48,10 +49,9 @@ DROP TABLE IF EXISTS `mail-mail_box`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mail-mail_box` (
-  `mail_address` varchar(70) NOT NULL,
   `mail_id` int(11) NOT NULL AUTO_INCREMENT,
-  `mail_title` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`mail_id`,`mail_address`)
+  `mail_address` varchar(70) NOT NULL,
+  PRIMARY KEY (`mail_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -65,26 +65,26 @@ LOCK TABLES `mail-mail_box` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `mail_box`
+-- Table structure for table `mailbox`
 --
 
-DROP TABLE IF EXISTS `mail_box`;
+DROP TABLE IF EXISTS `mailbox`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mail_box` (
+CREATE TABLE `mailbox` (
   `mail_id` int(11) NOT NULL AUTO_INCREMENT,
-  `mail_title` varchar(45) DEFAULT NULL,
+  `mail_address` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`mail_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `mail_box`
+-- Dumping data for table `mailbox`
 --
 
-LOCK TABLES `mail_box` WRITE;
-/*!40000 ALTER TABLE `mail_box` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mail_box` ENABLE KEYS */;
+LOCK TABLES `mailbox` WRITE;
+/*!40000 ALTER TABLE `mailbox` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mailbox` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -95,11 +95,9 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `iduser` int(11) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(60) DEFAULT NULL,
+  `mail_address` varchar(70) NOT NULL,
   `password` varchar(60) DEFAULT NULL,
-  `mail_address` varchar(70) DEFAULT NULL,
-  PRIMARY KEY (`iduser`)
+  PRIMARY KEY (`mail_address`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -109,31 +107,8 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES ('1223157723@qq.com','weixinbo');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `user-mail_box`
---
-
-DROP TABLE IF EXISTS `user-mail_box`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user-mail_box` (
-  `mail_address` varchar(70) NOT NULL,
-  `mail_id` int(11) NOT NULL,
-  `mail_title` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`mail_address`,`mail_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user-mail_box`
---
-
-LOCK TABLES `user-mail_box` WRITE;
-/*!40000 ALTER TABLE `user-mail_box` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user-mail_box` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -145,4 +120,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-01  9:01:33
+-- Dump completed on 2017-12-01 14:42:02
