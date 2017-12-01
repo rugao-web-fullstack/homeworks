@@ -23,11 +23,13 @@ DROP TABLE IF EXISTS `mail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mail` (
-  `emailid` int(20) NOT NULL AUTO_INCREMENT,
-  `mstate` varchar(10) DEFAULT 'false',
-  `title` varchar(50) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `sender` varchar(20) NOT NULL,
+  `receiver` varchar(20) NOT NULL,
+  `state` varchar(20) DEFAULT 'false',
+  `title` varchar(100) NOT NULL,
   `content` varchar(300) NOT NULL,
-  PRIMARY KEY (`emailid`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -41,26 +43,51 @@ LOCK TABLES `mail` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `mailbox`
+-- Table structure for table `receivebox`
 --
 
-DROP TABLE IF EXISTS `mailbox`;
+DROP TABLE IF EXISTS `receivebox`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mailbox` (
-  `senderid` int(20) NOT NULL,
-  `receiveid` int(20) NOT NULL,
-  `mid` int(20) NOT NULL
+CREATE TABLE `receivebox` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  KEY `id` (`id`),
+  CONSTRAINT `receivebox_ibfk_1` FOREIGN KEY (`id`) REFERENCES `user` (`id`),
+  CONSTRAINT `receivebox_ibfk_2` FOREIGN KEY (`id`) REFERENCES `mail` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `mailbox`
+-- Dumping data for table `receivebox`
 --
 
-LOCK TABLES `mailbox` WRITE;
-/*!40000 ALTER TABLE `mailbox` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mailbox` ENABLE KEYS */;
+LOCK TABLES `receivebox` WRITE;
+/*!40000 ALTER TABLE `receivebox` DISABLE KEYS */;
+/*!40000 ALTER TABLE `receivebox` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sendbox`
+--
+
+DROP TABLE IF EXISTS `sendbox`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sendbox` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  KEY `id` (`id`),
+  CONSTRAINT `sendbox_ibfk_1` FOREIGN KEY (`id`) REFERENCES `user` (`id`),
+  CONSTRAINT `sendbox_ibfk_2` FOREIGN KEY (`id`) REFERENCES `mail` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sendbox`
+--
+
+LOCK TABLES `sendbox` WRITE;
+/*!40000 ALTER TABLE `sendbox` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sendbox` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -71,10 +98,11 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `uid` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
+  `eaddress` varchar(20) NOT NULL,
   `password` varchar(64) NOT NULL,
-  PRIMARY KEY (`uid`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -96,4 +124,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-30 21:26:02
+-- Dump completed on 2017-12-01 10:24:48
