@@ -10,22 +10,27 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2017-12-01 09:05:00
+Date: 2017-12-01 10:11:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for emailbox_user
+-- Table structure for mail
 -- ----------------------------
-DROP TABLE IF EXISTS `emailbox_user`;
-CREATE TABLE `emailbox_user` (
-  `senderID` int(11) NOT NULL,
-  `receiverID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `mail`;
+CREATE TABLE `mail` (
+  `id` int(12) NOT NULL AUTO_INCREMENT,
+  `receiver` varchar(64) NOT NULL,
+  `sender` varchar(64) NOT NULL,
+  `title` varchar(64) NOT NULL,
+  `content` varchar(1000) NOT NULL,
+  `readState` varchar(12) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of emailbox_user
+-- Records of mail
 -- ----------------------------
 
 -- ----------------------------
@@ -33,9 +38,9 @@ CREATE TABLE `emailbox_user` (
 -- ----------------------------
 DROP TABLE IF EXISTS `mailbox`;
 CREATE TABLE `mailbox` (
-  `mail` int(128) NOT NULL,
-  `sender` varchar(32) NOT NULL,
-  `receiver` varchar(32) NOT NULL
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `address` int(128) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -43,28 +48,14 @@ CREATE TABLE `mailbox` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for maillist
--- ----------------------------
-DROP TABLE IF EXISTS `maillist`;
-CREATE TABLE `maillist` (
-  `mid` int(12) NOT NULL AUTO_INCREMENT,
-  `title` varchar(64) NOT NULL,
-  `content` varchar(1000) NOT NULL,
-  `readState` varchar(12) NOT NULL,
-  PRIMARY KEY (`mid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of maillist
--- ----------------------------
-
--- ----------------------------
 -- Table structure for mail_emailbox
 -- ----------------------------
 DROP TABLE IF EXISTS `mail_emailbox`;
 CREATE TABLE `mail_emailbox` (
-  `mailID` int(11) NOT NULL,
-  PRIMARY KEY (`mailID`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `address` varchar(64) NOT NULL,
+  `mail` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -80,8 +71,23 @@ CREATE TABLE `user` (
   `username` varchar(32) NOT NULL,
   `password` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for user_emialbox
+-- ----------------------------
+DROP TABLE IF EXISTS `user_emialbox`;
+CREATE TABLE `user_emialbox` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `address` int(11) NOT NULL,
+  `user` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_emialbox
 -- ----------------------------
