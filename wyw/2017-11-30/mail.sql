@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.20, for Linux (i686)
 --
--- Host: localhost    Database: mail
+-- Host: localhost    Database: mail2
 -- ------------------------------------------------------
 -- Server version	5.7.20-0ubuntu0.16.04.1
 
@@ -50,8 +50,8 @@ DROP TABLE IF EXISTS `mail_mailbox`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mail_mailbox` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `mailboxID` int(11) NOT NULL,
-  `mailID` int(11) NOT NULL,
+  `mailbox` int(11) NOT NULL,
+  `mail` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -75,7 +75,7 @@ DROP TABLE IF EXISTS `mailbox`;
 CREATE TABLE `mailbox` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mailbox` varchar(20) NOT NULL,
-  `username` varchar(20) NOT NULL,
+  `user` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -122,4 +122,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-01 14:40:58
+-- Dump completed on 2017-12-01 15:27:36
