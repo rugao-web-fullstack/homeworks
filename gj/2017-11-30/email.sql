@@ -30,7 +30,7 @@ CREATE TABLE `mail` (
   `content` varchar(10000) NOT NULL,
   `iread` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='邮件列表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='邮件列表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,27 +43,27 @@ LOCK TABLES `mail` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `mail-mailaddress`
+-- Table structure for table `mail-mmailabox`
 --
 
-DROP TABLE IF EXISTS `mail-mailaddress`;
+DROP TABLE IF EXISTS `mail-mailabox`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mail-mailaddress` (
+CREATE TABLE `mail-mailabox` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `mailaddress` varchar(64) NOT NULL,
+  `mailabox` varchar(64) NOT NULL,
   `mail` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='邮件-邮件地址';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `mail-mailaddress`
+-- Dumping data for table `mail-mailabox`
 --
 
-LOCK TABLES `mail-mailaddress` WRITE;
-/*!40000 ALTER TABLE `mail-mailaddress` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mail-mailaddress` ENABLE KEYS */;
+LOCK TABLES `mail-mailabox` WRITE;
+/*!40000 ALTER TABLE `mail-mailaboxs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mail-mailabox` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -91,27 +91,27 @@ LOCK TABLES `user` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `user_mailaddress`
+-- Table structure for table `user_mailabox`
 --
 
-DROP TABLE IF EXISTS `user_mailaddress`;
+DROP TABLE IF EXISTS `user_mailabox`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_mailaddress` (
+CREATE TABLE `user_mailabox` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `mailaddress` varchar(64) NOT NULL,
+  `mailabox` varchar(64) NOT NULL,
   `username` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='用户-绑定邮箱列表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user_mailaddress`
+-- Dumping data for table `user_mailabox`
 --
 
-LOCK TABLES `user_mailaddress` WRITE;
-/*!40000 ALTER TABLE `user_mailaddress` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_mailaddress` ENABLE KEYS */;
+LOCK TABLES `user_mailabox` WRITE;
+/*!40000 ALTER TABLE `user_mailabox` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_mailabox` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
