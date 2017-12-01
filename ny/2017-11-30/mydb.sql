@@ -10,16 +10,16 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-11-30 21:15:01
+Date: 2017-12-01 10:50:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for message
+-- Table structure for mail
 -- ----------------------------
-DROP TABLE IF EXISTS `message`;
-CREATE TABLE `message` (
+DROP TABLE IF EXISTS `mail`;
+CREATE TABLE `mail` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `sender` varchar(50) NOT NULL,
   `receiver` varchar(50) NOT NULL,
@@ -29,21 +29,37 @@ CREATE TABLE `message` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of message
+-- Records of mail
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for messagebox
+-- Table structure for mailbox
 -- ----------------------------
-DROP TABLE IF EXISTS `messagebox`;
-CREATE TABLE `messagebox` (
+DROP TABLE IF EXISTS `mailbox`;
+CREATE TABLE `mailbox` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `user` varchar(20) DEFAULT NULL,
+  `mailbox` varchar(20) NOT NULL,
+  `user` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of messagebox
+-- Records of mailbox
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for mail_mailbox
+-- ----------------------------
+DROP TABLE IF EXISTS `mail_mailbox`;
+CREATE TABLE `mail_mailbox` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `mailbox_id` int(10) NOT NULL,
+  `mail_id` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of mail_mailbox
 -- ----------------------------
 
 -- ----------------------------
@@ -52,9 +68,9 @@ CREATE TABLE `messagebox` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) NOT NULL,
+  `user` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `email` varchar(50) NOT NULL,
+  `mailbox` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
