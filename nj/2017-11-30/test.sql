@@ -26,8 +26,8 @@ CREATE TABLE `mail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(64) NOT NULL,
   `sender` varchar(20) NOT NULL,
-  `sender-receive` varchar(20) NOT NULL,
-  `content` varchar(64) NOT NULL,
+  `receiver` varchar(20) NOT NULL,
+  `content` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -52,6 +52,7 @@ CREATE TABLE `mailbox` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mailbox` varchar(20) NOT NULL,
   `user` int(10) NOT NULL,
+  `address` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -100,7 +101,6 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `address` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
