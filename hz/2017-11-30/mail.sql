@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-12-01 11:47:45
+Date: 2017-12-01 13:35:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -52,8 +52,8 @@ CREATE TABLE `mailbox` (
 DROP TABLE IF EXISTS `mail_mailbox`;
 CREATE TABLE `mail_mailbox` (
   `id` int(11) NOT NULL,
-  `mailbox` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `mailbox` int(11) NOT NULL,
+  `email` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
