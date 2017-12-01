@@ -33,8 +33,8 @@ app.post("/register", function(req, res) {
         var have = "select * from user where username ='" + name +"';";
         con.query(have,function(err,result){
             if (result.length === 0 && email !== "" && pwd !== "") {
-                var sql = "INSERT INTO user (username, password) VALUES('" + name + "', '" + pwd + "');";
-                var sql2 = "INSERT INTO email (email) VALUES('" + email + "');";
+                var sql = "INSERT INTO user (username, password) VALUES('" + name + "', '" + pwd + ");";
+                var sql2 = "INSERT INTO mailbox (address) VALUES('" + email + "');";
                 con.query(sql,function(err, result2) {
                     if (err) {
                         throw err;
@@ -65,7 +65,7 @@ app.post("/login", function(req, res) {
                 return;
             }
             if (name === result[0].username && pwd === result[0].password) {
-                var sql2 = "INSERT INTO user (state) VALUES('logined');";
+                var sql2 = "INSERT INTO user (states) VALUES('logined');";
                 con.query(sql2, function(err, result3) {
                     if (err) {
                         throw err;
@@ -77,7 +77,7 @@ app.post("/login", function(req, res) {
                 res.render('login');
             }
         });
-    })
+    },"emailSystem")
 });
 
 
