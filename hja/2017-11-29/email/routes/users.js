@@ -15,7 +15,7 @@ router.get('/login', function (req, res, next) {
 
 router.get('/register', function (req, res, next) {
   //处理ajax
-  
+
   res.render('register', { title: '注册' });
 });
 

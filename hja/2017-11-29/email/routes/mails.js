@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/write', function (req, res, next) {
-    res.render('write', { title: '编写邮件',name:req.session.user.username});
+    res.render('write', { title: '编写邮件', name: req.session.user.username });
 });
 
 router.get('/read', function (req, res, next) {

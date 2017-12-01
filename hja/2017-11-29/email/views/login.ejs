@@ -29,29 +29,29 @@
   <script>
     $(function () {
       $('#submit').click(function () {
-        
+
         if ($('#username').val() && $('#pwd').val()) {
           let username = $('#username').val();
           let pwd = $('#pwd').val();
           $.ajax({
-            url:'/users/login',
-            type:'post',
-            data:{
-              username:username,
-              password:pwd
+            url: '/users/login',
+            type: 'post',
+            data: {
+              username: username,
+              password: pwd
             },
-            success:function(data,status){
-              if(data==0){
+            success: function (data, status) {
+              if (data == 0) {
                 alert('用户不存在');
                 return;
-              } else if(data==1){
+              } else if (data == 1) {
                 alert('用户名密码错误');
               } else {
-                location.href = data; 
+                location.href = data;
               }
-              
+
             },
-            error:function(data,err){
+            error: function (data, err) {
               console.log(err);
               return;
             }

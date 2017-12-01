@@ -77,20 +77,20 @@
 
             //邮件提交
             $('#submit').click(function () {
-                if ($('#receiver').val() && $('#title').val() && $('#body').val()){
+                if ($('#receiver').val() && $('#title').val() && $('#body').val()) {
                     $.ajax({
-                        url:'/mails/write',
-                        type:'post',
-                        data:{
-                            sender:$('#sender').val(),
-                            receiver:$('#receiver').val(),
-                            title:$('#title').val(),
-                            body:$('#body').val()
+                        url: '/mails/write',
+                        type: 'post',
+                        data: {
+                            sender: $('#sender').val(),
+                            receiver: $('#receiver').val(),
+                            title: $('#title').val(),
+                            body: $('#body').val()
                         },
-                        success:function(data, statud){
-                            
+                        success: function (data, statud) {
+
                         },
-                        error:function(data, err){
+                        error: function (data, err) {
 
                         }
                     })
