@@ -103,7 +103,6 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
-  `address` varchar(64) NOT NULL,
   `password` varchar(64) NOT NULL,
   `createdAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
