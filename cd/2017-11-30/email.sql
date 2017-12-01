@@ -74,7 +74,7 @@ DROP TABLE IF EXISTS `received_mails`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `received_mails` (
   `id` int(10) NOT NULL,
-  `mailbox` varchar(255) DEFAULT NULL,
+  `mailbox` int(10) DEFAULT NULL,
   `email` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -122,5 +122,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-01 17:29:10
-
+-- Dump completed on 2017-12-01 18:34:31
