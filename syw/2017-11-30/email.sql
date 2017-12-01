@@ -78,7 +78,7 @@ CREATE TABLE `mailbox` (
    `id` int(11) NOT NULL AUTO_INCREMENT,
     `user` varchar(20) NOT NULL,
     `address` varchar(20) NOT NULL,
-    `mail` varchar(20) NOT NULL,
+  
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -126,8 +126,8 @@ DROP TABLE IF EXISTS `user_mailbox`;
 CREATE TABLE `user_mailbox` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user` INT(20) NOT NULL,
-  `mail` INT(255) NOT NULL
-  `address` varchar(20) NOT NULL,
+  `mailbox` INT(255) NOT NULL
+  
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
