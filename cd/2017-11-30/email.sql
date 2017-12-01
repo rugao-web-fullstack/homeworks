@@ -24,8 +24,8 @@ DROP TABLE IF EXISTS `email_message`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `email_message` (
   `id` int(10) NOT NULL,
-  `sender_address` varchar(255) DEFAULT NULL,
-  `receiver_address` varchar(255) DEFAULT NULL,
+  `sender` varchar(255) DEFAULT NULL,
+  `receiver` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `content` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
@@ -39,6 +39,30 @@ CREATE TABLE `email_message` (
 LOCK TABLES `email_message` WRITE;
 /*!40000 ALTER TABLE `email_message` DISABLE KEYS */;
 /*!40000 ALTER TABLE `email_message` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mail`
+--
+
+DROP TABLE IF EXISTS `mail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `mail` (
+  `id` int(10) NOT NULL,
+  `email_address` varchar(255) DEFAULT NULL,
+  `email` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mail`
+--
+
+LOCK TABLES `mail` WRITE;
+/*!40000 ALTER TABLE `mail` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mail` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -98,4 +122,5 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-01 17:05:58
+-- Dump completed on 2017-12-01 17:21:05
+
