@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/stylesheets/login.css" />
+</head>
+
+<body>
+  <h1 class="title">登录界面</h1>
+  <div class="center">
+    <form action="" method="POST">
+      <span>用户名:</span>
+      <input type="text" placeholder="请填写用户名" name='username' id='username'>
+      <br>
+      <span>密码:&nbsp;&nbsp;&nbsp;</span>
+      <input type="password" placeholder="请填写密码" name='password' id='pwd'>
+      <br>
+      <input type="button" value='登录' id='submit'>
+      <a type="button" href='/users/register'>注册</a>
+    </form>
+  </div>
+
+
+
+  <script src='/javascripts/jquery.min.js'></script>
+  <script>
+    $(function () {
+      $('#submit').click(function () {
+        
+        if ($('#username').val() && $('#pwd').val()) {
+          let username = $('#username').val();
+          let pwd = $('#pwd').val();
+          $.ajax({
+            url:'/users/login',
+            type:'post',
+            data:{
+              username:username,
+              password:pwd
+            },
+            success:function(data,status){
+              if(data==0){
+                alert('用户不存在');
+                return;
+              } else if(data==1){
+                alert('用户名密码错误');
+              } else {
+                location.href = data; 
+              }
+              
+            },
+            error:function(data,err){
+              console.log(err);
+              return;
+            }
+          });
+
+        } else {
+          alert('请填写完整');
+        }
+
+      });
+
+
+
+    });
+
+  </script>
+
+
+</body>
+
+</html>
