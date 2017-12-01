@@ -13,7 +13,7 @@ app.use(mid2);
 app.all('/', index)
 app.get('/hello', hello);
 app.get('/users/:id', function (req, res) {
-  res.write('inside  users\n');
+  res.write('inside  users\n');  
   console.log(req.params);
   res.write("\n");
   res.write(req.mid + "\n");

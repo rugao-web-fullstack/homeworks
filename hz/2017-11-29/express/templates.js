@@ -2,12 +2,12 @@ var express = require('express');
 var fs = require('fs');
 var app = express();
 
-app.use(function (req, res, next) {
-  res.render = function (filename, options) {
+app.use(function(req, res, next) {
+  res.render = function(filename, options) {
     console.log("inside render");
     console.log(filename);
     console.log(options);
-    fs.readFile("templates/main.html", function (err, data) {
+    fs.readFile("templates/main.html", function(err, data) {
       if (err) {
         console.log(err);
         return;
