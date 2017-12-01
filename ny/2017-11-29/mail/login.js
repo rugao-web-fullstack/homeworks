@@ -15,6 +15,7 @@ module.exports = function (req, res) {
 						console.log("密码不正确！");
 						res.redirect('/');
 					} else {
+						res.cookie('name', username);
 						console.log("user "+username+" login in");
 						res.redirect('/mail');
 					}
