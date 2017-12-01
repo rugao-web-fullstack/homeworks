@@ -50,7 +50,6 @@ DROP TABLE IF EXISTS `mailbox`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mailbox` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `mailbox` varchar(20) NOT NULL,
   `user` int(10) NOT NULL,
   `address` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
