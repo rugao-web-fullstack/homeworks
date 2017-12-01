@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `mail`;
 CREATE TABLE `mail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
-  `body` varchar(255) NOT NULL,
+  `body` text NOT NULL,
   `sender` varchar(20) NOT NULL,
   `receiver` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
@@ -74,7 +74,7 @@ DROP TABLE IF EXISTS `mailbox`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mailbox` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `mailbox` varchar(20) NOT NULL,
+  `address` varchar(20) NOT NULL,
   `user` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
