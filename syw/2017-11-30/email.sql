@@ -77,7 +77,7 @@ DROP TABLE IF EXISTS `mailbox`;
 CREATE TABLE `mailbox` (
    `id` int(11) NOT NULL AUTO_INCREMENT,
     `user` int(20) NOT NULL,
-    `address` int(20) NOT NULL,
+    `address` varchar(20) NOT NULL,
   
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
