@@ -51,7 +51,7 @@ DROP TABLE IF EXISTS `mail_mailbox`;
 CREATE TABLE `mail_mailbox` (
   `id` int(100) NOT NULL AUTO_INCREMENT,
   `mail` int(100) NOT NULL,
-  `address` varchar(255) NOT NULL,
+  `mailbox` int(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -101,12 +101,9 @@ CREATE TABLE `user` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `user`
---
 
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -117,4 +114,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-01 14:33:50
+-- Dump completed on 2017-12-01 16:24:57
