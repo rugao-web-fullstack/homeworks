@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>邮件系统-用户注册界面</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>用户注册</h1>
+        <div class="col-sm-6 col-sm-offset-3">
+            <form class="form" action="/register" method="post">
+                <p class="form-group">
+                    <label class="label-control" for="user">用户名：</label>
+                    <input class="form-control" id="user" name="username" type="text" placeholder="请输入您的用户名">
+                </p>
+                <p class="form-group">
+                    <label class="label-control" for="mail">邮箱：</label>
+                    <input class="form-control" id="mail" name="username" type="text" placeholder="请输入您的邮箱">
+                </p>
+                <p class="form-group">
+                    <label class="label-control">密码：</label>
+                    <input class="form-control" id="pwd" name="password" type="password" placeholder="请输入您的密码">
+                </p>
+                <p class="form-group">
+                    <input class="btn btn-primary" type="submit" id="register" value="注册">
+                </p>
+            </form>
+            <a href="http://127.0.0.1:3000/login">去登录</a>
+            <a href="index.html">返回主界面</a>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script>
+        var oBtn = document.getElementById('register');
+        oBtn.onclick = function () {
+            var oUsername = document.getElementById('user').value;
+            var oPassword = document.getElementById('pwd').value;
+
+            if (oUsername !== '' && oPassword !== '') {
+                alert('注册成功！');
+            } else {
+                alert('请输入准确信息!');
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
