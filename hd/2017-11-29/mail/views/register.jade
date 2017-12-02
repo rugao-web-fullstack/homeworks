@@ -12,8 +12,6 @@ html(lang='zh-CN')
     script(src='js/jquery.min.js')
     // Include all compiled plugins (below), or include individual files as needed
     script(src='js/bootstrap.min.js')
-    script(src='js/jquery.form.js')
-    script(src='js/register.js')
   body
     nav.navbar.navbar-default
       .container-fluid
@@ -22,10 +20,10 @@ html(lang='zh-CN')
           a.navbar-brand(href='#') 邮件系统
       // /.container-fluid
     .container
-      .col-sm-12
-        .col-sm-4
-        .col-sm-4
-          .col-sm-12.formdiv
+      .col-md-12
+        .col-md-4
+        .col-md-4
+          .col-md-12.formdiv
             form#registerForm(action='/register', method='POST')
               .form-group
                 label.control-label(for='')
@@ -38,8 +36,9 @@ html(lang='zh-CN')
                 label.control-label(for='') 邮箱密码
                 div
                   input.form-control(type='password', placeholder='请输入您的密码', name='password')
+              label#message.control-label #{message}
               .form-group
                 div
                   input#Msub.form-control.btn.btn-info.btn-login(type='submit', value='注册')
                   a#Msub.form-control.btn.btn-info.btn-login(type='button' href="/") 返回
-        .col-sm-4
+        .col-md-4
