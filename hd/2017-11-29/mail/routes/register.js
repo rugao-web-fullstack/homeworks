@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.render('register', { title: 'Express' });
+  res.render('register', {});
 });
 
 //用户注册处理
@@ -18,7 +18,7 @@ router.post("/",function(req,res,next){
         res.redirect("/");
       }else{
         //注册失败
-        res.send("用户名已经被注册!");
+        res.render('register', {"message":"用户名已经被注册了！"});
       }
     })
   })
