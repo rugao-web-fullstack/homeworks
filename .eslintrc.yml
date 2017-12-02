@@ -2,9 +2,12 @@ env:
   node: true
 extends: 'eslint:recommended'
 rules:
+  es6:
+    - error
+    - true
   indent:
     - error
-    - 4
+    - 2
   linebreak-style:
     - error
     - unix
