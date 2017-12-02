@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>邮件编写</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>邮件编写</h1>
+        <div class="col-sm-6 col-sm-offset-3">
+            <form class="form" action="/login/writemail" method="get">
+                <p class="form-group">
+                    <label class="control-label" for="address">发送地址：</label>
+                    <input class="form-control" id="address" type="text" placeholder="请输入您要发送的地址">
+                </p>
+                <p class="form-group">
+                    <label class="control-label" for="title">标题：</label>
+                    <input class="form-control" id="title" type="text" placeholder="请输入邮件的标题">
+                </p>
+                <p class="form-group">
+                    <label class="control-label" for="mainbody">正文：</label>
+                    <textarea class="form-control" id="mainbody" name="" id="" cols="30" rows="10" placeholder="在此输入正文内容"></textarea>
+                </p>
+                <p class="form-group">
+                    <input class="btn btn-primary" type="submit" value="发送邮件">
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>
