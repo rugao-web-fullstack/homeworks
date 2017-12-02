@@ -3,7 +3,7 @@ body{
 }
 .container{
 	background:url("/images/bg.jpg") no-repeat;
-	background-size:cover;
+	background-size:contain;
 }
 .formdiv{
 	margin: 50px 0px;
@@ -12,6 +12,10 @@ body{
 	background: #fff;
     border: 1px solid #CCCCCC;
     border-radius:10px;
+}
+
+#message{
+	color:red;
 }
 
 .btn-login{
