@@ -21,7 +21,7 @@ router.post("/",function(req,res,next){
       res.redirect("/users");
     }else{
       //登陆失败
-      res.send("账号密码输入错误!");
+      res.render('login', {"message":"账号密码输入错误！"});
     }
   })
 })
