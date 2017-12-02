@@ -1,0 +1,16 @@
+doctype html
+html
+    head
+        title Mail List
+        link(rel='stylesheet', href='/stylesheets/checkMail_all.css')
+        script(src="/javascripts/jquery-3.2.1.js")
+        script(src="/javascripts/checkMail_all.js").
+    body
+        div.head
+            h1 邮件列表
+            h2 点击查看详细信息
+            - var array = mailArr
+            ul
+                - for (var i = 0; i < array.length; ++i) {
+                li  #{array[i]}
+                - }

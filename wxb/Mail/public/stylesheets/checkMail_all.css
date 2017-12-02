@@ -1,0 +1,32 @@
+* {
+    text-decoration: none;
+    list-style: none;
+}
+
+.head {
+    border: 1px solid black;
+    text-align: center;
+    width: 98%;
+    margin: 0 auto;
+    padding-top: 30px;
+    font-size: 20px;
+    font-family: "Microsoft YaHei UI";
+    color: grey;
+}
+
+h1 {
+    font-size: 40px;
+    color: lightgrey;
+}
+
+h2 {
+    /*border: 1px solid black;*/
+    padding-left: 305px;
+    font-size: 22px;
+    color: lightgrey;
+}
+
+ul li {
+    margin-bottom: 20px;
+    cursor: pointer;
+}
