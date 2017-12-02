@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `mail`;
 CREATE TABLE `mail` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `sender` varchar(64)  NOT NULL,
-  `reseaver` varchar(64)  NOT NULL,
+  `receiver` varchar(64)  NOT NULL,
   `title` varchar(1000) NOT NULL,
   `content` varchar(10000)  NOT NULL,
   `iread` tinyint(1) NOT NULL,
@@ -100,7 +100,7 @@ DROP TABLE IF EXISTS `user_mailbox`;
 CREATE TABLE `user_mailbox` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `mailbox` int(64) NOT NULL,
-  `username` varchar(64)  NOT NULL,
+  `user` int(64)  NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8  COMMENT='用户-绑定邮箱列表';
 /*!40101 SET character_set_client = @saved_cs_client */;
