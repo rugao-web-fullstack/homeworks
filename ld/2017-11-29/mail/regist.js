@@ -14,7 +14,7 @@ module.exports = function (req, res) {
                     con1.query(sqlAdd, function (error, results) {
                         if (error) throw error;
                         debug('A new user has registed just now!');
-						debug(results);
+                        debug(results);
                     });
                 }, 'mydb');
                 res.redirect('/');
