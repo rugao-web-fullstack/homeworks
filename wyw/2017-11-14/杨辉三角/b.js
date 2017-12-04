@@ -1,3 +1,3 @@
-const o = require("./a");
+const o = require('./a');
 o();
 
