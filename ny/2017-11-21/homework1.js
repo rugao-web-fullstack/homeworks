@@ -1,7 +1,8 @@
-const fs = require("fs");
-const ws = fs.createWriteStream("file.txt");
-const rs = fs.createReadStream("file.txt");
+const fs = require('fs');
+const ws = fs.createWriteStream('file.txt');
+const rs = fs.createReadStream('file.txt');
 const writeBuff = Buffer.alloc(22);
+var debug = require('debug')('homework1');
 writeBuff.writeUInt32BE(100, 0);
 writeBuff.writeInt32BE(-100, 4);
 writeBuff.writeUInt8(100, 8);
@@ -11,22 +12,22 @@ writeBuff.writeDoubleBE(-888.888, 14);
 var readBuff = [];
 
 ws.end(writeBuff, function () {
-    console.log("ÎÄ¼þÐ´ÈëÍê³É£¡");
-    rs.on("readable", function () {
-        var data = rs.read();
-        if(data){
-            readBuff.push(data);
-        }
-    })
+  debug('log' + 'ï¿½Ä¼ï¿½Ð´ï¿½ï¿½ï¿½ï¿½É£ï¿½');
+  rs.on('readable', function () {
+    var data = rs.read();
+    if(data){
+      readBuff.push(data);
+    }
+  });
 
-    rs.on("end", function () {
-        readBuff = Buffer.concat(readBuff);
-        console.log("´ÓÎÄ¼þÖÐ¶ÁÈ¡³öÀ´µÄÖµÎª£º");
-        console.log("UInt32 = " +readBuff.readInt32BE(0));
-        console.log("Int32 = " +readBuff.readInt32BE(4));
-        console.log("UInt8 = " +readBuff.readUInt8(8));
-        console.log("Int8 = " +readBuff.readInt8(9));
-        console.log("Float = " +readBuff.readFloatBE(10));
-        console.log("Double = " +readBuff.readDoubleBE(14));
-    })
-})
+  rs.on('end', function () {
+    readBuff = Buffer.concat(readBuff);
+    debug('log' + 'ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ð¶ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÎªï¿½ï¿½');
+    debug('log' + 'UInt32 = ' +readBuff.readInt32BE(0));
+    debug('log' + 'Int32 = ' +readBuff.readInt32BE(4));
+    debug('log' + 'UInt8 = ' +readBuff.readUInt8(8));
+    debug('log' + 'Int8 = ' +readBuff.readInt8(9));
+    debug('log' + 'Float = ' +readBuff.readFloatBE(10));
+    debug('log' + 'Double = ' +readBuff.readDoubleBE(14));
+  });
+});

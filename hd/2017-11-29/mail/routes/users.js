@@ -8,7 +8,6 @@ router.get('/', function (req, res, next) {
   var username = req.session.username;
   if (username) {
     mailManage.getMail(username, function (err,mailArr) {
-      console.log(mailArr);
       res.render('user', {mailArr: mailArr||{}});
     })
   } else {
@@ -22,15 +21,20 @@ router.post('/', function (req, res, next) {
   var receiver = req.body.receiver;
   var title = req.body.title;
   var content = req.body.content;
+  var username = req.session.username;
 
   userManage.isExist(receiver,function(err){
     if(!err){
       //用户存在
       mailManage.addMail(sender,receiver,title,content, function () {
-        res.redirect("/users");
+        mailManage.getMail(username, function (err,mailArr) {
+          res.render('user', {mailArr: mailArr||{},"message":"消息发送成功！"});
+        })
       });
     }else{
-      res.send("收件人不存在");
+      mailManage.getMail(username, function (err,mailArr) {
+        res.render('user', {mailArr: mailArr||{},"message":"用户不存在！"});
+      })
     }
   })
 

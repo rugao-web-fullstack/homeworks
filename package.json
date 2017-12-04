@@ -1,0 +1,23 @@
+{
+  "name": "homeworks",
+  "version": "1.0.0",
+  "description": "1. 2017-11-14 （熟悉node.js模块化机制）     a. Fibonacci 数组实现通过node.js模块输出    b. 汉诺塔移动信息通过node.js以数组形式输出",
+  "main": "index.js",
+  "dependencies": {
+    "eslint": "^4.12.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rugao-web-fullstack/homeworks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rugao-web-fullstack/homeworks/issues"
+  },
+  "homepage": "https://github.com/rugao-web-fullstack/homeworks#readme"
+}

@@ -34,6 +34,7 @@ html(lang='zh-CN')
                 label.control-label(for='') 邮箱密码
                 div
                   input.form-control(type='password', placeholder='请输入您的密码', name='password', id="password")
+              label#message.control-label #{message}
               .form-group
                 div
                   input.form-control.btn.btn-info.btn-login(type='submit', value='登录')
