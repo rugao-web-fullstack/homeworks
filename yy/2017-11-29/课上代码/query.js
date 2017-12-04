@@ -1,6 +1,7 @@
-var express = require('express')
-var app = express()
-app.use('/', function(req, res) {
-	console.log(req.query);
+var express = require("express");
+var app = express();
+var debug = require("debug")("xxx");
+app.use("/", function(req, res) {
+	debug("log:" + req.query);
 });
-app.listen(3000)
+app.listen(3000);

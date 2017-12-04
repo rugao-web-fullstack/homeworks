@@ -10,7 +10,7 @@ module.exports = function(x){
 	for (let i=0; i<x; i++){
 		//内层循环拼接字符串
 		let tmp = [];
-		for (var j=0; j<=i; j++){
+		for (var j = 0; j <= i; j++){
 			tmp.push(evaluate(i,j));
 		}
 		res.push(tmp);

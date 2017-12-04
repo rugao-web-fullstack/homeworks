@@ -1,19 +1,15 @@
-var http = require('http');
-var url = require('url');
-var qs = require('querystring');
-var uuid = require('uuid/v4');
+var http = require("http");
+var url = require("url");
+var qs = require("querystring");
+var uuid = require("uuid/v4");
 var session = {};
-
 http.createServer(function (req, res) {
 	var user;
 	var sid;
 	// 恢复
 	var query = qs.parse(url.parse(req.url).query);
-	console.log(query);
 	if(query.sid){
 		user = session[query.sid];
-		console.log('--》' + query.sid);
-		console.log(user);
 	}
 
 	// 生成
@@ -22,9 +18,8 @@ http.createServer(function (req, res) {
 		user = {
 			id: uuid(),
 			username: "user-" + new Date().getTime(),
-			password: 'passord'
+			password: "passord"
 		};
-		console.log(user);
 		// 生成SID
 		sid = uuid();
 		// 保存用户信息

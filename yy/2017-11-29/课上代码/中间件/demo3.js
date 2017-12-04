@@ -1,5 +1,5 @@
-var express = require('express')
-var app = express()
+var express = require("express");
+var app = express();
 var index = require("./index");
 var hello = require("./hello");
 var user = require("./user");
@@ -10,12 +10,12 @@ app.use(mid1);
 
 app.use(mid2);
 
-app.get(['/users/:id/:actions', '/users/:id'], function (req, res) {
-  res.write('inside  users\n');  
-  console.log(req.params);
-  res.write("\n");
-  res.write(req.mid + "\n");
-  res.end();
+app.get(["/users/:id/:actions", "/users/:id"], function (req, res) {
+	res.write("inside  users\n");  
+	console.log(req.params);
+	res.write("\n");
+	res.write(req.mid + "\n");
+	res.end();
 });
 
 app.listen(3000);
