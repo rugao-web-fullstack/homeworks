@@ -8,6 +8,7 @@ html(lang='zh-CN')
     // Bootstrap
     link(href='css/bootstrap.min.css', rel='stylesheet')
     link(rel='stylesheet', href='css/index.css')
+    link(rel='stylesheet', href='css/user.css')
     script(src="js/jquery.min.js")
     script(src='js/user.js')
   body
@@ -28,10 +29,12 @@ html(lang='zh-CN')
               a(href='#mails', data-toggle='tab') 邮件列表
             li#acon
               a(href='#sendmail', data-toggle='tab') 发送邮件
+            li#acon
+              a(href='#addmailbox', data-toggle='tab') 添加收件箱
         .col-sm-10
-          | 邮件系统
+          | 用户:#{username} 欢迎您！
           hr
-          #message.alert.alert-danger #{message}
+          #message.alert.alert-info #{message}
           div
             .tab-content
               #mails.tab-pane.active
@@ -40,17 +43,20 @@ html(lang='zh-CN')
                     tr
                       th 邮件标题
                       th 发件人
+                      th 收件箱
                       th 时间
                       th 操作
                   tbody
+                    - if(mailArr){
                     - for(var i=0;i<mailArr.length;i++){
                     tr
                       td #{mailArr[i].title}
                       td #{mailArr[i].sender}
+                      td #{mailArr[i].receiver}
                       td #{mailArr[i].date}
                       td
                         button.showmail.btn.btn-default(data-content='#{mailArr[i].content}',data-toggle="modal",data-target="#Modal") 查看
-                    -}
+                    -}}
                     
               #Modal.modal.fade
                 .modal-dialog
@@ -66,6 +72,13 @@ html(lang='zh-CN')
                     label.control-label(for='')
                       h3 发送邮件
                   .form-group
+                    label.control-label(for='') 发件箱
+                    select.form-control(name="sender")
+                      -if(mailbox){
+                      -for(var j = 0; j < mailbox.length; j++){
+                      option #{mailbox[j].address}
+                      -}}
+                  .form-group
                     label.control-label(for='') 收件人
                     div
                       input.form-control(type='text', placeholder='请输入收件人', name='receiver')
@@ -79,7 +92,29 @@ html(lang='zh-CN')
                       textarea.form-control(rows='6', placeholder='邮件内容', name='content')
                   .form-group
                     button.btn.btn-primary(type='submit') 发送邮件
-    // jQuery (necessary for Bootstrap's JavaScript plugins)
+              #addmailbox.tab-pane
+                h3 收件箱列表
+                .panel.panel-primary
+                  .panel-heading 收件箱
+                  ul.list-group
+                    - if(mailbox){
+                    - for(var i=0;i<mailbox.length;i++){
+                        li.list-group-item #{mailbox[i].address}
+                    - }}
+                button.btn.btn-primary(data-toggle="modal",data-target="#addmailboxModal") 添加邮箱
+              .modal.fade#addmailboxModal
+                .modal-dialog.modal-sm
+                  form(action="/users", method="POST")
+                    .modal-content
+                      .modal-body
+                        .form-group
+                          label.control-label(for='') 添加收件箱
+                        div
+                          input.form-control(type='text', placeholder='请输入收件箱', name='mailbox')
+                      .modal-footer
+                        button.btn.btn-default(data-dismiss="modal") 关闭
+                        button.btn.btn-primary(type="submit")  提交
+
     script(src='https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js')
     // Include all compiled plugins (below), or include individual files as needed
     script(src='js/bootstrap.min.js')
