@@ -1,0 +1,46 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title 用户登陆
+    // Bootstrap
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    link(rel='stylesheet', href='css/login.css')
+  body
+    nav.navbar.navbar-default
+      .container-fluid
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          a.navbar-brand(href='#') 邮件系统
+      // /.container-fluid
+    .container
+      .col-md-12
+        .col-md-1
+        .col-md-10
+          .col-md-8
+            h1 邮箱登录
+          .col-md-4.formdiv
+            form#loginForm(role='form', action='/', method='POST')
+              .form-group
+                label.control-label(for='')
+                  h3 邮箱登录
+              .form-group
+                label.control-label(for='') 邮箱账号
+                div
+                  input.form-control(type='text', placeholder='请输入您的邮箱账号', name='username', id="username")
+              .form-group
+                label.control-label(for='') 邮箱密码
+                div
+                  input.form-control(type='password', placeholder='请输入您的密码', name='password', id="password")
+              label#message.control-label #{message}
+              .form-group
+                div
+                  input.form-control.btn.btn-info.btn-login(type='submit', value='登录')
+                  a.form-control.btn.btn-info.btn-login(type='button', href="/register")  注册
+        .col-md-1
+    // jQuery (necessary for Bootstrap's JavaScript plugins)
+    script(src='js/jquery.min.js')
+    // Include all compiled plugins (below), or include individual files as needed
+    script(src='js/bootstrap.min.js')
