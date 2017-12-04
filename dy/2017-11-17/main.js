@@ -6,6 +6,7 @@
  * 4、可以阅读（包括历史）
  * 5、提醒
  */
+var debug = require('debug')('log');
 const net = require('net');
 const Machine = require('./machine').Machine;
 const StateUser = require('./states/user').User;
@@ -14,24 +15,24 @@ const StateMailer = require('./states/mail').Mail;
 let sockets = [];
 
 const server = net.createServer((socket) => {
-    let machine = new Machine();
+  let machine = new Machine();
     
-    sockets.push(socket);
-    new StateUser(socket);
-    new StateMailer(socket);
+  sockets.push(socket);
+  new StateUser(socket);
+  new StateMailer(socket);
     
-    console.log('socket connected!');
+  debug('log' + 'socket connected!');
 
-    machine.process(socket, null);
+  machine.process(socket, null);
 
-    socket.on('data', (data) => {
-        console.log(data.toString().trim());
-        console.log('data received');
-        machine.process(socket, data);
-    });
+  socket.on('data', (data) => {
+    debug('log' + data.toString().trim());
+    debug('log' + 'data received');
+    machine.process(socket, data);
+  });
 });
 
 let port = process.env.NODE_PORT || 8080;
 server.listen(port, () => {
-    console.log('Server started at: ' + port);
+  debug('log' + 'Server started at: ' + port);
 });

@@ -1,6 +1,8 @@
-var basic = require("./base");
+var basic = require('./base');
+var debug = require('debug')('log');
+
 basic(function (con) {
-  var sql = "INSERT INTO user (username, password) VALUES ?;";
+  var sql = 'INSERT INTO user (username, password) VALUES ?;';
   var data = [
     ['John', 'Highway 71'],
     ['Peter', 'Lowstreet 4'],
@@ -16,10 +18,10 @@ basic(function (con) {
     ['William', 'Central st 954'],
     ['Chuck', 'Main Road 989'],
     ['Viola', 'Sideway 1633']
-  ]
+  ];
   con.query(sql, [data], function (err, result) {
     if (err) throw err;
-    console.log(result);
-    console.log("Number of records inserted: " + result.affectedRows);
+    debug('log' + result);
+    debug('log' + 'Number of records inserted: ' + result.affectedRows);
   });
 }, 'mydb');

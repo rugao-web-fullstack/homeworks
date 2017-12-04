@@ -1,2 +1,3 @@
-const yhsj = require("./yhsjmodele");
-console.log(yhsj());
+var debug = require('debug')('yhsj');
+const yhsj = require('./yhsjmodele');
+debug('log:' + yhsj());

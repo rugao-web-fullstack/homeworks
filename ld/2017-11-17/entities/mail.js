@@ -1,4 +1,4 @@
-let states = require("../states").states;
+let states = require('../states').states;
 const UserManager = require('./user').User;
 let mails = {
 };
@@ -20,10 +20,10 @@ Mail.send = function (sender, receiver, title, body) {
         mail: mail
     });
 
-    let receiverSocket = UserManager.getSocket(receiver)
+    let receiverSocket = UserManager.getSocket(receiver);
     receiverSocket.emit(states.MAIL_NEW, sender, mail);
     return true;
-}
+};
 
 Mail.get = function(user) {
     return mails[user];

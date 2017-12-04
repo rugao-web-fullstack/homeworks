@@ -1,5 +1,6 @@
-const fs = require("fs");
-const ws = fs.createWriteStream("demo.txt");
+const fs = require('fs');
+const ws = fs.createWriteStream('demo.txt');
+var debug = require('debug')('xxx');
 
 var writeBuff = Buffer.alloc(22);
 writeBuff.writeUInt32BE(0xfeedface, 0);
@@ -10,5 +11,5 @@ writeBuff.writeFloatBE(1.23, 10);
 writeBuff.writeDoubleBE(-1.23, 14);
 
 ws.end(writeBuff, function() {
-	console.log("导入成功");
+  debug('log:' + '导入成功');
 });
