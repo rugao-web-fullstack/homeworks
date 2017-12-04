@@ -1,10 +1,13 @@
+var debug = require('debug')('user');
+
+
 let users = {};
 let sockets = [];
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 // const UserManager = require('./user').User;
-const Storage = require("./storage").Storage;
-const FILENAME = "../data/user.json";
+const Storage = require('./storage').Storage;
+const FILENAME = '../data/user.json';
 const storage = new Storage(path.resolve(path.dirname(__filename), FILENAME));
 
 
@@ -22,8 +25,8 @@ User.register = function (socket, username, password, cb) {
     storage.save(users, (error) => {
         if (error) {
             cb(error);
-        } else if (username.indexOf("@") == -1) {
-            socket.write("邮箱名应该包含'＠'!!!\n");
+        } else if (username.indexOf('@') == -1) {
+            socket.write('邮箱名应该包含\'＠\'!!!\n');
             cb(true);
         } else {
             cb(false);
@@ -33,7 +36,7 @@ User.register = function (socket, username, password, cb) {
 };
 
 User.login = function (socket, username, password, cb) {
-    console.log("user manager login");
+    debug('user manager login');
 
     storage.read((error, users) => {
         if (error) {
@@ -48,14 +51,14 @@ User.login = function (socket, username, password, cb) {
                     socket: socket,
                     nowUser: username
                 });
-                console.log(sockets);
+                debug(sockets);
                 return;
             } else {
                 cb(true);
             }
         }
 
-    })
+    });
 };
 /**
  * 判断当前地址是不是有用户拥有
@@ -78,7 +81,7 @@ User.isAddress = function (address, cb) {
         }
     });
 
-}
+};
 
 /**
  * 根据地址获取用户socket
@@ -117,9 +120,9 @@ User.getUserBySocket = function (socket, cb) {
         }
         cb(false, null);
         return;
-    })
+    });
 
-}
+};
 
 exports.User = User;
 // exports.write = write;

@@ -15,7 +15,7 @@ module.exports = function yanghui(n) {
             array.push(add(i, j));
         }
         // documen"<br/>");
-        array.push(" ");
+        array.push(' ');
     }
     return array;
-}
+};

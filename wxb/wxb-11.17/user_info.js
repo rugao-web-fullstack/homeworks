@@ -1,3 +1,5 @@
+var debug = require('debug')('user_info');
+
 //---用户信息
 function user_info(mailname, password) {
     this.mailname = mailname;
@@ -14,8 +16,8 @@ user_info.mail = function (mailname, pwd,socket) {
     mailArr.push(mailname);
     pwdArr.push(pwd);
     sockets.push(socket);
-    console.log("mailArr : " + mailArr + " \npwd :" + pwdArr+"-"+sockets.length);
-}
+    debug('log: '+'mailArr : ' + mailArr + ' \npwd :' + pwdArr+'-'+sockets.length);
+};
 
 // user_info.mailTitle = function (user,title) {
 //     mailTitle.push([user,title]);
@@ -32,7 +34,7 @@ user_info.mail = function (mailname, pwd,socket) {
 
 user_info.returnmailArr=function () {
     return mailArr;
-}
+};
 
 user_info.returnSockets = function () {
     return sockets;
@@ -45,5 +47,5 @@ user_info.login = function (mailname, pwd) {
     } else {
         return false;
     }
-}
+};
 exports.user_info = user_info;
