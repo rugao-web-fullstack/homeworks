@@ -1,2 +1,3 @@
-const hanoi = require("./hanoimodule");
-console.log(hanoi());
+var debug = require('debug')('hanoi');
+const hanoi = require('./hanoimodule');
+debug('log:' + hanoi());

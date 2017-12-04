@@ -3,12 +3,12 @@ var nunjucks = require('nunjucks');
 var app = express();
 
 nunjucks.configure('templates', {
-    autoescape: true,
-    express: app
+  autoescape: true,
+  express: app
 });
 
 app.get('/', function(req, res) {
-    res.render('index.html', {name: "sb"});
+  res.render('index.html', {name: 'sb'});
 });
 
 app.listen(8080);

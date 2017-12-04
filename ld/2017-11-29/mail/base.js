@@ -1,4 +1,5 @@
-var mysql = require("mysql");
+var mysql = require('mysql');
+var debug = require('debug')('xxx');
 var init = function (cb, db) {
     var options = {
         host: process.env.MYSQL_HOST,
@@ -11,10 +12,10 @@ var init = function (cb, db) {
     var con = mysql.createConnection(options);
     con.connect(function (err) {
         if (err) throw err;
-        console.log("Connected");
+        debug('Connected');
         cb instanceof Function && cb(con);
     });
-}
+};
 if (!module.parent) {
     init();
 }

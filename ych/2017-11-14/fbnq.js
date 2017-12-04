@@ -1,2 +1,3 @@
-const fbnq = require("./fbnqmodule.js");
-console.log(fbnq());
+var debug = require('debug')('fbnq');
+const fbnq = require('./fbnqmodule.js');
+debug('log:' + fbnq());
