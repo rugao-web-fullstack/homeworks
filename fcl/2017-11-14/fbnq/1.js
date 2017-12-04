@@ -1,14 +1,12 @@
-function fei(m) {
-    var arr = new Array();
+module.exports = function fib(n) {
+  var p = 0;
+  if (n == 1 || n == 2) {
+    p = 1;
+  }
+  else {
+    p = fib(n - 1) + fib(n - 2);
+  }
 
-    if (i === 0 || i === 1) {
-        return 1;
-    } else {
-        return fei(n - 1) + fei(n - 2);
-    }
-    for (var i = 0; i < m; i + +) {
-        arr.push(fei(i));
-    }
-    return arr;
-}
-exports.fei = fei;
+  return p;
+
+};
