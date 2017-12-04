@@ -5,11 +5,10 @@
  * 3、Request
  * 4、Response
  */
+var debug = require('debug')('log');
 var express = require('express');
 var mid1 = require('./mid1');
 var mid2 = require('./mid2');
-var index = require('./index');
-var hello = require('./hello');
 var app = express();
 
 // 中间件 --- 异步函数
@@ -27,11 +26,11 @@ app.use(mid2);
 // app.get('/hello', hello);
 
 app.get('/users/:id', function (req, res) {
-    res.write('inside users');
-    console.log(req.params);
-    res.write('\n');
-    res.write(req.mid + '\n');
-    res.end();
+  res.write('inside users');
+  debug('log' + req.params);
+  res.write('\n');
+  res.write(req.mid + '\n');
+  res.end();
 });
 
 
