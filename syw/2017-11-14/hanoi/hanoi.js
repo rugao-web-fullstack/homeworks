@@ -1,22 +1,16 @@
-let moves = [];
-function mv(num, a, c) {
-    moves.push([num, a, b]);
-}
 
-function hanoi(num, a, b, c) {
-    if (n === 1) {
-        mv(num, a, c);
-        return
-    }
-    hanoi(n - 1, a, b, c);
-    mv(num, a, b);
-    hanoi(n - 1, a, b, c)
+var arr = [];
+function hunt(n) {
+  hnt(n, 'a', 'b', 'c');
+  return arr;
 }
-
-function records(num, a, b, c) {
-    moves = [];
-    hanoi(num, a, b, c);
-    return moves;
+function hnt(n, a, b, c) {
+  if (n === 1) {
+    arr.push('Move ' + n + ' from ' + a + ' to ' + c);
+  } else {
+    hnt(n - 1, a, c, b);
+    arr.push('Move ' + n + ' from ' + a + ' to ' + c);
+    hnt(n - 1, b, a, c);
+  }
 }
-
-module.exports = records;
+module.exports = hunt;

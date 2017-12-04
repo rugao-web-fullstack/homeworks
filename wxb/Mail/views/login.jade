@@ -1,0 +1,19 @@
+doctype html
+html
+    head
+        title Mail
+        link(rel='stylesheet', href='/stylesheets/register.css')
+        yield
+        script(src="/javascripts/jquery-3.2.1.js")
+        script(src="/javascripts/login.js")
+    body
+        div.info
+            h1  登录
+            span   请输入邮箱:
+                input(type="text" id="mail")
+            br
+            span   请输入密码:
+                input(type="password" id="pwd")
+                br
+            br
+            a#login 登录

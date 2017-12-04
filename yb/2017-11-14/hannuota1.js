@@ -1,11 +1,15 @@
-const hannuota = require('./hannuota');
-const readline = require('readline');// 引入readline模块
+var Hanoi = require('./Hanoi');
+var readline = require('readline');
+var debug = require('debug')('xxx');
 
-var  rl = readline.createInterface({//创建readline接口实例
-    input:process.stdin,
-    output:process.stdout
+var rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
 });
 
-rl.question("黄金圆盘片数是:",function(n) {// question方法
-    console.log(hannuota(n));
-})
+rl.question('请输入数列长度：', function(n){
+  var arr = Hanoi(n);
+  for(var i = 0; i < arr.length ; i++){
+    debug('log:' + arr[i]);
+  }
+});
