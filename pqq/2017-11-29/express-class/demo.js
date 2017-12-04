@@ -8,7 +8,7 @@ var mid2 = require('./module/mid2');
 app.use(mid1);
 app.use(mid2);
 
-app.get('/hi',hi);
-app.get('/hello',hello);
+app.get('/hi', hi);
+app.get('/hello', hello);
 
 app.listen(3333);
