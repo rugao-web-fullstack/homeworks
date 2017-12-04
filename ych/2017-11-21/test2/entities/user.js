@@ -79,7 +79,7 @@ User.isAddress = function (address, callback) {
  * 根据地址获取用户socket
  * @param {*} address 
  */
-User.getSocket = function (address, callback) {
+User.getSocket = function (address) {
   debug(sockets);
   for (var k in sockets) {
     if (k === address) {

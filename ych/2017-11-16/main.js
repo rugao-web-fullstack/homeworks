@@ -1,7 +1,6 @@
 var debug = require('debug')('main');
 const net = require('net');
 const User = require('./user').User;
-const Message = require('./message').Message;
 const EventEmitter = require('events');
 const emitter = new EventEmitter();
 

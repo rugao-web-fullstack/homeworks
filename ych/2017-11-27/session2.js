@@ -14,12 +14,12 @@ http.createServer(function (req, res) {
   }
 
   if (!user) {
-    var user = {
+    user = {
       id: uuid(),
       username: 'user-' + new Date().getTime(),
       password: 'password'
     };
-    var sid = uuid();
+    sid = uuid();
     session[sid] = user;
     var redirectUrl = '/?sid=' + sid;
     res.writeHead(301, {

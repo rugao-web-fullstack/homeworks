@@ -17,6 +17,6 @@ client.on('data', (data) => {
 client.on('end', () => {
   process.exit();
 });
-client.on('error', (err) => {
+client.on('error', () => {
   process.exit();
 });

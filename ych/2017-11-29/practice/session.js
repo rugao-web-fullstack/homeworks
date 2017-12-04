@@ -14,7 +14,7 @@ http.createServer(function (req, res) {
       for (var i = 0; i < cookies.length; i++) {
         if (cookies[i].indexOf('sid') === 0) {
           sid = cookies[i].split('=')[1];
-          console.log(sid);
+          debug('log:'+sid);
           index = i;
           break;
         }
@@ -27,12 +27,12 @@ http.createServer(function (req, res) {
   }
 
   if (!user) {
-    var user = {
+    user = {
       id: uuid(),
       username: 'user-' + new Date().getTime(),
       password: 'passord'
     };
-    var sid = uuid();
+    sid = uuid();
     session[sid] = user;
     res.writeHead(200, {
       'Set-Cookie': 'sid=' + sid,

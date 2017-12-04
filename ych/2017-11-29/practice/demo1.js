@@ -1,8 +1,6 @@
 var debug = require('debug')('demo1');
 var express = require('express');
 var app = express();
-var index = require('./index');
-var hello = require('./hello');
 var mid1 = require('./mid1');
 var mid2 = require('./mid2');
 

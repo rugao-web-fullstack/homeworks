@@ -9,7 +9,7 @@ const server = net.createServer(function (socket) {
   sockets.push(socket);
   new StateUser(socket);
   new StateMailer(socket);
-  console.log('socket connected!');
+  debug('socket connected!');
   machine.process(socket, null);
   socket.on('data', function (data) {
     debug(data);

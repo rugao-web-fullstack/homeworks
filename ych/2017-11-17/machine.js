@@ -6,7 +6,6 @@ function Machine() {
 }
 Machine.prototype.process = function (socket,
   data) {
-  let input = this.getCleanedString(data);
   switch (this.state) {
   case states.MAIL_WRITE:
     socket.emit(states.MAIL_WRITE,
