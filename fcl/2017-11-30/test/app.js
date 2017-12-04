@@ -1,13 +1,14 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
+
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var base = require('./base');
+var session = require('express-session');
 var index = require('./routes/index');
 var users = require('./routes/users');
-var url = require('url');
+
 
 var app = express();
 
@@ -21,6 +22,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({
+  secret: '12345',
+  resave: true,
+  saveUninitialized: true
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
@@ -30,57 +36,93 @@ app.post('/register', function(req, res) {
   var name = email;
   var pwd = req.body.pwd;
   base(function(con) {
-    var have = 'select * from user where username =\'' + name +'\';';
-    con.query(have,function(err,result){
+    var have = 'select *from user where username =\'' + name + '\';';
+    con.query(have, function(err, result) {
       if (result.length === 0 && email !== '' && pwd !== '') {
-        var sql = 'INSERT INTO user (username, password) VALUES(\'' + name + '\', \'' + pwd + '\');';
-        var sql2 = 'INSERT INTO email (email) VALUES(\'' + email + '\');';
-        con.query(sql,function(err, result2) {
+        var sql = 'INSERT INTO user (username,password) VALUES(\'' + name + '\',\'' + pwd + '\');';
+        var sql2 = 'INSERT INTO mailbox (address) VALUES(\'' + email + '\');';
+        con.query(sql, function(err) {
           if (err) {
             throw err;
-            return;
           }
           res.render('login');
         });
-        con.query(sql2,function(err, result3) {
+        con.query(sql2, function(err) {
           if (err) {
             throw err;
-            return;
           }
         });
-      }else{
+      } else {
         res.render('register');
       }
     });
   }, 'emailSystem');
 });
 app.post('/login', function(req, res) {
-  var name = req.body.name;
+  var name = req.body.Name;
   var pwd = req.body.pwd;
   base(function(con) {
-    var sql = 'select * from user where username =\'' + name + '\';';
+    var sql = 'select *from user where username =\'' + name + '\';';
     con.query(sql, function(err, result) {
       if (err) {
         throw err;
-        return;
       }
-      if (name === result[0].username && pwd === result[0].password) {
-        var sql2 = 'INSERT INTO user (state) VALUES(\'logined\');';
-        con.query(sql2, function(err, result3) {
-          if (err) {
-            throw err;
-            return;
-          }
-        });
-        res.render('user');
+      if (result.length !== 0) {
+        if (name === result[0].username && pwd === result[0].password) {
+
+          var sql2 = 'UPDATE user set states = \'logined\' where id = ' + result[0].id + ';';
+          con.query(sql2, function(err) {
+            if (err) {
+              throw err;
+            }
+          });
+          req.session.userInfo = name;
+          res.render('user', { name: req.session.userInfo });
+        } else {
+          res.render('login');
+        }
       } else {
         res.render('login');
       }
+
     });
-  });
+  }, 'emailSystem');
 });
-
-
+app.post('/user', function(req, res) {
+  var receiver = req.body.receiver;
+  var content = req.body.content;
+  var title = req.body.title;
+  var userInfo = req.session.userInfo;
+  base(function(con) {
+    if (receiver !== '' && content !== '' && title !== '') {
+      var sql = 'select *from mailbox where address =\'' + receiver + '\';';
+      con.query(sql, function(err, result) {
+        if (err) {
+          throw err;
+        }
+        if (result.length !== 0) {
+          var sql2 = 'INSERT INTO mail (sender,title,content,receiver) VALUES(\'' + userInfo + '\',\'' + title + '\',\'' + content + '\',\'' + receiver + '\');';
+          con.query(sql2, function(err) {
+            if (err) {
+              throw err;
+            }
+            var sql3 = 'UPDATE user set states = \'receivedMail\' where id = ' + result[0].id + ';';
+            con.query(sql3, function(err) {
+              if (err) {
+                throw err;
+              }
+            });
+            res.render('mail', { name: userInfo });
+          });
+        } else {
+          res.render('user');
+        }
+      });
+    } else {
+      res.render('user');
+    }
+  }, 'emailSystem');
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -90,7 +132,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
