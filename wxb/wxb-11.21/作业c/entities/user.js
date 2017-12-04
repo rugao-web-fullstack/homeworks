@@ -3,7 +3,6 @@ var debug = require('debug')('user');
 
 let users = {};
 let sockets = [];
-const fs = require('fs');
 const path = require('path');
 // const UserManager = require('./user').User;
 const Storage = require('./storage').Storage;
@@ -72,6 +71,7 @@ User.isAddress = function (address, cb) {
     }
     for (var k in users) {
       if (!users[address]) {
+        debug(k);
         cb(true);
         return;
       } else {

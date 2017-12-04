@@ -9,8 +9,6 @@ function user_info(mailname, password) {
 var mailArr = [];
 var pwdArr = [];
 var sockets = [];
-var mailTitle = {};
-var mailContent = {};
 
 user_info.mail = function (mailname, pwd,socket) {
   mailArr.push(mailname);

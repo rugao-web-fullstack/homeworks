@@ -63,7 +63,7 @@ Mail.prototype.stateWrite = function (machine, socket, data) {
  * @param {*} socket
  * @param {*} data
  */
-Mail.prototype.stateWriteHome = function (machine, socket, data) {
+Mail.prototype.stateWriteHome = function (machine, socket) {
   socket.write('\n请输入你要修改的内容，\n\t1.收件人地址\n\t2.标题\n\t3.正文内容\n\t4.发送邮件\n');
   machine.action = 'wait';
 };
@@ -108,7 +108,7 @@ Mail.prototype.stateWriteWait = function (machine, socket, data) {
  * @param {*} socket
  * @param {*} data
  */
-Mail.prototype.stateWriteAddressWait = function (machine, socket, data) {
+Mail.prototype.stateWriteAddressWait = function (machine, socket) {
   socket.write('请输入接收用户的地址:\n');
   machine.action = 'address';
 };
@@ -120,7 +120,7 @@ Mail.prototype.stateWriteAddressWait = function (machine, socket, data) {
  * @param {*} socket
  * @param {*} data
  */
-Mail.prototype.stateWriteTitleWait = function (machine, socket, data) {
+Mail.prototype.stateWriteTitleWait = function (machine, socket) {
   socket.write('请输入标题:\n');
   machine.action = 'title';
 };
@@ -131,7 +131,7 @@ Mail.prototype.stateWriteTitleWait = function (machine, socket, data) {
  * @param {*} socket
  * @param {*} data
  */
-Mail.prototype.stateWriteBodyWait = function (machine, socket, data) {
+Mail.prototype.stateWriteBodyWait = function (machine, socket) {
   socket.write('请输入邮件内容:\n');
   machine.action = 'body';
 };
@@ -171,12 +171,12 @@ Mail.prototype.getBody = function (machine, socket, data) {
 };
 
 
-Mail.prototype.sendMail = function (machine, socket, data) {
+Mail.prototype.sendMail = function (machine, socket) {
   UserManager.getUserBySocket(socket, (error, user) => {
     if (error) {
       socket.write('发送失败\n');
     }
-    // console.log(userObj.email);
+    // debug(userObj.email);
     MailManager.send(user.email, this.address, this.title, this.body.join('\n\r'), function (error) {
       if (error) {
         socket.write('发送失败\n');
@@ -187,7 +187,7 @@ Mail.prototype.sendMail = function (machine, socket, data) {
   });
 };
 
-Mail.prototype.onNewMail = function (socket, sender, mail) {
+Mail.prototype.onNewMail = function (socket, sender) {
   socket.write('你有来自<' + sender + '>的一封新邮件！\n');
 };
 
@@ -215,7 +215,7 @@ Mail.prototype.stateRead = function (machine, socket, data) {
 
 Mail.prototype.getMailList = function (socket, cb) {
   UserManager.getUserBySocket(socket, (error, userObj) => {
-    console.log(cb.toString());
+    debug(cb.toString());
     if (error) {
       cb(error);
       return null;
@@ -236,11 +236,11 @@ Mail.prototype.getMailList = function (socket, cb) {
   });
 };
 
-Mail.prototype.stateReadHome = function (machine, socket, data) {
+Mail.prototype.stateReadHome = function (machine, socket) {
   socket.write('\n请输入你要查看的邮件ID:\n');
   this.getMailList(socket, (error, mails) => {
     if (error) {
-      console.error(error.stack);
+      debug(error.stack);
       return;
     }
     for (let i = 0; i < mails.length; i++) {
@@ -259,12 +259,12 @@ Mail.prototype.stateReadHome = function (machine, socket, data) {
  * @param {*} data
  */
 Mail.prototype.stateReadWait = function (machine, socket, data) {
-  console.log('state read wait');
+  debug('state read wait');
   let index = machine.getCleanedString(socket, data);
-  console.log('input = ' + index);
+  debug('input = ' + index);
   this.getMailList(socket, (error, mails) => {
     if (error) {
-      console.log(error);
+      debug(error);
       return;
     }
     if (!mails) {
@@ -275,8 +275,8 @@ Mail.prototype.stateReadWait = function (machine, socket, data) {
       if (index < mails.length && index >= 0) {
         let email = mails[index].mail;
         mails[index].read = true;
-        console.log(mails[index]);
-        console.log(email);
+        debug(mails[index]);
+        debug(email);
         let id = index;
         socket.write('\n=========================邮件详情=======================\n');
         socket.write('id: ' + id + '\n');
@@ -292,8 +292,8 @@ Mail.prototype.stateReadWait = function (machine, socket, data) {
         socket.write('\n输入ID无法处理或者超出范围！\n');
       }
     } catch (e) {
-      console.log(e.stack);
-      console.log('on error parse');
+      debug(e.stack);
+      debug('on error parse');
     }
   });
 

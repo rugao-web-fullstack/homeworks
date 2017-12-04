@@ -1,4 +1,4 @@
-var use_info = require('./user_info').user_info;
+
 
 function userpage(socket) {
   socket.on('userpage', function () {
@@ -9,12 +9,10 @@ function userpage(socket) {
       if (data == '1') {
         socket.emit('sendmail');
         socket.removeListener('data',d);
-      } else if (data == '2') {
+      } else{
         socket.emit('receivemail');
         socket.removeListener('data',d);
-      } else if (data == '3') {
-
-      }
+      }       
     });
   });
 }

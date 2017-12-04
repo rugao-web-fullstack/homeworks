@@ -2,7 +2,6 @@ var debug = require('debug')('states/user');
 
 let states = require('../states').states;
 const UserManager = require('../entities/user').User;
-const write = require('../entities/user').write;
 
 function User(socket) {
   socket.on(states.USER_NOT_LOGIN,
@@ -15,7 +14,7 @@ function User(socket) {
     });
 }
 
-User.prototype.notLoginHome = function (machine, socket, data) {
+User.prototype.notLoginHome = function (machine, socket) {
   debug('inside user not login');
   socket.write('欢迎来到XXX邮件系统！请选择:\n\t1.用户注册\n\t2.用户登录\n');
   machine.action = 'wait';
@@ -81,18 +80,18 @@ User.prototype.stateNotLogin = function (machine, socket, data) {
   }
 };
 
-User.prototype.registerWait = function (machine, socket, data) {
+User.prototype.registerWait = function (machine, socket) {
   socket.write('\n请输入注册邮箱和密码，格式： 邮箱 密码\n');
   machine.action = 'register';
 };
 
-User.prototype.loginWait = function (machine, socket, data) {
+User.prototype.loginWait = function (machine, socket) {
   socket.write('\n请输入登录邮箱和密码，格式： 邮箱 密码\n');
   machine.action = 'login';
 };
 
-User.prototype.register = function (machine, socket, data) {
-  let input = machine.getCleanedString(socket, data);
+User.prototype.register = function (machine, socket) {
+  let input = machine.getCleanedString(socket);
   input = input.split(' ');
   if (input.length === 2) {
     UserManager.register(socket, input[0], input[1], (error) => {
@@ -102,7 +101,7 @@ User.prototype.register = function (machine, socket, data) {
         // this.registerWait(machine, socket, data);
       }
       socket.write('注册成功!\n');
-      this.loginWait(machine, socket, data);
+      this.loginWait(machine, socket);
     });
   } else {
     socket.write('输入错误!');
@@ -125,7 +124,7 @@ User.prototype.stateLogin = function (machine, socket, data) {
   }
 };
 
-User.prototype.loginHome = function (machine, socket, data) {
+User.prototype.loginHome = function (machine, socket) {
   socket.write('\n你已经成功登录邮件系统\n\t1.编写邮件\n\t2.查看邮件\n请输入：');
   machine.action = 'wait';
 };

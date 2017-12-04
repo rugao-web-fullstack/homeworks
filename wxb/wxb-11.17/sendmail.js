@@ -7,8 +7,7 @@ function sendmail(socket) {
       //---去除空格
       data = data.toString().replace(/(^\s*)|(\s*$)/g, '');
       var user = data.split(',')[0];
-      var title = data.split(',')[1];
-      var content = data.split(',')[2];
+    
       var index=use_info.returnmailArr().indexOf(user);
       // use_info.mailTitle(user, title);
       // use_info.mailContent(user, content);

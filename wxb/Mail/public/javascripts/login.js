@@ -6,7 +6,7 @@ $(function () {
       url: '/login-confirm',
       dataType: 'json',
       data: {'mail': $('#mail').val(), 'pwd': $('#pwd').val()},
-      error:function (xhr, statusText, error) //当访问发生错误或者跳转指令的时候在这里
+      error:function (xhr) //当访问发生错误或者跳转指令的时候在这里
       //处理
       {
         debug(xhr.responseText);//这里拿到了新的页面的html

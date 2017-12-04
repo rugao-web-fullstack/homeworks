@@ -22,35 +22,35 @@ router.use(bodyParser.urlencoded({extended: true}));
 
 router.use(express.static(path.join(__dirname, '../public')));
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res) {
   res.render('main');
 });
 
 /* 注册 */
-router.get('/register', function (req, res, next) {
+router.get('/register', function (req, res) {
   res.render('register');
 });
 
 /* 登录 */
-router.get('/login', function (req, res, next) {
+router.get('/login', function (req, res) {
   res.render('login');
 });
 
 /* 欢迎页 */
-router.get('/welcome', function (req, res, next) {
+router.get('/welcome', function (req, res) {
   res.render('welcome', {
     name: req.session.user
   });
 });
 
 /* 编写邮件 */
-router.get('/writeMail', function (req, res, next) {
+router.get('/writeMail', function (req, res) {
   res.render('writeMail');
 });
 
 /* POST获取发送邮件的数据并存入数据库 */
-router.post('/writeMail', function (req, res, next) {
-  db.query('INSERT INTO `mail`.`mail` (`sender`, `receiver`, `title`, `content`) VALUES (\'' + req.session.user + '\', \'' + req.body.receiver + '\', \'' + req.body.title + '\', \'' + req.body.content + '\');', function (err, rows) {
+router.post('/writeMail', function (req, res) {
+  db.query('INSERT INTO `mail`.`mail` (`sender`, `receiver`, `title`, `content`) VALUES (\'' + req.session.user + '\', \'' + req.body.receiver + '\', \'' + req.body.title + '\', \'' + req.body.content + '\');', function (err) {
     if (err) {
       debug('Failed' + err);
     } else {
@@ -61,7 +61,7 @@ router.post('/writeMail', function (req, res, next) {
 });
 
 /* 查看邮件 */
-router.get('/checkMail_all', function (req, res, next) {
+router.get('/checkMail_all', function (req, res) {
   db.query('select * from mail where receiver=\'' + req.session.user + '\'', function (err, rows) {
     if (err) {
       debug('Failed' + err);
@@ -88,11 +88,11 @@ router.get('/checkMail_all', function (req, res, next) {
 });
 
 /* 添加进数据库 */
-router.post('/register-add', function (req, res, next) {
+router.post('/register-add', function (req) {
   // debug(req.body.email+req.body.pwd);//---1223157723@qq.com123
   var mail_address = req.body.email;
   var password = req.body.pwd;
-  db.query('INSERT INTO `mail`.`user` (`username`, `password`) VALUES (\'' + mail_address + '\', \'' + password + '\');', function (err, rows) {
+  db.query('INSERT INTO `mail`.`user` (`username`, `password`) VALUES (\'' + mail_address + '\', \'' + password + '\');', function (err) {
     if (err) {
       debug('Failed' + err);
     } else {
@@ -102,7 +102,7 @@ router.post('/register-add', function (req, res, next) {
 });
 
 /* 登录验证 */
-router.post('/login-confirm', function (req, res, next) {
+router.post('/login-confirm', function (req, res) {
   var login_email = req.body.mail;
   var login_password = req.body.pwd;
   db.query('select * from user', function (err, rows) {
