@@ -22,7 +22,7 @@ router.use(bodyParser.urlencoded({extended: true}));
 router.use(express.static(path.join(__dirname, '../public')));
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('main', {name: 'Express'});
+  res.render('main');
 });
 
 /* 注册 */
