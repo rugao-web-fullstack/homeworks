@@ -1,0 +1,85 @@
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title 用户界面
+    // Bootstrap
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    link(rel='stylesheet', href='css/index.css')
+    script(src="js/jquery.min.js")
+    script(src='js/user.js')
+  body
+    nav.navbar.navbar-default
+      .container-fluid
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          a.navbar-brand(href='#') 邮件系统
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(href="/") 退出登录
+      // /.container-fluid
+    .container
+      .row
+        .col-sm-2
+          ul#mailnav.nav.nav-pills.nav-stacked
+            li.active
+              a(href='#mails', data-toggle='tab') 邮件列表
+            li#acon
+              a(href='#sendmail', data-toggle='tab') 发送邮件
+        .col-sm-10
+          | 邮件系统
+          hr
+          #message.alert.alert-danger #{message}
+          div
+            .tab-content
+              #mails.tab-pane.active
+                table#document.table
+                  thead
+                    tr
+                      th 邮件标题
+                      th 发件人
+                      th 时间
+                      th 操作
+                  tbody
+                    - for(var i=0;i<mailArr.length;i++){
+                    tr
+                      td #{mailArr[i].title}
+                      td #{mailArr[i].sender}
+                      td #{mailArr[i].date}
+                      td
+                        button.showmail.btn.btn-default(data-content='#{mailArr[i].content}',data-toggle="modal",data-target="#Modal") 查看
+                    -}
+                    
+              #Modal.modal.fade
+                .modal-dialog
+                  .modal-content
+                    .modal-header
+                      h4.modal-title 邮件内容
+                    #mailContent.modal-body
+                    .modal-footer
+                      button.btn.btn-default(data-dismiss="modal") 关闭        
+              #sendmail.tab-pane
+                form(action='/users', method='POST')
+                  .form-group
+                    label.control-label(for='')
+                      h3 发送邮件
+                  .form-group
+                    label.control-label(for='') 收件人
+                    div
+                      input.form-control(type='text', placeholder='请输入收件人', name='receiver')
+                  .form-group
+                    label.control-label(for='') 标题
+                    div
+                      input.form-control(type='text', placeholder='请输入邮件标题', name='title')
+                  .form-group
+                    label.control-label(for='') 邮件内容
+                    div
+                      textarea.form-control(rows='6', placeholder='邮件内容', name='content')
+                  .form-group
+                    button.btn.btn-primary(type='submit') 发送邮件
+    // jQuery (necessary for Bootstrap's JavaScript plugins)
+    script(src='https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js')
+    // Include all compiled plugins (below), or include individual files as needed
+    script(src='js/bootstrap.min.js')
