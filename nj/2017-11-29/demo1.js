@@ -11,10 +11,10 @@ app.use(info);
 // app.get('/', hello);
 // app.get("/hello", world);
 app.get('/users/:id',function(req,res){
-    res.write('inside users\n');
-    debug(req.params);
-    res.write('\n');
-    res.write(req.mid+'\n');
-    res.end();
+  res.write('inside users\n');
+  debug(req.params);
+  res.write('\n');
+  res.write(req.mid+'\n');
+  res.end();
 });
 app.listen(3000);

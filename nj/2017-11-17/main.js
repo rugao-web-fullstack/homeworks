@@ -7,22 +7,22 @@ let sockets = [];
 let machine = new Machine();
 
 const server = net.createServer(function (socket) {
-    sockets.push(socket);
-    new StateUser(socket);
+  sockets.push(socket);
+  new StateUser(socket);
 
-    debug('log:' + 'socket connected!');
+  debug('log:' + 'socket connected!');
 
-    machine.process(socket, null);
+  machine.process(socket, null);
 
-    socket.on('data', function (data) {
-        debug('log:' + data);
-        debug('log:' + String(data));
-        debug('log:' + 'data received!');
-        machine.process(socket, data);
-    });
+  socket.on('data', function (data) {
+    debug('log:' + data);
+    debug('log:' + String(data));
+    debug('log:' + 'data received!');
+    machine.process(socket, data);
+  });
 });
 
 let port = process.env.NODE_PORT || 8080;
 server.listen(port, () => {
-    debug('log:' + 'Server started at: ' + port);
+  debug('log:' + 'Server started at: ' + port);
 });

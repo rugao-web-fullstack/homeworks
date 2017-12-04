@@ -14,24 +14,24 @@ writeBuff.writeDoubleBE(-888.888, 14);
 var readBuff = [];
 
 ws.end(writeBuff, function() {
-    debug('log:' + '文件已写入!');
+  debug('log:' + '文件已写入!');
 
-    rs.on('readable', function() {
-        var data = rs.read();
-        if(data) {
-            readBuff.push(data);
-        }
-    });
+  rs.on('readable', function() {
+    var data = rs.read();
+    if(data) {
+      readBuff.push(data);
+    }
+  });
 
-    rs.on('end', function() {
-        readBuff = Buffer.concat(readBuff);
-        debug('log:' + '从文件中读取出来的值为：');
-        debug('log:' + 'UInt32 = ' + readBuff.readInt32BE(0));
-        debug('log:' + 'Int32 = ' + readBuff.readInt32BE(4));
-        debug('log:' + 'UInt8 = ' + readBuff.readUInt8(8));
-        debug('log:' + 'Int8 = ' + readBuff.readInt8(9));
-        debug('log:' + 'Float = ' + readBuff.readFloatBE(10));
-        debug('log:' + 'Double = ' + readBuff.readDoubleBE(14));
-    });
+  rs.on('end', function() {
+    readBuff = Buffer.concat(readBuff);
+    debug('log:' + '从文件中读取出来的值为：');
+    debug('log:' + 'UInt32 = ' + readBuff.readInt32BE(0));
+    debug('log:' + 'Int32 = ' + readBuff.readInt32BE(4));
+    debug('log:' + 'UInt8 = ' + readBuff.readUInt8(8));
+    debug('log:' + 'Int8 = ' + readBuff.readInt8(9));
+    debug('log:' + 'Float = ' + readBuff.readFloatBE(10));
+    debug('log:' + 'Double = ' + readBuff.readDoubleBE(14));
+  });
 
 });

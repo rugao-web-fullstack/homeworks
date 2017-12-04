@@ -9,57 +9,57 @@ const storage = new Storage(path.resolve(path.dirname(__filename), FILENAME));
 //let mails = {};
 
 function Mail(sender, receiver, title, body) {
-    this.sender = sender;
-    this.receiver = receiver;
-    this.title = title;
-    this.body = body;
+  this.sender = sender;
+  this.receiver = receiver;
+  this.title = title;
+  this.body = body;
 }
 
 Mail.send = function(sender, receiver, title, body, cb) {
-    debug('inside send');
-    storage.read((error, mails) => {
-        if(error) {
-            debug(error.stack);
-            cb(error);
-            return;
-        }
+  debug('inside send');
+  storage.read((error, mails) => {
+    if(error) {
+      debug(error.stack);
+      cb(error);
+      return;
+    }
 
-        if(!mails[receiver]) {
-            mails[receiver] = [];
-        }
-        let mail = new Mail(sender, receiver, title, body);
+    if(!mails[receiver]) {
+      mails[receiver] = [];
+    }
+    let mail = new Mail(sender, receiver, title, body);
 
-        mails[receiver].push({
-            read: false,
-            mail: mail
-        });
-
-        storage.save(mails, (error) => {
-            if(error) {
-                cb(error);
-                return;
-            }
-            let receiverSocket = UserManager.getSocket(receiver);
-            if(receiverSocket) {
-                receiverSocket.emit(states.MAIL_NEW, sender, mail);
-                cb(false);
-                return;
-            }
-            cb(false);
-            return;
-
-        });
+    mails[receiver].push({
+      read: false,
+      mail: mail
     });
+
+    storage.save(mails, (error) => {
+      if(error) {
+        cb(error);
+        return;
+      }
+      let receiverSocket = UserManager.getSocket(receiver);
+      if(receiverSocket) {
+        receiverSocket.emit(states.MAIL_NEW, sender, mail);
+        cb(false);
+        return;
+      }
+      cb(false);
+      return;
+
+    });
+  });
 };
 
 Mail.get = function(user, cb) {
-    storage.read((error, mails) => {
-        if(error) {
-            cb(error);
-            return;
-        }
-        return cb(false, mails[user]);
-    });
+  storage.read((error, mails) => {
+    if(error) {
+      cb(error);
+      return;
+    }
+    return cb(false, mails[user]);
+  });
 
 };
 
