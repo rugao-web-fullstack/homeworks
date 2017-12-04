@@ -4,7 +4,7 @@
 }
 
 .head {
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     text-align: center;
     width: 98%;
     margin: 0 auto;
@@ -26,7 +26,28 @@ h2 {
     color: lightgrey;
 }
 
-ul li {
-    margin-bottom: 20px;
+/*ul li {*/
+    /*margin-bottom: 20px;*/
+    /*cursor: pointer;*/
+/*}*/
+
+table {
+    width: 50%;
+    margin: 50px auto;
+    border: 1px solid lightgrey;
+}
+
+table th {
+    border: 1px solid lightgrey;
+    padding: 5px;
+}
+
+table td {
     cursor: pointer;
+    padding: 5px;
+    border: 1px solid lightgrey;
+}
+
+table tr:hover {
+    color: #00B7FF;
 }

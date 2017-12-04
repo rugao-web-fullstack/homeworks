@@ -7,16 +7,16 @@ var debug = require('debug')('tcp-server');
 
 // var receivemail = require("./receivemail");
 var server = require('net').createServer(function (socket) {
-    mainpage(socket);
-    register(socket);
-    login(socket);
-    userpage(socket);
-    sendmail(socket);
-    // receivemail(socket);
-    socket.emit('mainpage');
+  mainpage(socket);
+  register(socket);
+  login(socket);
+  userpage(socket);
+  sendmail(socket);
+  // receivemail(socket);
+  socket.emit('mainpage');
 });
 server.on('connection', function () {
-    debug('log: '+'connect');
+  debug('log: '+'connect');
 });
 server.listen(8080);
 

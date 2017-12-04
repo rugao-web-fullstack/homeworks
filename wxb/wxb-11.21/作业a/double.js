@@ -13,5 +13,5 @@ ws.write(buf);
 
 //---buf.readDoubleBE
 rs.on('data', function (data) {
-    debug('log: '+buf.readDoubleBE(data));
+  debug('log: '+buf.readDoubleBE(data));
 });

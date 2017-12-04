@@ -12,5 +12,5 @@ ws.write(buf);
 
 //---buf.readFloatBE
 rs.on('data', function (data) {
-    debug('log: ' + buf.readFloatBE(data));
+  debug('log: ' + buf.readFloatBE(data));
 });

@@ -12,7 +12,7 @@ ws.write(buf);
 
 //---buf.readUInt32BE(offset[, noAssert])
 rs.on('data', function (data) {
-    debug('log: '+buf.readUInt32BE(data));
+  debug('log: '+buf.readUInt32BE(data));
 });
 
 

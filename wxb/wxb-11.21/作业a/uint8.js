@@ -12,6 +12,6 @@ ws.write(buf);
 
 //---buf.readUInt8
 rs.on('data', function (data) {
-    debug('log: ' + buf.readUInt8(data));
+  debug('log: ' + buf.readUInt8(data));
 });
 
