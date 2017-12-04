@@ -1,22 +1,11 @@
-let moves = [];
-function mv(num, a, c) {
-    moves.push([num, a, b]);
-}
+var debug = require('debug')('log');
+module.exports = function hanoi(n,x,y,z) {
+  if(n == 1){
+    debug('log:' + 'Move '+n+' from '+x+' to '+z);
+  } else {
+    hanoi(n-1, x, z, y);
+    debug('log:' + 'Move '+n+' from '+x+' to '+z);
+    hanoi(n-1, y, x, z);
+  }
+};
 
-function hanoi(num, a, b, c) {
-    if (n === 1) {
-        mv(num, a, c);
-        return
-    }
-    hanoi(n - 1, a, b, c);
-    mv(num, a, b);
-    hanoi(n - 1, a, b, c)
-}
-
-function records(num, a, b, c) {
-    moves = [];
-    hanoi(num, a, b, c);
-    return moves;
-}
-
-module.exports = records;
