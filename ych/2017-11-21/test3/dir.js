@@ -1,3 +1,4 @@
+var debug = require('debug')('dir');
 var fs = require('fs');
 var path = require('path');
 
@@ -8,7 +9,7 @@ fileDisplay(filePath);
 function fileDisplay(filePath) {
     fs.readdir(filePath, function (err, files) {
         if (err) {
-            console.warn(err)
+            console.warn(err);
         } else {
             files.forEach(function (filename) {
                 var filedir = path.join(filePath, filename);
@@ -19,13 +20,13 @@ function fileDisplay(filePath) {
                         var isFile = stats.isFile();//是文件  
                         var isDir = stats.isDirectory();//是文件夹  
                         if (isFile) {
-                            console.log(filedir);
+                            debug(filedir);
                         }
                         if (isDir) {
                             fileDisplay(filedir);//递归，如果是文件夹，就继续遍历该文件夹下面的文件  
                         }
                     }
-                })
+                });
             });
         }
     });
