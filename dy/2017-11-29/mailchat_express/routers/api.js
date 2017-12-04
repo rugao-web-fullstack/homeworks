@@ -1,6 +1,7 @@
 var express = require('express');
 var User = require('../models/User');
 var router = express.Router();
+var debug = require('debug')('log');
 
 // 设置统一返回的格式
 var responseData;
@@ -17,7 +18,7 @@ User.connect();
 /**
  * 用户注册：
  */
-router.post('/register', function (req, res, next) {
+router.post('/register', function (req, res) {
     var username = req.body.username;
     var email = req.body.email;
     var password = req.body.password;
@@ -42,7 +43,7 @@ router.post('/register', function (req, res, next) {
     // 判断用户是否已经注册
     User.query('select * from user', function (err, rs) {
         if (err) {
-            console.log(err);
+            debug('log' + err);
         }
         if (rs) {
             // 表示数据库中有该记录
@@ -53,16 +54,16 @@ router.post('/register', function (req, res, next) {
         }
         // 保存数据到数据库中
         var sql = 'INSERT INTO user (username, password) VALUES(\'username\', \'password\');';
-        User.query(sql, function (err, result) {
+        User.query(sql, function (err) {
             if (err) throw err;
-            console.log('1 record inserted');
+            debug('log' + '1 record inserted');
             responseData.code = 0;
             responseData.message = '注册成功，赶快去登录吧！';
             res.json(responseData);
         });
     });
 });
-router.get('/login', function (req, res, next) {
+router.get('/login', function (req, res) {
     res.render('login.html');
 });
 

@@ -1,7 +1,7 @@
 var debug = require('debug')('log');
 $(function () {
     var $goRegister = $('#goRegister');
-    var goLogin = $('#goLogin');
+    var $goLogin = $('#goLogin');
 
     // 注册界面和登录界面的跳转
     $goRegister.click(function () {

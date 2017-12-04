@@ -23,6 +23,6 @@ var con = mysql.createConnection({
 });
 con.connect(function(err) {
     if (err) throw err;
-    debug('log' + connected);
+    debug('log' + 'connected!');
     app.listen(3000);
 });
