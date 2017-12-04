@@ -3,15 +3,15 @@ html
     head
         title Mails
     body
-        p   hello #{name}
+        p   hello: #{name}
         br
 
-        p#check   你有一封来自 #{sender}的邮件
+        p#check   你有一封来自 :#{sender}的邮件
 
         div#mail
-            #{title}
+            p title: #{title}
             br
-            #{content}
+            p content: #{content}
 
         
         
