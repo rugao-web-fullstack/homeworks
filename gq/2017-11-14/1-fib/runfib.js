@@ -1,2 +1,3 @@
-let fib = require("./fib");
-console.log(fib(8));
+var debug = require('debug')('gq');
+let fib = require('./fib');
+debug(fib(8));

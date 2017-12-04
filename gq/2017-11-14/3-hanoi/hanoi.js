@@ -1,18 +1,19 @@
+var debug = require('debug')('gq');
 function mv(n, x, y, z) {
 	z.push([n, x, y]);
 	if(process.env.NODE_DEBUG){
-		console.log("at "+ n +" layer,from "+ x +" to "+ z);
+		debug('at '+ n +' layer,from '+ x +' to '+ z);
 	}
 }
 
 function hanoi(n, x, m, y, z){
 	if(n === 1){
 		mv(n, x, y, z);
-		return
+		return;
 	}
 	hanoi(n - 1, x, y, m, z);
 	mv(n, x, y, z);
-	hanoi(n - 1, m, x, y, z)
+	hanoi(n - 1, m, x, y, z);
 }
 
 function records(n, x, m, y){
