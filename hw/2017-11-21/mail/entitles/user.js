@@ -1,3 +1,4 @@
+var debug = require('debug')('xxx');
 const path = require("path");
 const UserManager = require('./user').User;
 const Storage = require("./storage").Storage;
@@ -18,10 +19,10 @@ User.register = function(socket, username, password, cb) {
         socket: socket,
         username: username
     });
-    console.log(sockets);
+    debug("log:" +sockets);
     storage.read((err, users) => {
         if (err) {
-            console.log(err.stack);
+            debug("log:" +err.stack);
             cb(err);
             return;
         }
@@ -37,7 +38,7 @@ User.register = function(socket, username, password, cb) {
         }
         storage.save(users, (err) => {
             if (err) {
-                console.log(err.stack);
+                debug("log:" +err.stack);
                 cb(err);
                 return;
             }
@@ -48,10 +49,10 @@ User.register = function(socket, username, password, cb) {
 };
 
 User.login = function(socket, username, password, cb) {
-    console.log("user manager login");
+    debug("log:" +"user manager login");
     storage.read((err, users) => {
         if (err) {
-            console.log(err);
+            debug("log:" +err);
             cb(err);
             return;
         }
@@ -65,7 +66,7 @@ User.login = function(socket, username, password, cb) {
 User.isAddress = function(address, cb) {
         storage.read((err, users) => {
             if (err) {
-                console.log(err);
+                debug("log:" +err);
                 cb(err);
                 return;
             }
@@ -94,7 +95,7 @@ User.getSocket = function(address) {
 User.getemailbySocket = function(socket, cb) {
     storage.read((err, users) => {
         if (err) {
-            console.log(err);
+            debug("log:" +err);
             cb(err);
             return;
         }

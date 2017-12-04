@@ -1,3 +1,4 @@
+var debug = require('debug')('xxx');
 const Fib = require('./fibonacci');
 const readline = require('readline');
 var rl = readline.createInterface({
@@ -5,5 +6,5 @@ var rl = readline.createInterface({
 	output: process.stdout
 });
 rl.question('Please enter what you want:', function (n) {
-	console.log(Fib(n));
+	debug("log:" +Fib(n));
 })

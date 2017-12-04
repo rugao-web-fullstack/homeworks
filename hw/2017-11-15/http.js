@@ -1,3 +1,4 @@
+var debug = require('debug')('xxx');
 const http = require('http');
 let html = `
 <DOCTYPE html><html>
@@ -18,5 +19,5 @@ const server = http.createServer((req, res) => {
 });
 let port = process.env.NODE_PORT || 8080;
 server.listen(port, () => {
-	console.log("Server started at: " + port);
+	debug("log:" +"Server started at: " + port);
 });

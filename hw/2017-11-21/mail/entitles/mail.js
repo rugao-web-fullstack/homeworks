@@ -1,3 +1,4 @@
+var debug = require('debug')('xxx');
 let states = require("../states").states;
 const path = require("path");
 const UserManager = require('./user').User;
@@ -15,10 +16,10 @@ function Mail(sender, receiver, title, body) {
 }
 
 Mail.send = function(sender, receiver, title, body, cb) {
-    console.log("inside send")
+    debug("log:" +"inside send")
     storage.read((error, mails) => {
         if (error) {
-            console.log(error.stack);
+            debug("log:" +error.stack);
             cb(error);
             return;
         }

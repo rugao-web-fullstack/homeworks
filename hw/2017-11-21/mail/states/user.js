@@ -1,3 +1,4 @@
+var debug = require('debug')('xxx');
 let states = require("../states").states;
 const UserManager = require('../entitles/user').User;
 
@@ -11,7 +12,7 @@ function User(socket) {
 }
 
 User.prototype.notLoginHome = function(machine, socket, data) {
-    console.log("inside user not login");
+    debug("log:" +"inside user not login");
     socket.write("欢迎来到XXX邮件系统！请选择:\n\t1.用户注册\n\t2.用户登录\n");
     machine.action = 'wait';
 }
@@ -23,7 +24,7 @@ User.prototype.login = function(machine, socket, data) {
         // User Register
         UserManager.login(socket, input[0], input[1], (err) => {
             if (err) {
-                console.log(err);
+                debug("log:" +err);
                 socket.write('\n用户名或者密码不匹配！\n')
                 return;
             }
@@ -39,39 +40,39 @@ User.prototype.login = function(machine, socket, data) {
 
 User.prototype.notLoginWait = function(machine, socket, data) {
     let input = machine.getCleanedString(socket, data);
-    console.log("input = " + input);
+    debug("log:" +"input = " + input);
     switch (input) {
         case '1':
-            console.log("inside not login wait 1");
+            debug("log:" +"inside not login wait 1");
             this.registerWait(machine, socket, data);
             break;
         case '2':
-            console.log("inside not login wait 2");
+            debug("log:" +"inside not login wait 2");
             this.loginWait(machine, socket, data);
             break;
         default:
-            console.log("inside not login wait default");
+            debug("log:" +"inside not login wait default");
             break;
     }
 }
 
 User.prototype.stateNotLogin = function(machine, socket, data) {
-    console.log("inside not login");
+    debug("log:" +"inside not login");
     if (!machine.action) {
-        console.log("inside not login home");
+        debug("log:" +"inside not login home");
         this.notLoginHome(machine, socket, data);
     } else {
-        console.log("inside not login else");
+        debug("log:" +"inside not login else");
         switch (machine.action) {
             case 'register':
                 this.register(machine, socket, data);
                 break;
             case 'login':
-                console.log("inside login");
+                debug("log:" +"inside login");
                 this.login(machine, socket, data);
                 break;
             case 'wait':
-                console.log("inside not login wait");
+                debug("log:" +"inside not login wait");
                 this.notLoginWait(machine, socket, data);
                 break;
         }
@@ -94,9 +95,9 @@ User.prototype.register = function(machine, socket, data) {
     if (input.length === 2) {
         UserManager.register(socket, input[0], input[1], (err) => {
             if (err) {
-                console.log(err);
+                debug("log:" +err);
                 socket.write('\n用户已经存在！\n');
-                console.log("regist err");
+                debug("log:" +"regist err");
                 return;
             }
             socket.write('\n注册成功！\n');
@@ -108,15 +109,15 @@ User.prototype.register = function(machine, socket, data) {
 };
 
 User.prototype.stateLogin = function(machine, socket, data) {
-    console.log("inside login");
+    debug("log:" +"inside login");
     if (!machine.action) {
-        console.log("inside not login home");
+        debug("log:" +"inside not login home");
         this.loginHome(machine, socket, data);
     } else {
-        console.log("inside not login else");
+        debug("log:" +"inside not login else");
         switch (machine.action) {
             case 'wait':
-                console.log("inside not login wait");
+                debug("log:" +"inside not login wait");
                 this.homeWaite(machine, socket, data);
                 break;
         }
@@ -130,24 +131,24 @@ User.prototype.loginHome = function(machine, socket, data) {
 
 User.prototype.homeWaite = function(machine, socket, data) {
     let input = machine.getCleanedString(socket, data);
-    console.log("input = " + input);
+    debug("log:" +"input = " + input);
     switch (input) {
         case '1':
-            console.log("inside mail write");
+            debug("log:" +"inside mail write");
             socket.write("mail write");
             machine.state = states.MAIL_WRITE;
             machine.action = '';
             socket.emit(states.MAIL_WRITE, machine, socket, data);
             break;
         case '2':
-            console.log("inside mail write");
+            debug("log:" +"inside mail write");
             socket.write("mail read");
             machine.state = states.MAIL_READ;
             machine.action = '';
             socket.emit(states.MAIL_READ, machine, socket, data);
             break;
         default:
-            console.log("inside not login wait default");
+            debug("log:" +"inside not login wait default");
             break;
     }
 }

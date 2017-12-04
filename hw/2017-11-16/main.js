@@ -1,3 +1,4 @@
+var debug = require('debug')('xxx');
 const net = require('net');
 const User = require("./user").User;
 const Message = require("./message").Message;
@@ -18,8 +19,8 @@ function Interactive(socket) {
 }
 
 var server = net.createServer(function(socket) {
-	console.log("user login from: " + socket.remoteAddress);
-	console.log("current users = " + sockets.length);
+	debug("log:" +"user login from: " + socket.remoteAddress);
+	debug("log:" +"current users = " + sockets.length);
 	sockets.push(socket);
 	socket.write("Hello to user from " + socket.remoteAddress);
 	socket.write("\n");
@@ -27,9 +28,9 @@ var server = net.createServer(function(socket) {
 	ia.print();
 	socket.on('data', function(data) {
 		let message = new String(data);
-		console.log("message:" + message);
+		debug("log:" +"message:" + message);
 		let inputs = message.split(" ");
-		console.log(inputs);
+		debug("log:" +inputs);
 		if(inputs.length === 3) {
 			user.register(inputs[0], inputs[1], inputs[2]);
 			let userInfo = {
@@ -40,12 +41,12 @@ var server = net.createServer(function(socket) {
 
 	});
 	socket.on('close', function() {
-		console.log("client disconnected");
+		debug("log:" +"client disconnected");
 		for(var i = 0; i < sockets.length; i++) {
 			let s = sockets[i];
 			if(s === socket) {
 				sockets.splice(i, 1);
-				console.log("socket removed");
+				debug("log:" +"socket removed");
 			}
 		}
 	});
@@ -53,5 +54,5 @@ var server = net.createServer(function(socket) {
 
 let port = process.env.NODE_PORT || 8080;
 server.listen(port, () => {
-	console.log("Server started at: " + port);
+	debug("log:" +"Server started at: " + port);
 });

@@ -24,7 +24,7 @@ Machine.prototype.process = function (socket, data) {
 
 Machine.prototype.getCleanedString = function (socket, data) {
 	let input = String(data);
-    	input = input.replace(/(\n|\r)+$/, '');
+    input = input.replace(/(\n|\r)+$/, '');
 	return input;
 }
 exports.Machine = Machine;

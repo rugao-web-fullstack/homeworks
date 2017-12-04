@@ -1,3 +1,4 @@
+var debug = require('debug')('xxx');
 let states = require("../states").states;
 const UserManager = require('../entitles/user').User;
 const MailManager = require('../entitles/mail').Mail;
@@ -29,12 +30,12 @@ function Mail(socket) {
 //@param {*} data 
 
 Mail.prototype.stateWrite = function(machine, socket, data) {
-    console.log("state write");
+    debug("log:" +"state write");
     if (!machine.action) {
-        console.log("state write home");
+        debug("log:" +"state write home");
         this.stateWriteHome(machine, socket, data);
     } else {
-        console.log("inside not login else");
+        debug("log:" +"inside not login else");
         switch (machine.action) {
             case 'address':
                 this.getAddress(machine, socket, data);
@@ -46,7 +47,7 @@ Mail.prototype.stateWrite = function(machine, socket, data) {
                 this.getBody(machine, socket, data);
                 break;
             case 'wait':
-                console.log("inside not login wait");
+                debug("log:" +"inside not login wait");
                 this.stateWriteWait(machine, socket, data);
                 break;
         }
@@ -69,9 +70,9 @@ Mail.prototype.stateWriteHome = function(machine, socket, data) {
 //@param {*} data 
 
 Mail.prototype.stateWriteWait = function(machine, socket, data) {
-        console.log("state write");
+        debug("log:" +"state write");
         let input = machine.getCleanedString(socket, data);
-        console.log("input = " + input);
+        debug("log:" +"input = " + input);
         switch (input) {
             case '1':
                 this.stateWriteAddressWait(machine, socket, data);
@@ -91,7 +92,7 @@ Mail.prototype.stateWriteWait = function(machine, socket, data) {
                 socket.emit(states.USER_LOGIN, machine, socket);
                 break;
             default:
-                console.log("inside not login wait default");
+                debug("log:" +"inside not login wait default");
                 break;
         }
 }
@@ -190,15 +191,15 @@ Mail.prototype.onNewMail = function(socket, sender, mail) {
 //@param {*} socket 
 //@param {*} data 
 Mail.prototype.stateRead = function(machine, socket, data) {
-    console.log("state read");
+    debug("log:" +"state read");
     if (!machine.action) {
-        console.log("state write home");
+        debug("log:" +"state write home");
         this.stateReadHome(machine, socket, data);
     } else {
-        console.log("inside not login else");
+        debug("log:" +"inside not login else");
         switch (machine.action) {
             case 'wait':
-                console.log("inside not login wait");
+                debug("log:" +"inside not login wait");
                 this.stateReadWait(machine, socket, data);
                 break;
         }
@@ -217,15 +218,15 @@ Mail.prototype.getMailList = function(socket, cb) {
                 cb(error)
                 return;
             }
-            console.log("mails");
-            console.log(mails);
+            debug("log:" +"mails");
+            debug("log:" +mails);
 
             if (!mails || mails.length < 1) {
                 socket.write("你邮件列表为空!");
                 cb(false, null);
                 return;
             }
-            console.log("return mails");
+            debug("log:" +"return mails");
             cb(false, mails);
             return;
         });
@@ -254,12 +255,12 @@ Mail.prototype.stateReadHome = function(machine, socket, data) {
 //@param {*} socket 
 //@param {*} data 
 Mail.prototype.stateReadWait = function(machine, socket, data) {
-    console.log("state read wait");
+    debug("log:" +"state read wait");
     let index = machine.getCleanedString(socket, data);
-    console.log("input = " + index);
+    debug("log:" +"input = " + index);
     this.getMailList(socket, (error, mails) => {
         if (error) {
-            console.log(error);
+            debug("log:" +error);
             return;
         }
         if (!mails) {
@@ -270,8 +271,8 @@ Mail.prototype.stateReadWait = function(machine, socket, data) {
             if (index < mails.length && index >= 0) {
                 let email = mails[index].mail;
                 mails[index].read = true;
-                console.log(mails[index]);
-                console.log(email);
+                debug("log:" +mails[index]);
+                debug("log:" +email);
                 let id = index;
                 socket.write("\n=========================邮件详情=======================\n");
                 socket.write("id: " + id + "\n");
@@ -287,8 +288,8 @@ Mail.prototype.stateReadWait = function(machine, socket, data) {
                 socket.write('\n输入ID无法处理或者超出范围！\n');
             }
         } catch (e) {
-            console.log(e.stack);
-            console.log('on error parse');
+            debug("log:" +e.stack);
+            debug("log:" +'on error parse');
         }
     });
 }
