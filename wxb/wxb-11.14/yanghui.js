@@ -1,4 +1,6 @@
 var yanghui = require('./yanghui-module');
+var debug = require('debug')('yanghui');
+
 
 var readline = require('readline');
 //创建readline接口实例
@@ -10,7 +12,7 @@ var rl = readline.createInterface({
 // question方法
 rl.question('请输入n的值\n', function (n) {
   var yang = new yanghui(n);
-  console.log(yang);
+  debug(yang);
   // 不加close，则不会结束
   rl.close();
 });

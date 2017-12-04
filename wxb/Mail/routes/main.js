@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var router = express.Router();
 var db = require('../config/db');
 var session = require('express-session');
+var debug = require('debug')('main');
 
 /* 用户名和密码 */
 var username = [];
@@ -51,9 +52,9 @@ router.get('/writeMail', function (req, res, next) {
 router.post('/writeMail', function (req, res, next) {
   db.query('INSERT INTO `mail`.`mail` (`sender`, `receiver`, `title`, `content`) VALUES (\'' + req.session.user + '\', \'' + req.body.receiver + '\', \'' + req.body.title + '\', \'' + req.body.content + '\');', function (err, rows) {
     if (err) {
-      console.log('Failed' + err);
+      debug('Failed' + err);
     } else {
-      console.log('Success insert mail');
+      debug('Success insert mail');
     }
   });
   res.redirect('/welcome');
@@ -63,7 +64,7 @@ router.post('/writeMail', function (req, res, next) {
 router.get('/checkMail_all', function (req, res, next) {
   db.query('select * from mail where receiver=\'' + req.session.user + '\'', function (err, rows) {
     if (err) {
-      console.log('Failed' + err);
+      debug('Failed' + err);
     } else {
       var mailArr = [];
       var shortMail = [];
@@ -88,14 +89,14 @@ router.get('/checkMail_all', function (req, res, next) {
 
 /* 添加进数据库 */
 router.post('/register-add', function (req, res, next) {
-  // console.log(req.body.email+req.body.pwd);//---1223157723@qq.com123
+  // debug(req.body.email+req.body.pwd);//---1223157723@qq.com123
   var mail_address = req.body.email;
   var password = req.body.pwd;
   db.query('INSERT INTO `mail`.`user` (`username`, `password`) VALUES (\'' + mail_address + '\', \'' + password + '\');', function (err, rows) {
     if (err) {
-      console.log('Failed' + err);
+      debug('Failed' + err);
     } else {
-      console.log('Success insert');
+      debug('Success insert');
     }
   });
 });
@@ -106,7 +107,7 @@ router.post('/login-confirm', function (req, res, next) {
   var login_password = req.body.pwd;
   db.query('select * from user', function (err, rows) {
     if (err) {
-      console.log('err: ' + err);
+      debug('err: ' + err);
     } else {
       /* 保存用户名 */
       /* 保存密码 */
@@ -115,7 +116,7 @@ router.post('/login-confirm', function (req, res, next) {
         password.push(rows[i].password);
       }
       if (username.indexOf(login_email) !== -1 && password.indexOf(login_password) !== -1) {
-        console.log('验证成功');
+        debug('验证成功');
         req.session.user = login_email;
         //     ---ajax局部刷新
         res.redirect();
