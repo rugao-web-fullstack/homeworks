@@ -1,3 +1,0 @@
-export MYSQL_HOST=localhost
-export MYSQL_USERNAME=chen
-export MYSQL_PASSWORD=123
