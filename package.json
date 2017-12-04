@@ -5,7 +5,15 @@
   "main": "index.js",
   "dependencies": {
     "@ljharb/eslint-config": "github:ljharb/eslint-config",
+<<<<<<< HEAD
     "eslint": "^4.12.1"
+=======
+    "body-parser": "^1.18.2",
+    "debug": "^3.1.0",
+    "eslint": "^4.12.1",
+    "express": "^4.16.2",
+    "mysql": "^2.15.0"
+>>>>>>> 44fbbaf580626d7f1fbb374a2a07beda38ac25bc
   },
   "devDependencies": {},
   "scripts": {
