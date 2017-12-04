@@ -1,23 +1,25 @@
-body{
-	background-color:rgb(239, 249, 255);
+body {
+	background-color: rgb(239, 249, 255);
 }
-.container{
-	background:url("/images/bg.jpg") no-repeat;
-	background-size:contain;
+
+.container {
+	background: url("/images/bg.jpg") no-repeat;
+	background-size: contain;
 }
-.formdiv{
+
+.formdiv {
 	margin: 50px 0px;
 	position: relative;
 	z-index: 111;
 	background: #fff;
-    border: 1px solid #CCCCCC;
-    border-radius:10px;
+	border: 1px solid #CCCCCC;
+	border-radius: 10px;
 }
 
-#message{
-	color:red;
+#message {
+	color: red;
 }
 
-.btn-login{
+.btn-login {
 	margin-top: 20px;
 }
