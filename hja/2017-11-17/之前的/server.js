@@ -13,17 +13,17 @@ const SendMail = require('./SendMail');
 const ReadMail = require('./ReadMail');
 const port = process.env.NODE_PORT || 8080;
 var server = net.createServer(function (socket) {
-    Index(socket);
-    Register(socket);
-    Login(socket);
-    MainPage(socket);
-    SendMail(socket);
-    ReadMail(socket);
-    socket.emit('Index');
+  Index(socket);
+  Register(socket);
+  Login(socket);
+  MainPage(socket);
+  SendMail(socket);
+  ReadMail(socket);
+  socket.emit('Index');
 
 
 });
 
 server.listen(port, function () {
-    console.log('启动服务');
+  // console.log('启动服务');
 });
