@@ -1,4 +1,4 @@
-
+var debug = require('debug')('xxx');
 let users = {
 };
 
@@ -23,7 +23,7 @@ User.register = function (socket,
 
 User.login = function (socket,
     username, password) {
-    console.log("user manager login");
+    debug('log:' + 'user manager login');
     if (!users[username]) {
         return false;
     }
@@ -42,7 +42,7 @@ User.isAddress = function (address) {
         }
     }
     return false;
-}
+};
 
 /**
  * 根据地址获取用户socket
@@ -51,11 +51,11 @@ User.isAddress = function (address) {
 User.getSocket = function (address) {
     for (var k in users) {
         if (users[k].user.email === address) {
-            return users[k].socket
+            return users[k].socket;
         }
     }
     return null;
-}
+};
 
 
 /**
@@ -65,10 +65,10 @@ User.getSocket = function (address) {
 User.getUserBySocket = function (socket) {
     for (var k in users) {
         if (users[k].socket === socket) {
-            return users[k].user
+            return users[k].user;
         }
     }
     return null;
-}
+};
 
 exports.User = User;

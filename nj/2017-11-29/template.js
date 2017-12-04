@@ -1,11 +1,12 @@
+var debug = require('debug')('xxx');
 var express = require('express');
 var fs = require('fs');
 var app = express();
 app.use(function (req, res, next) {
     res.render = function (filename, options) {
-        fs.readFile("templates/index.html", function (err, data) {
+        fs.readFile('templates/index.html', function (err, data) {
             if (err) {
-                console.log(err);
+                debug(err);
                 return;
             }
             var content = String(data);
@@ -13,7 +14,7 @@ app.use(function (req, res, next) {
             if (test) {
                 var key = RegExp.$1;
                 if (key && options[key]) {
-                    content = content.replace("{{" + key + "}}", options[key]);
+                    content = content.replace('{{' + key + '}}', options[key]);
                 }
             }
             res.write(content);
@@ -23,6 +24,6 @@ app.use(function (req, res, next) {
     next();
 });
 app.get('/', function (req, res) {
-    res.render('index.html', { name: "Wang" });
+    res.render('index.html', { name: 'Wang' });
 });
 app.listen(3000);

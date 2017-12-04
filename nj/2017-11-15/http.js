@@ -1,8 +1,9 @@
-const http = require("http");
+var debug = require('debug')('xxx');
+const http = require('http');
 let port = process.env.NODE_PORT || 8080;
 
 http.createServer((req, res) => {
-    res.end("Hello world");
+    res.end('Hello world');
 }).listen(port, () => {
-    console.log("Server started at:" + port);
+    debug('Server started at:' + port);
 });
