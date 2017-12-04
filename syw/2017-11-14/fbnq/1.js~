@@ -1,0 +1,14 @@
+function fei(m) {
+  var arr = [];
+
+  if (i === 0 || i === 1) {
+    return 1;
+  } else {
+    return fei(m - 1) + fei(m - 2);
+  }
+  for (var i = 0; i < m; i++) {
+    arr.push(fei(i));
+  }
+  return arr;
+}
+exports.fei = fei;
