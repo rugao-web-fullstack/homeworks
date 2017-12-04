@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			<%= title %>
+		</title>
+		<link rel='stylesheet' href='/stylesheets/style.css' />
+	</head>
+
+	<body>
+		<div class="main">
+			<h1>欢迎使用Dmail系统！</h1>
+			<form action="" method="post">
+				<span>邮件名：</span>
+				<input type="text" name="mailname" id="mailname" value="" /><br />
+				<span>收件人：</span>
+				<input type="text" name="getuser" id="getuser" value="" /><br />
+				<span>发送时间：</span>
+				<span id="time"></span><br />
+				<span>邮件内容：</span><br />
+				<textarea name="mailContent" rows="5" cols=""></textarea><br />
+				<input type="submit" name="send" id="send" value="发送邮件" />
+			</form>
+		</div>
+	</body>
+
+</html>

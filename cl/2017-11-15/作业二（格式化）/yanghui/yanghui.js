@@ -23,3 +23,4 @@ module.exports = function yanghui(n){
 	
   return str;
 };
+

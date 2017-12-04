@@ -1,5 +1,5 @@
-module.exports = function fib(n) {
 
+module.exports = function fib(n) {
   var p = 0;
   if (n == 1 || n == 2) {
     p = 1;
@@ -10,4 +10,3 @@ module.exports = function fib(n) {
   return p;
 
 };
-
