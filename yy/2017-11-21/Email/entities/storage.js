@@ -24,10 +24,9 @@ Storage.prototype.read = function (callback) {
 			let maxLength = 0;
 			for (let i = 0; i < data.length; i++) {
 				maxLength += data[i].length;
-				console.log("chunk" + data[i]);
 			}
 			let str = String(Buffer.concat(data, maxLength));
-          
+
 			if (str.length) {
 				let json = JSON.parse(str);
 				callback(false, json);

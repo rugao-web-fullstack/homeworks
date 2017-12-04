@@ -37,6 +37,7 @@ User.prototype.notLoginHome = function (machine, socket, data) {
 	debug("log:" + "state write");
 	socket.write("欢迎来到XXX邮件系统！请选择:\n\t1.用户注册\n\t2.用户登录\n");
 	machine.action = "wait";
+	debug("log:" + data);
 };
 
 User.prototype.notLoginWait = function (machine, socket, data) {
@@ -58,11 +59,13 @@ User.prototype.notLoginWait = function (machine, socket, data) {
 User.prototype.registerWait = function (machine, socket, data) {
 	socket.write("\n请输入注册邮箱和密码，格式： 邮箱 密码\n");
 	machine.action = "register";
+	debug("log:" + data);
 };
 
 User.prototype.loginWait = function (machine, socket, data) {
 	socket.write("\n请输入登录邮箱和密码，格式： 邮箱 密码\n");
 	machine.action = "login";
+	debug("log:" + data);
 };
 
 
@@ -103,6 +106,7 @@ User.prototype.login = function (machine, socket, data) {
 
 //用户已经登录
 User.prototype.stateLogin = function (machine, socket, data) {
+	debug("log:" + data);
 	if (!machine.action) {
 		this.loginHome(machine, socket, data);
 	} else {
@@ -117,6 +121,7 @@ User.prototype.stateLogin = function (machine, socket, data) {
 User.prototype.loginHome = function (machine, socket, data) {
 	socket.write("\n你已经成功登录邮件系统\n\t1.编写邮件\n\t2.查看邮件\n请输入：");
 	machine.action = "wait";
+	debug("log:" + data);
 };
 User.prototype.homeWaite = function (machine, socket, data) {
 	let input = machine.getCleanedString(socket, data);

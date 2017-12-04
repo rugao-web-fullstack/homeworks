@@ -18,5 +18,6 @@ client.on("end", () => {
 	process.exit();
 });
 client.on("error", (err) => {
+	debug("log:" + err);
 	process.exit();
 });

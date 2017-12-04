@@ -15,16 +15,13 @@ function User(username, password) {
 }
 
 User.register = function (socket, username, password, cb) {
-	console.log("inside send");
 	storage.read((error, users) => {
 		if (error) {
-			console.log(error.stack);
 			cb(error);
 			return;
 		}
 		// 如果user.json文件中还没有users
 		if (!users) {
-			console.log("新创建users");
 			users = {};
 		}
 		// 已经存在该用户
@@ -54,7 +51,6 @@ User.login = function (socket, username, password, cb) {
 	sockets[username] = {
 		s: socket
 	};
-	console.log("user manager login");
 	storage.read((error, users) => {
 		if (error) {
 			cb(error);

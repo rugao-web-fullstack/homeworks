@@ -16,5 +16,5 @@ module.exports = function(x){
 		res.push(tmp);
 	}
 	return res;
-}
+};
 

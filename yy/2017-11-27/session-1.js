@@ -24,10 +24,10 @@ http.createServer(function (req, res) {
 		sid = uuid();
 		// 保存用户信息
 		session[sid] = user;
-		redirectUrl = "http://127.0.0.1:8080/?sid=" + sid;
-		res.writeHead(301,{
-			Location:redirectUrl
-		});
+		//redirectUrl = "http://127.0.0.1:8080/?sid=" + sid;
+		//res.writeHead(301,{
+		//Location:redirectUrl
+		//});
 	}
 	
 	res.write("your name is " + user.username);

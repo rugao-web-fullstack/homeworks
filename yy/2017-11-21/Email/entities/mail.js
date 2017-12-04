@@ -16,13 +16,11 @@ function Mail(sender, receiver, title, body) {
 Mail.send = function (socket, sender, receiver, title, body, cb) {
 	storage.read((error, mails) => {
 		if (error) {
-			console.log(error.stack);
 			cb(error);
 			return;
 		}
 		// 如果还没有任何邮件存在,新创建一个mails
 		if (!mails) {
-			console.log("新创建mails");
 			mails = {};
 		}
 		// 如果mails里面还没有创建 接收的用户，则创建
@@ -42,7 +40,6 @@ Mail.send = function (socket, sender, receiver, title, body, cb) {
 			let receiverSocket;
 			UserManager.getSocket(receiver, (error, rec) => {
 				if (error) {
-					console.error(error.stack);
 					socket.write("该用户不在线！");
 					cb(error);
 					return;

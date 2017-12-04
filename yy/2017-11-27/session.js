@@ -29,7 +29,7 @@ http.createServer(function (req, res) {
 
 	// 生成
 	if (!user) {
-	     user = {
+		user = {
 			id: uuid(),
 			username: "user-" + new Date().getTime(),
 			password: "password"

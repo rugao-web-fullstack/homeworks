@@ -1,14 +1,13 @@
 const net = require("net");
 const User = require("./user").User;
-const Message = require("./message").Message;
+//const Message = require("./message").Message;
 const EventEmitter = require("events");
 const emitter = new EventEmitter();
-var debug = require("debug")("xxx");
 // All sockets connections
-
+var debug = require("debug")("xxx");
 let sockets = [];
 const user = new User(emitter);
-const message = new Message(emitter, sockets);
+//const message = new Message(emitter, sockets);
 
 //每个用户登录弹出的信息
 function Interactive(socket) {

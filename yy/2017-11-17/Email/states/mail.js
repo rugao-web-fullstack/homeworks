@@ -31,7 +31,6 @@ function Mail(socket) {
  * @param {*} data
  */
 Mail.prototype.stateWrite = function (machine, socket, data) {
-	debug("log:" + "state write");
 	if (!machine.action) {
 		debug("log:" + "state write home");
 		this.stateWriteHome(machine, socket, data);
@@ -47,7 +46,6 @@ Mail.prototype.stateWrite = function (machine, socket, data) {
 			this.getBody(machine, socket, data);
 			break;
 		case "wait":
-			console.log("inside not login wait");
 			this.stateWriteWait(machine, socket, data);
 			break;
 		}
@@ -60,7 +58,7 @@ Mail.prototype.stateWrite = function (machine, socket, data) {
  * @param {*} socket
  * @param {*} data
  */
-Mail.prototype.stateWriteHome = function (machine, socket, data) {
+Mail.prototype.stateWriteHome = function (machine, socket) {
 	socket.write("\n请输入你要修改的内容，\n\t1.收件人地址\n\t2.标题\n\t3.正文内容\n\t4.发送邮件\n");
 	machine.action = "wait";
 };
@@ -106,7 +104,7 @@ Mail.prototype.stateWriteWait = function (machine, socket, data) {
  * @param {*} socket
  * @param {*} data
  */
-Mail.prototype.stateWriteAddressWait = function (machine, socket, data) {
+Mail.prototype.stateWriteAddressWait = function (machine, socket) {
 	socket.write("请输入接收用户的地址:\n");
 	machine.action = "address";
 };
@@ -118,7 +116,7 @@ Mail.prototype.stateWriteAddressWait = function (machine, socket, data) {
  * @param {*} socket
  * @param {*} data
  */
-Mail.prototype.stateWriteTitleWait = function (machine, socket, data) {
+Mail.prototype.stateWriteTitleWait = function (machine, socket) {
 	socket.write("请输入标题:\n");
 	machine.action = "title";
 };
@@ -129,7 +127,7 @@ Mail.prototype.stateWriteTitleWait = function (machine, socket, data) {
  * @param {*} socket
  * @param {*} data
  */
-Mail.prototype.stateWriteBodyWait = function (machine, socket, data) {
+Mail.prototype.stateWriteBodyWait = function (machine, socket) {
 	socket.write("请输入邮件内容:\n");
 	machine.action = "body";
 };
@@ -163,11 +161,11 @@ Mail.prototype.getBody = function (machine, socket, data) {
 	} else {
 		this.body.push(input);
 	}
-
+	debug("log:" + data);
 };
 
 
-Mail.prototype.sendMail = function (machine, socket, data) {
+Mail.prototype.sendMail = function (machine, socket) {
 	let user = UserManager.getUserBySocket(socket);
 	if (!MailManager.send(
 		user.email,
@@ -179,7 +177,7 @@ Mail.prototype.sendMail = function (machine, socket, data) {
 	return socket.write("邮件发送成功！\n");
 };
 
-Mail.prototype.onNewMail = function(socket, sender, mail) {
+Mail.prototype.onNewMail = function(socket, sender) {
 	socket.write("你有来自<" + sender + ">的一封新邮件！\n");
 };
 
@@ -196,7 +194,6 @@ Mail.prototype.stateRead = function (machine, socket, data) {
 	} else {
 		switch (machine.action) {
 		case "wait":
-			console.log("inside not login wait");
 			this.stateReadWait(machine, socket, data);
 			break;
 		}
@@ -225,6 +222,7 @@ Mail.prototype.stateReadHome = function (machine, socket, data) {
 		socket.write("id: " + i + ", 标题: " + mails[i].mail.title + "\n");
 	}
 	machine.action = "wait";
+	debug("log:" + data);
 };
 
 
@@ -235,6 +233,7 @@ Mail.prototype.stateReadHome = function (machine, socket, data) {
  * @param {*} data 
  */
 Mail.prototype.stateReadWait = function (machine, socket, data) {
+	debug("log:" + data);
 	let index = machine.getCleanedString(socket, data);
 	if(index === "exit"){
 		machine.state = states.USER_LOGIN;

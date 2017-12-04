@@ -5,6 +5,6 @@ let server = "192.168.177.128";
 let port = 4333;
 var debug = require("debug")("xxx");
 client.send(message, port, server, (err) => {
-	debug("log:" + "client close");
+	debug("log:" + err);
 	client.close();
 });
