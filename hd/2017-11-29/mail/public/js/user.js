@@ -1,15 +1,16 @@
-$(function(){
+$(function () {
     $('#mailnav a').click(function (e) {
         e.preventDefault()
         $(this).tab('show')
     })
 
-    $(".showmail").click(function(){
+    $(".showmail").click(function () {
         $("#mailContent").html($(this).attr("data-content"));
     })
-    if($("#message").text()){
+    if ($("#message").text()) {
         $("#message").show();
-    }else{
-        $("#message").hide();
+        setTimeout(function () {
+            $("#message").fadeOut(1500, "linear");
+        }, 3000);
     }
 })
