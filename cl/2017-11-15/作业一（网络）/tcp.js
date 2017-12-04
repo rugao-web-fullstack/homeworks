@@ -5,6 +5,6 @@ const server = net.createServer((socket) => {
 });
 let port = process.env.NODE_PORT || 8080;
 server.listen(port, () => {
-  debug('log:'+'Server started at:' + port);
-
+  // console.log('Server started at:' + port);
+  debug('log:' + 'Server started at:' + port);
 });

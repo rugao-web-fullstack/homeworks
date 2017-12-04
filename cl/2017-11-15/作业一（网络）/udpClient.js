@@ -6,8 +6,8 @@ let server = 'localhost';
 let port = 4333;
 
 client.send(message, port, server, (err) => {
-  if(err) throw err;
+  if (err) throw err;
   // console.log('client close');
-  debug('log:'+'client close');
+  debug('log:' + 'client close');
   client.close();
 });

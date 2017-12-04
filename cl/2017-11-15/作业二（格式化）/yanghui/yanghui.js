@@ -4,21 +4,22 @@ module.exports = function yanghui(n){
   for(var i = 0; i < n; i++){    
     tArray[i] = new Array();  
     for(var j = 0; j < n; j++){  
+		
       tArray[i][0] = 1;
       tArray[i][i] = 1;   
     }
 		
   }
-  for(i = 2; i < n; i++){    
-    for( j = 1; j < i; j++){  
-		
+  for(i = 2; i < n; i++){     
+    for(j = 1; j < i; j++){  
       tArray[i][j] = tArray[i-1][j-1]+tArray[i-1][j]; 
     }
 		
   }
-
-  for( i = 0; i < n; i++){    
-    str = str+tArray[i]+' '+'\n';
-  }	
+	
+  for(i = 0; i < n; i++){    	 	
+    str = str+tArray[i]+' '+'\n';	
+  }
+	
   return str;
 };
