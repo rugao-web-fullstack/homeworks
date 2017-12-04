@@ -6,16 +6,16 @@ var app = express();
 var upload = multer({ dest: 'upload/' });
 
 nunjucks.configure('templates', {
-	autoescape: true,
-	express: app
+  autoescape: true,
+  express: app
 });
 
 app.post('/', upload.single('avatar'), function (req, res) {
-	res.render('file.html');
+  res.render('file.html');
 });
 
 app.get('/', function (req, res) {
-	res.render('file.html');
+  res.render('file.html');
 });
 
 app.listen(3000);

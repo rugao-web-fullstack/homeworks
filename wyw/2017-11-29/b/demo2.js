@@ -12,10 +12,10 @@ app.use(mid2);
 app.get('/', index);
 app.get('/hello', hello);
 app.get('/users/:id',function (req,res) {
-	res.write('inside users\n');
-	debug('log'+req.params);
-	res.write('\n');
-	res.write(req.mid + '\n');
-	res.end();
+  res.write('inside users\n');
+  debug('log'+req.params);
+  res.write('\n');
+  res.write(req.mid + '\n');
+  res.end();
 });
 app.listen(3000);
