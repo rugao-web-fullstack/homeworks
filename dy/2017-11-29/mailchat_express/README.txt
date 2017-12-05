@@ -1,21 +1,28 @@
-一、模块划分：
-    前台模块
-    API 模块：
+url:
+    /user
+    /user/regster
+    /user/login
+    /user/logout
 
-    app.use('/', require('./routers/main'));
-    app.use('/api', require('./routers/api'));
+    /mail
+    /mail/sendmail
+    /mail/writemail
+    /mail/deletemail
 
-二、前台路由 + 模板
-    main 模块：
-        /       首页
-        /user   用户
-        /mail   邮件
+API 设计：
+    /user
+        GET  /user:id
+            /user/?page=
+        POST /user
+            action=register         注册
+            action=login            登录
+            action=logout           退出
 
-    API 模块：
-        /user
-            action=[register&username=&address=&password=]
-            action=[login&address=&password=]
+    /mail
+        GET /mail:id
+            /mail/?page=
 
-        /mail
-            action=[sendmail&sender=&receiver=&title=&body=]
-            action=[writemail&sender=&receiver=&title=&body=]
+        POST /mail
+        action=sendmail         发送邮件
+        action=writemail        写邮件
+        action=deletemail       删除邮件
