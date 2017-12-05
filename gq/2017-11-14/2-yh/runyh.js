@@ -1,3 +1,3 @@
-var debug = require('debug')('gq');
-let yh = require('./yh');
-debug(yh(8));
+var test = require('./yh.js');
+var arg = process.argv.splice(2)[0];
+test.test(arg);

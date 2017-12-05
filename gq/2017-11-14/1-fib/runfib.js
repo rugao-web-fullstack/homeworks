@@ -1,3 +1,3 @@
-var debug = require('debug')('gq');
-let fib = require('./fib');
-debug(fib(8));
+const fib = require('./fib.js');
+var arg = process.argv.splice(2)[0];
+fib.fib(arg);
