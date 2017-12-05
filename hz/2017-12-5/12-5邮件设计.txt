@@ -46,6 +46,5 @@
  	method:GET
 
 	6.读取单个用户
-	url: /users
+	url: /users/:id?page=1&limit=20&filter
 	method: GET
-	data: id=1
