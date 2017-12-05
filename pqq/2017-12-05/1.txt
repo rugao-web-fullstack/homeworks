@@ -16,24 +16,24 @@
 2. WEB API(json数据交互)  action = req.body.action
 user
 - 用户登录：
-url: /api/user
+url: /users
 action=login
 Method = post
 说明：填写表单数据 后台进行处理
 
 - 用户注册:  
-url: /api/user
+url: /users
 action=register
 Method = post
 说明：填写表单数据 后台进行处理
 
 -用户注销： 
-url: /api/user
+url: /users
 action=logout
 Method = post
 
 mail :    
-url:/api/mail
+url:/mails
 发送邮件：
 action=create
 说明：发送邮件更
