@@ -1,8 +1,16 @@
 1. WEB URL(html页面)----GET
-- 首页：/
-- 用户登录：/user/login
-- 用户注册：/user/register
-- 个人邮箱页面：/user/mailmain  
+- 首页：   
+  url:/  
+  说明：有注册登录的链接，可进行跳转
+- 用户登录：
+  url:/user/login
+  说明：显示登录页面
+- 用户注册：
+  url:/user/register
+  说明：显示注册页面
+- 个人邮箱页面：
+  url:/user/mailmain  
+  说明：有三个tab页面 分别为发送邮件页面；收件箱；发件箱
   
 
 2. WEB API(json数据交互)----POST
