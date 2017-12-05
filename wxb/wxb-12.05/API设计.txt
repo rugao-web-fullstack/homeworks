@@ -1,0 +1,34 @@
+﻿url:
+①主页：/
+  作用：邮件首页，选择登录/注册功能
+
+②登录：/user/login
+  作用：用户登录
+
+③注册：/user/register
+  作用：用户注册
+
+④邮箱：/user/mail
+  作用：基于session辨别用户的邮箱主页，提供写邮件和查邮件功能
+
+⑤写邮件：/user/mail/write
+  作用：编写邮件并发送
+
+⑥查所有邮件：/user/mail/all
+  作用：查看邮件列表
+
+⑦查详细邮件：/user/mail/detail
+  作用：查看详细邮件
+
+API:
+
+①GET
+	GET /user获取用户列表
+	GET /user/:id读取id对应用户信息
+	GET /user/mail获取邮件信息
+	
+②POST
+	action=register 注册
+	action=login 登录
+	action=exit 退出登录
+	action=send 发送邮件
