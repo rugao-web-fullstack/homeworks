@@ -1,0 +1,36 @@
+Web Url
+HTML页面
+1.登录首页
+	url：/index
+	作用：用户登录和跳转到注册页面功能	
+2.用户注册
+	URL：/user/register
+	作用：注册用户功能
+3.主页面
+	URL：/main
+	作用：选择写邮件和查看邮件功能
+4.写邮件页面:
+	URL：/main/writemail
+	作用：写邮件和发送邮件功能
+5.查看邮件页面
+	URL：/main/checkmail
+	作用：显示邮件列表功能
+6.读取邮件内容页面
+	URL：/main/readmail
+	作用：读取邮件信息功能
+
+Web API
+1.用户 users
+	（1）用户登录
+	GET /users 
+	action=login
+	（2）用户注册
+	POST /users 
+	action=register
+2.邮件 mails
+	（1）写邮件
+	POST /mails
+	action=write
+	（2）查看邮件
+	GET /mails 
+	action=check
