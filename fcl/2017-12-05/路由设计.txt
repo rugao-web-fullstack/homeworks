@@ -44,7 +44,7 @@ data action=mail
 作用：发送邮件
 
 4.邮件列表
-url：/mail/list
+url：/mails
 method：get
 作用：邮件列表
 5.用户列表
