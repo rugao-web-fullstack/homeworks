@@ -2,20 +2,39 @@
 HTML页面
 1 主页面
 url： /index
+作用：首页，用于用户选择注册或者登录
 2 注册页面
-url： /register
+url： /user/register
+作用：注册页面，注册完跳转到登录页面
 3 登录页面
-url： /login
+url： /user/login
+作用：登录页面，登录结束之后到用户页面
 4 用户页面
 url：  /login/user
+作用：用户页面，用户卡亚选择读或者写邮件
 5 邮件页面
-burl： /user/mail
+burl： /login/mail
+作用，用来查看邮件
 
 
 2. Web API
 JSON数据
-name = username
-pwd = password
-action = [updata,remove,login,register]
+1.用户注册
+url：/rehister
+method：post
+data action=rehister
+作用：提示这测成功与否
+
+2.用户登录
+url：/login
+method：post
+data action=login
+作用：判断能否登录
+
+2.发送邮件
+url：/mail
+method：post
+data action=mail
+作用：发送邮件
 
 
