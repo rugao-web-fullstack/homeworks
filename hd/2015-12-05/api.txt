@@ -20,23 +20,21 @@ GET  /mails/send
 
 1.用户
 
-GET  /api/users
-Data: action=”login”
+POST  /api/users/
+Data: action=login
 用户登录验证
 
 POST  /api/users/
-Data:action=”register”
+Data:action=register
 用户注册验证
 
-GET  /api/users
-data:action="getinfo"
-获取用户信息
+GET  /api/users?uid=xxx
+获取xxx用户信息
 
 2.邮件
 
-GET  /api/mails/
-Data:action=”getlist”
-获取邮件列表
+GET  /api/mails?uid=xxx
+获取xxx用户邮件列表
 
 
 POST  /api/mails/
