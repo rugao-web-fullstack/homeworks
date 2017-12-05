@@ -1,4 +1,4 @@
-﻿1.Web URL
+﻿1.Web URL（返回html页面）
 	1.首页
 		url:/home
 		作用：提供给用户选择注册或是登录的主页面
@@ -29,10 +29,10 @@
 
 	7.查看邮件
 		url:/email/read
-		作用：列出邮件列表，供用户选择
+		作用：查询数据库中的emial表，列出邮件列表，供用户选择
 
 
-2.Web API
+2.Web API（返回JSON数据）
 	1.注册成功与否的判断
 		url:/users
 		method:post
@@ -50,9 +50,3 @@
 		method:post
 		data:action=write
 		作用：向数据库中的emial表插入邮件，判断该用户输入的数据是否存在数据库中,返回是否插入成功
-	4.查看邮件
-		url:/emails
-		method:post
-		data:action=read
-		作用：查询数据库中的emial表，返回该用户的邮件信息
-		
