@@ -1,0 +1,38 @@
+1.Web URL
+  (1)用户登录
+     url:/user/login
+     作用：用户登录页面
+   (2)用户注册
+     url:/user/register
+     作用：用户注册页面
+   (3)主页面
+     url:/user/home
+     作用：主页面
+   (4)邮件页面
+     url:/user/mail
+     作用：邮件页面
+
+2.Web API
+   (1)用户 /users 
+      GET  /users
+      GET  /users/:id
+      GET  /users?page=1&limit=50    
+
+      url: /users
+      method:post
+      data:action = [login,register,update]
+      //login---获取登录信息
+      //register--获取注册信息
+      //update ---获取更新信息
+
+   (2)邮件 /mails
+      GET  /mails
+      GET  /mails/:id
+      GET  /mails?page=1&limit=50           
+
+      url:/mails
+      method:post
+      data:action = [receive,write,send]
+      //write ---写的邮件 
+      //send ----发送的邮件
+      //receive ---接收的邮件
