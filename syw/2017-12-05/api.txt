@@ -3,7 +3,7 @@
      url:/user/login
      作用：用户登录页面
    (2)用户注册
-     url:/user/regist
+     url:/user/register
      作用：用户注册页面
    (3)主页面
      url:/user/home
@@ -20,9 +20,9 @@
 
       url: /users
       method:post
-      data:action = [login,regist,update]
+      data:action = [login,register,update]
       //login---获取登录信息
-      //registe--获取注册信息
+      //register--获取注册信息
       //update ---获取更新信息
 
    (2)邮件 /mails
