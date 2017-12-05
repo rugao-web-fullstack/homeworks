@@ -21,15 +21,31 @@ Web URL
 
 
 API
-1.用户		users
-读取用户		GET /users
-读取具体用户	GET /users/id
-读取分页用户	GET /users?page=1&limit=50
-用户登录		action=login
-用户注册		action=register
-用户退出		action=quit
+1.用户		user
+读取用户		GET /user
+读取具体用户	GET /user/id
+读取用户第一页前50条	GET /user?page=1&limit=50
+用户登录		
+	url:/user
+	method:POST
+	data:action=login
+	作用：用户登录
+用户注册		
+	url:/user
+	method:POST
+	data:action=register
+	作用：用户注册
+用户退出	
+	url:/user
+	method:POST
+	data:action=loginout
+	作用：用户退出
 
-2.邮件		mails
-写邮件		action=write
+2.邮件		mail
+写邮件	
+	url:/mail
+	method:POST
+	data:action=write
+	作用：写邮件
 邮件列表		GET /mails/list
 读具体邮件	GET /mails/list/id
