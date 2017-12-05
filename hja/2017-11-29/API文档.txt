@@ -1,0 +1,90 @@
+﻿WEB URL
+
+
+HTML页面
+
+
+1.首页：/ 
+  
+  作用:进入未登录状态的首页
+
+
+
+2.用户登录: /users/login:
+  
+  
+  作用:进入用户登录页面
+
+
+
+3.用户注册：/users/register：
+
+
+  作用:进入用户注册页面
+
+
+
+4.用户主页：/users/home:
+
+
+  作用:用户登录成功后进入用户功能主页
+
+
+
+5.邮件编写：/mails/write:
+
+
+  作用：用户进入邮件编写页面
+
+
+
+6.邮件总览：/mails/read：
+
+
+  作用：用户浏览所有收到的邮件列表
+
+
+
+7.邮件详情：/mails/detail：
+
+
+  作用：用户查看点击的邮件的详情内容
+
+
+
+
+
+WEB API
+
+
+数据
+
+1.用户操作：POST /api/users/
+
+  作用：data:
+action等于login时，进行登录操作
+	
+
+        data:action等于register时，进行注册操作
+	
+	data:action等于logout时，进行注销操作
+
+ 	GET：/api/users 获取用户信息
+       	     
+	     /api/users/:name 查询该用户名是否被占用/该收件人是否存在
+
+
+
+2.邮件发送：POST /api/mails/
+
+  作用：
+data:action等于post时，发送邮件
+
+
+	
+3.邮件读取：
+
+  GET /api/mails/:receiver   作用：获取该用户所有的收件
+
+  GET /api/mails/detail/:id  作用：获取该id的邮件详情
+
