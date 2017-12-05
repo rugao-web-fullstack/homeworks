@@ -21,17 +21,25 @@
     url:/users
     method:POST
     data:action=login
-    获取前端登录数据，于后端进行处理，判断用户名及密码是否相符
+    作用：获取前端登录数据，于后端进行处理，判断用户名及密码是否相符
   （2）用户注册
     url:/users
     method:POST
     data:action=register
-    获取前端注册数据，后端进行处理，判断该用户名是否已被占用
-  （3）邮件
+    作用：获取前端注册数据，后端进行处理，判断该用户名是否已被占用
+  （3）用户列表
+    url:/users
+    method:GET
+    作用：查看用户列表
+  （4）发送邮件
     url:/mails
     method:POST
     data:action=send
-    编写邮件信息并发送
+    作用：编写邮件信息并发送
+  （5）邮件列表
+    url:/mails
+    method:GET
+    作用：查看邮件列表
 
     
     
