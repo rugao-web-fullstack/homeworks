@@ -1,0 +1,66 @@
+1、web URL 
+HTML页面
+	1.主页
+		1)未登录主页
+		url: GET /
+		作用：用于显示尚未登录状态的显示页面，提示选择登录、注册
+		1)登录主页
+		url: GET /main
+		作用：用于显示登录状态的显示页面，提示选择发邮件、读邮件、登出
+	2.用户
+		1)登录
+		url: GET /user/:action
+		action = login
+		作用：用于显示用户登录页面
+		2)注册
+		url: GET /user/:action
+		action = register
+		作用：用于显示用户注册页面
+		3)登出
+		url: GET /user/:action
+		action = logout
+		作用：退出登录，显示未登录页面
+	3.邮件
+		1)列表
+		url: GET /mail
+		作用：用于显示邮件列表页面
+		2)发送
+		url: GET /mail/:action
+		action = send
+		作用：用于显示邮件发送页面
+		3)内容	
+		url: GET /mail/:id
+		id = 邮件具体id
+		作用：用于显示邮件内容页面
+2、web API
+JSON数据处理
+	1.用户
+		1)登录
+		url: /users
+		method: POST
+		data: action = login
+		作用：用于接收用户登录信息的表单，并对信息进行处理，然后返回“登录成功/用户名或密码错误”到前台
+		2)注册
+		url: /users
+		method: POST
+		data: action = register
+		作用：用于接收用户注册信息的表单，并对信息进行处理，然后返回“注册成功/改用户已存在”到前台
+		3)列表
+		url: /users
+		method: GET
+		作用：返回用户列表数据到前台
+	2.邮件
+		1)列表
+		url: /mails
+		method: GET
+		作用：返回邮件列表数据到前台
+		2)发送
+		url: /mails
+		method: POST
+		data: action = send
+		作用：用于接收邮件发送表单，并对信息进行处理，然后返回“发送成功/该用户不存在”到前台
+		3)内容	
+		url: /mails/:id
+		method: GET
+		id = 具体邮件地址
+		作用：返回具体邮件（指定id）内容数据到前台

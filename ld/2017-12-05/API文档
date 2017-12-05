@@ -1,0 +1,41 @@
+1.Web URL（返回HTML页面）
+	1.系统进入页
+	url:/
+	作用：此为html页面，用于提示用户注册或登陆
+	2.用户登陆
+	url:/user/login
+	作用：此为html页面，输入信息后台验证登陆成功后返回到系统的主页面
+	3.用户注册
+	url:/user/regist
+	作用：此为html页面，输入注册信息后若符合要求则进入到登陆页面
+	4.邮件系统主页
+	url:/mail/home
+	作用：此为html页面，用于提示用户选择何种功能：写邮件、读邮件、或登出
+	5.邮件系统写邮件
+	url:/mail/write
+	作用：此为html页面，用于用户写邮件页面
+	6.邮件系统邮箱邮件列表
+	url:/mail/list
+	作用：此为html页面，用于显示邮箱列表
+	7.邮件系统邮件详情
+	url:/mail/list/info
+	作用：此为html页面，用于显示邮箱中一条邮件的内容
+
+2.Web API（返回JSON数据）
+	1.用户注册
+	url:/users
+	method:POST
+	data:action=regist
+	作用：接收前台用户注册时填写的表单数据，后台进行处理，然后提示‘用户名已注册或注册失败’
+	2.用户登陆
+	url:/users
+	method:POST
+	data:action=login
+	作用：接收前台用户登陆时填写的表单数据，后台进行处理，然后提示‘用户名或密码不正确’
+	3.发送邮件
+	url:/mails
+	method:POST
+	data:action=send
+	作用：编写邮件完成后发送
+	
+

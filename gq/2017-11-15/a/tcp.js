@@ -1,9 +1,10 @@
-const net = require("net");
+var debug = require('debug')('gq');
+const net = require('net');
 const server = net.createServer((socket) => {
-	socket.write("请输入你想输入的内容\n");
+	socket.write('请输入你想输入的内容\n');
 	socket.on('data', (data) => {
 		let Data = data.toString();
-		console.log(Data);		
+		debug(Data);		
 		let closeSocket = Buffer.from('closeSocket\r\n');
 		let closeServer = Buffer.from('closeServer\r\n');
 		if(Buffer.compare(data, closeSocket) === 0){
@@ -13,8 +14,8 @@ const server = net.createServer((socket) => {
 			socket.end();
 			server.close();
 		}
-	})
+	});
 });
 server.listen(process.env.NODE_POST || 8080, () => {
-	console.log('TCP开启');
+	debug('TCP开启');
 });

@@ -7,13 +7,13 @@ nunjucks.configure('html', {
 	express: app
 });
 app.post('/', function (req, res) {
-	res.render("index.html");
+	res.render('index.html');
 });
 
 app.get('/', function (req, res) {
-	res.render("index.html");
+	res.render('index.html');
 });
 app.get('/register', function (req, res) {
-	res.render("register.html");
+	res.render('register.html');
 });
 app.listen(3000);

@@ -1,0 +1,79 @@
+WEB URL
+1.index页面
+url:/
+作用：进入初始主页面
+
+2.用户登录
+url:/user/login
+作用：进入用户登录页面
+
+3.用户注册
+url:/user/register
+作用:进入用户注册页面
+
+4.用户邮件主页面
+url:/user/home
+作用：进入用户邮件主页面
+
+5.邮件查看页面
+url:/mail/read
+作用：点击直接进入用户邮件邮件查看页面
+
+6.邮件填写页面
+url:/mail/write
+作用：进入用户邮件邮件填写页面
+
+7.邮件详情页
+url:/mail/content
+作用：进入用户邮件邮件详情页面
+
+
+
+WEB API
+
+GET /users
+1. GET /uers  
+读取用户列表
+
+2. GET /users/:id  
+读取id对应用户用户的信息
+
+
+POST /users
+1.用户登陆
+url: /users
+mentod:post
+data:action=login
+作用：完成登录
+
+
+2.用户注册 
+url: /users
+mentod:post
+data:action=register
+作用：完成注册
+
+
+GET /mails
+1. GET /mails 
+读取所有邮件列表
+
+2. GET /mails/:username
+读取username对应用户邮件的信息
+
+
+POST /users
+1.发送邮件 
+url :/mails
+mentod:post
+data:action=send
+作用：完成发送
+
+
+
+
+
+
+
+
+
