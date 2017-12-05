@@ -45,6 +45,6 @@ Method = post
 
 
 - 读取=GET  
-  /api/mail？receiver=当前用户  ----  这个为自己的收件箱  
-  /api/mail? sender=当前用户    ----  这个为自己的发件箱  
-  /api/mail? mailid=xxx          ---- 读取单个邮件
+  /mails？receiver=当前用户  ----  这个为自己的收件箱  
+  /mails? sender=当前用户    ----  这个为自己的发件箱  
+  /mails? mailid=xxx          ---- 读取单个邮件
