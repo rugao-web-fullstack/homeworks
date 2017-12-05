@@ -86,5 +86,5 @@ data:action等于post时，发送邮件
 
   GET /api/mails/:receiver   作用：获取该用户所有的收件
 
-  GET /api/mails/:id  作用：获取该id的邮件详情
+  GET /api/mails/detail/:id  作用：获取该id的邮件详情
 
