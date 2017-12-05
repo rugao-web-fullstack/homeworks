@@ -1,0 +1,25 @@
+.title{
+    margin:50px auto;
+    width:100%;
+    border-bottom:1px dotted #000;
+    text-align: center;
+    padding-bottom:16px;
+}
+div.center{
+    width:1000px;
+    margin:20px auto;
+    border:1px solid #000;
+    text-align: center;
+}
+div.center ul{
+    text-align: center;
+}
+div.center ul li{
+    list-style: none;
+    margin:20px auto;
+}
+div.center ul li a{
+    font-size: 20px;
+    color:#000;
+    text-decoration: none;
+}
