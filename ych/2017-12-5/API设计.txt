@@ -1,16 +1,16 @@
-web URL
-	1.��ҳ          URL��/  	   ���ã���ҳ �û�ѡ���¼����ע��
-	2.�û���¼����  URL��/login        ���ã��û���¼
-	3.�û�ע��ҳ��  URL��/register 	   ���ã��û�ע��
-	4.�ʼ���ҳ      URL��/emailpage    ���ã���¼���ʼ���ҳ
-	5.д�ʼ�        URL��/writeemail   ���ã�д�ʼ����ҷ���
-	6.���ʼ�        URL��/reademail    ���ã���ȡ�ļ��б�����ʾ
+﻿web URL
+	1.主页          URL：/  	   作用：主页 用户选择登录或者注册
+	2.用户登录界面  URL：/login        作用：用户登录
+	3.用户注册页面  URL：/register 	   作用：用户注册
+	4.邮件主页      URL：/emailpage    作用：登录后邮件主页
+	5.写邮件        URL：/writeemail   作用：写邮件并且发送
+	6.读邮件        URL：/reademail    作用：读取文件列表并显示
 web API
-	1.�û�
-		�û���½ action = login
+	1.用户
+		用户登陆 action = login
 		API:/login
-		�û�ע�� action = register
+		用户注册 action = register
 		API:/register
-	2.�ʼ�
-		�����ʼ� action = send
-		API��/writeemail
+	2.邮件
+		发送邮件 action = send
+		API：/writeemail
