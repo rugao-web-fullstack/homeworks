@@ -1,7 +1,7 @@
 web URL HTML页面
 .首页
-                url:/index
-                作用：初始页面，实现登录或注册界面跳转
+        url:/index
+        作用：初始页面，实现登录或注册界面跳转
 .用户登陆
 	url：/user/login
 	作用：实现用户登陆,后台验证成功后进入主页面
@@ -9,8 +9,8 @@ web URL HTML页面
 	url:/user/register
 	作用：实现用户注册，成功后进入登录页面
 .主界面
-                url:/user/main
-                作用：登录成功后跳转主界面，实现跳转读邮件界面和写邮件界面和登出	
+        url:/user/main
+        作用：登录成功后跳转主界面，实现跳转读邮件界面和写邮件界面和登出	
 .读取邮件
 	url:/mail/list
 	作用：显示用户接受的邮件列表,可跳转具体邮件页面读取
@@ -33,5 +33,5 @@ web API(ison)
                 api:/mail/write
 	邮件列表		
                 GET /mails/list
-                读具体邮件
-                GET /mails/list/id	
+        读具体邮件
+        GET /mails/list/id	
