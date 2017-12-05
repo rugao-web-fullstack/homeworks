@@ -1,62 +1,62 @@
-1��web URL 
-HTMLҳ��
-	1.��ҳ
-		1)δ��¼��ҳ
+1、web URL 
+HTML页面
+	1.主页
+		1)未登录主页
 		url: GET /
-		���ã�������ʾ��δ��¼״̬����ʾҳ�棬��ʾѡ���¼��ע��
-		1)��¼��ҳ
+		作用：用于显示尚未登录状态的显示页面，提示选择登录、注册
+		1)登录主页
 		url: GET /main
-		���ã�������ʾ��¼״̬����ʾҳ�棬��ʾѡ���ʼ������ʼ����ǳ�
-	2.�û�
-		1)��¼
+		作用：用于显示登录状态的显示页面，提示选择发邮件、读邮件、登出
+	2.用户
+		1)登录
 		url: GET /user/:action
 		action = login
-		���ã�������ʾ�û���¼ҳ��
-		2)ע��
+		作用：用于显示用户登录页面
+		2)注册
 		url: GET /user/:action
 		action = register
-		���ã�������ʾ�û�ע��ҳ��
-		3)�ǳ�
+		作用：用于显示用户注册页面
+		3)登出
 		url: GET /user/:action
 		action = logout
-		���ã��˳���¼����ʾδ��¼ҳ��
-	3.�ʼ�
-		1)�б�
+		作用：退出登录，显示未登录页面
+	3.邮件
+		1)列表
 		url: GET /mail
-		���ã�������ʾ�ʼ��б�ҳ��
-		2)����
+		作用：用于显示邮件列表页面
+		2)发送
 		url: GET /mail/:action
 		action = send
-		���ã�������ʾ�ʼ�����ҳ��
-		3)����	
+		作用：用于显示邮件发送页面
+		3)内容	
 		url: GET /mail/:id
-		id = �ʼ�����id
-		���ã�������ʾ�ʼ�����ҳ��
-2��web API
-JSON���ݴ���
-	1.�û�
-		1)��¼
+		id = 邮件具体id
+		作用：用于显示邮件内容页面
+2、web API
+JSON数据处理
+	1.用户
+		1)登录
 		url: /users
 		method: POST
 		data: action = login
-		���ã����ڽ����û���¼��Ϣ�ı�����������Ϣ���д�����Ȼ�󷵻ء���¼�ɹ�/�û�����������󡱵�ǰ̨
-		2)ע��
+		作用：用于接收用户登录信息的表单，并对信息进行处理，然后返回“登录成功/用户名或密码错误”到前台
+		2)注册
 		url: /users
 		method: POST
 		data: action = register
-		���ã����ڽ����û�ע����Ϣ�ı�����������Ϣ���д�����Ȼ�󷵻ء�ע��ɹ�/���û��Ѵ��ڡ���ǰ̨
-	2.�ʼ�
-		1)�б�
+		作用：用于接收用户注册信息的表单，并对信息进行处理，然后返回“注册成功/改用户已存在”到前台
+	2.邮件
+		1)列表
 		url: /mails
 		method: GET
-		���ã������ʼ��б����ݵ�ǰ̨
-		2)����
+		作用：返回邮件列表数据到前台
+		2)发送
 		url: /mails
 		method: POST
 		data: action = send
-		���ã����ڽ����ʼ����ͱ�����������Ϣ���д�����Ȼ�󷵻ء����ͳɹ�/���û������ڡ���ǰ̨
-		3)����	
+		作用：用于接收邮件发送表单，并对信息进行处理，然后返回“发送成功/该用户不存在”到前台
+		3)内容	
 		url: /mails
 		method: GET
-		data: id = �����ʼ���ַ
-		���ã����ؾ����ʼ���ָ��id���������ݵ�ǰ̨
+		data: id = 具体邮件地址
+		作用：返回具体邮件（指定id）内容数据到前台
