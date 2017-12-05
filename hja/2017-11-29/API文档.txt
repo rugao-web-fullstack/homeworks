@@ -76,6 +76,9 @@ action等于login时，进行登录操作
 	
 	data:action等于logout时，进行注销操作
 
+ GET：/api/users 获取用户信息
+      /api/users/:id 获取单个用户信息
+
 
 
 
