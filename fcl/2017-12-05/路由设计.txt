@@ -1,0 +1,21 @@
+1. Web URL
+HTML页面
+1 主页面
+url： /index
+2 注册页面
+url： /register
+3 登录页面
+url： /login
+4 用户页面
+url：  /login/user
+5 邮件页面
+burl： /user/mail
+
+
+2. Web API
+JSON数据
+name = username
+pwd = password
+action = [updata,remove,login,register]
+
+
