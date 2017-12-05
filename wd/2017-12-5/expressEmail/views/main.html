@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>main</title>
+</head>
+
+<body>
+    <h1>主页面</h1>
+    <a href="/write">写邮件</a>
+    <a href="/list">读邮件</a>
+    <a id="logout" href="/login">退出</a>
+    <script type="text/javascript" src="javascripts/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        $("#logout").on("click", function () {
+            var NDate = new Date();
+            NDate.setDate(NDate.getDate() + "-1");
+            document.cookie = "name=1" + ";expires=" + NDate.toGMTString();
+            document.cookie = "email=1" + ";expires=" + NDate.toGMTString();
+        })
+    </script>
+</body>
+
+</html>

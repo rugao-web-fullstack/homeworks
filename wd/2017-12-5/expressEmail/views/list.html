@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>List</title>
+</head>
+
+<body>
+    <h1>邮件列表</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>邮件标题</th>
+                <th>发件人</th>
+            </tr>
+        </thead>
+        <tbody id="msg">
+            <tr>
+                <td>标题一</td>
+                <td>王二</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/main">返回</a>
+    <script type="text/javascript" src="javascripts/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="javascripts/template-native.js"></script>
+    <script id='template' type='text/html'>
+        <div id="main">
+            <%for(var i=0;i<emails.length;i++){%>
+                <tr>
+                    <td><%=emails[i].title></td>
+                    <td><%=emails[i].sender></td>
+                </tr>
+                
+            <%}%>
+        </div>
+    </script>
+    <script type="text/javascript">
+        var receiver;
+        var arr = document.cookie.split('; ');
+        for (var i = 0; i < arr.length; i++) {
+            var arr2 = arr[i].split('=');
+            if (arr2[0] == "email") {
+                receiver = arr2[1];
+            }
+        }
+        var data = { "receiver": receiver };
+        $.ajax({
+            url: "/list",
+            type: "post",
+            data: data,
+            success: function (data) {
+                console.log(data);
+                var DataArr = [];
+                if (data !== 0) {
+                    alert("you have email");
+                    DataArr.emails = data;
+                    console.log(DataArr);
+                    var html = template('template', DataArr);
+                    $('#msg').html(html);
+                } else {
+                    alert("you have no email");
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

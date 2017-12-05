@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Register</title>
+</head>
+
+<body>
+    <h1>注册</h1>
+    <form>
+        <label for="email">邮箱：</label>
+        <input type="email" id="email" name="email">
+        <br>
+        <label for="name">用户名：</label>
+        <input type="text" id="name" name="name">
+        <br>
+        <label for="pwd">密码：</label>
+        <input type="password" id="pwd" name="pwd">
+        <br>
+        <input type="button" id="sub" value="注 册">
+    </form>
+    <script type="text/javascript" src="javascripts/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        $("#sub").on("click", function () {
+            var email = $("#email").val();
+            var name = $("#name").val();
+            var pwd = $("#pwd").val();
+            var data = { "email": email, "username": name, "password": pwd };
+            $.ajax({
+                url: "/register",
+                type: "post",
+                data: data,
+                success: function (data, status) {
+                    if (status === "success") {
+                        console.log("success");
+                        location.href = 'login';
+                    }
+                }
+            })
+        })
+    </script>
+</body>
+
+
+</html>
