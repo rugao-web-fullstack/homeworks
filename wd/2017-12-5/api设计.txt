@@ -30,10 +30,9 @@
 		作用: 读取用户列表
 
 	2、读取单个用户
-		url: /users
+		url: /users/:id
 		method: GET
-		data: id=1
-		作用: 读取单个用户
+		作用: 读取id为xxx的用户
 	
 	3、注册
 		url: /users
@@ -53,10 +52,9 @@
 		作用: 读取邮件信息
 	
 	6、查看单个邮件
-		url: /emails
+		url: /emails/:id
 		method: GET
-		data: id=1
-		作用: 读取单个邮件信息
+		作用: 读取id为xxx的邮件
 
 	7、发邮件
 		url: /emails
