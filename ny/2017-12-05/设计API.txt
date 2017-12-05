@@ -16,14 +16,14 @@
 6.邮件列表	/mails/list
 作用：显示用户邮箱的所有接收邮件
 
-7.读邮件		/mails/list/id
+7.读邮件		/mails/list/:id
 作用：读具体的一封邮件
 
 
 API
 1.用户		users
 读取用户		GET /users
-读取具体用户	GET /users/id
+读取具体用户	GET /users/:id
 读取用户第一页前50条	GET /users?page=1&limit=50
 用户登录		
 	url:/users
@@ -47,5 +47,5 @@ API
 	method:POST
 	data:action=write
 	作用：写邮件
-邮件列表		GET /mails/list
-读具体邮件	GET /mails/list/id
+邮件列表		GET /mails
+读具体邮件	GET /mails/:id
