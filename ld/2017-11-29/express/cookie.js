@@ -5,7 +5,7 @@ var app = express();
 app.use(cp());
 
 app.get('/', function(req, res) {
-  res.cookie('name', 'express').send('cookie has been written');
+    res.cookie('name', 'express').send('cookie has been written');
 });
 
 app.listen(8080);

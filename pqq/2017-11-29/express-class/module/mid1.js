@@ -1,5 +1,6 @@
-module.exports = function(req,res,next){
-    console.log('在mid1中');
-    req.mid = req.mid+'-top';
-    next();
-}
+var debug = require('debug')('xxx');
+module.exports = function (req, res, next) {
+  debug('log:' + '在mid1中');
+  req.mid = req.mid + '-top';
+  next();
+};

@@ -1,3 +1,5 @@
-var foo = require("./yang1");
+var foo = require('./yang1');
+var debug = require('debug')('yang2');
 var arg = process.argv.splice(2)[0];
-console.log(foo(arg));
+debug('log: '+foo(arg));
+
