@@ -1,6 +1,6 @@
 一．Web URL （返回HTML页面）
 1. 用户登录       url:/user/login        显示登陆界面
-2. 用户注册       url:/user/registe      显示注册界面
+2. 用户注册       url:/user/regist       显示注册界面
 3. 邮件主界面     url:/mail               显示邮件主界面
 4. 写邮件         url:/mail/write        显示写邮件界面，以及发送
 5. 读邮件         url:/mail/read         显示读邮件界面
