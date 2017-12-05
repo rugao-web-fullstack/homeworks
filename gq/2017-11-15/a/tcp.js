@@ -1,5 +1,5 @@
 var debug = require('debug')('gq');
-const net = require('net');
+var net = require('net');
 const server = net.createServer((socket) => {
   socket.write('请输入你想输入的内容\n');
   socket.on('data', (data) => {

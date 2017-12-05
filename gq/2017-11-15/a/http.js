@@ -1,5 +1,5 @@
 var debug = require('debug')('gq');
-const http = require('http');
+var http = require('http');
 const server = http.createServer((req, res) => {
   res.writeHead(200, {'Content-type': 'text/plain'});
   res.end('访问成功');

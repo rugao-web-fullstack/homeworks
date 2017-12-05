@@ -1,5 +1,5 @@
 var debug = require('debug')('gq');
-const net = require('net');
+var net = require('net');
 const readline = require('readline');
 const rl = readline.createInterface({
   input: process.stdin,

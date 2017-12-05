@@ -1,5 +1,5 @@
 var debug = require('debug')('gq');
-const net = require('net');
+var net = require('net');
 let port = process.env.NODE_PORT || 8080;
 const server = net.createServer((socket) => {
   socket.write('sucess！\n');

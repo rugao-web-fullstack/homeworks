@@ -1,5 +1,5 @@
 var debug = require('debug')('gq');
-const dgram = require('dgram');
+var dgram = require('dgram');
 const server = dgram.createSocket('udp4');
 server.on('messgae', () => {
   debug('server got: ${message} from ${rinfo.address}:${rinfo,port}\n');
