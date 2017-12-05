@@ -44,32 +44,6 @@ LOCK TABLES `mail` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `mailbox`
---
-
-DROP TABLE IF EXISTS `mailbox`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mailbox` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user` int(20) NOT NULL,
-  `address` varchar(64) NOT NULL,
-  `mailSum` int(100) DEFAULT 0,
-  `createdAt` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `mailbox`
---
-
-LOCK TABLES `mailbox` WRITE;
-/*!40000 ALTER TABLE `mailbox` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mailbox` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `mail_mailbox`
 --
 
@@ -94,6 +68,32 @@ LOCK TABLES `mail_mailbox` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `mailbox`
+--
+
+DROP TABLE IF EXISTS `mailbox`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `mailbox` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` int(20) NOT NULL,
+  `address` varchar(64) NOT NULL,
+  `mailSum` int(100) DEFAULT '0',
+  `createdAt` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mailbox`
+--
+
+LOCK TABLES `mailbox` WRITE;
+/*!40000 ALTER TABLE `mailbox` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mailbox` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -103,8 +103,8 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
-  `address` varchar(64) NOT NULL,
   `password` varchar(64) NOT NULL,
+  `address` varchar(64) NOT NULL,
   `createdAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -118,7 +118,6 @@ LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
-
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -129,4 +128,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-01  9:08:02
+-- Dump completed on 2017-12-04 16:18:25
