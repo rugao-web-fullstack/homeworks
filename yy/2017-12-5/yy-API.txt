@@ -29,24 +29,45 @@
 
 	7.查看邮件
 		url:/email/read
-		作用：查询数据库中的emial表，列出邮件列表，供用户选择
+		作用：列出邮件列表，供用户选择
 
 
 2.Web API（返回JSON数据）
+	(1)users
 	1.注册成功与否的判断
-		url:/users
-		method:post
+		url:/api/users
+		method:POST
 		data:action=register
 		作用：根据该用户输入的信息，查询数据库中的user表，判断该用户输入的数据是否与数据库中的信息冲突，返回查询结果
 
 	2.登录成功与否的判断
-		url:/users
-		method:post
+		url:/api/users
+		method:POST
 		data:action=login
 		作用：根据该用户输入的信息，查询数据库中的user表，判断该用户输入的数据是否存在数据库中，返回查询结果
 
-	3.向数据库中插入邮件
-		url:/emails
-		method:post
+	3.查看全部用户
+		url:/api/users
+		method:GET
+		作用：列出全部用户列表
+
+	4.查看单个用户
+		url:/api/users/:id
+		method:GET
+		作用：根据用户id查看某个具体用户
+
+	
+	（2）emails
+	1.向数据库中插入邮件
+		url:/api/emails
+		method:POST
 		data:action=write
 		作用：向数据库中的emial表插入邮件，判断该用户输入的数据是否存在数据库中,返回是否插入成功
+	2.查看邮件
+		url:/api/emails
+		method:GET
+		作用：列出全部邮件列表
+	3.查看单个邮件
+		url:/api/emails/:id
+		method:GET
+		作用：列出全部邮件列表
