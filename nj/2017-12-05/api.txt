@@ -21,15 +21,34 @@ HTML页面
 
 2. Web API
   1、user
-      GET/users  读取用户列表
-      GET/users/id 读取用户id
+      url:/users
+      method:GET
+      读取用户列表
 
-    POST/users
-      action=login     登录
-      action=register  注册
+      url:/users/id
+      method:GET
+      读取用户id
+
+    
+      url:/users
+      method:POST
+      data:action=login     
+      登录
+
+      url:/users
+      method:POST
+      data:action=register  
+      注册
    
   2、mail
-      action=send   写邮件
-      action=update 更变邮件状态
+      url:/mails
+      method:GET
+      查看邮件列表
+
+      url:/mails
+      method:POST
+      data:action=send   
+      写邮件
+      
    
    
