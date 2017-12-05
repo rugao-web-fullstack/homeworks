@@ -6,6 +6,6 @@ nunjucks.configure('templates', {
   express: app
 });
 app.get('/', function (req, res) {
-  res.render('main.html', { username: "Greate",password: "123" });
+  res.render('main.html', { username: 'Greate',password: '123' });
 });
 app.listen(8080);
