@@ -6,8 +6,8 @@ let message = Buffer.from('Udp 孙丑丑大傻子');
 let server = '192.168.21.33';
 let port = 4333;
 client.send(message, port, server, () => {
-	debug('client close');
+  debug('client close');
 
-	client.close();
+  client.close();
 });
 
