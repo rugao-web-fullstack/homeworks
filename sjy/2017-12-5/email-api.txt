@@ -34,7 +34,7 @@ API
 			data:action=login
 			作用：用户登录自己的账号
 		3、读取用户信息
-			url:/users:id
+			url:/users/:id
 			method:GET
 			作用：读取用户信息
 		
