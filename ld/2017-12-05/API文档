@@ -22,14 +22,20 @@
 	作用：此为html页面，用于显示邮箱中一条邮件的内容
 
 2.Web API（返回JSON数据）
-	1.用户注册 action = regist
-	api：/users/regist
+	1.用户注册
+	url:/users
+	method:POST
+	data:action=regist
 	作用：接收前台用户注册时填写的表单数据，后台进行处理，然后提示‘用户名已注册或注册失败’
-	2.用户登陆 action = login
-	api：/users/login
+	2.用户登陆
+	url:/users
+	method:POST
+	data:action=login
 	作用：接收前台用户登陆时填写的表单数据，后台进行处理，然后提示‘用户名或密码不正确’
-	3.发送邮件 action = send
-	api：POST /mails/send
+	3.发送邮件
+	url:/mails
+	method:POST
+	data:action=send
 	作用：编写邮件完成后发送
 	
 
