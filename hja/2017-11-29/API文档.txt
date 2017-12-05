@@ -60,31 +60,29 @@ WEB API
 
 数据
 
-1.用户操作：POST /api/users/：action
+1.用户操作：POST /api/users/
 
-
-  作用：
+  作用：data:
 action等于login时，进行登录操作
 	
 
-        action等于register时，进行注册操作
+        data:action等于register时，进行注册操作
 
 
-	action等于namecheck时，进行用户名是否占用查询操作
+	data:action等于namecheck时，进行用户名是否占用查询操作
 
 
-	action等于receivercheck时，进行收件人是否存在的查询操作
+	data:action等于receivercheck时，进行收件人是否存在的查询操作
 	
-	action等于logout时，进行注销操作
+	data:action等于logout时，进行注销操作
 
 
 
 
-2.邮件发送：POST /api/mails/：action
-
+2.邮件发送：POST /api/mails/
 
   作用：
-action等于post时，发送邮件
+data:action等于post时，发送邮件
 
 
 	
