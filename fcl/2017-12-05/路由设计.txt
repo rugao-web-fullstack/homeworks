@@ -10,7 +10,7 @@ url： /user/register
 url： /user/login
 作用：登录页面，登录结束之后到用户页面
 4 用户页面
-url：  /login/user
+url：  /login/user/:id
 作用：用户页面，用户卡亚选择读或者写邮件
 5 邮件页面
 burl： /login/mail
