@@ -5,13 +5,25 @@
 4. 写邮件         url:/mail/write        显示写邮件界面，以及发送
 5. 读邮件         url:/mail/read         显示读邮件界面
 
-二．Web API （返回JSON数据）
-1. / users 用户
-       GET    /users          读取用户列表
-              /users/:id      读取单个用户信息
-       POST   /users/action = login       登录
-              /users/action = register    注册
-2. /mails 邮件
-      GET    /users/:id/mails  读取邮件列表
-      POST   /mails/action = send      发送邮件
-              
+二．Web API （返回JSON数据）           
+1.读取用户列表
+  url:/users
+  method:GET
+2.读取单个用户信息
+  url:/users/:id
+  method:GET
+3.用户登录
+  url:/users
+  method:POST
+  data:action=login
+4.用户注册
+  url:/users
+  method:POST
+  data:action=register
+5.读取邮件列表
+  url:/users/:id/mails
+  method:GET
+6.发送邮件
+  url:/mails
+  method:POST
+  data:action=send
