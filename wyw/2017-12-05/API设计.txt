@@ -4,7 +4,7 @@ HTML页面
 	url：/index
 	作用：用户登录和跳转到注册页面功能	
 2.用户注册
-	URL：/user/regist
+	URL：/user/register
 	作用：注册用户功能
 3.主页面
 	URL：/main
@@ -26,7 +26,7 @@ Web API
 	action=login
 	（2）用户注册
 	POST /users 
-	action=regist
+	action=register
 2.邮件 mails
 	（1）写邮件
 	POST /mails
