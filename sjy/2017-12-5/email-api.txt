@@ -1,54 +1,54 @@
-WEB URL
-	HTMLҳ�棺
-   	   �û���
-		1���û���ҳ��
-			url��users/main
-			���ã�д�ʼ� ���ʼ� �û��˳���¼�������ܵ����
- 	        2���û���¼
-			url��users/login
-			���ã���ע���û���¼�Լ����˺�
-	  	3���û�ע��
-			url��users/register
-			���ã���û���˺ŵ��û��ڴ�ҳ��ע��
-  	   �ʼ���
-	        1���ʼ��б�ҳ�棺
-			url��emails/list
-			���ã���ʾ���û��յ��������ʼ���������
-		2�����ʼ�ҳ�棺
-			url��emails/read
-			���ã��û����ʼ��ĵ�ҳ��
-		3��д�ʼ�ҳ�棺
-			url��email/write
-			���ã��û���д�ʼ������͵�ҳ��
+﻿WEB URL
+	HTML页面：
+   	   用户：
+		1、用户主页面
+			url：users/main
+			作用：写邮件 读邮件 用户退出登录三个功能的入口
+ 	        2、用户登录
+			url：users/login
+			作用：已注册用户登录自己的账号
+	  	3、用户注册
+			url：users/register
+			作用：还没有账号的用户在此页面注册
+  	   邮件：
+	        1、邮件列表页面：
+			url：emails/list
+			作用：显示该用户收到的所有邮件及发件人
+		2、读邮件页面：
+			url：emails/read
+			作用：用户读邮件的的页面
+		3、写邮件页面：
+			url：email/write
+			作用：用户编写邮件并发送的页面
 
 API
-	  �û� 
-		1��ע��
+	  用户 
+		1、注册
 			url:/users
 			method:POST
 			data:action=register
-			���ã�û���˺ŵ��û�ע���˻�
-		2����¼
+			作用：没有账号的用户注册账户
+		2、登录
 			url:/users
 			method:POST
 			data:action=login
-			���ã��û���¼�Լ����˺�
-		3����ȡ�û���Ϣ
+			作用：用户登录自己的账号
+		3、读取用户信息
 			url:/users
 			method:GET
 			data:action=id
-			���ã���ȡ�û���Ϣ
-		4���û���ҳ��
+			作用：读取用户信息
+		4、用户主页面
 			url:/users
 			data:action=main
-			���ã�д�ʼ� ���ʼ� �û��˳���¼�������ܵ����
+			作用：写邮件 读邮件 用户退出登录三个功能的入口
 
-           �ʼ� 
+           邮件 
  	        
-		д�ʼ���
+		写邮件：
 			url:/emails
 			method:POST
 			data:action=write
-			���ã��û���д�ʼ������͵�ҳ��
+			作用：用户编写邮件并发送的页面
 			
 	
