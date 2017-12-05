@@ -33,17 +33,24 @@ API
 			method:POST
 			data:action=login
 			作用：用户登录自己的账号
-		3、读取用户信息
-			url:/users/:id
-			method:GET
-			作用：读取用户信息
+		3、获取整个用户信息
+			GET /users
+			作用：获取整个用户信息
+		4、获取单独用户
+			GET /users/:id
+			作用：获取单独用户信息
 		
            邮件 
  	        
-		写邮件：
+		1、写邮件：
 			url:/emails
 			method:POST
 			data:action=write
 			作用：用户编写邮件并发送的页面
-			
+		2、获取整个邮件信息
+			GET /emails
+			作用：获取整个邮件信息
+		3、获取单独用户
+			GET /emails/:id
+			作用：获取单独邮件信息	
 	
