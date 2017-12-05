@@ -20,16 +20,16 @@ GET  /mails/send
 
 1.用户
 
-POST  /api/users/
+POST  /api/users
 Data: action=login
 用户登录验证
 
-POST  /api/users/
+POST  /api/users
 Data:action=register
 用户注册验证
 
 
-GET  /api/users/
+GET  /api/users
 获取用户列表
 
 GET  /api/users/:id
@@ -37,13 +37,13 @@ GET  /api/users/:id
 
 2.邮件
 
-GET  /api/mails/
+GET  /api/mails
 获取邮件列表
 
 GET  /api/mails/:id
 获取单个邮件
 
 
-POST  /api/mails/
+POST  /api/mails
 data:action=send
 发送邮件
