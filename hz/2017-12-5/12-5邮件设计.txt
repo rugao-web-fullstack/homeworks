@@ -1,0 +1,51 @@
+﻿1.Web URL
+  HTML页面
+	1.用户注册
+	url：/users/register
+	作用：用户注册界面
+
+	2.用户登录
+	url：/users/login
+	作用：用户登录界面
+
+	3.主页面
+	url：/main
+	作用：用户主界面
+
+	4.写邮件
+	url：/mails/write
+	作用：用户写邮件并发送
+
+	5.读邮件
+	url：/mails/read
+	作用：用户读取某邮件
+
+
+2.Web API
+	1.用户注册
+	url:/users
+	method:POST
+	data:action=register
+	
+	2.用户登录
+	url:/users
+	method:POST
+	data:action=login
+
+	3.写邮件
+	url:/mails
+	method:POST
+	data:action=write
+
+	4.查看邮件列表：
+ 	url:/mails
+ 	method:GET
+
+	5.查看用户列表：
+ 	url:/users
+ 	method:GET
+
+	6.读取单个用户
+	url: /users
+	method: GET
+	data: id=1
