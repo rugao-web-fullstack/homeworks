@@ -1,17 +1,17 @@
-Ò»£®Web URL £¨·µ»ØHTMLÒ³Ãæ£©
-1. ÓÃ»§µÇÂ¼      url:/user/login         ÏÔÊ¾µÇÂ½½çÃæ
-2. ÓÃ»§×¢²á      url:/user/registe      ÏÔÊ¾×¢²á½çÃæ
-3. ÓÊ¼şÖ÷½çÃæ   url:/mail          ÏÔÊ¾ÓÊ¼şÖ÷½çÃæ
-4. Ğ´ÓÊ¼ş         url:/mail/write         ÏÔÊ¾Ğ´ÓÊ¼ş½çÃæ£¬ÒÔ¼°·¢ËÍ
-5. ¶ÁÓÊ¼ş         url:/mail/read         ÏÔÊ¾¶ÁÓÊ¼ş½çÃæ
+ä¸€ï¼Web URL ï¼ˆè¿”å›HTMLé¡µé¢ï¼‰
+1. ç”¨æˆ·ç™»å½•       url:/user/login        æ˜¾ç¤ºç™»é™†ç•Œé¢
+2. ç”¨æˆ·æ³¨å†Œ       url:/user/registe      æ˜¾ç¤ºæ³¨å†Œç•Œé¢
+3. é‚®ä»¶ä¸»ç•Œé¢     url:/mail               æ˜¾ç¤ºé‚®ä»¶ä¸»ç•Œé¢
+4. å†™é‚®ä»¶         url:/mail/write        æ˜¾ç¤ºå†™é‚®ä»¶ç•Œé¢ï¼Œä»¥åŠå‘é€
+5. è¯»é‚®ä»¶         url:/mail/read         æ˜¾ç¤ºè¯»é‚®ä»¶ç•Œé¢
 
-¶ş£®Web API £¨·µ»ØJSONÊı¾İ£©
-1. / users ÓÃ»§
-       GET  /users          ¶ÁÈ¡ÓÃ»§ÁĞ±í
-              /users/:id     ¶ÁÈ¡µ¥¸öÓÃ»§ĞÅÏ¢
-       POST /users/action = login       µÇÂ¼
-                /users/action = register    ×¢²á
-2. /mails ÓÊ¼ş
-      GET    /mails    ¶ÁÈ¡ÓÊ¼şÁĞ±í
-      POST /mails/action = send      ·¢ËÍÓÊ¼ş
+äºŒï¼Web API ï¼ˆè¿”å›JSONæ•°æ®ï¼‰
+1. / users ç”¨æˆ·
+       GET    /users          è¯»å–ç”¨æˆ·åˆ—è¡¨
+              /users/:id      è¯»å–å•ä¸ªç”¨æˆ·ä¿¡æ¯
+       POST   /users/action = login       ç™»å½•
+              /users/action = register    æ³¨å†Œ
+2. /mails é‚®ä»¶
+ Â  Â   GET Â   /users/:id/mails  è¯»å–é‚®ä»¶åˆ—è¡¨
+      POST   /mails/action = send      å‘é€é‚®ä»¶
               
