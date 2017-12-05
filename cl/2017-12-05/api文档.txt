@@ -2,9 +2,8 @@
 1.用户登录页面：/users/login
 2.用户注册页面：/users/register
 3.首页：/
-4.用户查看信息页面：/users/info
-5.邮件编写页面：/mails/write
-6.收件箱页面：/mails/read
+4.邮件编写页面：/mails/write
+5.收件箱页面：/mails/read
 
 
 Web API:
