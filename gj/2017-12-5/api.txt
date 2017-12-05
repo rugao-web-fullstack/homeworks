@@ -12,7 +12,7 @@ url:/user/register
 作用:进入用户注册页面
 
 4.用户邮件主页面
-url:/userhmoe
+url:/user/hmoe
 作用：进入用户邮件主页面
 
 5.邮件查看页面
@@ -68,14 +68,6 @@ url :/mails
 mentod:post
 data:action=send
 作用：完成发送
-
-
-
-
-
-
-
-
 
 
 
