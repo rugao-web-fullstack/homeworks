@@ -1,13 +1,24 @@
-﻿1.Web URL：
-用户登录：/users/login
-用户注册：/users/register
-首页(其他页面跳转)：
-写邮件：/mails/write
-读邮件：/mails/read
-查看邮件列表：/mails/list
+﻿1.用户注册：
+url：/user
+method：POST
+data：action=register
+2.用户登录
+url:/user
+mathod:POST
+data:action=login
+3.编写邮件
+url:/mail
+method:POST
+data:action=write
+4.查看邮件列表：
+url:/mail
+method:GET
+5.退出登录
+url:/user
+mathod:POST
+data:action=logout
+6.查看用户列表：
+url:/user
+method:GET
 
-2.Web API：
-首页（其他页面跳转）：/
-用户登录：/users/login/action="login"
-用户注册：/users/register/action="register"
-写邮件：/mails/write/action="write"
+
