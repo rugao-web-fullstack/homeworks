@@ -11,7 +11,7 @@ url:
 
 API 设计：
     /users
-        GET  /uses/:id              通过用户id, 查看用户列表
+        GET  /users/:id              通过用户id, 查看用户列表
              /users/?page=          分页查看用户信息
         POST /users
             action=register         注册
