@@ -74,6 +74,8 @@ action等于login时，进行登录操作
 
 
 	action等于receivercheck时，进行收件人是否存在的查询操作
+	
+	action等于logout时，进行注销操作
 
 
 
