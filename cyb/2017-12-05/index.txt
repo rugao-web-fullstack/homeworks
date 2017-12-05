@@ -45,14 +45,15 @@
 
 
 2.Web API---JSON数据
-    
-·用户注册---method:POST
-	
+ 
+·读取用户列表---method:GET	
    URL:/users	
-   作用:接收用户注册表
+   作用:读取用户列表	
+·读取单个用户---method:GET	
+   URL:/users	
+   作用:读取单个用户
 	
-   data:action=register
-    
+   data:id=1    
 ·用户登录---method:POST
 	
    URL:/users	
