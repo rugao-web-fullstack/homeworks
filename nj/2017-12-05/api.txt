@@ -25,7 +25,7 @@ HTML页面
       method:GET
       读取用户列表
 
-      url:/users/id
+      url:/users/:id
       method:GET
       读取用户id
 
