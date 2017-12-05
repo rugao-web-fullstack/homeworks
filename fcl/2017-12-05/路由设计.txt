@@ -13,13 +13,13 @@ url： /user/login
 url： /user/:id
 作用：用户页面，用户卡亚选择读或者写邮件
 5 查看用户列表
-url：  /user/:id/userlist
+url：  /user/list
 作用：可以查看用户列表
 5 邮件页面
 url： /mail
 作用，用来查看邮件
 6 邮件列表
-url： /user/maillist
+url： /mail/list
 作用，用来查看邮件列表
 
 
@@ -28,7 +28,7 @@ JSON数据
 1.用户注册
 url：/users
 method：post
-data action=rehister
+data action=register
 作用：提示这测成功与否
 
 2.用户登录
@@ -38,17 +38,17 @@ data action=login
 作用：判断能否登录
 
 3.发送邮件
-url：/mail
+url：/mails
 method：post
 data action=mail
 作用：发送邮件
 
 4.邮件列表
-url：/maillist
+url：/mail/list
 method：get
 作用：邮件列表
 5.用户列表
-url：/userlist
+url：/users
 method：get
 作用：邮件列表
 
