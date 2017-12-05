@@ -1,5 +1,4 @@
 ﻿Web Url
-HTML页面
 1.登录首页
 	url：/
 	作用：用户登录和跳转到注册页面功能	
@@ -22,16 +21,20 @@ HTML页面
 Web API
 1.用户 users
 	（1）读取用户
+	GET /users
+	（2）读取单个用户
 	GET /users/:id
-	（2）用户登录
+	（3）用户登录
 	POST /users 
 	action=login
-	（3）用户注册
+	（4）用户注册
 	POST /users 
 	action=register
 2.邮件 mails
-	（1）查看邮件
+	（1）查看邮件列表
+	GET /mails
+	（2）查看单个邮件
 	GET /mails/:id
-	（2）写邮件
+	（3）写邮件
 	POST /mails
 	action=write
