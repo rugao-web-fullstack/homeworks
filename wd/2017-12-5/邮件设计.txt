@@ -1,0 +1,39 @@
+一、Web URL
+	1、用户登录界面
+		url:user/login
+		作用：用户登录界面
+	2、用户注册界面
+		url:user/register
+		作用：用户注册界面
+	3、用户主界面
+		url:user/main
+		作用：登录后用户主界面，可跳转邮件列表界面，写邮件界面，登出
+	4、邮件列表界面
+		url:email/list
+		作用：显示用户收到的邮件列表，可跳转到具体某页面读邮件
+	5、读邮件界面
+		url:email/read
+		作用：用户读取某邮件
+	6、写邮件界面
+		url:email/write
+		作用：用户写邮件并发送
+
+二、Web API
+	users/:action
+		登录
+		users/register
+		返回注册信息保存数据库
+		
+		注册
+		users/login
+		返回登录信息与数据库内容匹配
+
+	emails/:action
+		发邮件
+		emails/send
+		邮件信息保存数据库
+
+		
+		
+		
+	
