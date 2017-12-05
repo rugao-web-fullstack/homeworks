@@ -1,0 +1,41 @@
+WEB URL
+	HTML页面：
+   	   用户：
+		1、用户主页面
+			url：user/main
+			作用：写邮件 读邮件 用户退出登录三个功能的入口
+ 	        2、用户登录
+			url：user/login
+			作用：已注册用户登录自己的账号
+	  	3、用户注册
+			url：user/register
+			作用：还没有账号的用户在此页面注册
+  	   邮件：
+	        1、邮件列表页面：
+			url：email/list
+			作用：显示该用户收到的所有邮件及发件人
+		2、读邮件页面：
+			url：email/read
+			作用：用户读邮件的的页面
+		3、写邮件页面：
+			url：email/write
+			作用：用户编写邮件并发送的页面
+
+API
+	  用户 
+		1、用户主页面 
+			 user/main
+			{action = main}
+		2、用户登陆 
+			 user/login
+			{action = login}
+		3、用户注册 
+			 user/login
+			{action = register}
+           邮件 
+ 	        
+		写邮件页面：
+			email/write
+			{action = write}
+			
+	
