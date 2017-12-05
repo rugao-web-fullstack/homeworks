@@ -1,34 +1,34 @@
 ﻿1.Web URL
 	1.首页
-		url:/
+		url:/home
 		作用：提供给用户选择注册或是登录的主页面
 
 	2.注册
-		url:/register
+		url:/user/regist
 		作用：接收用户输入的注册信息
 
 	3.注册成功
-		url:/register-success
+		url:/user/regist/success
 		作用：用户注册成功，跳转到注册成功页面
 
 	4.登录
-		url:/login
+		url:/user/login
 		作用：接收用户输入的登录信息
 
 	5.登录成功
-		url:/login-success
+		url:/user/login/success
 		作用：用户登录成功，跳转到登录成功页面，用户可以选择读写邮件的功能
 
 	5.写邮件
-		url:/writeEmail
+		url:/email/write
 		作用：接收用户输入的邮件内容
 
 	6.发送成功
-		url:/sendSuccess
+		url:/email/send
 		作用：跳转到发送成功页面
 
 	7.查看邮件
-		url:/readEmial
+		url:/email/read
 		作用：列出邮件列表，供用户选择
 
 
@@ -36,7 +36,7 @@
 	1.注册成功与否的判断
 		url:/users
 		method:post
-		data:action=register
+		data:action=regist
 		作用：根据该用户输入的信息，查询数据库中的user表，判断该用户输入的数据是否与数据库中的信息冲突，返回查询结果
 
 	2.登录成功与否的判断
