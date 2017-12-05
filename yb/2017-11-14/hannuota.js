@@ -1,12 +1,24 @@
-module.exports = function(num, a, b, c) {
-	function hannuota(n, a, b, c) {
-		if(n == 1) {
-			console.log("把" + n + "从" + a + "移动到" + c);
-		} else {
-			hannuota(n - 1, a, c, b);
-			console.log("把" + n + "从" + a + "移动到" + c)
-			hannuota(n - 1, b, a, c);
-		}
-	}
-	hannuota(num, "A", "B", "C");
-}
+module.exports = function (num) {
+  var arr = [];
+  var a = 'a';
+  var b = 'b';
+  var c = 'c';
+
+  Han(a, b, c, num);
+
+  function Han(a, b, c, n){
+    if(n == 1){
+      Move(a, b);
+    }else{
+      Han(a, c, b, n - 1);
+      Move(a, b);
+      Han(c, b, a, n - 1);
+    }
+  }
+
+  function Move(num1, num2){
+    arr.push('从盘' + num1 + '移动一个到盘' + num2);
+  }
+
+  return arr;
+};

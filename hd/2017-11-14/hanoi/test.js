@@ -1,3 +1,4 @@
-var hanoi = require("./hanoi.js");
+var hanoi = require('./hanoi.js');
+var debug = require('debug');
 var num = parseInt(process.argv[2]);
-console.log(hanoi(num));
+debug(hanoi(num));

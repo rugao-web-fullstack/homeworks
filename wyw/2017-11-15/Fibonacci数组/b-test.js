@@ -1,2 +1,3 @@
+var debug = require('debug')('b-test');
 const test = require('./b');
-console.log(test(10));
+debug('log'+test(10));

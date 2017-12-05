@@ -1,14 +1,15 @@
+var debug = require('debug')('xxx');
 var http = require('http');
 var qs = require('querystring');
 var fs = require('fs');
 var path = require('path');
 //create a server object:
 http.createServer(function (req, res) {
-  if (req.method === "POST") {
+  if (req.method === 'POST') {
     var data = [];
     var length = 0;
     req.on('data', function (chunk) {
-      console.log('data');
+      debug('log' + 'data');
       // 接收数据
       length += chunk.length;
       data.push(chunk);
@@ -19,16 +20,16 @@ http.createServer(function (req, res) {
       // 分析数据
       var formData = qs.parse(String(data));
       req.body = formData;
-      console.log(formData);
+      debug('log' + formData);
       res.write(String(data));
       res.end();
     });
   } else {
-    console.log("inside home");
-    var filename = path.resolve(__dirname, "form.html");
-    console.log(filename)
+    debug('log' + 'inside home');
+    var filename = path.resolve(__dirname, 'form.html');
+    debug('log' + filename);
     var content = fs.readFileSync(filename);
-    console.log(String(content));
+    debug('log' + String(content));
     res.write(String(content)); //write a response to the client
     res.end(); //end the response
   }

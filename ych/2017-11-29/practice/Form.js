@@ -1,14 +1,15 @@
+var debug = require('debug')('Form');
 var http = require('http');
 var qs = require('querystring');
 var fs = require('fs');
 var path = require('path');
 
 http.createServer(function (req, res) {
-  if (req.method === "POST") {
+  if (req.method === 'POST') {
     var data = [];
     var length = 0;
     req.on('data', function (chunk) {
-      console.log('data');
+      debug('data');
       length += chunk.length;
       data.push(chunk);
     });
@@ -16,16 +17,16 @@ http.createServer(function (req, res) {
       data = Buffer.concat(data, length);
       var formData = qs.parse(String(data));
       req.body = formData;
-      console.log(formData);
+      debug(formData);
       res.write(String(data));
       res.end();
     });
   } else {
-    console.log("inside home");
-    var filename = path.resolve(__dirname, "form.html");
-    console.log(filename)
+    debug('inside home');
+    var filename = path.resolve(__dirname, 'form.html');
+    debug(filename);
     var content = fs.readFileSync(filename);
-    console.log(String(content));
+    debug(String(content));
     res.write(String(content));
     res.end();
   }
