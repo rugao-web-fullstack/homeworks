@@ -1,0 +1,37 @@
+1. Web URL
+  1、首页
+  url:/
+  作用：用于跳转用户的注册和登录
+  2、用户登录
+  url: /user/login
+  作用：用户的登录
+  3、用户注册
+  url: /user/register
+  作用：用户的注册
+  4、邮箱页
+  url：/mail
+  作用：进入邮箱的详情页
+  5、读取邮箱内容页
+  url:/mail/read
+  作用：读取邮箱信件
+  6、发送邮箱页
+  url:/mail/send
+  作用：发送邮箱信件
+
+2. Web API
+  1、user
+      GET/users  读取用户列表
+      GET/users/id 读取用户id对应用户信息
+
+    POST/users
+      action=login     登录
+      action=register  注册
+      action=logout 退出
+   
+  2、mail
+      GET/mails  读取所有邮件列表
+    
+      POST
+      action=send   写邮件
+   
+   
