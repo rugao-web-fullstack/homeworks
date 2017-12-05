@@ -30,7 +30,7 @@ API:
 	POST  action=exit 退出登录	
 
 ②/mails
-	GET /users/mail获取邮件信息
+	GET /users/:id/mails获取邮件信息
 	POST  action=send 发送邮件
 
 	
