@@ -1,20 +1,21 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
+var debug = require('debug')('xxx');
 
 function tranverse(dirname) {
-	const dirbase = path.dirname(path.resolve(dirname));
-	const dir = fs.readdirSync(dirname);
-	console.log("directories contains " + dir);
-	for(let i = 0; i < dir.length; i++) {
-		let filename = path.resolve(dirname, dir[i]);
-		let stats = fs.statSync(filename);
-		if(stats.isDirectory()) {
-			console.log("dirname = " + filename);
-			tranverse(filename);
-			continue;
-		}
-		console.log("filename = " + filename);
-	}
+//const dirbase = path.dirname(path.resolve(dirname));
+  const dir = fs.readdirSync(dirname);
+  debug('log:' + 'directories contains ' + dir);
+  for(let i = 0; i < dir.length; i++) {
+    let filename = path.resolve(dirname, dir[i]);
+    let stats = fs.statSync(filename);
+    if(stats.isDirectory()) {
+      debug('log:' + 'dirname = ' + filename);
+      tranverse(filename);
+      continue;
+    }
+    debug('log:' + 'filename = ' + filename);
+  }
 }
-let filename = path.dirname(path.resolve("."));
+let filename = path.dirname(path.resolve('.'));
 tranverse(filename);

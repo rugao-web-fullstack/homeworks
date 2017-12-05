@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/index.css">
+</head>
+<body>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>欢迎来到邮件系统！</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="row">
+                <div class="col-sm-8">xxxxxxxx</div>
+                <div class="col-sm-4">
+                    <div style="display: none" class="r-side r-side-msg">
+                        <h4>用户信息</h4>
+                        <p>您好，<span>xxx</span>！欢迎来到邮件系统！</p>
+                        <p>
+                            <a href="javascript:;">退出</a>
+                        </p>
+                    </div>
+                    <div style="display: none;" class="r-side r-side-register">
+                        <h4>注册</h4>
+                        <form action="">
+                            <div class="r-group">
+                                <label for="username">用户名</label>
+                                <input type="text" name="username" id="username" placeholder="请输入您的用户名">
+                            </div>
+                            <div class="r-group">
+                                <label for="email">邮箱</label>
+                                <input type="email" name="email" id="email" placeholder="请输入您的邮箱">
+                            </div>
+                            <div class="r-group">
+                                <label for="password">密码</label>
+                                <input type="password" id="password" name="password" placeholder="请输入您的密码">
+                            </div>
+                            <div class="r-group">
+                                <label for="repassword">确认密码</label>
+                                <input type="password" id="repassword" name="repassword" placeholder="请重新输入您的密码">
+                            </div>
+                            <div class="r-group">
+                                <input class="btn btn-primary register" type="submit" value="注册">
+                            </div>
+                            <p>
+                                <span>已有账号？<a id="goLogin" href="javascript:;">马上去登录</a></span>
+                            </p>
+                        </form>
+                    </div>
+                    <div class="r-side r-side-login">
+                        <h4>登录</h4>
+                        <form action="">
+                            <div class="r-group">
+                                <label for="email">邮箱</label>
+                                <input type="email" name="email" id="email" placeholder="请输入您的邮箱">
+                            </div>
+                            <div class="r-group">
+                                <label for="password">密码</label>
+                                <input type="password" id="password" name="password" placeholder="请输入您的密码">
+                            </div>
+                            <div class="r-group">
+                                <input class="btn btn-primary login" type="submit" value="登录">
+                            </div>
+                            <p>
+                                <span>还没有注册？<a id="goRegister" href="javascript:;">快速注册</a></span>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/public/js/index.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>

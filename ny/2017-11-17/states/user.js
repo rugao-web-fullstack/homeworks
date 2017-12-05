@@ -1,159 +1,152 @@
+var debug = require('debug')('xxx');
+let states = require('../states').states;
 const UserManager = require('../entities/user').User;
 
 function User(socket) {
-    socket.on("user-not-login", (state, socket, data) => {
-        this.notLogin(state, socket, data)
-});
-    socket.on("user-home", (state, socket, data) => {
-        this.home(state, socket, data)
-});
+  socket.on(states.USER_NOT_LOGIN,
+    (machine, socket, data) => {
+      this.stateNotLogin(machine, socket, data);
+    });
+  socket.on(states.USER_LOGIN,
+    (machine, socket, data) => {
+      this.stateLogin(machine, socket, data);
+    });
 }
 
-User.prototype.homeWait = function (state, socket, data) {
-    let input = state.getCleanedString(socket, data);
-    console.log('input')
-    if (input === '1') {
-        state.state = 'email-write';
-        state.action = '';
-        console.log("inside 1");
-        socket.emit("mail-write", state, socket, data);
-    } else if (input === '2') {
-        state.state = 'email-read';
-        state.action = '';
-        console.log("inside 2");
-        socket.emit("mail-read", state, socket, data);
+User.prototype.notLoginHome = function (machine, socket) {
+  debug('log:' +'inside user not login');
+  socket.write('欢迎来到XXX邮件系统！请选择:\n\t1.用户注册\n\t2.用户登录\n');
+  machine.action = 'wait';
+};
+
+User.prototype.login = function (machine, socket, data) {
+  let input = machine.getCleanedString(socket, data);
+  input = input.split(' ');
+  if (input.length === 2) {
+    // User Register
+    if (UserManager.login(socket, input[0], input[1])) {
+      socket.write('\n登录成功！\n');
+      machine.state = states.USER_LOGIN;
+      machine.action = '';
+      machine.process(socket, data);
+      // socket.emit(states.USER_LOGIN, state, socket, null);
     } else {
-        socket.write('\n输入错误!\n');
-        this.homeDefault(state, socket, data);
+      socket.write('\n用户名或者密码不匹配！\n');
     }
+  } else {
+    socket.write('输入错误!');
+  }
 };
 
-User.prototype.homeDefault = function (state, socket, data) {
-    socket.write("\n你已经成功登录邮件系统\n\t1.编写邮件\n\t2.查看邮件\n请输入：")
-    state.action = "wait";
+User.prototype.notLoginWait = function (machine, socket, data) {
+  let input = machine.getCleanedString(socket, data);
+  debug('log:' +'input = ' + input);
+  switch (input) {
+  case '1':
+    debug('log:' +'inside not login wait 1');
+    this.registerWait(machine, socket, data);
+    break;
+  case '2':
+    debug('log:' +'inside not login wait 2');
+    this.loginWait(machine, socket, data);
+    break;
+  default:
+    debug('log:' +'inside not login wait default');
+    break;
+  }
 };
 
-User.prototype.home = function (state, socket, data) {
-    console.log("inside home");
-    console.log("this.action === " + state.action);
-    if (!state.action) {
-        this.homeDefault(state, socket, data);
+User.prototype.stateNotLogin = function (machine, socket, data) {
+  debug('log:' +'inside not login');
+  if (!machine.action) {
+    debug('log:' +'inside not login home');
+    this.notLoginHome(machine, socket, data);
+  } else {
+    debug('log:' +'inside not login else');
+    switch (machine.action) {
+    case 'register':
+      this.register(machine, socket, data);
+      break;
+    case 'login':
+      debug('log:' +'inside login');
+      this.login(machine, socket, data);
+      break;
+    case 'wait':
+      debug('log:' +'inside not login wait');
+      this.notLoginWait(machine, socket, data);
+      break;
+    }
+  }
+};
+
+User.prototype.registerWait = function (machine, socket) {
+  socket.write('\n请输入注册邮箱和密码，格式： 邮箱 密码\n');
+  machine.action = 'register';
+};
+
+User.prototype.loginWait = function (machine, socket) {
+  socket.write('\n请输入登录邮箱和密码，格式： 邮箱 密码\n');
+  machine.action = 'login';
+};
+
+User.prototype.register = function (machine, socket, data) {
+  let input = machine.getCleanedString(socket, data);
+  input = input.split(' ');
+  if (input.length === 2) {
+    // User Register
+    if (UserManager.register(socket, input[0], input[1])) {
+      socket.write('\n注册成功！\n');
+      this.loginWait(machine, socket, data);
     } else {
-        console.log("inside not login");
-        let cmd = state.getCleanedString(socket, data);
-        console.log("cmd = " + cmd);
-        if (cmd === 'exit') {
-            if (state.action === 'wait') {
-                state.state = 'user-not-login';
-                state.action = "";
-                socket.emit("user-not-login", state, socket, data);
-                return;
-            }
-            state.action = '';
-            this.homeDefault(state, socket, data);
-            return;
-        }
-        switch (state.action) {
-            case 'wait':
-                this.homeWait(state, socket, data);
-                break;
-            case 'email-write':
-                console.log('inside mail-write');
-                socket.emit("email-write", state, socket, data);
-                break;
-            case 'email-read':
-                console.log('inside mail-read');
-                socket.emit("email-read", state, socket, data);
-                break;
-        }
+      socket.write('\n用户已经存在！\n');
     }
+  } else {
+    socket.write('输入错误!');
+  }
 };
 
-User.prototype.login = function (state, socket, data) {
-    console.log("inside login");
-    let input = state.getCleanedString(socket, data);
-    input = input.split(" ");
-    console.log("input =" + input);
-    if (input.length === 2) {
-        if (UserManager.login(socket, input[0], input[1])) {
-            socket.write('\n登录成功！\n');
-            state.state = 'user-home';
-            state.action = '';
-            state.process(socket);
-        } else {
-            socket.write("登录失败！用户名与密码不匹配！\n");
-        }
-    } else {
-        socket.write("输入有误，请重新输入！格式： 邮箱 密码\n");
+User.prototype.stateLogin = function (machine, socket, data) {
+  debug('log:' +'inside login');
+  if (!machine.action) {
+    debug('log:' +'inside not login home');
+    this.loginHome(machine, socket, data);
+  } else {
+    debug('log:' +'inside not login else');
+    switch (machine.action) {
+    case 'wait':
+      debug('log:' +'inside not login wait');
+      this.homeWaite(machine, socket, data);
+      break;
     }
+  }
 };
 
-User.prototype.idle = function (state, socket, data) {
-    socket.write("\n欢迎使用邮件服务系统\n\t1.注册\n\t2.登陆\n请输入：")
-    state.action = "wait";
+User.prototype.loginHome = function (machine, socket) {
+  socket.write('\n你已经成功登录邮件系统\n\t1.编写邮件\n\t2.查看邮件\n请输入：');
+  machine.action = 'wait';
 };
-
-User.prototype.wait = function (state, socket, data) {
-    let input = state.getCleanedString(socket, data);
-    switch (input) {
-        case '1':
-            socket.write('\n请输入你要注册的邮箱和密码，格式： 邮箱 密码\n');
-            state.action = 'register';
-            break;
-        case '2':
-            socket.write('\n请输入您的邮箱和密码，格式： 邮箱 密码\n');
-            state.action = 'login';
-            break;
-        default:
-            socket.write('\n输入错误，请重新输入!\n');
-    }
+User.prototype.homeWaite = function (machine, socket, data) {
+  let input = machine.getCleanedString(socket, data);
+  debug('log:' +'input = ' + input);
+  switch (input) {
+  case '1':
+    debug('log:' +'inside mail write');
+    socket.write('mail write');
+    machine.state = states.MAIL_WRITE;
+    machine.action = '';
+    socket.emit(states.MAIL_WRITE, machine, socket, data);
+    break;
+  case '2':
+    debug('log:' +'inside mail write');
+    socket.write('mail read');
+    machine.state = states.MAIL_READ;
+    machine.action = '';
+    socket.emit(states.MAIL_READ, machine, socket, data);            
+    break;
+  default:
+    debug('log:' +'inside not login wait default');
+    break;
+  }
 };
-
-User.prototype.notLogin = function (state, socket, data) {
-    console.log("this.action === " + state.action);
-    console.log(state.state);
-    if (!state.action) {
-        this.idle(state, socket, data);
-    } else {
-        console.log("inside not login");
-        let cmd = state.getCleanedString(socket, data);
-        console.log("cmd = " + cmd);
-        if (cmd === 'exit') {
-            state.action = '';
-            this.idle(state, socket, data);
-            return;
-        }
-
-        switch (state.action) {
-            case 'wait':
-                this.wait(state, socket, data)
-                break;
-            case 'register':
-                this.register(state, socket, data);
-                break;
-            case 'login':
-                this.login(state, socket, data);
-                break;
-
-        }
-    }
-};
-
-User.prototype.register = function (state, socket, data) {
-    console.log("inside register");
-    let input = state.getCleanedString(socket, data);
-    input = input.split(" ");
-    if (input.length === 2) {
-        if (UserManager.register(socket, input[0], input[1])) {
-            socket.write('\n注册成功！\n');
-            socket.write('\n请输入您的邮箱和密码，格式： 邮箱 密码\n');
-            state.action = 'login';
-        } else {
-            socket.write("用户已经存在！\n");
-        }
-    } else {
-        socket.write("输入有误，请重新输入！格式： 邮箱 密码\n");
-    }
-}
 
 exports.User = User;
