@@ -1,68 +1,68 @@
-һ��Web URL
-	1���û���¼����
+﻿一、Web URL
+	1、用户登录界面
 		url:user/login
-		���ã��û���¼����
+		作用：用户登录界面
 
-	2���û�ע�����
+	2、用户注册界面
 		url:user/register
-		���ã��û�ע�����
+		作用：用户注册界面
 
-	3���û�������
+	3、用户主界面
 		url:user/main
-		���ã���¼���û������棬����ת�ʼ��б����棬д�ʼ����棬�ǳ�
+		作用：登录后用户主界面，可跳转邮件列表界面，写邮件界面，登出
 
-	4���ʼ��б�����
+	4、邮件列表界面
 		url:email/list
-		���ã���ʾ�û��յ����ʼ��б�������ת������ĳҳ����ʼ�
+		作用：显示用户收到的邮件列表，可跳转到具体某页面读邮件
 
-	5�����ʼ�����
+	5、读邮件界面
 		url:email/read
-		���ã��û���ȡĳ�ʼ�
+		作用：用户读取某邮件
 
-	6��д�ʼ�����
+	6、写邮件界面
 		url:email/write
-		���ã��û�д�ʼ�������
+		作用：用户写邮件并发送
 
-����Web API
-	1����ȡ�û��б�
+二、Web API
+	1、读取用户列表
 		url: /users
 		method: GET
-		����: ��ȡ�û��б�
+		作用: 读取用户列表
 
-	2����ȡ�����û�
+	2、读取单个用户
 		url: /users
 		method: GET
 		data: id=1
-		����: ��ȡ�����û�
+		作用: 读取单个用户
 	
-	3��ע��
+	3、注册
 		url: /users
 		method: POST
 		data: action=register
-		����: ����ע����Ϣ�����ݿ�
+		作用: 返回注册信息到数据库
 
-	4����¼
+	4、登录
 		url: /users
 		method: POST
 		data: action=login
-		����: ���ص�¼��Ϣ�������ݿ���Ϣ�Ƚ�
+		作用: 返回登录信息并与数据库信息比较
 
-	5���鿴�ʼ��б�
+	5、查看邮件列表
 		url: /emails
 		method: GET
-		����: ��ȡ�ʼ���Ϣ
+		作用: 读取邮件信息
 	
-	6���鿴�����ʼ�
+	6、查看单个邮件
 		url: /emails
 		method: GET
 		data: id=1
-		����: ��ȡ�����ʼ���Ϣ
+		作用: 读取单个邮件信息
 
-	7�����ʼ�
+	7、发邮件
 		url: /emails
 		method: POST
 		data: action=send
-		����: �����ʼ���Ϣ�����ݿ�
+		作用: 返回邮件信息到数据库
 
 
 		
