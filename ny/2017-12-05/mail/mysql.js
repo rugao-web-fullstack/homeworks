@@ -2,9 +2,10 @@ var mysql = require('mysql');
 var debug = require('debug')('connect');
 var init = function (cb, db) {
   var options = {
-    host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USERNAME,
-    password: process.env.MYSQL_PASSWORD
+    host: 'localhost',
+    user: 'root',
+    password: '123123',
+    database: 'mydb'
   };
   if (db) {
     options.database = db;

@@ -1,6 +1,13 @@
-var base = require('./base');
+var express = require('express');
+var router = express.Router();
+var base = require('../mysql');
 var debug = require('debug')('login');
-module.exports = function (req, res) {
+/* GET login. */
+router.get('/', function(req, res, next) {
+  res.render('login', { title: '登录' });
+  next();
+});
+router.post('/', function (req, res, next) {
   var username = req.body.username;  
   var password = req.body.password;
   base(function (con) {
@@ -16,13 +23,14 @@ module.exports = function (req, res) {
             debug('log' + '密码不正确！');
             res.redirect('/');
           } else {
-            res.clearCookie('name');
             res.cookie('name', username);
             debug('log' + 'user ' + username + ' login in');
-            res.redirect('/mail');
+            res.redirect('/main');
           }
         });
       }
     });
   }, 'mydb');
-};
+  next();
+});
+module.exports = router;
