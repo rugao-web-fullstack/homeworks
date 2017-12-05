@@ -38,11 +38,7 @@ API
 			method:GET
 			data:action=id
 			作用：读取用户信息
-		4、用户主页面
-			url:/users
-			data:action=main
-			作用：写邮件 读邮件 用户退出登录三个功能的入口
-
+		
            邮件 
  	        
 		写邮件：
