@@ -38,7 +38,7 @@ API
 用户退出	
 	url:/users
 	method:POST
-	data:action=loginout
+	data:action=logout
 	作用：用户退出
 
 2.邮件		mails
