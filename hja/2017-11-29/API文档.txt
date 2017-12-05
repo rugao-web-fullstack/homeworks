@@ -60,7 +60,7 @@ WEB API
 
 数据
 
-1.用户操作：/api/users/：action
+1.用户操作：POST /api/users/：action
 
 
   作用：
