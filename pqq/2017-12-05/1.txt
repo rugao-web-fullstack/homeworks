@@ -1,0 +1,27 @@
+1. WEB URL(html页面)----GET
+- 首页：/
+- 用户登录：/user/login
+- 用户注册：/user/register
+- 个人邮箱页面：/user/mailmain  
+  
+
+2. WEB API(json数据交互)----POST
+action = req.body.action
+
+user
+- 用户登录： /api/user/login
+action=login&username=xxx&password=xxx
+
+
+- 用户注册:   /api/user/register
+action=register&username=xxx&password=xxx
+
+mail
+发送邮件：action=create
+未读邮件变已读：action=update
+
+
+- 读取=GET  
+  /api/mail？receiver=当前用户  ----  这个为自己的收件箱  
+  /api/mail? sender=当前用户    ----  这个为自己的发件箱  
+  /api/mail? mailid=xxx          ---- 读取单个邮件
