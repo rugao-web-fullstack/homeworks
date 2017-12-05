@@ -70,4 +70,4 @@
 	3.查看单个邮件
 		url:/api/emails/:id
 		method:GET
-		作用：列出全部邮件列表
+		作用：根据邮件id列出单个邮件信息
