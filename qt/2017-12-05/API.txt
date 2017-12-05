@@ -1,0 +1,33 @@
+一、 Web URL（HTML页面）
+    1. 用户登录
+    url：/user/login
+    作用：用户登陆页面
+    2. 用户注册
+    url：/user/register
+    作用：用户注册页面
+    3. 写邮件
+    url：/user/write
+    作用：用户写邮件页面
+    4. 发邮件
+    url：/mail/send
+    作用：用户发送邮件页面
+    5. 查看邮件
+    url：/mail/list
+    作用：显示邮件列表页面 
+
+二、 Web API（JSON数据）
+    1.用户登陆
+    url:/user
+    method:POST
+    data:action=login
+    作用：用户登陆
+    2.用户注册
+    url:/user
+    method:POST
+    data:action=register
+    作用：用户注册
+    3.发送邮件
+    url：/mail
+    method:POST
+    data:action=send
+    作用：发送邮件
