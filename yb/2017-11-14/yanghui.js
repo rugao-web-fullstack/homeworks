@@ -1,26 +1,20 @@
-module.exports = function(num) {
-	var arr = new Array();
+module.exports = function (n) {
+  var arr = [];
 
-	function test(n) {
-		for(var i = 0; i < num; i++) {
-			if(i == 0) {
-				arr.push(1);
-			} else if(i == 1) {
-				arr = new Array();
-				arr.push(1);
-				arr.push(1);
-			} else {
-				var arr2 = new Array();
-				arr2.push(1);
-				for(var j = 0; j < arr.length - 1; j++) {
-					arr2.push(arr[j] + arr[j + 1]);
-				}
-				arr2.push(1);
-				arr = new Array();
-				arr = arr2;
-			}
-			console.log(arr.join(" "));
-		}
-	}
-	test(num);
-}
+  for(var i = 0; i < n; i++) {
+    arr[i] = [];
+  }
+
+  if(n >= 1){
+    for(i = 0; i < n; i++) {
+      for(var j = 0; j < i+1; j++) {
+        if(j == 0 || j == i) {
+          arr[i][j] = 1;
+        }else{
+          arr[i][j] = arr[i-1][j-1] + arr[i-1][j];
+        }
+      }
+    }
+  }
+  return arr;
+};

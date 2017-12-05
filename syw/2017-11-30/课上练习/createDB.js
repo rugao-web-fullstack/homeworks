@@ -1,9 +1,10 @@
-var basic = require("./basic");
-
+var basic = require('./basic');
+var debug = require('debug')('xxx');
 basic(function (con) {
-  con.query("CREATE DATABASE mydb", function (err, result) {
+  con.query('CREATE DATABASE mydb', function (err) {
     if (err) throw err;
-    console.log("Database created");
+    debug('log' + 'Database created');
+ 
   });
 });
 
