@@ -50,10 +50,10 @@
    URL:/users	
    作用:读取用户列表	
 ·读取单个用户---method:GET	
-   URL:/users	
+   URL:/users/:id	
    作用:读取单个用户
 	
-   data:id=1    
+       
 ·用户登录---method:POST
 	
    URL:/users	
