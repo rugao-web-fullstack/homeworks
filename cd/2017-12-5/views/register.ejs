@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<h1><%= title %></h1>
+<form method="post">
+    <p>
+        <label for="username">用户：</label>
+        <input type="text" name="username" id="username" value="">
+    </p>
+    <p>
+        <label for="password">密码：</label>
+        <input type="password" name="password" id="password" value="">
+    </p>
+    <p>
+        <label for="email">邮箱：</label>
+        <input type="email" name="email" id="email" value="">
+    </p>
+    <p>
+        <input type="submit" name="register" value="注册">
+    </p>
+    <p>
+        <a href="/login"><h3>已有账号，返回登陆</h3></a>
+    </p>
+</form>
+</body>
+</html>
