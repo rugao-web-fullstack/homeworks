@@ -11,7 +11,7 @@ url:
 
 API 设计：
     /users
-        GET  /uses:id               通过用户id, 查看用户列表
+        GET  /uses/:id              通过用户id, 查看用户列表
              /users/?page=          分页查看用户信息
         POST /users
             action=register         注册
@@ -19,7 +19,7 @@ API 设计：
             action=logout           退出
 
     /mails
-        GET /mails:id               通过邮件id, 查看邮件列表
+        GET /mails/:id               通过邮件id, 查看邮件列表
             /mails/?page=           分页查看邮件列表
 
         POST /mails
