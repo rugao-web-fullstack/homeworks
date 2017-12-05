@@ -22,7 +22,7 @@ HTML页面
 Web API
 1.用户 users
 	（1）用户登录
-	GET /users 
+	POST /users 
 	action=login
 	（2）用户注册
 	POST /users 
@@ -32,5 +32,5 @@ Web API
 	POST /mails
 	action=write
 	（2）查看邮件
-	GET /mails 
+	POST /mails 
 	action=check
