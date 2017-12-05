@@ -46,29 +46,32 @@
 
 2.Web API---JSON数据
     
-·用户注册---post
+·用户注册---method:POST
 	
-   URL:/users/register
-	
+   URL:/users	
    作用:接收用户注册表
 	
-   action:register
+   data:action=register
     
-·用户登录---post
+·用户登录---method:POST
 	
-   URL:/users/login
-	
+   URL:/users	
    作用:接收用户登录表
 	
-   action:login
-    
-·邮件发送---post
+   data:action=login
+
+·用户退出---method:POST
 	
-   URL:/mails/send
+   URL:/users	
+   作用:退出当前用户账号
+   data:action=logout
+      
+·邮件发送---method:POST
 	
+   URL:/mails	
    作用:用户发送的邮件
 	
-   action:send
+   data:action=send
     
 
 
