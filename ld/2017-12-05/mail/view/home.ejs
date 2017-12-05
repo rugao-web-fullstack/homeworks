@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Test</title>
+</head>
+
+<body>
+    <header>
+        <h1>
+            <%= title %>
+        </h1>
+    </header>
+    <nav>
+        <!-- <span>
+            <a title="主页" href="/">home</a>
+        </span>
+        <span>
+            <a title="登陆" href="/login">login</a>
+        </span>
+        <span>
+            <a title="注册" href="/reg">register</a>
+        </span> -->
+        <% if(locals.islogin){%>
+            用户：
+            <h2>
+                <%= user %>
+            </h2>欢迎来到Email系统！
+            <p>
+                <a href="/mail/write">写邮件</a>
+            </p>
+            <p>
+                <a href="/mail/read">读邮件</a>
+            </p>
+            <p>
+                <a class="btn" href="/logout">退出</a>
+            </p>
+            <% }else{%>
+                <p>
+                    <a href="/user/login">登录</a>
+                </p>
+                <%}%>
+    </nav>
+    </article>
+</body>
+
+</html>
