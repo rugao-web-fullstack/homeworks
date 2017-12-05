@@ -1,5 +1,5 @@
 $(function () {
-    $("#submit").on("click",function () {
-        alert("发送成功");
-    });
+  $('#submit').on('click',function () {
+    alert('发送成功');
+  });
 });
