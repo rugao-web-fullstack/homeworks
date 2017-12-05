@@ -1,15 +1,11 @@
 var express = require('express');
 var path = require('path');
-
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var base = require('./base');
 var session = require('express-session');
 var index = require('./routes/index');
-var users = require('./routes/users');
-
-
 var app = express();
 
 // view engine setup
@@ -30,7 +26,6 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
 app.post('/register', function(req, res) {
   var email = req.body.email;
   var name = email;
@@ -67,6 +62,7 @@ app.post('/login', function(req, res) {
       if (err) {
         throw err;
       }
+
       if (result.length !== 0) {
         if (name === result[0].username && pwd === result[0].password) {
 
@@ -112,7 +108,17 @@ app.post('/user', function(req, res) {
                 throw err;
               }
             });
-            res.render('mail', { name: userInfo });
+            var sql4 = 'select *from mail where receiver =\'' + userInfo + '\';';
+            con.query(sql4, function(err, result4) {
+              if (err) {
+                throw err;
+              }
+              var title = result4[0].title;
+              var content = result4[0].content;
+              var sender = result4[0].sender;
+              res.render('mail', { name: userInfo, sender: sender, title: title, content: content });
+            });
+
           });
         } else {
           res.render('user');
@@ -123,7 +129,20 @@ app.post('/user', function(req, res) {
     }
   }, 'emailSystem');
 });
-
+app.get('/mail', function(req, res) {
+  var sql4 = 'select *from mail where receiver =\'' + req.session.userInfo + '\';';
+  base(function(con) {
+    con.query(sql4, function(err, result4) {
+      if (err) {
+        throw err;
+      }
+      var title = result4[0].title;
+      var content = result4[0].content;
+      var sender = result4[0].sender;
+      res.render('mail', { name: req.session.userInfo, sender: sender, title: title, content: content });
+    });
+  }, 'emailSystem');
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
