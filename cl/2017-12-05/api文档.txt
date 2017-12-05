@@ -1,10 +1,10 @@
 ﻿Web URL：
-1.用户登录页面：/user/login
-2.用户注册页面：/user/register
+1.用户登录页面：/users/login
+2.用户注册页面：/users/register
 3.首页：/
-4.用户查看信息页面：/user/info
-5.邮件编写页面：/mail/write
-6.收件箱页面：/mail/read
+4.用户查看信息页面：/users/info
+5.邮件编写页面：/mails/write
+6.收件箱页面：/mails/read
 
 
 Web API:
@@ -43,7 +43,7 @@ method:GET
 作用：向用户返回用户列表信息。
 
 7.查看单个用户信息：
-url:/users/id
+url:/users/:id
 method:GET
 作用：返回某个用户id的具体用户信息
 
