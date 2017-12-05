@@ -4,8 +4,7 @@
 HTML页面
 
 
-1.首页：/index
-  
+1.首页：/ 
   
   作用:进入未登录状态的首页
 
@@ -46,7 +45,7 @@ HTML页面
 
 
 
-7.邮件详情：/mails/showdetail：
+7.邮件详情：/mails/detail：
 
 
   作用：用户查看点击的邮件的详情内容
@@ -67,18 +66,12 @@ action等于login时，进行登录操作
 	
 
         data:action等于register时，进行注册操作
-
-
-	data:action等于namecheck时，进行用户名是否占用查询操作
-
-
-	data:action等于receivercheck时，进行收件人是否存在的查询操作
 	
 	data:action等于logout时，进行注销操作
 
- GET：/api/users 获取用户信息
-      /api/users/:id 获取单个用户信息
-
+ 	GET：/api/users 获取用户信息
+       	     
+	     /api/users/:name 查询该用户名是否被占用/该收件人是否存在
 
 
 
