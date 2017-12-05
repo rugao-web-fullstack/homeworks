@@ -22,9 +22,26 @@
 
 API
 １.用户 User
-	用户登陆 action = login
-	用户注册 action = register
+	用户登陆 
+		url:/users
+		method: POST
+		data: action = login
+
+	用户注册  
+		url:/users
+		method: POST
+		data: action = register
+
+	查看用户列表
+		url:/users
+		method: GET
+
 2.邮件 Mail
-	发送邮件 action = send
-	读取邮件列表 action = list
-	读取邮件 action = read	
+	发送邮件 
+		url:/mails
+		method: POST
+		data: action = send
+
+	查看邮件列表
+		url:/mails
+		method: GET
