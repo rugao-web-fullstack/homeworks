@@ -31,6 +31,3 @@ Web API
 	（1）写邮件
 	POST /mails
 	action=write
-	（2）查看邮件
-	POST /mails 
-	action=check
