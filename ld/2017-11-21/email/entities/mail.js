@@ -1,11 +1,11 @@
-let states = require("../states").states;
-const path = require("path");
+let states = require('../states').states;
+const path = require('path');
 const UserManager = require('./user').User;
-const Storage = require("./storage").Storage;
-const FILENAME = "../data/mail.json";
+const Storage = require('./storage').Storage;
+const FILENAME = '../data/mail.json';
 const storage = new Storage(path.resolve(path.dirname(__filename), FILENAME));
-
-let mails = {};
+var debug = require('debug')('ago');
+//let mails = {};
 
 function Mail(sender, receiver, title, body) {
     this.sender = sender;
@@ -15,10 +15,9 @@ function Mail(sender, receiver, title, body) {
 }
 
 Mail.send = function(sender, receiver, title, body, cb) {
-    console.log("inside send")
     storage.read((error, mails) => {
         if (error) {
-            console.log(error.stack);
+            debug(error.stack);
             cb(error);
             return;
         }
@@ -44,7 +43,7 @@ Mail.send = function(sender, receiver, title, body, cb) {
 
             receiverSocket.emit(states.MAIL_NEW, sender, mail);
             cb(false);
-        })
+        });
     });
 };
 

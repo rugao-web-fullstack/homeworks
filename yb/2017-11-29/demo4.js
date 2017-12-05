@@ -1,21 +1,22 @@
-var express = require('express')
+var express = require('express');
 var app = express();
-var index = require("./index");
-var hello = require("./hello");
-var user = require("./user");
-var mid1 = require("./mid1");
-var mid2 = require("./mid2");
+//var index = require('./index');
+//var hello = require('./hello');
+//var user = require('./user');
+var mid1 = require('./mid1');
+var mid2 = require('./mid2');
+var debug = require('debug')('xxx');
 
 app.use(mid1);
 
 app.use(mid2);
 
-app.get('/users/:id', function(req, res) {
-	res.write('inside users\n');
-	console.log(res.params);
-	res.write("\n");
-	res.write(req.mid + "\n");
-	res.end();
+app.get('/users/:id', function (req, res) {
+  res.write('inside users\n');
+  debug('log:' + res.params);
+  res.write('\n');
+  res.write(req.mid + '\n');
+  res.end();
 });
 
 app.listen(3000);

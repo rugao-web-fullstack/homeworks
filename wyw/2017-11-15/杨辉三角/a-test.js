@@ -1,3 +1,4 @@
-const test = require("./a");
-console.log(test(10));
+const test = require('./a');
+var debug = require('debug')('a-test');
+debug('log'+test(10));
 

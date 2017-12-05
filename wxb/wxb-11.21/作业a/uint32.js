@@ -1,6 +1,8 @@
-const fs = require("fs");
-const ws = fs.createWriteStream("uint32.txt");
-const rs = fs.createReadStream("uint32.txt");
+var debug = require('debug')('uint32');
+
+const fs = require('fs');
+const ws = fs.createWriteStream('uint32.txt');
+const rs = fs.createReadStream('uint32.txt');
 
 const buf = Buffer.allocUnsafe(4);
 
@@ -9,8 +11,8 @@ buf.writeUInt32BE(0x11, 0);
 ws.write(buf);
 
 //---buf.readUInt32BE(offset[, noAssert])
-rs.on("data", function (data) {
-    console.log(buf.readUInt32BE(data));
+rs.on('data', function (data) {
+  debug('log: '+buf.readUInt32BE(data));
 });
 
 

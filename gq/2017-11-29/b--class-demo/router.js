@@ -1,5 +1,6 @@
-var http = require("http");
-var url = require("url");
+var debug = require('debug')('gq');
+var http = require('http');
+var url = require('url');
 
 function userLogin(req,res){
 	res.writeHead(200,{'Content-Type':'text/html'});
@@ -8,7 +9,7 @@ function userLogin(req,res){
 }
 http.createServer(function(req,res){
 	var parsed = url.parsed(req,url);
-	console.log(parsed);
+	debug(parsed);
 	if(parsed.pathname === '/user/login'){
 		return userLogin(req,res);
 	}

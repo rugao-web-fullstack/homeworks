@@ -1,44 +1,32 @@
-const User = require("./user").User;
+let states = require('../states').states;
+const UserManager = require('./user').User;
 let mails = {
-
 };
-
-
 function Mail(sender, receiver, title, body) {
-    this.sender = sender;
-    this.receiver = receiver;
-    this.title = title;
-    this.body = body;
+  this.sender = sender;
+  this.receiver = receiver;
+  this.title = title;
+  this.body = body;
 }
 
 Mail.send = function (sender, receiver, title, body) {
-    if (!mails[receiver]) {
-        mails[receiver] = [];
-    }
-    mails[receiver].push({
-        read: false,
-        receiver: new Mail(sender, receiver, title, body)
-    });
+  if (!mails[receiver]) {
+    mails[receiver] = [];
+  }
+  let mail = new Mail(sender, receiver, title, body);
+
+  mails[receiver].push({
+    read: false,
+    mail: mail
+  });
+
+  let receiverSocket = UserManager.getSocket(receiver);
+  receiverSocket.emit(states.MAIL_NEW, sender, mail);
+  return true;
 };
 
-Mail.write = function (socket, sender, receiver, title, body) {
-    if (!User.isReceiverExist()) {
-        return false;
-    }
-    Mail.addMail(receiver, title, body);
-    return true;
-};
-
-// Mail.read = function (socket, receiver) {
-
-//     if (!User.isOwn(socket, receiver)) {
-//         return false;
-//     }
-//     return mails[receiver];
-// };
-
-Mail.list = function (receiver) {
-    return mails[receiver];
+Mail.get = function(user) {
+  return mails[user];
 };
 
 exports.Mail = Mail;
