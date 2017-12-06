@@ -2,17 +2,18 @@
   "name": "project",
   "version": "1.0.0",
   "main": "src/index.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
+    "eslint": "^4.12.1",
     "mocha": "^4.0.1"
   },
-  "dependencies": {},
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
   "description": ""
 }
