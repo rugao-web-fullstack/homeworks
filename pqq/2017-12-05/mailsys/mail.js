@@ -1,6 +1,6 @@
 var router = require('express').Router();
 
-router.get('/main', function(req, res) {
+router.get('/main', function() {
   // process
  
 });
