@@ -1,15 +1,15 @@
 var assert = require('assert');
 var hello = require('../src/').hello;
 var fib = require('../src/').fib;
-describe('project',function(){
-it('has hello',function(){
- console.log(hello);
- assert.equal("Hello World",hello);
+var debug = require('debug')('log');
+describe('project', function() {
+  it('has hello', function() {
+    //console.log(hello);
+    debug('log:'+'heoolw');
+    assert.equal('Hello World', hello);
+  });
 
-
-
-});
-it('test fib 1', function() {
+  it('test fib 1', function() {
     assert.equal(1, fib(0));
     assert.equal(1, fib(1));
     assert.equal(2, fib(2));
@@ -22,5 +22,4 @@ it('test fib 1', function() {
     assert.equal(55, fib(9));
     assert.equal(89, fib(10));
   });
-})
-
+});
