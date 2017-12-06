@@ -13,4 +13,11 @@ describe('project1', function () {
     assert.equal(5, fib(4));
     assert.equal(8, fib(5));
   });
+  it('test fib exception', function () {
+    try {
+      fib(-1);
+    } catch (e) {
+      assert.equal('Error Input!', e.message);
+    }
+  });
 });
