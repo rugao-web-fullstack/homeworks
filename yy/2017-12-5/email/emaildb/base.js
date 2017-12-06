@@ -11,7 +11,7 @@ var init = function(cb,db){
   var con = mysql.createConnection(options);
   con.connect(function(err){
     if(err) throw err;
-    // console.log('connected');	
+    // console.log('connected');
     cb instanceof Function && cb(con);
   });
 };
