@@ -1,0 +1,55 @@
+1. Web URL
+HTML页面
+1 主页面
+url： /
+作用：首页，用于用户选择注册或者登录
+2 注册页面
+url： /user/register
+作用：注册页面，注册完跳转到登录页面
+3 登录页面
+url： /user/login
+作用：登录页面，登录结束之后到用户页面
+4 用户页面
+url： /user/:id
+作用：用户页面，用户卡亚选择读或者写邮件
+5 查看用户列表
+url：  /user/list
+作用：可以查看用户列表
+5 邮件页面
+url： /mail
+作用，用来查看邮件
+6 邮件列表
+url： /mail/list
+作用，用来查看邮件列表
+
+
+2. Web API
+JSON数据
+1.用户注册
+url：/users
+method：post
+data action=register
+作用：提示这测成功与否
+
+2.用户登录
+url：/users
+method：post
+data action=login
+作用：判断能否登录
+
+3.发送邮件
+url：/mails
+method：post
+data action=mail
+作用：发送邮件
+
+4.邮件列表
+url：/mails
+method：get
+作用：邮件列表
+5.用户列表
+url：/users
+method：get
+作用：邮件列表
+
+

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="email.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <div class="write">
+        <h1>* 填 写 邮 件 *</h1>
+        <form action="#" method="post">
+            <input type="hidden" name='sender' id='sender' value=<%= name %> >
+            <div>
+                <label>收件人:</label>
+                <input type="text" id='receiver' name="receiver">
+            </div>
+            <div>
+                <label>标&nbsp;&nbsp;题:</label>
+                <input type="text" id='title' name='title'>
+            </div>
+            <div>
+                <label>内&nbsp;&nbsp;容:</label>
+                <textarea name="content" id='content' cols="30" rows="20"></textarea>
+            </div>
+            <div class="bot">
+                <input class="Sub" id='submit' type="button" value="发送">
+                </button>
+                <a href="/users/home">返回</a>
+            </div>
+        </form>
+    </div>
+</body>
+<script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+    $(function () {
+        $("#receiver").blur(function () {
+            var rece = $('#receiver').val();
+            $.ajax({
+                url: '/api/users/' + rece,
+                data: {
+                },
+                type: 'get',
+                success: function (data, status) {
+                    //获取data
+                    if (data !== '0') {
+                        alert('收件人不存在！');
+                        return;
+                    }
+                    console.log(data);
+                },
+                error: function (data, err) {
+                    console.log('ajax请求失败');
+                    return;
+                }
+            });
+
+        });
+
+
+        $('#submit').click(function () {
+            if ($("#receiver").val() && $("#title").val() && $("#content").val()) {
+                var send = $('#sender').val();
+                var rece = $("#receiver").val();
+                var tit = $("#title").val();
+                var cont = $("#content").val();
+                $.ajax({
+                    url: '/api/mails',
+                    data: {
+                        action: 'send',
+                        sender: send,
+                        receiver: rece,
+                        title: tit,
+                        content: cont,
+                        iread: 0
+                    },
+                    type: 'post',
+                    success: function (data) {
+                        console.log(data);
+                        if (data !== 0) {
+                            alert('发件成功!');
+                            location.href = data;
+                            return;
+                        } else {
+                            alert('发件失败！!');
+                            return;
+                        }
+                    },
+                    error: function (data, err) {
+                        console.log('ajax请求失败');
+                        return;
+                    }
+                })
+
+            }
+        });
+    })
+</script>
+
+</html>

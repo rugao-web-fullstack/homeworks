@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Test</title>
+</head>
+
+<body>
+    <header>
+        <h1>
+            <%= title %>
+        </h1>
+    </header>
+    <nav>
+        <div class="container">
+            <form class="col-sm-offset-4 col-sm-4 form-horizontal" role="form" method="post">
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="receiver">收件人</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="receiver" name="receiver" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="title">标题</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="title" name="title" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="content">内容</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" rows="20" cols="20" id="content" name="content" required>
+                    </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button type="submit" class="btn btn-primary">发送</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </nav>
+    </article>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+        $(function(){
+            $('#send').on('click',function(){
+                var date = new Date().toLocaleString();
+                $.ajax({
+                    type:'post',
+                    url:"/mails/write",
+                    data:{
+                        'title':$('#mailname').val(),
+                        'address':$('#receiver').val(),
+                        'content':$('#mailContent').val(),
+                        'date':date
+                    },
+                    async:false,
+                    error:function(){
+                        alert('服务器访问错误！')
+                    },
+                    success:function(data){
+                        alert(data);
+                        if(data === 'success'){
+                            location.href = 'http://127.0.0.1:3000/main';
+                        }else{
+                            $('#receiver').val('');
+                        }
+                    }
+                });
+            });
+        })
+    </script>
+</body>
+
+</html>

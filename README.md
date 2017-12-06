@@ -1,3 +1,7 @@
+
+[![](https://travis-ci.org/rugao-web-fullstack/homeworks.svg?branch=master)](https://travis-ci.org/rugao-web-fullstack/homeworks)
+---
+
 # 作业
 
 1. 2017-11-14 （熟悉node.js模块化机制）    
@@ -33,7 +37,9 @@ b. 今天的代码提交一下。
 8. 2017-11-30   
 a. 设计邮箱数据，并以mysql导出提交
 
-
+9. 2017-12-05  
+a. 设计WEB页面的URL与Web API（基于VIG API规范设计），并提交  
+b. 根据VIG API规范来编写相关的接口  
 
 ---
 ### 模块化要求
@@ -43,11 +49,10 @@ a. 设计邮箱数据，并以mysql导出提交
 4. 逻辑清晰正确
 5. 高扇入，低扇出
 
+---
 ### 代码提交要求
 1. 一天的作业，只通过一个PR完成提交
 2. 多天的作业按天分开提交
 3. 不包含配置信息的文件，包括.idea, .project等文件
 4. 不包含node_modules这样的安装包文件
-
-
 ---

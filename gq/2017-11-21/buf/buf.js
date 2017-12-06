@@ -1,7 +1,7 @@
-
-var fs = require("fs");
-var ws = fs.createWriteStream("num.txt");
-var rs = fs.createReadStream("num.txt");
+var debug = require('debug')('gq');
+var fs = require('fs');
+var ws = fs.createWriteStream('num.txt');
+var rs = fs.createReadStream('num.txt');
 
 var buf = Buffer.alloc(22);
 buf.writeUInt32BE(16, 0);
@@ -14,22 +14,22 @@ buf.writeDoubleBE(-1616.1616, 14);
 var readBuff = [];
 
 ws.end(buf, function () {
-    rs.on("readable", function () {
-        var data = rs.read();
-        if (data) {
-            readBuff.push(data);
-        }
-    })
+  rs.on('readable', function () {
+    var data = rs.read();
+    if (data) {
+      readBuff.push(data);
+    }
+  });
 
-    rs.on("end", function () {
-        readBuff = Buffer.concat(readBuff);
-        console.log("读出的值为：");
-        console.log("UInt32 = " + readBuff.readInt32BE(0));
-        console.log("Int32 = " + readBuff.readInt32BE(4));
-        console.log("UInt8 = " + readBuff.readUInt8(8));
-        console.log("Int8 = " + readBuff.readInt8(9));
-        console.log("Float = " + readBuff.readFloatBE(10));
-        console.log("Double = " + readBuff.readDoubleBE(14));
-    })
+  rs.on('end', function () {
+    readBuff = Buffer.concat(readBuff);
+    debug('读出的值为：');
+    debug('UInt32 = ' + readBuff.readInt32BE(0));
+    debug('Int32 = ' + readBuff.readInt32BE(4));
+    debug('UInt8 = ' + readBuff.readUInt8(8));
+    debug('Int8 = ' + readBuff.readInt8(9));
+    debug('Float = ' + readBuff.readFloatBE(10));
+    debug('Double = ' + readBuff.readDoubleBE(14));
+  });
 
-}) 
+}); 
