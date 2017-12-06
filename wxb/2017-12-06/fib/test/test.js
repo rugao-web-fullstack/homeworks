@@ -19,10 +19,10 @@ describe('project', function() {
     assert.equal(89, fib(10));
   });
   it('test fib exception',function(){
-	try{
-		fib(-1);
-	}catch(e){
-		assert.equal('Error Input',e.message);	
-	}
+    try{
+      fib(-1);
+    }catch(e){
+      assert.equal('Error Input',e.message);	
+    }
   });
 });
