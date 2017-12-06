@@ -3,7 +3,7 @@ var hello = require('../src/').hello;
 var fib = require('../src/').fib;
 describe('project', function () {
     it('has hello', function () {
-        console.log(hello);
+        //console.log(hello);
         assert.equal("Hello World", hello);
     });
 
