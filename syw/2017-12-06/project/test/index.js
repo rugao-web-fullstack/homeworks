@@ -2,13 +2,13 @@ var assert = require('assert');
 var hello = require('../src/').hello;
 var fib = require('../src/').fib;
 var debug = require('debug')('xxx');
-var mocha = require('mocha');
+var mocha = require('mocha')
 var describe = mocha.describe;
 var it = mocha.it;
 describe('project', function () {
   it('has hello', function () {
     debug('log:' + hello);
-    assert.equal('Hello World', hello);
+    assert.equal("Hello World", hello);
 
 
 
@@ -26,5 +26,5 @@ describe('project', function () {
     assert.equal(55, fib(9));
     assert.equal(89, fib(10));
   });
-});
+})
 
