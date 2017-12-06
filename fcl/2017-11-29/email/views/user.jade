@@ -1,0 +1,22 @@
+doctype html
+html
+    head
+        title Mails
+    body
+        p   hello:      #{name}
+        a(href="mail") read mail
+        form(method="post" action="/user") 
+            span   请输入收件人:
+            br
+            input(type="text" id="reeiver" name="receiver")
+            br
+            span   请输入title:
+            br
+            input(type="text" id="title" name="title")
+            br
+            span   请输入内容:
+            br
+            textarea(id="content" name="cotent")
+            br
+            input(type="submit")
+           
