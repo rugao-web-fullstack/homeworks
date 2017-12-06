@@ -1,19 +1,14 @@
 {
-  "name": "project",
+  "name": "12-5project",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "eslint": "^4.12.1",
-    "mocha": "^4.0.1"
-  },
-  "directories": {
-    "test": "test"
-  },
-  "devDependencies": {},
-  "description": ""
+    "supertest": "^3.0.0"
+  }
 }
