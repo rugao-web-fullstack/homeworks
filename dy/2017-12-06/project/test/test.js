@@ -1,7 +1,7 @@
 var assert = require('assert');
 var hello = require('../src/').hello;
-var fib = require('../src').fib;
-describe('project1', function () {
+var fib = require('../src/').fib;
+describe('project', function () {
   it ('has hello', function () {
     assert.equal('Hello World', hello);
   });
@@ -12,5 +12,12 @@ describe('project1', function () {
     assert.equal(3, fib(3));
     assert.equal(5, fib(4));
     assert.equal(8, fib(5));
+  });
+  it('test fib exception', function () {
+    try {
+      fib(-1);
+    } catch (e) {
+      assert.equal('Error Input!', e.message);
+    }
   });
 });
