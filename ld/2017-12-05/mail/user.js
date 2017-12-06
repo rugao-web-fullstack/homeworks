@@ -1,5 +1,5 @@
 var usr = require('./databaseCon');
-client = usr.connect();
+//var client = usr.connect();
 function User(username, password) {
     this.username = username;
     this.email = username;
@@ -14,35 +14,35 @@ userManager.addUser = function (client, username, password, callback) {
         if (result.length) {
             callback(new Error('用户已经被注册!'));
             return;
-        } 
-        usr.insertUser(client, username, password,function(err){
-            if(err){
+        }
+        usr.insertUser(client, username, password, function (err) {
+            if (err) {
                 callback(new Error('用户注册失败!'));
-            }else{
+            } else {
                 callback(null);
             }
         });
-        
+
     });
 };
 
 userManager.checkUser = function (client, username, callback) {
-    var user = new User(username, password);
-    usr.selectUser(client, user.username, function (err, result) {
+    //var user = new User(username, password);
+    usr.selectUser(client, username, function (err, result) {
         if (result.length) {
             callback(null);
-        } else{
+        } else {
             callback(new Error('用户不存在!'));
         }
     });
 };
 
-userManager.isUser = function (client, username, callback) {
-    var user = new User(username, password);
-    usr.selectUser(client, user.username,user.password, function (err, result) {
+userManager.isUser = function (client, username, password, callback) {
+    //var user = new User(username, password);
+    usr.selectUser(client, username, password, function (err, result) {
         if (result.length) {
             callback(null);
-        } else{
+        } else {
             callback(new Error('用户不存在!'));
         }
     });

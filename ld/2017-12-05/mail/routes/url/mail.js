@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var usr = require('../../databaseCon');
 
 router.route('/write')
     .get(function (req, res) {
@@ -15,9 +14,9 @@ router.route('/write')
 
 router.route('/')
     .get(function (req, res) {
-        Mail = usr.Mail();
-        var mail = new Mail();
-        mail.readMail(function (err, result) {
+        /*  Mail = usr.Mail();
+         var mail = new Mail(); */
+        /* mail.readMail(function (err, result) {
             if (err) {
                 res.status(404).end(err);
             } else {
@@ -26,13 +25,14 @@ router.route('/')
                     items: result
                 });
             }
-        });
+        }); */
+        res.render();
     });
 router.route('/:id')
     .get(function (req, res) {
         //process
-        res.render('mail/info',{
-            title:'邮件信息'
+        res.render('mail/info', {
+            title: '邮件信息'
         });
     });
 
