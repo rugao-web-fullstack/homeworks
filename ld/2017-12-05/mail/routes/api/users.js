@@ -1,15 +1,17 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../../user');
+var usr = require('../../databaseCon');
 /* GET users listing. */
 router.route('/reg')
     .post(function (req, res) {
-        user = new User(req.body.username, req.body.password);
+        var user = new User(req.body.username, req.body.password);
+        var client = usr.connect();
         user.register(client, req.body.username, req.body.password, function (err) {
-            if (err){
+            if (err) {
                 throw err;
-                res.send('fail');
-            } 
+                //res.send('');
+            }
             //res.send('注册成功');
             res.redirect('/');
         });
@@ -18,8 +20,8 @@ router.route('/reg')
 
 router.route('/login')
     .post(function (req, res) {
-        user = new User(req.body.username, req.body.password);
-        result = null;
+        //var user1 = new User(req.body.username, req.body.password);
+        var client = usr.connect();
         usr.selectFun(client, req.body.username, function (result) {
             if (result[0] === undefined) {
                 res.send('没有该用户');
