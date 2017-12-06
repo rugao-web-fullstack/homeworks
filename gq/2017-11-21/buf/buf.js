@@ -14,22 +14,22 @@ buf.writeDoubleBE(-1616.1616, 14);
 var readBuff = [];
 
 ws.end(buf, function () {
-	rs.on('readable', function () {
-		var data = rs.read();
-		if (data) {
-			readBuff.push(data);
-		}
-	});
+  rs.on('readable', function () {
+    var data = rs.read();
+    if (data) {
+      readBuff.push(data);
+    }
+  });
 
-	rs.on('end', function () {
-		readBuff = Buffer.concat(readBuff);
-		debug('读出的值为：');
-		debug('UInt32 = ' + readBuff.readInt32BE(0));
-		debug('Int32 = ' + readBuff.readInt32BE(4));
-		debug('UInt8 = ' + readBuff.readUInt8(8));
-		debug('Int8 = ' + readBuff.readInt8(9));
-		debug('Float = ' + readBuff.readFloatBE(10));
-		debug('Double = ' + readBuff.readDoubleBE(14));
-	});
+  rs.on('end', function () {
+    readBuff = Buffer.concat(readBuff);
+    debug('读出的值为：');
+    debug('UInt32 = ' + readBuff.readInt32BE(0));
+    debug('Int32 = ' + readBuff.readInt32BE(4));
+    debug('UInt8 = ' + readBuff.readUInt8(8));
+    debug('Int8 = ' + readBuff.readInt8(9));
+    debug('Float = ' + readBuff.readFloatBE(10));
+    debug('Double = ' + readBuff.readDoubleBE(14));
+  });
 
 }); 
