@@ -15,6 +15,7 @@ var mailMannage = require('../operation/mailmannage');
 var userLogin = function (req, res) {
   userMannage.Login(req.body.username, req.body.password, function (err) {
     if (err) {
+      
       res.send('0');
       return;
     } else {
@@ -40,6 +41,7 @@ var userRegister = function (req, res) {
       }
     });
 };
+
 //注册用户名查重，邮件查看是否有此收件人
 router.get('/users/:name', function (req, res) {
   userMannage.CheckUser(req.params.name, function (err) {
@@ -52,6 +54,7 @@ router.get('/users/:name', function (req, res) {
     }
   });
 });
+
 //用户action
 router.post('/users', function (req, res) {
   switch (req.body.action) {
@@ -59,8 +62,7 @@ router.post('/users', function (req, res) {
     userLogin(req, res);
     break;
   case 'register':
-    userRegister(req, res);
-      
+    userRegister(req, res); 
     break;
   }
 });
@@ -76,10 +78,6 @@ var mailSend = function (req, res) {
     }
   });
 };
-
-
-
-
 
 //读邮件
 router.get('/read/:name', function (req, res) {
