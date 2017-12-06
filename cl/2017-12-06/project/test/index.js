@@ -6,6 +6,7 @@ describe('project', function () {
     // console.log(hello);
     assert.equal('Hello World', hello);
   });
+
   it('test fib 1',function(){
     assert.equal(1,fib(0));
     assert.equal(1,fib(1));
@@ -14,4 +15,14 @@ describe('project', function () {
     assert.equal(5,fib(4));
     assert.equal(89,fib(10));
   });
+
+  it('test fib exception', function(){
+    try{
+      fib(-1);
+    }catch(e) {
+      assert.equal('Error Input',e.message);
+    }
+
+  });
+    
 });
