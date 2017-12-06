@@ -7,12 +7,16 @@
     "body-parser": "^1.18.2",
     "debug": "^3.1.0",
     "eslint": "^4.12.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
     "express": "^4.16.2",
     "mysql": "^2.15.0"
   },
   "devDependencies": {
     "@ljharb/eslint-config": "github:ljharb/eslint-config",
-    "mocha": "^4.0.1"
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0"
   },
   "scripts": {
     "test": "bash test.sh"
