@@ -1,2 +1,3 @@
-let y = require("./y");
-console.log(y(10));
+let y = require('./y');
+let debug = require('debug')('y');
+debug(y);
