@@ -1,5 +1,5 @@
 var mysql = require('mysql');
-
+var debug = require('debug')('mail');
 function connectServer() {
 
     var client = mysql.createConnection({
@@ -15,7 +15,7 @@ function connectServer() {
 
 function selectUser(client, username, callback) {
     //client为一个mysql连接对象
-    client.query('select * from user where username="' + username + '"', function (err, results, fields) {
+    client.query('select * from user where username="' + username + '"', function (err, results) {
         if (err) throw err;
 
         callback(results);
@@ -24,7 +24,7 @@ function selectUser(client, username, callback) {
 
 function selectAll(client, username, password, callback) {
     //client为一个mysql连接对象
-    client.query('select * from user where username="' + username + '" and password="' + password + '"', function (err, results, fields) {
+    client.query('select * from user where username="' + username + '" and password="' + password + '"', function (err, results) {
         if (err) throw err;
 
         callback(results);
@@ -32,12 +32,12 @@ function selectAll(client, username, password, callback) {
 }
 
 function insertUser(client, username, password, callback) {
-    client.query('insert into user value(?,?,?,?)', [, username, username, password], function (err, result) {
+    client.query('insert into user (username,email,password)', [username, username, password], function (err, result) {
         if (err) {
-            console.log('error:' + err.message);
+            debug('error:' + err.message);
             return err;
         }
-        callback(err);
+        callback(result);
     });
 }
 
