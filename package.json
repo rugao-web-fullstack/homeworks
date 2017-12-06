@@ -11,7 +11,8 @@
     "mysql": "^2.15.0"
   },
   "devDependencies": {
-    "@ljharb/eslint-config": "github:ljharb/eslint-config"
+    "@ljharb/eslint-config": "github:ljharb/eslint-config",
+    "mocha": "^4.0.1"
   },
   "scripts": {
     "test": "bash test.sh"
