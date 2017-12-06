@@ -6,13 +6,11 @@ var fib = function (n) {
   case 1:
   case '1':
     return 1;
-  default:
-    if (n > 1) {
-      return fib(n - 2) + fib(n - 1);
-    }
+  default:  
     if (n < 0) {
-      throw new Error('Error input');
+      throw new Error('Error Input');
     }
+    return fib(n - 2) + fib(n - 1);
   }
 };
 
