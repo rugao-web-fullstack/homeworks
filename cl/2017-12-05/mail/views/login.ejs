@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+<h1><%= title %></h1>
+<form method="post">
+    <p>
+        <label for="username">用户：</label>
+        <input type="text" name="username" id="username" value="">
+    </p>
+    <p>
+        <label for="password">密码：</label>
+        <input type="password" name="password" id="password" value="">
+    </p>
+    <p>
+        <input type="submit" name="login" value="登录">
+        <a href="/register">没有账号？点击创建</a>
+    </p>
+</form>
+</body>
+</html>
