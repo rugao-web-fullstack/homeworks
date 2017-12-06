@@ -13,6 +13,13 @@ describe('project', function () {
     assert.equal(3, fib(3));
     assert.equal(5, fib(4));
   });
+  it('fib test 1', function () {
+    try {
+      fib(-1);
+    } catch (e) {
+      e;
+    }
+  });
   // it('fib test error',function(){
   //     assert.equal('error input', fib(-100));
   // })
