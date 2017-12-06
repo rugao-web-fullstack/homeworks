@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Test</title>
+</head>
+
+<body>
+    <header>
+        <h1>
+            <%= title %>
+        </h1>
+    </header>
+    <nav>
+        <div class="container">
+            <form class="col-sm-offset-4 col-sm-4 form-horizontal" role="form" method="post">
+                <fieldset>
+                    <% if(locals.islogin) { %>
+                        用户：
+                        <h3>
+                            <%= test %>
+                        </h3>已经登陆。
+                        <br>
+                        <a class="btn" href="/logout">登出</a>
+                        <% } else{ %>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="username">用户名</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="用户名" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="password">密码</label>
+                                <div class="col-sm-9">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="密码" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button type="submit" class="btn btn-primary" id="login">登录</button>
+                                </div>
+                            </div>
+                            <% } %>
+                </fieldset>
+            </form>
+        </div>
+    </nav>
+    </article>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+        $(function(){
+            $('#login').on('click',function(){
+                $.ajax({
+                    type:'post',
+                    url:"/users/login",
+                    data:{
+                        'username':$('#username').val(),
+                        'password':$('#password').val(),
+                        'sub':'登录'
+                    },
+                    async:false,
+                    error:function(){
+                        alert('服务器访问错误！')
+                    },
+                    success:function(data){
+                        if(data !== 'password_wrong'){
+                            location.href = 'http://127.0.0.1:8080/home';
+                        }else{
+                            alert(data);
+                        }
+                    }
+                });
+            });
+        })
+    </script>
+</body>
+
+</html>

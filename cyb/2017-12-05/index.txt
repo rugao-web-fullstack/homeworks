@@ -1,0 +1,78 @@
+﻿1.Web URL---HTML页面
+    
+·用户注册
+	
+   URL:/user/register
+	
+   作用:显示用户注册页面
+    
+·用户登录
+	
+   URL:/user/login
+	
+   作用:显示用户登录页面
+    
+·用户退出
+	
+   URL:/user/logout
+	
+   作用:显示用户登出页面
+    
+·主页
+	
+   URL:/user/index
+	
+   作用:显示主页页面
+    
+·邮件列表
+	
+   URL:/mail/list
+	
+   作用:显示接收到的邮件列表页面
+    
+·邮件发送
+	
+   URL:/mail/send
+	
+   作用:显示邮件的发送页面
+    
+·邮件查看
+	
+   URL:/mail/read
+	
+   作用:显示接收到的邮件具体内容页面
+
+
+
+2.Web API---JSON数据
+ 
+·读取用户列表---method:GET	
+   URL:/users	
+   作用:读取用户列表	
+·读取单个用户---method:GET	
+   URL:/users/:id	
+   作用:读取单个用户
+	
+       
+·用户登录---method:POST
+	
+   URL:/users	
+   作用:接收用户登录表
+	
+   data:action=login
+
+·用户退出---method:POST
+	
+   URL:/users	
+   作用:退出当前用户账号
+   data:action=logout
+      
+·邮件发送---method:POST
+	
+   URL:/mails	
+   作用:用户发送的邮件
+	
+   data:action=send
+    
+
+
