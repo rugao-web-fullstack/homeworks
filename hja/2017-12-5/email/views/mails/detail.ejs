@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/read.css' />
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        table {
+            font-size: 18px;
+        }
+
+        th {
+            font-size: 20px;
+        }
+
+        th,
+        thead,
+        tbody {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="hidden" value=<%= id %> id='id'>
+    <h1 class="title">尊敬的用户:
+        <%= name %> 欢迎使用邮件查看服务</h1>
+
+    <div class="container">
+        <div class="row text-center">
+            <table class="table text-center table-hover ">
+                <thead>
+                    <tr class="danger">
+                        <th>内容</th>
+                        <th>标题</th>
+                        <th>发送人</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+    <!-- <script src='/javascripts/jquery.min.js'></script> -->
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+    <script>
+        $(function () {
+            $.ajax({
+                url: '/api/mails/detail/'+Number($('#id').val()),
+                type: 'get',
+                data: {
+                    
+                },
+                success: function (data, status) {
+                    //新建元素
+                    var newTr = $('<tr></tr>');
+                    var newCon = $('<td>' + data[0].content + '</td>');
+                    var newSender = $('<td>' + data[0].sender + '</td>');
+                    var newTitle = $('<td>' + data[0].title + '</td>');
+                    newTr.append(newCon);
+                    newTr.append(newTitle);
+                    newTr.append(newSender);
+                    $('tbody').append(newTr);
+                },
+                error: function (err) {
+
+                }
+
+
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

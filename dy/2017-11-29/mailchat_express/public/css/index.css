@@ -1,0 +1,42 @@
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.col-sm-4 > .r-side {
+    border: 5px solid #ccc;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+}
+.col-sm-4 > .r-side > form > p {
+    text-align: right;
+}
+.col-sm-4 > .r-side > form > p.register-warnning, .col-sm-4 > .r-side > form > p.login-warnning {
+    color: rgb(240, 94, 50);
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+}
+.col-sm-4 > .r-side > h4 {
+    margin-bottom: 10px;
+    font-weight: 700;
+    border-bottom: 1px solid #ccc;
+}
+.col-sm-4 > .r-side .r-group {
+    margin-bottom: 4px;
+}
+.col-sm-4 > .r-side .r-group > label {
+    width: 70px;
+    line-height: 30px;
+}
+.col-sm-4 > .r-side .r-group > input {
+    line-height: 30px;
+    padding-left: 4px;
+}
+.col-sm-4 > .r-side .r-group > input[type="submit"] {
+    width: 100%;
+    line-height: 28px;
+    padding: 0;
+    margin: 16px 0;
+}

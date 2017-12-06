@@ -1,9 +1,10 @@
-var basic = require("./basic");
+var basic = require('./basic');
+var debug = require('debug')('xxx');
 basic(function (con) {
-  var sql = "SELECT * FROM user ORDER BY username";
+  var sql = 'SELECT * FROM user ORDER BY username';
   con.query(sql, function (err, result) {
     if (err) throw err;
-    console.log(result);
+    debug('log' + result);
   });
 }, 'mydb');
 

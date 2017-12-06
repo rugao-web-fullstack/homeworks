@@ -1,3 +1,4 @@
-var fibonacci = require("./fibonacci");
+var fibonacci = require('./fibonacci');
+var debug = require('debug');
 var num = parseInt(process.argv[2]);
-console.log(fibonacci(num));
+debug(fibonacci(num));

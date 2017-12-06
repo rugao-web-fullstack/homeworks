@@ -1,0 +1,41 @@
+1.web URL (HTML页面)
+	1.首页
+	url:/
+	作用：实现首页显示和跳转用户登录、注册页面；邮箱已注册跳转
+	2.用户登录
+	url:/user/login
+	作用：用户登录功能；邮箱注册成功跳转
+	3.用户注册
+	url:/user/register
+	作用：用户注册邮箱、用户名、密码功能
+	4.邮件主页
+	url:/mail/home
+	作用：选择收发邮件功能
+	5.写发邮件页面
+	url: mail/write    
+	作用：写、发送邮件功能
+	6.读取邮件页面
+	url:mail/read
+	作用：实现读取邮件内容功能
+
+2.web API (JSON数据)
+	1.用户 /users
+		GET /users
+		GET /users/id
+		GET /users?page=1&limit=50
+
+		注册：
+		url：/users
+		method:POST
+		data:action = register
+
+		登录：
+		url：/users
+		method:POST
+		data:action = login
+
+	2.邮件 /mails
+		发送邮件：
+		url：/mails
+		method:POST
+		data:action = send

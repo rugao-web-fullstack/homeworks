@@ -1,9 +1,11 @@
-var basic = require("./basic");
+var basic = require('./basic');
+var debug = require('debug')('xxx');
 basic(function (con) {
-  var sql = "select * from user;";
+  var sql = 'select * from user;';
   con.query(sql, function (err, result) {
     if (err) throw err;
-    console.log(result);
+    debug('log' + result);
+    
   });
 }, 'mydb');
 
