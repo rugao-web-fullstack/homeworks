@@ -1,0 +1,29 @@
+一．Web URL （返回HTML页面）
+1. 用户登录       url:/user/login        显示登陆界面
+2. 用户注册       url:/user/regist       显示注册界面
+3. 邮件主界面     url:/mail               显示邮件主界面
+4. 写邮件         url:/mail/write        显示写邮件界面，以及发送
+5. 读邮件         url:/mail/read         显示读邮件界面
+
+二．Web API （返回JSON数据）           
+1.读取用户列表
+  url:/users
+  method:GET
+2.读取单个用户信息
+  url:/users/:id
+  method:GET
+3.用户登录
+  url:/users
+  method:POST
+  data:action=login
+4.用户注册
+  url:/users
+  method:POST
+  data:action=register
+5.读取邮件列表
+  url:/users/:id/mails
+  method:GET
+6.发送邮件
+  url:/mails
+  method:POST
+  data:action=send
