@@ -1,3 +1,7 @@
+
+[![](https://travis-ci.org/rugao-web-fullstack/homeworks.svg?branch=master)](https://travis-ci.org/rugao-web-fullstack/homeworks)
+---
+
 # 作业
 
 1. 2017-11-14 （熟悉node.js模块化机制）    
