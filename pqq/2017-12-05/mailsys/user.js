@@ -1,11 +1,11 @@
 var router = require('express').Router();
 
-router.get('/login', function(req, res) {
+router.get('/login', function() {
   // process
 
 });
 
-router.get('/register', function(req, res) {
+router.get('/register', function() {
   // process
   
 });
