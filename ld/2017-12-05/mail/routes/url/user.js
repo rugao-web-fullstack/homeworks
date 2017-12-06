@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../../user');
+//var User = require('../../user');
 /* GET users listing. */
+//var user = new User();
 router.route('/reg')
     .get(function (req, res) {
         res.render('user/reg', { title: '注册' });
