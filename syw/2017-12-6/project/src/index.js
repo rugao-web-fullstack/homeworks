@@ -1,12 +1,12 @@
 exports.hello = 'Hello world';
 var fib = function (n) {
   switch (n) {
-    case 0:
-    case 1:
+  case 0:
+  case 1:
       return 1;
-    default:
-      console.log(n);
-      if (n < 0) {
+  default:
+    console.log(n);
+    if (n < 0) {
         throw new Error('Error Input');
       }
       return fib(n - 2) + fib(n - 1);
@@ -14,3 +14,4 @@ var fib = function (n) {
   }
 };
 exports.fib = fib;
+
