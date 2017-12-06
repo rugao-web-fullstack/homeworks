@@ -6,7 +6,7 @@ var fib = function (n) {
   case 1:
   case '1':
     return 1;
-  default:  
+  default:
     if (n < 0) {
       throw new Error('Error Input');
     }
