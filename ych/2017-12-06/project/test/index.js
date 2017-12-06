@@ -3,7 +3,6 @@ const hello = require('../src/').hello;
 const fib = require('../src/').fib;
 describe('project', function() {
   it('has hello', function() {
-    console.log(hello);
     assert.equal('Hello World', hello);
   });
   it('test fib 1', function() {
