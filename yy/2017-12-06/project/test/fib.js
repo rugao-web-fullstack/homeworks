@@ -10,4 +10,11 @@ describe('project',function(){
     assert.equal(8,fib(5));
     assert.equal(13,fib(6));
   });
+  it('test fib exception',function(){
+    try {
+      fib(-1);
+    } catch (e){
+      assert.equal('Error Input',e.message);
+    }
+  });
 });
