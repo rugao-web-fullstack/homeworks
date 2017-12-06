@@ -12,7 +12,8 @@
   },
   "devDependencies": {
     "@ljharb/eslint-config": "github:ljharb/eslint-config",
-    "mocha": "^4.0.1"
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0"
   },
   "scripts": {
     "test": "bash test.sh"
