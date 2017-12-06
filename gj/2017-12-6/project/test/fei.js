@@ -1,8 +1,8 @@
 var assert = require('assert');
-var hello = require('../src/').hello;
-var fib = require('../src/').fib;
+var hello = require('../src/fei').hello;
+var fib = require('../src/fei').fib;
 var debug = require('debug')('log');
-describe('project', function() {
+describe('fei test', function() {
   it('has hello', function() {
     //console.log(hello);
     debug('log:'+'heoolw');
@@ -22,4 +22,15 @@ describe('project', function() {
     assert.equal(55, fib(9));
     assert.equal(89, fib(10));
   });
+
+	
+  it('tset fib esception',function(){
+    try{
+      fib(-1);		
+    }catch(e){
+      assert.equal('Error Input',e.message);
+    }
+  });
+
+	
 });
