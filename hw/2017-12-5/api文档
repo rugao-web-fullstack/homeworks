@@ -31,15 +31,21 @@
     url:/users
     method:GET
     作用：查看用户列表
-  （4）发送邮件
+  （4）单个用户
+    GET /users/:id
+    作用：查看单个用户信息
+  （5）发送邮件
     url:/mails
     method:POST
     data:action=send
     作用：编写邮件信息并发送
-  （5）邮件列表
+  （6）邮件列表
     url:/mails
     method:GET
     作用：查看邮件列表
+  （6）单个邮件
+    GET /mails/:id
+    作用：查看单个邮件信息
 
     
     
