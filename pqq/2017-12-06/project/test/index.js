@@ -2,7 +2,6 @@ var assert = require('assert');
 var hello = require('../src/').hello;
 var fib = require('../src/').fib;
 
-
 describe('project', function () {
   it('has hello', function () {
     // console.log(hello);
