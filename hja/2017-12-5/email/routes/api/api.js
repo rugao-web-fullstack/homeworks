@@ -100,7 +100,7 @@ router.get('/mails/:receiver', function (req, res) {
 
 //单个邮件读取
 router.get('/mails/detail/:id', function (req, res) {
-  let id = req.params.id;/
+  let id = req.params.id;
   MailMannager.detail(id, function (err, data) {
     if (err) {
       return;
