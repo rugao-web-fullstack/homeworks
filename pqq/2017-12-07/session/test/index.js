@@ -2,7 +2,6 @@ var request = require('supertest');
 var assert = require('assert');
 var app = require('../src/app').app;
 var cookies;
-
 describe('POST /user/login', function () {
   it('should respond with json', function (done) {
     request(app)
