@@ -25,8 +25,10 @@ describe('project', function() {
     try{
       fib(-1);
     }catch(e) {
-      assert.equal('Error Input',e.message);
+      assert.equal('Error Input', e.message);
     }
 
   });
 });
+
+
