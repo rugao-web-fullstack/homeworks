@@ -8,7 +8,7 @@ describe('POST /user/login', function() {
     request(app)
       .get('/')
       .expect(200, function(err, res) {
-        console.log(res.headers);
+
         cookies = res.headers['set-cookie'];
 
         assert(cookies !== null);

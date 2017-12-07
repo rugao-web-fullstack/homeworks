@@ -2,7 +2,7 @@ var express = require('express');
 var session = require('express-session');
 
 var app = express();
-app.use(session({secret: "sosososososso"}));
+app.use(session({secret: 'sosososososso'}));
 
 app.get('/', function(req, res){
   if(req.session.page){
