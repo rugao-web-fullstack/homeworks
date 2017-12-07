@@ -8,4 +8,11 @@ describe('Project Hello', function () {
         assert.equal(3, fib(3));
         assert.equal(5, fib(4));
     });
+    it('test fib exception', function () {
+        try {
+            fib(-100);
+        } catch (e) {
+            e;
+        }
+    });
 });
