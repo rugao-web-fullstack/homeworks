@@ -1,0 +1,17 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "y",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "y"
+  },
+  "keywords": [
+    "y"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^4.0.1"
+  }
+}
