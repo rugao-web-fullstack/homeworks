@@ -1,3 +1,4 @@
+var debug = require('debug')('xxx');
 var request = require('supertest');
 var assert = require('assert');
 var app = require('../src/').app;
@@ -8,7 +9,7 @@ describe('POST /user/login', function() {
     request(app)
       .get('/')
       .expect(200, function(err, res) {
-        console.log(res.headers);
+        debug('log' + res.headers);
         cookies = res.headers['set-cookie'];
 
         assert(cookies !== null);
