@@ -1,18 +1,18 @@
 {
   "name": "project",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "supertest": "^3.0.0"
-  },
   "directories": {
     "test": "test"
   },
-  "devDependencies": {},
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "mocha": "^4.0.1",
+    "should": "^13.1.3"
+  }
 }

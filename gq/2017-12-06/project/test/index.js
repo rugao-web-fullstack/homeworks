@@ -1,6 +1,7 @@
 var assert = require('assert');
 var hello = require('../src/').hello;
 var fib = require('../src/').fib;
+var hunt = require('../src/hanoi.js');
 describe('project', function () {
   it('has hello', function () {
     // console.log(hello);
@@ -29,5 +30,20 @@ describe('project', function () {
     }
 
   });
+});
 
+describe('project',function(){
+  it('test hanoi 1', function () {
+    assert.equal('from a to c', hunt(1));
+  });
+  it('test hanoi 2',function(){
+    assert.equal('from a to b,from a to c,from b to c',hunt(2));
+  });
+  it('test hanoi exception',function(){
+    try{
+      hunt(0);
+    }catch(e){
+      assert.equal('Error Input',e.message);
+    }
+  });
 });
