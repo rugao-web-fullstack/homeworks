@@ -1,9 +1,10 @@
+var debug = require('debug')('xxx');
 var assert = require('assert');
 var hello = require('../src/').hello;
 var fib=require('../src/').fib;
 describe('project', function () {
   it('has hello', function () {
-    // console.log(hello);
+    debug('log:' +hello);
     assert.equal('Hello World', hello);
   });
 
