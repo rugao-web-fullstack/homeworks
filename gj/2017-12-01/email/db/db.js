@@ -1,6 +1,7 @@
 var debug = require('debug')('log');
 var mysql = require('mysql');
 
+//定义链接事件
 var connect=false;
 
 var init = function (cb, db) {
@@ -15,6 +16,7 @@ var init = function (cb, db) {
   }
   //创建数据库连接
   var con = mysql.createConnection(options);
+  //判断是否已经链接数据库
   if(connect){
     cb instanceof Function && cb(con);
     return;

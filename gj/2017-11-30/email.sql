@@ -46,10 +46,10 @@ UNLOCK TABLES;
 -- Table structure for table `mail-mailbox`
 --
 
-DROP TABLE IF EXISTS `mail-mailbox`;
+DROP TABLE IF EXISTS `mail_mailbox`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mail-mailbox` (
+CREATE TABLE `mail_mailbox` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `mailbox` int(64) NOT NULL,
   `mail` varchar(64) NOT NULL,
@@ -58,12 +58,12 @@ CREATE TABLE `mail-mailbox` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `mail-mailbox`
+-- Dumping data for table `mail_mailbox`
 --
 
-LOCK TABLES `mail-mailbox` WRITE;
-/*!40000 ALTER TABLE `mail-mailbox` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mail-mailbox` ENABLE KEYS */;
+LOCK TABLES `mail_mailbox` WRITE;
+/*!40000 ALTER TABLE `mail_mailbox` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mail_mailbox` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
