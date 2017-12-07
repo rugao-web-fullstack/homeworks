@@ -1,10 +1,8 @@
-var debug = require('debug')('xxx');
 var assert = require('assert');
 var hello = require('../src/').hello;
 var fib = require('../src/').fib;
 describe('project', function() {
   it('has hello', function() {
-    debug('log:' + hello);
     assert.equal('Hello World', hello);
   });
   it('test fib', function() {
@@ -15,4 +13,12 @@ describe('project', function() {
     assert.equal(5, fib(4));
     assert.equal(89, fib(10));
   });
+  it('test fib exception', function(){
+    try {
+      fib(-1);
+    } catch(e) {
+      assert.equal('error input', e.message);
+    }
+  });
 });
+
