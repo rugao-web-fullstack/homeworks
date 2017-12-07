@@ -1,5 +1,5 @@
 var arr = [];
-function hunt(n) {
+function hanio(n) {
   hnt(n, 'a', 'b', 'c');
   var arrs = arr.join();
   arr = [];
@@ -16,6 +16,6 @@ function hnt(n, a, b, c) {
     hnt(n - 1, b, a, c);
   }
 }
-module.exports = hunt;
+module.exports = hanio;
 
 
