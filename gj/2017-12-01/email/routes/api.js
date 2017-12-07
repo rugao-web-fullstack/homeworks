@@ -15,7 +15,6 @@ var mailMannage = require('../operation/mailmannage');
 var userLogin = function (req, res) {
   userMannage.Login(req.body.username, req.body.password, function (err) {
     if (err) {
-      
       res.send('0');
       return;
     } else {
@@ -67,6 +66,7 @@ router.post('/users', function (req, res) {
   }
 });
 
+//发送邮件
 var mailSend = function (req, res) {
   mailMannage.Send(req.body.sender, req.body.receiver, req.body.title, req.body.content, req.body.iread, function (err) {
     if (err) {
@@ -111,9 +111,7 @@ router.post('/mails', function (req, res) {
   case 'send':
     mailSend(req, res);
     break;
-  case 'register':
-    userRegister(req, res);
-      
+  default:
     break;
   }
 });

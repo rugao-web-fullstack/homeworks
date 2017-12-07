@@ -1,11 +1,9 @@
 var assert = require('assert');
 var hello = require('../src/fei').hello;
 var fib = require('../src/fei').fib;
-var debug = require('debug')('log');
 describe('project', function() {
   it('test fei hello', function() {
     //console.log(hello);
-    debug('log:'+'heoolw');
     assert.equal('Hello World', hello);
   });
 
