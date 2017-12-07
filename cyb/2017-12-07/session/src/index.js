@@ -7,6 +7,7 @@ app.use(session({secret: 'sosososososso'}));
 app.get('/', function(req, res){
   if(req.session.page){
     req.session.page++;
+	//...
   } else {
     req.session.page = 1;
   }
