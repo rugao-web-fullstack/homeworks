@@ -13,5 +13,4 @@ app.get('/', function(req, res){
   res.json(req.session.page);
 });
 
-app.listen(3000);
 exports.app = app;
