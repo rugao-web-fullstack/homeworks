@@ -12,4 +12,12 @@ describe('ceshi', function() {
     assert.equal(2, fib(2));
     assert.equal(3, fib(3));
   });
+
+  it('test fib exception', function() {
+    try {
+      fib(-1);
+    } catch (e) {
+      assert.equal('Error Input', e.message);
+    }
+  });
 });
