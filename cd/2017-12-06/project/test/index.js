@@ -1,7 +1,6 @@
 var assert = require('assert');
 var hello = require('../src/').hello;
-var fib = require('../src/index.js').fib;
-var hunt = require('../src/index2.js');
+var fib = require('../src/index.js').fib; 
 describe('project', function () {
   it('has hello', function () {
     assert.equal('Hello world', hello);
