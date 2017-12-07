@@ -3,14 +3,8 @@ do
   if [ "$file" == "node_modules" ];then
       continue
   fi
-
-  if [ "$file" == "rwx" ];then
-      continue
-  fi
-
-
   if [ -d "$file" ];then
     echo "inside $file ..."
-    ./node_modules/.bin/eslint $file || exit 1;
+    ./node_modules/.bin/eslint $file;
   fi
 done
