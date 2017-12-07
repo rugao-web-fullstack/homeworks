@@ -13,6 +13,5 @@ app.get('/', function(req, res){
   res.json(req.session.page);
 });
 
-
 exports.app = app;
 
