@@ -3,6 +3,7 @@ var app = require('../src/').app;
 var assert = require('assert');
 
 var cookies;
+
 describe('POST /user/login', function () {
     it('should respond with json', function (done) {
         request(app)
