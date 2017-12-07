@@ -10,6 +10,7 @@ router.get('/write', function (req, res, next) {
   res.render('write', { name: req.session.user.username });
   debug('log : '+next);
 });
+
 router.get('/read', function (req, res, next) {
   res.render('read', { name: req.session.user.username });
   debug('log : '+next);
