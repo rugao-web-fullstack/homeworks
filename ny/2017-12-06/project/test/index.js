@@ -1,7 +1,6 @@
 var assert = require('assert');
 var hello = require('../src/').hello;
 var fib = require('../src/').fib;
-var hanoi = require('../src/hanoi').hanoi;
 describe('project', function() {
   it('has hello', function() {
     assert.equal('Hello World', hello);
@@ -18,17 +17,6 @@ describe('project', function() {
     try {
       fib(-1);
     } catch(e) {
-      assert.equal('error input', e.message);
-    }
-  });
-  it('test hanoi', function () {
-    assert.equal('from a to c', hanoi(1));
-    assert.equal('from a to b,from a to c,from b to c', hanoi(2));
-  });
-  it('test hanoi exception', function () {
-    try {
-      hanoi(0);
-    } catch (e) {
       assert.equal('error input', e.message);
     }
   });
