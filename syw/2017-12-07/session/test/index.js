@@ -1,3 +1,4 @@
+var debug = require('debug')('xxx');
 var request = require('supertest');
 var assert = require('assert');
 var app = require('../src/').app;
@@ -7,7 +8,9 @@ describe('POST /user/login', function() {
   it('should respond with json', function(done) {
     request(app)
       .get('/')
-      .expect(200, function(err, res) { 
+      .expect(200, function(err, res) {
+        // console.log(res.headers);
+        debug('log:' + res.headers);
         cookies = res.headers['set-cookie'];
 
         assert(cookies !== null);
@@ -20,7 +23,8 @@ describe('POST /user/login', function() {
     var req = request(app)
       .get('/');
     req.cookies = cookies;
-    req.expect(200, function(err, res) {
+    req
+      .expect(200, function(err, res) {
         assert(res.body, 2);
         done();
       });
