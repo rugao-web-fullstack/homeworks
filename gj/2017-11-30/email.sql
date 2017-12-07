@@ -58,12 +58,12 @@ CREATE TABLE `mail_mailbox` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `mail-mailbox`
+-- Dumping data for table `mail_mailbox`
 --
 
 LOCK TABLES `mail_mailbox` WRITE;
-/*!40000 ALTER TABLE `mail-mailbox` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mail-mailbox` ENABLE KEYS */;
+/*!40000 ALTER TABLE `mail_mailbox` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mail_mailbox` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
