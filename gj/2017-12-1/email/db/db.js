@@ -1,5 +1,8 @@
 var debug = require('debug')('log');
 var mysql = require('mysql');
+
+var connect=false;
+
 var init = function (cb, db) {
   var options = {
     host: 'localhost',
@@ -12,10 +15,15 @@ var init = function (cb, db) {
   }
   //创建数据库连接
   var con = mysql.createConnection(options);
+  if(connect){
+    cb instanceof Function && cb(con);
+    return;
+  }
   //连接数据库
   con.connect(function (err) {
     if (err) throw err;
     // console.log('Connected');
+    connect=true;
     debug('log: '+'content');
     //返回的cd是函数类型，就执行cb(con)
     cb instanceof Function && cb(con);
