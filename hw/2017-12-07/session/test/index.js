@@ -18,6 +18,7 @@ describe('POST /user/login', function() {
       });
   });
 
+  
   it('should respond with json', function(done) {
     var req = request(app)
       .get('/');
