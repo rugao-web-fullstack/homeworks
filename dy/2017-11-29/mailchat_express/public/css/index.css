@@ -12,6 +12,12 @@
 .col-sm-4 > .r-side > form > p {
     text-align: right;
 }
+.col-sm-4 > .r-side > form > p.register-warnning, .col-sm-4 > .r-side > form > p.login-warnning {
+    color: rgb(240, 94, 50);
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+}
 .col-sm-4 > .r-side > h4 {
     margin-bottom: 10px;
     font-weight: 700;

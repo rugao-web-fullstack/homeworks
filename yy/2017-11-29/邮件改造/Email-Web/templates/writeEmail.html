@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+	</head>
+	<body>
+		<h1>写邮件</h1>
+		<form action="/send" method="post">
+			<label for="receiver">发件人：</label><br>
+			<input type="text" name="sender" id='sender' placeholder="请输入邮箱地址" value={{name}}><br>
+			<label for="receiver">收件人：</label><br>
+			<input type="text" name="receiver" id='receiver' placeholder="请输入邮箱地址"><br>
+			<label for="title">标题：</label><br>
+			<input type="text" name="title" id='title' placeholder="请输入标题"><br>
+			<label for="content">正文：</label><br>
+			<textarea rows="10" cols="30" name='content' id="content"></textarea><br>
+			<input type="submit" value='发送'/>
+		</form>
+		<form action="login-success" method="get">
+			<input type="submit" value='返回'/>
+		</form>
+	</body>
+</html>

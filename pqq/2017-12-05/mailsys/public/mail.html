@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>邮箱页面</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+    <script src="./js/jquery.js"></script>
+
+    <style>
+        * {
+            list-style: none;
+            text-decoration: none;
+        }
+
+        body {
+            background: #bddff9;
+        }
+
+        header {
+            height: 50px;
+            margin: 5px;
+            font-size: 20px;
+        }
+
+        header .username {
+            color: red;
+        }
+
+        ul.gn {
+            float: left;
+            position: relative;
+            margin-left: 60px;
+            z-index: 999;
+        }
+
+        ul.gn li {
+            padding: 3px;
+            border: 1px solid;
+            height: 100px;
+            line-height: 100px;
+            width: 60px;
+            text-align: center;
+            background: #242b3c;
+            color: #71a5d5;
+        }
+
+        ul.gn li.select1 {
+            background: #bddff9;
+            color: #242b3c;
+            border-right: #bddff9 1px;
+        }
+
+        ul.tab {
+            float: left;
+            position: relative;
+            left: -42px;
+            z-index: 1;
+        }
+
+        ul.tab li {
+            padding: 20px;
+            width: 800px;
+            height: 600px;
+            border: 1px solid;
+            /* display: block; */
+        }
+
+        .select {
+            display: block;
+        }
+
+        .hid {
+            display: none;
+        }
+
+        .tab-1 input,
+        .tab-1 textarea {
+            width: 400px;
+            height: 30px;
+            margin-bottom: 20px;
+        }
+
+
+        .tab-1 textarea {
+            height: 200px;
+        }
+
+        .info {
+            margin-top: 40px;
+            color: red;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #send {
+            width: 80px;
+            height: 40px;
+            text-align: center;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        table {
+            border: 1px solid;
+        }
+
+        th,
+        td {
+            border: 1px solid;
+            width: 200px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header class="">
+        <span>当前用户：</span>
+        <span class="username">root </span>
+    </header>
+
+    <p>用户功能</p>
+    <ul class="gn">
+        <li class="select1" id="sendli">写信</li>
+        <li id="recli">收件箱</li>
+    </ul>
+
+    <ul class="tab">
+        <li class="tab-1 select" id="tab-1">
+
+            <form>
+                <span> 邮件标题</span>
+                <br/>
+                <input type="text" name='mtitle' id="mtitle">
+                <br/>
+
+                <span> 邮件内容</span>
+                <br/>
+                <textarea rows="10" name='mcontent' id="mcontent"></textarea>
+
+                <br/>
+
+                <span> &nbsp;&nbsp;收件人&nbsp;</span>
+                <br/>
+                <input type="text" name='receiver' id="mreceiver">
+                <br/>
+                <input type="text" value="发送" id="send" readonly>
+
+            </form>
+
+            <div class="info">
+                <!-- 提示信息：发送成功！ -->
+            </div>
+
+
+
+        </li>
+        <li id="tab-2" class="hid">
+            <table id="myTable">
+                <th>邮件标号</th>
+                <th>发件人</th>
+                <th>标题</th>
+                <!-- <tr>
+                    <td>1</td>
+                    <td>潘倩倩</td>
+                    <td>测试邮件</td>
+                </tr> -->
+            </table>
+        </li>
+    </ul>
+</body>
+
+
+<script>
+    $(document).ready(function () {
+        // 发送邮件---------------------------------
+        $('#send').on('click', function () {
+            var params = {
+                title: $("#mtitle").val(),
+                content: $("#mcontent").val(),
+                receiver: $('#mreceiver').val()
+
+            };
+            $.ajax({
+                data: params,
+                url: '/sendmail',
+                dataType: 'json',
+                type: 'post',
+                success: function (data) {
+                    var res = data;
+                    console.log(res);
+                    if (res[0] == 'fail') {
+                        $('.info').html('提示信息发送失败--请检查填写的邮件信息');
+                        $("#mtitle").val() = '';
+                        $("#mcontent").val() = '';
+                        $('#mreceiver').val() = '';
+                    }
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('error ' + textStatus + " " + errorThrown);
+                }
+            });
+        });
+
+
+
+        // 接受邮件---------------------------------
+        $('#recli').on('click', function () {
+            console.log('111');
+            $('#recli').addClass('select1');
+            $('#sendli').removeClass('select1');
+            $('#tab-2').addClass('select').removeClass('hid');
+            $('#tab-1').removeClass('select').addClass('hid');
+            var recpar = {
+                receiver: 'root'
+            }
+            $.ajax({
+                data: recpar,
+                url: '/recmail',
+                dataType: 'json',
+                type: 'post',
+                success: function (data) {
+                    console.log(data);
+                    console.log(data.length);
+                    console.log(data[0]);
+                    console.log(data[0].length);
+                    console.log(data[0][0].title);
+                    for(var i = 0;i<data[0].length;i++){
+                        $("#myTable").append("<tr><td>"+i+1+"</td><td>"+data[0][i].sendername+"</td><td>"+data[0][i].title+"</td></tr>");
+                    }
+                }
+            });
+
+            // $("#myTable").append("<tr><td>222</td><td>222</td><td>222</td></tr>");
+            // $("#myTable").append("<tr><td>2222222</td><td>222</td><td>222</td></tr>");
+            
+
+
+        });
+    });
+</script>
+
+
+</html>
