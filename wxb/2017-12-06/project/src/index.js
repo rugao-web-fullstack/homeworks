@@ -1,4 +1,3 @@
-exports.hello='Hello world';
 var fib=function(n){
   switch(n){
   case 0:
