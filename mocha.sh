@@ -11,7 +11,7 @@ do
     fi
     if [ -d "$file/2017-12-06/hanoi" ]; then
       echo "inside hanoi coverage $file ..."
-      ./node_modules/nyc/bin/nyc.js --check-coverage --lines 100 --functions 95 --branches 95 ./node_modules/.bin/mocha "$file/2017-12-06/project/hanoi" || exit 1;
+      ./node_modules/nyc/bin/nyc.js --check-coverage --lines 100 --functions 95 --branches 95 ./node_modules/.bin/mocha "$file/2017-12-06/hanoi/test" || exit 1;
     fi
   fi
 done
