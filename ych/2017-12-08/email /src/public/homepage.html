@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>welcom to mail system! please check!</p>
+    <button id="login">login</button>
+    <button id="register">register</button>
+
+
+<script>
+	var login = document.getElementById("login");
+	var register = document.getElementById("register");
+	register.onclick = function(){
+		location.href = "user/register";
+	}
+	login.onclick = function(){
+		location.href = "user/login";
+	}
+</script>
+</body>
+</html>
