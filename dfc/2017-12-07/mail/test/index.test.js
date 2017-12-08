@@ -123,26 +123,21 @@ describe('POST /users/register', function() {
     });
     con.connect(function (err) {
       if (err) throw err;
-      var sql = "CREATE TABLE user (id INT NOT NULL AUTO_INCREMENT,username VARCHAR(20) NOT NULL,password VARCHAR(64) NOT NULL,createdAt DATETIME,PRIMARY KEY ( id ))";
-      con.query(sql, function (err, result) {
+      var sql = 'CREATE TABLE user (id INT NOT NULL AUTO_INCREMENT,username VARCHAR(20) NOT NULL,password VARCHAR(64) NOT NULL,createdAt DATETIME,PRIMARY KEY ( id ))';
+      con.query(sql, function (err) {
         if (err) throw err;
-        console.log("user table created");
-        sql = "CREATE TABLE user_mailbox (id INT NOT NULL AUTO_INCREMENT,user int NOT NULL,mailbox int NOT NULL,createdAt DATETIME,PRIMARY KEY ( id ))";
-        con.query(sql, function (err, result) {
+        sql = 'CREATE TABLE user_mailbox (id INT NOT NULL AUTO_INCREMENT,user int NOT NULL,mailbox int NOT NULL,createdAt DATETIME,PRIMARY KEY ( id ))';
+        con.query(sql, function (err) {
           if (err) throw err;
-          console.log("user_mailbox table created");
-          sql = "CREATE TABLE mailbox (id INT NOT NULL AUTO_INCREMENT,address VARCHAR(20) NOT NULL,createdAt DATETIME,PRIMARY KEY ( id ))";
-          con.query(sql, function (err, result) {
+          sql = 'CREATE TABLE mailbox (id INT NOT NULL AUTO_INCREMENT,address VARCHAR(20) NOT NULL,createdAt DATETIME,PRIMARY KEY ( id ))';
+          con.query(sql, function (err) {
             if (err) throw err;
-            console.log("mailbox table created");
-            sql = "CREATE TABLE receivered_mail (id INT NOT NULL AUTO_INCREMENT,mailbox int NOT NULL,mail int NOT NULL,createdAt DATETIME,PRIMARY KEY ( id ))";
-            con.query(sql, function (err, result) {
+            sql = 'CREATE TABLE receivered_mail (id INT NOT NULL AUTO_INCREMENT,mailbox int NOT NULL,mail int NOT NULL,createdAt DATETIME,PRIMARY KEY ( id ))';
+            con.query(sql, function (err) {
               if (err) throw err;
-              console.log("receivered_mail table created");
-              sql = "CREATE TABLE mail (id INT NOT NULL AUTO_INCREMENT,sender VARCHAR(20) NOT NULL, receiver VARCHAR(20) NOT NULL, title VARCHAR(20) NOT NULL, content VARCHAR(250) NOT NULL, date VARCHAR(20) NOT NULL,createdAt DATETIME,PRIMARY KEY ( id ))";
-              con.query(sql, function (err, result) {
+              sql = 'CREATE TABLE mail (id INT NOT NULL AUTO_INCREMENT,sender VARCHAR(20) NOT NULL, receiver VARCHAR(20) NOT NULL, title VARCHAR(20) NOT NULL, content VARCHAR(250) NOT NULL, date VARCHAR(20) NOT NULL,createdAt DATETIME,PRIMARY KEY ( id ))';
+              con.query(sql, function (err) {
                 if (err) throw err;
-                console.log("mail table created");
                 con.end();
                 done();
               });
@@ -162,10 +157,7 @@ describe('POST /users/register', function() {
         'sub':'注册'
       })
       .set('Accept', 'application/json')
-      .expect(200,function(err,res){
-        
-        done();
-      });
+      .expect(200,done);
   });
   it('重复注册测试', function(done) {
     request(app)

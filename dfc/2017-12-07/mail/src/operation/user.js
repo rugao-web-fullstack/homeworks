@@ -46,23 +46,23 @@ function register(req, res) {
         //录入用户表
         sql = 'INSERT INTO user (username, password) VALUES(\'' + data.username + '\',\'' + data.password + '\');';
         con.query(sql, function(err) {
-          // if(err) throw err;
+          debug('error:' + err);
           debug('log:' + req.body.username + '录入成功');
           sql = 'SELECT id FROM user WHERE username = \'' + data.username + '\' AND password = \'' + data.password + '\';';
           con.query(sql, function(err, result) {
-            // if(err) throw err;
+            debug('error:' + err);
             userid = result[0].id;
             sql = 'INSERT INTO mailbox (address) VALUES(\'' + data.username + '@dmail.com\');';
             con.query(sql, function(err) {
-              // if(err) throw err;
+              debug('error:' + err);
               debug('log:' + data.username + '地址录入成功');
               sql = 'SELECT id FROM mailbox WHERE address = \'' + data.username + '@dmail.com\';';
               con.query(sql, function(err, result) {
-                // if(err) throw err;
+                debug('error:' + err);
                 mailboxid = result[0].id;
                 sql = 'INSERT INTO user_mailbox (user, mailbox) VALUES(\'' + userid + '\',\'' + mailboxid + '\');';
                 con.query(sql, function(err) {
-                  // if(err) throw err;
+                  debug('error:' + err);
                   debug('log:' + data.username + '关系表录入成功');
                   req.session.user = data.username;
                   res.send('/main');
