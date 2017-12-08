@@ -6,11 +6,8 @@ var logger = require('morgan');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/web_url/index');
-var user = require('./routes/web_url/user');
-var mail = require('./routes/web_url/mail');
-var users = require('./routes/web_api/users');
-// var mails = require('./routes/web_api/mails');
+var index = require('./routes/index');
+var user = require('./routes/user'); 
 
 var app = express();
 
@@ -31,13 +28,8 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-//url
 app.use('/', index);
-app.use('/user', user);
-app.use('/mail', mail);
-//api
-app.use('/users', users);
-// app.use('/mails', mails);
+app.use('/user', user); 
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
