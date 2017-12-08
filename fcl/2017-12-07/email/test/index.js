@@ -9,7 +9,7 @@ describe('url', function () {
     request(app)
       .get('/')
       .expect(200, function (err, res) {
-       assert((res.text).indexOf('Express') !== -1);
+        assert((res.text).indexOf('Express') !== -1);
         done();
       });
   });
