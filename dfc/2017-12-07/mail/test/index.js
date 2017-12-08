@@ -79,46 +79,125 @@ describe('页面url测试', function () {
         done();
       });
   });
+});
 
-  describe('数据库链接测试', function () {
-    before(function () {
-      // 创建数据库
-      var con = mysql.createConnection({
-        host: process.env.MYSQL_HOST,
-        user: process.env.MYSQL_USERNAME,
-        password: process.env.MYSQL_PASSWORD
-      });
-      con.query('DROP DATABASE dmail', function () { });
-      con.query('CREATE DATABASE dmail', function () { });
-      con.end();
+describe('数据库链接测试', function () {
+  before(function (done) {
+    // 创建数据库
+    var con = mysql.createConnection({
+      host: process.env.MYSQL_HOST,
+      user: process.env.MYSQL_USERNAME,
+      password: process.env.MYSQL_PASSWORD
     });
-    it('connect to mysql', function (done) {
-      basic(function (con) {
-        assert(con);
+    con.query('DROP DATABASE dmail', function () {
+      con.query('CREATE DATABASE dmail', function () {
         con.end();
         done();
       });
-    });
-    it('connect to dmail', function (done) {
-      basic(function (con) {
-        assert(con);
-        con.end();
-        done();
-      }, 'dmail');
-    });
-    it('should not connect to ss', function () {
-      basic('', 'ss');
     });
   });
-  // it('should respond with json', function (done) {
-  //   var req = request(app)
-  //     .get('/');
-  //   req.cookies = cookies;
-  //   req
-  //     .expect(200, function (err, res) {
-  //       assert(res.body, 2);
-  //       done();
-  //     });
-  // });
+  it('connect to mysql', function (done) {
+    basic(function (con) {
+      assert(con);
+      con.end();
+      done();
+    });
+  });
+  it('connect to dmail', function (done) {
+    basic(function (con) {
+      assert(con);
+      con.end();
+      done();
+    }, 'dmail');
+  });
+});
 
+describe('POST /users/register', function() {
+  before(function (done) {
+    // 链接数据库
+    var con = mysql.createConnection({
+      host: process.env.MYSQL_HOST,
+      user: process.env.MYSQL_USERNAME,
+      password: process.env.MYSQL_PASSWORD,
+      database: 'dmail'
+    });
+    con.connect(function (err) {
+      if (err) throw err;
+      var sql = "CREATE TABLE user (id INT NOT NULL AUTO_INCREMENT,username VARCHAR(20) NOT NULL,password VARCHAR(64) NOT NULL,createdAt DATETIME,PRIMARY KEY ( id ))";
+      con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("user table created");
+        sql = "CREATE TABLE user_mailbox (id INT NOT NULL AUTO_INCREMENT,user int NOT NULL,mailbox int NOT NULL,createdAt DATETIME,PRIMARY KEY ( id ))";
+        con.query(sql, function (err, result) {
+          if (err) throw err;
+          console.log("user_mailbox table created");
+          sql = "CREATE TABLE mailbox (id INT NOT NULL AUTO_INCREMENT,address VARCHAR(20) NOT NULL,createdAt DATETIME,PRIMARY KEY ( id ))";
+          con.query(sql, function (err, result) {
+            if (err) throw err;
+            console.log("mailbox table created");
+            sql = "CREATE TABLE receivered_mail (id INT NOT NULL AUTO_INCREMENT,mailbox int NOT NULL,mail int NOT NULL,createdAt DATETIME,PRIMARY KEY ( id ))";
+            con.query(sql, function (err, result) {
+              if (err) throw err;
+              console.log("receivered_mail table created");
+              sql = "CREATE TABLE mail (id INT NOT NULL AUTO_INCREMENT,sender VARCHAR(20) NOT NULL, receiver VARCHAR(20) NOT NULL, title VARCHAR(20) NOT NULL, content VARCHAR(250) NOT NULL, date VARCHAR(20) NOT NULL,createdAt DATETIME,PRIMARY KEY ( id ))";
+              con.query(sql, function (err, result) {
+                if (err) throw err;
+                console.log("mail table created");
+                con.end();
+                done();
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+  it('注册测试', function(done) {
+    request(app)
+      .post('/users/register')
+      .type('json')
+      .send({
+        'username':'root',
+        'password':'123',
+        'sub':'注册'
+      })
+      .set('Accept', 'application/json')
+      .expect(200, done);
+  });
+  it('重复注册测试', function(done) {
+    request(app)
+      .post('/users/register')
+      .type('json')
+      .send({
+        'username':'root',
+        'password':'123',
+        'sub':'注册'
+      })
+      .set('Accept', 'application/json')
+      .expect(200, done);
+  });
+  it('登录测试', function(done) {
+    request(app)
+      .post('/users/login')
+      .type('json')
+      .send({
+        'username':'root',
+        'password':'123',
+        'sub':'登录'
+      })
+      .set('Accept', 'application/json')
+      .expect(200, done);
+  });
+  it('登录失败测试', function(done) {
+    request(app)
+      .post('/users/login')
+      .type('json')
+      .send({
+        'username':'root',
+        'password':'1234',
+        'sub':'登录'
+      })
+      .set('Accept', 'application/json')
+      .expect(200, done);
+  });
 });
