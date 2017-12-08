@@ -1,10 +1,19 @@
 var express = require('express');
 var mysql = require('mysql');
+var path = require('path');
+var nunjucks = require('nunjucks');
 var app = express();
 
-app.get('/user', function(req, res) {
-  res.status(200).json({ name: 'test' });
+var dir = path.resolve(__dirname, './src/templates');
+     
+nunjucks.configure(dir, {
+  autoescape: true,
+  express: app
 });
+
+// 设置静态文件托管
+app.use('/public', express.static(__dirname + '/src/public'));
+app.use('/', require('./src/routers/main'));
 
 var con = mysql.createConnection({
   host: process.env.MYSQL_HOST,
