@@ -30,6 +30,13 @@
     "type": "git",
     "url": "git+https://github.com/rugao-web-fullstack/homeworks.git"
   },
+  "nyc": {
+    "exclude": [
+      "**/*.spec.js",
+      "**/*.test.js",
+      "test"
+    ]
+  },
   "author": "",
   "license": "ISC",
   "bugs": {
