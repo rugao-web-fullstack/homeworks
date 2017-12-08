@@ -5,8 +5,8 @@ function connectServer() {
     var client = mysql.createConnection({
         host: process.env.MYSQL_HOST,
         user: process.env.MYSQL_USERNAME,
-        password: process.env.MYSQL_PASSWORD,
-        database: 'mydb'
+        password: process.env.MYSQL_PASSWORD
+        //database: 'mydb'
     });
 
     return client;
