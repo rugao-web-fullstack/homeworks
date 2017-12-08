@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="we">write email</button>
+    <button id="re">read email</button>
+    <script>
+   	var btnwe = document.getElementById("we");
+	var btnre = document.getElementById("re");
+	btnwe.onclick = function(){
+		location.href = "mail/write";	
+	}
+	btnre.onclick = function(){
+		location.href = "mail/read";	
+	}
+    </script>
+</body>
+</html>
