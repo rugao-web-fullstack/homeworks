@@ -7,12 +7,12 @@ var router = express.Router();
 router.get('/', function (req, res) {
   //判断session是否存在
   //if (req.session.user) {
-    res.render('main', {
-      title: '主页',
-      username: req.session.user
-    });
+  res.render('main', {
+    title: '主页',
+    username: req.session.user
+  });
   //} else {
-    //res.render('index', { title: '欢迎' });
+  //res.render('index', { title: '欢迎' });
   //}
 });
 
