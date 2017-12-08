@@ -1,23 +1,28 @@
+var express = require('express');
 var mysql = require('mysql');
-var options = {
+var app = express();
+
+app.get('/user', function(req, res) {
+  res.status(200).json({ name: 'test' });
+});
+
+var con = mysql.createConnection({
   host: process.env.MYSQL_HOST,
   user: process.env.MYSQL_USERNAME,
   password: process.env.MYSQL_PASSWORD
-};
-var con = mysql.createConnection(options);
-var cbFunc = function cbFunc(cb) {
+});
+
+var cbFunc = function cbFunc (cb) {
   return function (err) {
-    if (err) {
-      throw err;
-    }
+    if (err) throw err; 
+
     if (cb instanceof Function) {
       cb(con);
     }
   };
 };
-
-exports.cbFunc = cbFunc;
 exports.mysql = function (cb) {
   con.connect(cbFunc(cb));
 };
-exports.hello = 'hello';
+exports.cbFunc = cbFunc;
+exports.app = app;

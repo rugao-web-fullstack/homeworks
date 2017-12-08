@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mail</title>
+    <style>
+        .container{
+            margin:30px auto;
+            padding:30px;
+            width:850px;
+            height:520px;
+            border-radius: 10px;
+            border:10px solid lightskyblue;
+        }
+        .head div{
+            display: inline-block;
+        }
+        .head div:nth-child(1){
+            margin-left: 250px;
+            font-size: 28px;
+            font-family: 仿宋;
+            font-weight: 700;
+        }
+        .head div:nth-child(2){
+            float:right;
+        }
+        .content{
+            margin-top: 10px;
+            padding:50px;
+        }
+        table tr{
+           background: #ccc;
+        }
+        table tr th{
+            height: 35px;
+            width:300px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="head">
+        <div >
+            欢迎来到邮件系统！
+        </div>
+        <div>用户：<span>{{name}}</span></div>
+    </div>
+    <div class="content">
+        <table>
+            <tr>
+                <th>序号</th>
+                <th>标题</th>
+                <th>发送者</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><button>=</button></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
