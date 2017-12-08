@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			<%= title %>
+		</title>
+	</head>
+	<body>
+		<h1>
+			用户：<%= username %>，您好，欢迎使用邮件系统！
+		</h1>
+		<form action="/email/write" method="get">
+			<input type="submit" value='1.写邮件'/>
+		</form>
+		<form action="/email/read" method="get">
+			<input type="submit" value='2.查看邮件'/>
+		</form>
+	</body>
+</html>
