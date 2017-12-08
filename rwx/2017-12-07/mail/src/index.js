@@ -1,4 +1,6 @@
 var mysql = require('mysql');
+var express = require('express');
+var app = express();
 var options = {
   host: process.env.MYSQL_HOST,
   user: process.env.MYSQL_USERNAME,
@@ -21,3 +23,4 @@ exports.mysql = function (cb) {
   con.connect(cbFunc(cb));
 };
 exports.hello = 'hello';
+exports.app = app;
