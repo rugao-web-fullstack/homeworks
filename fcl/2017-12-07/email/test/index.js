@@ -1,15 +1,15 @@
 var request = require('supertest');
 var assert = require('assert');
-var app = require('../src/app').app;
+var app = require('../src/app');
 
 // var cookies;
 
-describe('页面url测试', function () {
+describe('url', function () {
   it('get /', function (done) {
     request(app)
       .get('/')
       .expect(200, function (err, res) {
-       assert((res.body.H).indexOf('欢 迎 使 用 邮 件 系 统') !== -1);
+       assert((res.text).indexOf('Express') !== -1);
         done();
       });
   });
@@ -17,7 +17,7 @@ describe('页面url测试', function () {
     request(app)
       .get('/users/home')
       .expect(200, function (err, res) {
-        assert((res.body.H).indexOf('请选择您需要的服务') !== -1);
+        assert((res.text).indexOf('home') !== -1);
         done();
       });
   });
@@ -25,7 +25,7 @@ describe('页面url测试', function () {
     request(app)
       .get('/users/login')
       .expect(200, function (err, res) {
-        assert((res.body.H).indexOf('登录') !== -1);
+        assert((res.text).indexOf('login') !== -1);
         done();
       });
   });
@@ -33,7 +33,7 @@ describe('页面url测试', function () {
     request(app)
       .get('/users/register')
       .expect(200, function (err, res) {
-        assert((res.body.H).indexOf('注册') !== -1);
+        assert((res.text).indexOf('register') !== -1);
         done();
       });
   });
@@ -41,7 +41,7 @@ describe('页面url测试', function () {
     request(app)
       .get('/mails/read')
       .expect(200, function (err, res) {
-        assert((res.body.H).indexOf('邮 件 列 表') !== -1);
+        assert((res.text).indexOf('read') !== -1);
         done();
       });
   });
@@ -49,15 +49,15 @@ describe('页面url测试', function () {
     request(app)
       .get('/mails/write')
       .expect(200, function (err, res) {
-        assert((res.body.H).indexOf('填 写 邮 件') !== -1);
+        assert((res.text).indexOf('write') !== -1);
         done();
       });
   });
-  it('get /readcontent/:id', function (done) {
+  it('get /mails/readcontent/:id', function (done) {
     request(app)
-      .get('/readcontent/:id')
+      .get('/mails/readcontent/:id')
       .expect(200, function (err, res) {
-        assert((res.body.H).indexOf('readcontent') !== -1);
+        assert((res.text).indexOf('readcontent') !== -1);
         done();
       });
   });

@@ -6,14 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
-//添加debug包
-var debug = require('debug')('log');
 
 //路由
 var index = require('./routes/index');
 var users = require('./routes/users');
 var mails = require('./routes/mails');
-var api = require('./routes/api');
 
 var app = express();
 
@@ -34,7 +31,6 @@ app.use(session({ secret: 'sosos' }));
 app.use('/', index);
 app.use('/users', users);
 app.use('/mails', mails);
-app.use('/api', api);
 
 // catch 404 and forward to error handler
 // app.use(function (req, res, next) {
