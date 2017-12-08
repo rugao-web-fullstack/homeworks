@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/web_url/index');
 var user = require('./routes/web_url/user');
 var mail = require('./routes/web_url/mail');
-// var users = require('./routes/web_api/users');
+var users = require('./routes/web_api/users');
 // var mails = require('./routes/web_api/mails');
 
 var app = express();
@@ -36,7 +36,7 @@ app.use('/', index);
 app.use('/user', user);
 app.use('/mail', mail);
 //api
-// app.use('/users', users);
+app.use('/users', users);
 // app.use('/mails', mails);
 
 // catch 404 and forward to error handler
