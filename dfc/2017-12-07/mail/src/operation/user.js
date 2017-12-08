@@ -20,9 +20,11 @@ function login(req, res) {
         debug('log:' + req.body.username + '登录成功');
         req.session.user = req.body.username;
         res.send('/main');
+        con.end();
       } else {
         debug('log:' + '登录失败');
         res.send('password_wrong');
+        con.end();
       }
     });
   }, 'dmail');
@@ -37,6 +39,7 @@ function register(req, res) {
       if(result.length !== 0) {
         debug('log:' + '注册失败');
         res.send('username_existed');
+        con.end();
       } else {
         var userid = 0;
         var mailboxid = 0;
@@ -63,6 +66,7 @@ function register(req, res) {
                   debug('log:' + data.username + '关系表录入成功');
                   req.session.user = data.username;
                   res.send('/main');
+                  con.end();
                 });
               });
             });

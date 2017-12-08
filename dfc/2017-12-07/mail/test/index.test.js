@@ -162,7 +162,10 @@ describe('POST /users/register', function() {
         'sub':'注册'
       })
       .set('Accept', 'application/json')
-      .expect(200, done);
+      .expect(200,function(err,res){
+        
+        done();
+      });
   });
   it('重复注册测试', function(done) {
     request(app)
