@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            margin: 100px auto;
+            padding: 30px;
+            width: 750px;
+            height: 420px;
+            border-radius: 10px;
+            border: 10px solid lightskyblue;
+        }
+
+        .head {
+            text-align: center;
+            font-size: 28px;
+            font-family: 仿宋;
+            font-weight: 700;
+        }
+
+        .content {
+            margin-top: 40px;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .content div {
+            margin-bottom: 20px;
+        }
+
+        .content div:nth-child(1) {
+            margin-left: -15px;
+        }
+
+        .content div span {
+            font-size: 18px;
+            font-family: 微软雅黑;
+            color: #4C4C4C;
+        }
+
+        .content div input {
+            padding-left: 10px;
+            width: 250px;
+            height: 30px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .content div:nth-child(3) input{
+            cursor: pointer;
+            width: 110px;
+            height: 40px;
+            font-size: 18px;
+            border-radius: 4px;
+            border: 1px solid lightgreen;
+            background: lightgreen;
+        }
+
+        .content div:nth-child(4) {
+            float: right;
+        }
+
+        .content div a {
+            text-decoration: none;
+        }
+
+        .content div a:hover {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="head">
+        欢迎来到邮件系统！
+    </div>
+    <div class="content">
+        <form action="/mails" method="post">
+            <div><span>用户名：</span><input type="text" name='username' placeholder="请输入用户名"></div>
+            <div><span>密码：</span><input type="password" name='password' placeholder="请输入密码"></div>
+            <div><input type="submit" value="登录"></div>
+            <div>还没有账号？ 去 <a href="/user/register">注册</a></div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
