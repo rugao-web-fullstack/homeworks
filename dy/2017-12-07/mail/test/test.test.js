@@ -5,22 +5,17 @@ var mysql = require('../mail').mysql;
 var cbFunc = require('../mail').cbFunc;
 
 // 测试 express
-describe('GET /user', function () {
-  it ('should response with json', function (done) {
+describe('GET index.html', function () {
+  it ('should response with index.html', function (done) {
     request(app)
-      .get('/user')
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
+      .get('/')
+      .set('Accept', 'application/html')
+      .expect('Content-Type', /text\/html; charset=utf-8/)
       .expect(200, done);
   });
 });
 
 // 测试 mysql
-describe('#indexOf()', function () {
-  it ('should return -1 when the value is not present', function () {
-    assert.equal(-1, [1, 2, 3].indexOf(4));
-  });
-});
 describe('mysql()', function () {
   it ('should test cbFunc', function () {
     var entered = false;
@@ -37,11 +32,17 @@ describe('mysql()', function () {
     cb(false);
   });
 
-  it ('should connect to mysql', function (done) {
+  it ('should connect to mysql', function () {
     mysql(function (con) {
       assert(con);
       con.end();
-      done();
     });
   });
 });
+
+// 测试 nunjucks
+// describe('test nunjucks', function () {
+//     it ('should get files', function () {
+
+//     });
+// });
