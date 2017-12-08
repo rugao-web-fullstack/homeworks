@@ -1,0 +1,264 @@
+/*=======================index页面=============================*/
+div.index {
+  width: 1000px;
+  height: 400px;
+  margin: 100px auto;
+  border: 2px solid #8ec1ff;
+  padding: 100px;
+  text-align: center;
+  border-radius: 10px;
+  color: #7e91ff;
+  background: #f0f4ff;
+}
+
+div.index h1 {
+  margin-bottom: 80px;
+}
+
+div.index a {
+  display: inline-block;
+  margin: 100px 50px;
+  width: 250px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid #ffb19e;
+  background: #ff8d82;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+}
+
+div.index a:hover {
+  background: white;
+  color: #ff8d82;
+}
+
+
+/*===============================登录注册======================*/
+div.index form div {
+  height: 80px;
+  color: #ff8d82;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+div.index form div input {
+  width: 250px;
+  height: 26px;
+  border: 1px solid #ffb19e;
+  border-radius: 2px;
+}
+
+div.index form .Sub {
+  font-size: 22px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid #ffb19e;
+  background: #ff8d82;
+  cursor: pointer;
+  color: white;
+  width: 100px;
+  height: 36px;
+  outline: none;
+}
+
+div.index form .Sub:hover {
+  background: white;
+  color: #ff8d82;
+}
+
+
+/*================================用户主页=========================*/
+div.userHome a ,div.userHome button{
+  display:block;
+  margin: 70px auto;
+  width: 250px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid #ffb19e;
+  background: #ff8d82;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  outline: none;
+}
+div.userHome button:hover {
+  background: white;
+  color: #ff8d82;
+}
+
+/*===============================查看邮件============================*/
+div.read {
+  width: 1000px;
+  margin: 50px auto;
+  border: 2px solid #8ec1ff;
+  padding:20px 50px;
+  text-align: center;
+  border-radius: 10px;
+  color: #7e91ff;
+  background: #f0f4ff;
+}
+div.read h1{
+  margin-bottom: 50px;
+}
+div.read a {
+  display: inline-block;
+  margin: 100px 0  30px 0;
+  width: 250px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid #ffb19e;
+  background: #ff8d82;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+}
+
+
+div.read a:hover {
+  background: white;
+  color: #ff8d82;
+}
+
+
+div.read table{
+  color:  #ff8d82;
+  background: #ffffff;
+  border-collapse: collapse;
+  width: 1000px;
+  margin: 0 auto;
+  border: 2px solid #ffb19e;
+  font-weight: bold;
+}
+div.read th{
+  font-size: 22px;
+  text-align: center;
+  width:250px;
+  height:46px;
+  line-height:46px;
+  background:  #fcf4f3;
+  border-bottom: 2px solid #ffb19e;
+}
+div.read tbody tr{
+  font-size: 18px;
+  text-align: center;
+  width:250px;
+  height:34px;
+  line-height:34px;
+  border-bottom: 1px solid #ffb19e;
+  cursor: pointer;
+}
+
+div.read tbody tr:hover{
+  background: #ff8d82;
+  color: white;
+}
+
+/*===============================写邮件============================*/
+div.write{
+  width: 1000px;
+  height: 600px;
+  margin: 50px auto;
+  border: 2px solid #8ec1ff;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  color: #7e91ff;
+  background: #f0f4ff;
+}
+div.write h1 {
+  margin-bottom: 40px;
+}
+div.write form{
+  width:500px ;
+  margin: 0 auto;
+}
+div.write form div {
+  color: #ff8d82;
+  font-size: 18px;
+  margin: 20px 0;
+  display: flex;
+}
+div.write form div input{
+  width: 400px;
+  height: 26px;
+  margin-left: 10px;
+}
+div.write form div textarea{
+  margin-left: 10px;
+  width: 400px;
+}
+div.write form .Sub{
+  font-size: 22px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid #ffb19e;
+  background: #ff8d82;
+  cursor: pointer;
+  color: white;
+  width: 100px;
+  height: 36px;
+  outline: none;
+  margin: 10px 0 0 150px;
+}
+
+div.write form .Sub:hover {
+  background: white;
+  color: #ff8d82;
+}
+
+div.write a {
+  margin-left: 40px;
+  display: inline-block;
+  font-size: 22px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid #ffb19e;
+  background: #ff8d82;
+  cursor: pointer;
+  color: white;
+  width:100px;
+  height:32px;
+  line-height: 32px;
+  text-decoration: none;
+  outline: none;
+  margin-top: 10px;
+}
+
+
+div.write a:hover {
+  background: white;
+  color: #ff8d82;
+}
+
+/* ------------------------邮件内容页------------- */
+
+div.readcontent {
+  width: 800px;
+  padding: 100px;
+  margin: 0 auto;
+}
+div.readcontent h1{
+  margin-top: -50px;
+  font-size: 30px;
+}
+div.readcontent p{
+  margin-left: 600px;
+  font-size: 18px;
+  color: #ff8d82;
+}
+
+div.readcontent article{
+  text-align: left;
+  font-size: 24px;
+  color: #df2727;
+}

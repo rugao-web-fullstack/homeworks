@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="email.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <h1 name="H" id="H"> readcontent </h1>
+    <div class="read">
+        <input type="hidden" name='mailid' id='mailid' value=<%=i d %> >
+        <div class='readcontent'>
+        </div>
+
+        <a href="/mails/read" clss='ret'>返回</a>
+    </div>
+</body>
+<script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+    $(function () {
+        var mailid = $("#mailid").val();
+        //查看邮件
+        //ajax请求
+        $.ajax({
+            url: '/api/readcontent/' + mailid,
+            data: {
+            },
+            type: 'get',
+            success: function (data, status) {
+                console.log(data);
+                //获取data
+                if (data !== '0') {
+                    var newh1 = $('<h1>' + '* ' + data[0].title + ' *' + '</h1>');
+                    var newp = $('<p>' + '发件人：' + data[0].sender + '</p>');
+                    var newarticle = $('<article>' + data[0].content + '</article>');
+                    $('.readcontent').append(newh1);
+                    $('.readcontent').append(newp);
+                    $('.readcontent').append(newarticle);
+                } else {
+                    alert('获取邮件内容失败！');
+                }
+            },
+            error: function (data, err) {
+                console.log('ajax请求失败');
+                return;
+            }
+        });
+    })
+</script>
+
+
+
+</html>
