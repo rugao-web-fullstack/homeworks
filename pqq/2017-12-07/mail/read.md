@@ -1,10 +1,10 @@
 
-###GET
+### GET
 
-##user
+## user
 - /user/main  ---首页
 - /user/register   ---注册
 - /user/login  ---登录
 
-##mail
+## mail
 - /mail/main   ---邮箱 
