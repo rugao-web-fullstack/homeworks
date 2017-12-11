@@ -12,10 +12,8 @@ router.post('/send', function(req, res, next) {
   mail.sendMail();
 });
 router.post('/:id', function(req, res, next) {
-  if(!isNaN(req.params.id)) {
-    var mail = new Mail(req, res, next);
-    mail.readMailContent();
-  }
+  var mail = new Mail(req, res, next);
+  mail.readMailContent();
 });
 
 module.exports = router;

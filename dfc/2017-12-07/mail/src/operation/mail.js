@@ -16,32 +16,34 @@ Mail.prototype.sendMail = function() {
     let mailid = 0;
     var sql = 'SELECT id FROM mailbox WHERE address = \'' + data.address + '\';';
     con.query(sql, function(err, result) {
-      if(err) throw err;
-      if(result.length !== 0) {
-        debug('log:' + '查询到地址');
-        var mailboxid = result[0].id;
-        debug('log:' + self.user);
-        sql = 'INSERT INTO mail (sender, receiver, title, content, date) VALUES(\'' + self.user + '\',\'' + data.address + '\',\'' + data.title + '\',\'' + data.content + '\',\'' + data.date + '\');';
-        con.query(sql, function(err) {
-          if(err) throw err;
-          debug('log:' + '插入邮件表成功');
-          sql = 'SELECT id FROM mail WHERE title = \'' + data.title + '\'AND date = \'' + data.date + '\';';
-          con.query(sql, function(err, result) {
-            if(err) throw err;
-            debug('log:' + '查询到邮件id');
-            mailid = result[0].id;
-            sql = 'INSERT INTO receivered_mail (mail, mailbox) VALUES(\'' + mailid + '\',\'' + mailboxid + '\');';
-            con.query(sql, function(err) {
-              if(err) throw err;
-              debug('log:' + '插入收件表成功');
-              self.res.send('success');
-            });
+      debug('error:' + err);
+      // if(result.length !== 0) {
+      debug('log:' + '查询到地址');
+      var mailboxid = result[0].id;
+      debug('log:' + self.user);
+      sql = 'INSERT INTO mail (sender, receiver, title, content, date) VALUES(\'' + self.user + '\',\'' + data.address + '\',\'' + data.title + '\',\'' + data.content + '\',\'' + data.date + '\');';
+      con.query(sql, function(err) {
+        debug('error:' + err);
+        debug('log:' + '插入邮件表成功');
+        sql = 'SELECT id FROM mail WHERE title = \'' + data.title + '\'AND date = \'' + data.date + '\';';
+        con.query(sql, function(err, result) {
+          debug('error:' + err);
+          debug('log:' + '查询到邮件id');
+          mailid = result[0].id;
+          sql = 'INSERT INTO receivered_mail (mail, mailbox) VALUES(\'' + mailid + '\',\'' + mailboxid + '\');';
+          con.query(sql, function(err) {
+            debug('error:' + err);
+            debug('log:' + '插入收件表成功');
+            self.res.send('success');
+            con.end();
           });
         });
-      } else {
-        debug('log:' + '发送失败');
-        self.res.send('该地址不存在');
-      }
+      });
+      // } else {
+      //   debug('log:' + '发送失败');
+      //   self.res.send('该地址不存在');
+      //   con.end();
+      // }
     });
   }, 'dmail');
 };
@@ -51,41 +53,42 @@ Mail.prototype.readMailList = function() {
   db(function(con) {
     var sql = 'SELECT id FROM user WHERE username = \'' + self.user + '\';';
     con.query(sql, function(err, result) {
-      if(err) throw err;
-      if(result.length !== 0) {
+      debug('error:' + err);
+      // if(result.length !== 0) {
+      debug('log:' + result[0]);
+      var sql = 'SELECT mailbox FROM user_mailbox WHERE user = \'' + result[0].id + '\';';
+      con.query(sql, function(err, result) {
         debug('log:' + result[0]);
-        var sql = 'SELECT mailbox FROM user_mailbox WHERE user = \'' + result[0].id + '\';';
+        debug('error:' + err);
+        var sql = 'SELECT mail FROM receivered_mail WHERE mailbox = \'' + result[0].mailbox + '\';';
         con.query(sql, function(err, result) {
-          debug('log:' + result[0]);
-          if(err) throw err;
-          var sql = 'SELECT mail FROM receivered_mail WHERE mailbox = \'' + result[0].mailbox + '\';';
-          con.query(sql, function(err, result) {
-            if(err) throw err;
-            debug('log:' + result.length);
-            async.each(result, function(mailmsg, callback) {
-              debug('log:' + mailmsg);
-              var sql = 'SELECT * FROM mail WHERE id = \'' + mailmsg.mail + '\';';
-              con.query(sql, function(err, result) {
-                if(err) throw err;
-                debug('log:' + result[0]);
-                arr.push(result[0]);
-                callback();
-              });
-            }, function(err) {
-              debug('log:' + '++++++++++++++++');
-              if(err) {
-                debug('log:' + '读取失败');
-              } else {
-                debug('log:' + '邮件全部读取成功');
-                self.res.send(arr);
-              }
+          debug('error:' + err);
+          debug('log:' + result.length);
+          async.each(result, function(mailmsg, callback) {
+            debug('log:' + mailmsg);
+            var sql = 'SELECT * FROM mail WHERE id = \'' + mailmsg.mail + '\';';
+            con.query(sql, function(err, result) {
+              debug('error:' + err);
+              debug('log:' + result[0]);
+              arr.push(result[0]);
+              callback();
             });
+          }, function(err) {
+            // if(err) {
+            debug('error:' + err);
+            // } else {
+            debug('log:' + '邮件全部读取成功');
+            self.res.send(arr);
+            con.end();
+            // }
           });
         });
-      } else {
-        debug('log:' + '发送失败');
-        self.res.send('该地址不存在');
-      }
+      });
+      // } else {
+      //   debug('log:' + '发送失败');
+      //   self.res.send('该地址不存在');
+      //   con.end();
+      // }
     });
   }, 'dmail');
 };
@@ -97,6 +100,7 @@ Mail.prototype.readMailContent = function() {
     con.query(sql, function(err, result) {
       debug('log:' + result);
       self.res.send('文件已读');
+      con.end();
     });
   }, 'dmail');
 };

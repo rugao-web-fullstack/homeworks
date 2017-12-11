@@ -4,7 +4,7 @@ var app = require('../src/app');
 var mysql = require('mysql');
 var basic = require('../src/db/basic');
 
-// var cookies;
+var cookies;
 
 describe('页面url测试', function () {
   it('get /', function (done) {
@@ -111,8 +111,8 @@ describe('数据库链接测试', function () {
     }, 'dmail');
   });
 });
-
-describe('POST /users/register', function() {
+//用户api测试
+describe('POST /users', function() {
   before(function (done) {
     // 链接数据库
     var con = mysql.createConnection({
@@ -180,8 +180,49 @@ describe('POST /users/register', function() {
         'password':'123',
         'sub':'登录'
       })
-      .set('Accept', 'application/json')
-      .expect(200, done);
+      .expect(200, function(err,res){
+        cookies = res.headers['set-cookie'];
+        done();
+      });
+  });
+  it('发送邮件测试', function(done) {
+    var date = new Date().toLocaleString();
+    var req = request(app)
+      .post('/mails/send')
+      .type('json')
+      .send({
+        'title':'test',
+        'address':'root@dmail.com',
+        'content':'**********',
+        'date':date
+      })
+      .set('Accept', 'application/json');
+    req.cookies = cookies;
+    req.expect(200, done);
+  });
+  it('获取邮件列表测试', function(done) {
+    var req = request(app)
+      .get('/mails')
+      .set('Accept', 'application/json');
+    // .expect('Content-Type', /json/)
+    req.cookies = cookies;
+    req.expect(200, done);
+  });
+  it('显示邮件测试', function(done) {
+    var req = request(app)
+      .post('/mails/1')
+      .type('json')
+      .send({
+        id: 1,
+        sender: 'root',
+        receiver: 'root@dmail.com',
+        title: 'test',
+        content: '**********',
+        date: '2017-12-11 19:11:03',
+        createdAt: null })
+      .set('Accept', 'application/json');
+    req.cookies = cookies;
+    req.expect(200, done);
   });
   it('登录失败测试', function(done) {
     request(app)
