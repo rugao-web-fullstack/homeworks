@@ -41,4 +41,34 @@ describe('页面测试', function () {
         done();
       });
   });
+  it('get /mail/send', function () {
+    request(app)
+      .get('/mail/send')
+      .expect(200, function (err, res) {
+        assert((res.text).indexOf('发送邮件') !== -1);
+      });
+  });
+  it('get /mail', function () {
+    request(app)
+      .get('/mail')
+      .expect(200, function (err, res) {
+        assert((res.text).indexOf('邮件列表') !== -1);
+      });
+  });
+ 
+  it('get /mail/1', function () {
+    request(app)
+      .get('/mail/1')
+      .expect(200, function (err, res) {
+        assert((res.text).indexOf('邮件信息') !== -1);
+      });
+  });
+  it('get /mail/wwww', function (done) {
+    request(app)
+      .get('/mail/wwww')
+      .expect(200, function (err, res) {
+        assert((res.text).indexOf('404') !== -1);
+        done();
+      });
+  });
 });

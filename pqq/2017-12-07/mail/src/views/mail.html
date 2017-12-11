@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>mail</title>
+</head>
+
+<body>
+    
+    
+    <script type="text/javascript">
+        $("#sub").on("click", function () {
+            var email = $("#email").val();
+            var name = $("#name").val();
+            var pwd = $("#pwd").val();
+            var data = { "email": email, "username": name, "password": pwd };
+            $.ajax({
+                url: "/mail",
+                type: "post",
+                data: data,
+                success: function (data, status) {
+                    if (data !== 0) {
+                        location.href = data;
+                    }
+                }
+            })
+        })
+    </script>
+</body>
+
+
+</html>
