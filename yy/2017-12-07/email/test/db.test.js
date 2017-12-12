@@ -1,6 +1,6 @@
 var assert = require('assert');
-var mysql = require('../src/emaildb/base1').init;
-var cbFunc = require('../src/emaildb/base1').cbFunc;
+var mysql = require('../src/emaildb/base').init;
+var cbFunc = require('../src/emaildb/base').cbFunc;
   
 describe('mysql()', function () {
   it('should test cbFunc', function () {
