@@ -3,9 +3,6 @@ var debug = require('debug')('dmail');
 
 var init = function (cb, db) {
   var options = {
-    // host: 'localhost',
-    // user: 'root',
-    // password: '123'
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USERNAME,
     password: process.env.MYSQL_PASSWORD
