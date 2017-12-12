@@ -30,7 +30,11 @@ router.get('/send/failure', function(req, res) {
 });
 router.get('/read', function(req, res) {
   res.render('readEmail',{
-    title:'读邮件'
+    title:'读邮件',
+    id:'',
+    sender:'',
+    emailTitle:'',
+    content:''
   });
   // next();
 });

@@ -1,5 +1,5 @@
 var base = require('../emaildb/base').init;
-
+var cb=require('./cb').cb;
 function User(){}
 
 User.prototype.register=function(req,res){
@@ -9,7 +9,7 @@ User.prototype.register=function(req,res){
   // 先查询user表中的该用户名是否被占用
   base(function (con) {
     var sql = 'select * from user  where username=\'' + username + '\';';
-    con.query(sql, function (err, result) {
+    con.query(sql,cb(function (result) {
       // if (err) throw err;
       if (result[0]) {
         req.session.register=0;
@@ -18,22 +18,22 @@ User.prototype.register=function(req,res){
         //当用户名不存在，才执行插入user
         base(function (con) {
           var sql = 'INSERT INTO user (username,password) VALUES(\'' + username + '\',\'' + password + '\');';
-          con.query(sql, function (err, result) {
+          con.query(sql, cb(function (result) {
             //  if (err) throw err;
             // 将该用户的id 与email一起插入进email表中
             var userId=result.insertId;
             base(function (con) {
               var sql = 'INSERT INTO emailbox (user,address) VALUES(\'' + userId + '\',\'' + email + '\');';
-              con.query(sql, function (err) {
-                if (err) throw err;
+              con.query(sql, cb(function () {
+                // if (err) throw err;
                 req.session.register=1;
                 res.redirect('/user/register/success');
-              });
+              }));
             }, 'emaildb');
-          });
+          }));
         }, 'emaildb');
       }
-    });
+    }));
   }, 'emaildb');
 };
 
@@ -42,7 +42,7 @@ User.prototype.login=function(req,res){
   var password = req.body.password;
   base(function (con) {
     var sql = 'select * from user  where username=\'' + username + '\';';
-    con.query(sql, function (err, result) {
+    con.query(sql, cb(function (result) {
       // if (err) throw err;
       if (result[0]) {
         var pwd = result[0].password;
@@ -54,11 +54,11 @@ User.prototype.login=function(req,res){
           //根据userId获取该用户的email地址
           base(function (con) {
             var sql = 'select * from emailbox  where user=\'' + userId + '\';';
-            con.query(sql, function (err, result) {
+            con.query(sql, cb(function (result) {
               //     if (err) throw err;
               req.session.sender=result[0].address;
               res.redirect('/user/login/success');
-            });
+            }));
           }, 'emaildb');
         }else{
           req.session.login=0;
@@ -69,7 +69,7 @@ User.prototype.login=function(req,res){
         req.session.login=0;
         res.redirect('/user/login/failure');
       }
-    });
+    }));
   }, 'emaildb');
 };
 exports.User=User;
