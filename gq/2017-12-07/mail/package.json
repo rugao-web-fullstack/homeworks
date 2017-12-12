@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "ejs": "^2.5.7",
+    "eslint": "^4.12.1",
     "express": "^4.16.2",
     "mocha": "^4.0.1",
     "supertest": "^3.0.0"

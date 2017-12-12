@@ -1,7 +1,7 @@
+var debug = require('debug')('gq');
 var request = require('supertest');
 var assert = require('assert');
 var app = require('../src/app');
-var debug = require('debug')('gq');
 
 describe('url', function () {
   it('get /users/main', function (done) {
@@ -60,5 +60,5 @@ describe('url', function () {
         debug('log:' + res);
         done();
       });
-  }); 
+  });
 });
