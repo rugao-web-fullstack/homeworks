@@ -41,9 +41,11 @@
                     type: 'get',
                     success: function (data, status) {
                         //获取data
-                        if (data == '0') {
+                        if (data === '0') {
                             alert('用户名已存在！');
                             return;
+                        } else {
+                            alert('注册失败！');
                         }
                         console.log(data);
                     },
@@ -76,7 +78,7 @@
                         type: 'post',
                         success: function (data, status) {
                             //获取data
-                            if (data != 0) {
+                            if (data !== 0) {
                                 alert('注册成功！');
                                 location.href = data;
                                 return;
