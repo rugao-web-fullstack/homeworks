@@ -1,13 +1,9 @@
 var db = require('./db');
+var cbs = require('./cb').cb;
 function logincheck(username, password, cb) {
   db(function (con) {
-
     var sql = 'select password from user where username = ?';
-    con.query(sql, username, function (err, result) {
-      // if (err) {
-      //   cb(true);
-      //   return;
-      // }
+    con.query(sql, username, cbs(function (result) {
       if (!result[0]) {
         cb(false, 0);
         con.end();
@@ -24,7 +20,7 @@ function logincheck(username, password, cb) {
         }
       }
 
-    });
+    },cb));
   }, 'email');
 
 }

@@ -17,8 +17,6 @@ var init = function (cb, db) {
   }
   con.connect(function (err) {
     debug(err);
-    // if (err) throw err;
-    // console.log('Connected');
     connect = true;
     cb instanceof Function && cb(con);
     return;
