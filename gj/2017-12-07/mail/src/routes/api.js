@@ -69,7 +69,7 @@ router.get('/read/:name', function (req, res) {
 
 //读取邮件详情
 router.get('/readcontent/:id', function (req, res) {
-  mailMannage.ReadContent(req.params.id, cbRouters(function (err, mail) {
+  mailMannage.ReadContent(req.params.id, cbRouters(function ( mail) {
     res.json(mail);
     return;
   }, res));
