@@ -7,30 +7,34 @@ var router = express.Router();
 //   // next();
 // });
 
-router.get('/write', function(req, res) {
-  res.render('writeEmail',{
-    title:'写邮件',
-    senderAddress:req.session.sender
+router.get('/write', function (req, res) {
+  res.render('writeEmail', {
+    title: '写邮件',
+    senderAddress: req.session.sender
   });
   // next();
 });
-router.get('/send/success', function(req, res) {
-  res.render('send-result',{
-    title:'发送',
-    message:'恭喜发送成功！'
+router.get('/send/success', function (req, res) {
+  res.render('send-result', {
+    title: '发送',
+    message: '恭喜发送成功！'
   });
   // next();
 });
-router.get('/send/failure', function(req, res) {
-  res.render('send-result',{
-    title:'发送',
-    message:'发送失败！收件地址不存在'
+router.get('/send/failure', function (req, res) {
+  res.render('send-result', {
+    title: '发送',
+    message: '发送失败！收件地址不存在'
   });
   // next();
 });
-router.get('/read', function(req, res) {
-  res.render('readEmail',{
-    title:'读邮件'
+router.get('/read', function (req, res) {
+  res.render('readEmail', {
+    title: '读邮件',
+    id: '',
+    sender: '',
+    emailTitle: '',
+    content: ''
   });
   // next();
 });
