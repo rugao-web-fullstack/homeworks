@@ -17,7 +17,7 @@ describe('database test------------', function () {
       });
     });
   });
-// 测试
+  // 测试
   it('connect to mysql', function (done) {
     basic(function (con) {
       assert(con);
@@ -25,7 +25,7 @@ describe('database test------------', function () {
       done();
     });
   });
-// 测试
+  // 测试
   it('connect to db', function (done) {
     basic(function (con) {
       assert(con);
