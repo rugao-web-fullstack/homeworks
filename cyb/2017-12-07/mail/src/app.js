@@ -9,6 +9,8 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var user = require('./routes/user');
 var mail = require('./routes/mail');
+var users = require('./routes/users');
+var mails = require('./routes/mails');
 var debug = require('debug')('xxx');
 
 var app = express();
@@ -30,5 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/user', user);
 app.use('/mail', mail);
+app.use('/users', users);
+app.use('/mails', mails);
 
 module.exports = app;
