@@ -49,7 +49,7 @@ describe('url', function () {
     request(app)
       .post('/users/login')
       .expect(200, function (err, res) {
-        debug('log:' + res);
+        debug('info'+res);
         done();
       });
   });
@@ -57,7 +57,7 @@ describe('url', function () {
     request(app)
       .post('/users/register')
       .expect(200, function (err, res) {
-        debug('log:' + res);
+        debug('info'+res);
         done();
       });
   });
