@@ -7,9 +7,9 @@ var init = function (cb, db) {
     user: process.env.MYSQL_USERNAME,
     password: process.env.MYSQL_PASSWORD
   };
-    //   if (db) {
-    //     options.database = db;
-    //   }
+  //   if (db) {
+  //     options.database = db;
+  //   }
   debug('info:' + db);
   var con = mysql.createConnection(options);
   con.connect(function (err) {
