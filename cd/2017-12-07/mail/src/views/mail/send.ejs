@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			<%= title %>
+		</title>
+		<link rel='stylesheet' href='/stylesheets/style.css' />
+	</head>
+
+	<body>
+		<div class="main">
+			<h1><%= title %></h1>
+			<form action="">
+				<span>邮件名：</span>
+				<input type="text" name="mailname" id="mailname" value="" /><br />
+				<span>收件人：</span>
+				<input type="text" name="receiver" id="receiver" value="" /><br />
+				<span>邮件内容：</span><br />
+				<textarea id="mailContent" rows="5" cols=""></textarea><br />
+				<input type="button" name="send" id="send" value="发送邮件" />
+			</form>
+		</div>
+	</body>
+
+</html>
