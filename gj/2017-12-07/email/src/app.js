@@ -4,16 +4,14 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session=require('express-session');
+var session = require('express-session');
 
-//添加debug包
-// var debug = require('debug')('log');
 
 //路由
 var index = require('./routes/index');
 var users = require('./routes/users');
-//var mails = require('./routes/mails');
-// var api = require('./routes/api');
+var mails = require('./routes/mails');
+var api = require('./routes/api');
 
 var app = express();
 
@@ -29,21 +27,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session({secret:'sosos'}));
+app.use(session({ secret: 'sosos' }));
 
 app.use('/', index);
 app.use('/users', users);
-//app.use('/mails', mails);
-// app.use('/api',api);
+app.use('/mails', mails);
+app.use('/api', api);
 
-// // catch 404 and forward to error handler
+// catch 404 and forward to error handler
 // app.use(function(req, res, next) {
 //   var err = new Error('Not Found');
 //   err.status = 404;
 //   next(err);
 // });
 
-// // error handler
+// error handler
 // app.use(function(err, req, res, next) {
 //   // set locals, only providing error in development
 //   res.locals.message = err.message;
@@ -54,11 +52,5 @@ app.use('/users', users);
 //   res.render('error');
 //   debug('log:'+next);
 // });
-
-
-
-
-
-
 
 module.exports = app;
