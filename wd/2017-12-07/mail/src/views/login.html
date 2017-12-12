@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login</title>
+</head>
+
+<body>
+    <h1>
+        <%=title%>
+    </h1>
+    <form>
+        <label for="name">用户名：</label>
+        <input type="text" id="name" name="name">
+        <br>
+        <label for="pwd">密码：</label>
+        <input type="password" id="pwd" name="pwd">
+        <br>
+        <input type="button" id="sub" value="登 录">
+    </form>
+    <script type="text/javascript" src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $("#sub").on("click", function () {
+            var name = $("#name").val();
+            var pwd = $("#pwd").val();
+            var data = { "username": name, "password": pwd };
+            $.ajax({
+                url: "/api/login",
+                type: "post",
+                data: data,
+                success: function (data, status) {
+                    console.log(typeof data);
+                    if (data !== 0) {
+                        alert("登录成功！正在跳转！");
+                        location.href = data;
+                    } else {
+                        alert("登录失败，请重试！");
+                        location.href = "/users/login";
+                    }
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

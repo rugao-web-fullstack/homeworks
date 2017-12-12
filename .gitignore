@@ -1,5 +1,7 @@
 .project
 .idea
+.vscode
+.nyc_output
 package-lock.json
 # Logs
 logs

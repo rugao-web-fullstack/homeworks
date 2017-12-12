@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mail</title>
+    <style>
+        .container{
+            margin:30px auto;
+            padding:30px;
+            width:850px;
+            height:520px;
+            border-radius: 10px;
+            border:10px solid lightskyblue;
+        }
+        .head div{
+            display: inline-block;
+        }
+        .head div:nth-child(1){
+            margin-left: 250px;
+            font-size: 28px;
+            font-family: 仿宋;
+            font-weight: 700;
+        }
+        .head div:nth-child(2){
+            float:right;
+        }
+        .content{
+            margin-top: 10px;
+            padding:50px;
+        }
+        .content div{
+            margin-bottom: 20px;
+        }
+        .content div:nth-child(2){
+            padding-left:15px;
+        }
+        .content div:nth-child(2) input{
+            width: 500px;
+        }
+        .content div:nth-child(3){
+            padding-left:15px;
+        }
+        .content div:nth-child(3) input{
+            width: 500px;
+            height:200px;
+        }
+        .content div span{
+            font-size: 18px;
+            font-family: 微软雅黑;
+            color: #4C4C4C;
+        }
+        .content div input{
+            padding-left: 10px;
+            width:250px;
+            height:30px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .content div:nth-child(4){
+            float: right;
+        }
+        .content div:nth-child(4)>input{
+            cursor: pointer;
+            width:110px;
+            height: 40px;
+            font-size: 18px;
+            border-radius: 4px;
+            border: 1px solid lightgreen;
+            background: lightgreen;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="head">
+        <div >
+            欢迎来到邮件系统！
+        </div>
+        <div>用户：<span>{{name}}</span></div>
+    </div>
+    <div class="content">
+        <form action="/mails/send" method="post">
+            <div><span>收件人：</span><input type="text" name='receiver' placeholder="请输入收件人"></div>
+            <div><span>标题：</span><input type="text" name='title' placeholder="请输入邮件标题"></div>
+            <div><span>正文：</span><input type="text" name='body' placeholder="请输入正文内容"></div>
+            <div><input type="submit" value  ="发送"></div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>注册</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <div class="index">
+        <h1>* &nbsp;注 &nbsp; 册 &nbsp;*</h1>
+        <form action="" method="POST">
+            <div>
+                <label>用户名：</label>
+                <input type="text" id="username" name="username">
+            </div>
+            <div>
+                <label>密&nbsp;&nbsp;&nbsp; 码：</label>
+                <input type="password" id='password' name="password">
+            </div>
+            <div>
+                <label>邮&nbsp;&nbsp;&nbsp; 箱：</label>
+                <input type="text" id='mailbox' name="mailbox">
+            </div>
+            <!-- <button class="Sub" id="submit">注 册</button> -->
+            <!-- button不能用的原因：button有默认提交行为 -->
+            <input class="Sub" id="submit" type="button" value="注册">
+        </form>
+    </div>
+
+
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $("#username").blur(function () {
+                var user = $('#username').val();
+                $.ajax({
+                    url: '/api/users/' + user,
+                    data: {
+                    },
+                    type: 'get',
+                    success: function (data, status) {
+                        //获取data
+                        if (data == '0') {
+                            alert('用户名已存在！');
+                            return;
+                        }
+                        console.log(data);
+                    },
+                    error: function (data, err) {
+                        console.log('ajax请求失败');
+                        return;
+                    }
+                });
+
+            });
+
+
+
+
+            //提交注册数据
+            $('#submit').click(function () {
+                if ($('#username').val() && $('#password').val() && $('#mailbox').val()) {
+                    var user = $('#username').val();
+                    var pwd = $('#password').val();
+                    var maBox = $("#mailbox").val();
+                    //ajax请求
+                    $.ajax({
+                        url: '/api/users',
+                        data: {
+                            action: 'register',
+                            username: user,
+                            password: pwd,
+                            mailbox: maBox
+                        },
+                        type: 'post',
+                        success: function (data, status) {
+                            //获取data
+                            if (data != 0) {
+                                alert('注册成功！');
+                                location.href = data;
+                                return;
+                            }
+                            console.log(data);
+                        },
+                        error: function (data, err) {
+                            console.log('ajax请求失败');
+                            return;
+                        }
+                    });
+
+                } else {
+                    alert('请填写完整！');
+                };
+            })
+
+
+
+
+        });
+
+
+    </script>
+</body>
+
+</html>
