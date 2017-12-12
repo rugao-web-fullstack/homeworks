@@ -28,16 +28,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(
   session({
     secret: 'sosos',
-    name:'usertest'
+    name: 'usertest'
   })
 );
 //url
 app.use('/', index);
 app.use('/user', user);
-app.use('/email',email);
+app.use('/email', email);
 //api
 app.use('/users', users);
-app.use('/emails',emails);
+app.use('/emails', emails);
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
 //   var err = new Error('Not Found');

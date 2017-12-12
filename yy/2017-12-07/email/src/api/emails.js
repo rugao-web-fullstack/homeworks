@@ -1,15 +1,15 @@
 var express = require('express');
 var router = express.Router();
-var Email=require ('../operations/emailsTest').Email;
-var email=new Email();
+var Email = require('../operations/emailsTest').Email;
+var email = new Email();
 //var fs=require('fs');
-var cb=require('../operations/cb').cb;
-router.post('/write', function(req, res) {
-  email.write(req,res);
+var cb = require('../operations/cb').cb;
+router.post('/write', function (req, res) {
+  email.write(req, res);
   // next();
 });
-router.get('/read', function(req, res) {
-  email.read(req,res,cb((emails)=>{
+router.get('/read', function (req, res) {
+  email.read(req, res, cb((emails) => {
     // if(err){
     //     console.log(err);
     //     return;
@@ -22,16 +22,16 @@ router.get('/read', function(req, res) {
     //     if(err) throw err;  
     //     console.log('write JSON ');  
     // });  
-    res.render('readEmail',{
-      title:'收件箱',
-      id:emails[0][0].id,
-      sender:emails[0][0].senderAddress,
-      emailTitle:emails[0][0].title,
-      content:emails[0][0].content
+    res.render('readEmail', {
+      title: '收件箱',
+      id: emails[0][0].id,
+      sender: emails[0][0].senderAddress,
+      emailTitle: emails[0][0].title,
+      content: emails[0][0].content
     });
   }));
-  
-   
+
+
   // next();
 });
 
