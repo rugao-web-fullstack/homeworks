@@ -10,7 +10,7 @@ var index = require('./routes/index');
 var user = require('./routes/user');
 var email = require('./routes/email');
 
-//var users = require('./api/users');
+var users = require('./api/users');
 //var emails = require('./api/emails');
 var app = express();
 
@@ -36,7 +36,7 @@ app.use('/', index);
 app.use('/user', user);
 app.use('/email',email);
 //api
-//app.use('/users', users);
+app.use('/users', users);
 //app.use('/emails',emails);
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
