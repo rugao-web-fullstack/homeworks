@@ -6,16 +6,16 @@ var router = express.Router();
 	POST /users 
 	action=login
 */
-/*router.post('/', function(req, res) {
-  res.render('index');
-});*/
+router.post('/', function(req, res) {
+  res.send('api之/users');
+});
 /* 
 用户注册
 	POST /users 
 	action=register
 */
-// router.post('/register', function(req, res) {
-//   res.render('register');
-// });
+router.post('/register', function(req, res) {
+  res.send('api之/users/register');
+});
 
 module.exports = router;
