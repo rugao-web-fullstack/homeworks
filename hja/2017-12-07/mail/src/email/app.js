@@ -35,7 +35,7 @@ app.use(session({ secret: 'sosos' }));
 app.use('/', index);
 app.use('/users', users);
 app.use('/mails', mails);
-app.use('/api',api);
+app.use('/api', api);
 
 
 
