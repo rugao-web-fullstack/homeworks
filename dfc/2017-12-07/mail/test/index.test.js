@@ -200,6 +200,21 @@ describe('POST /users', function() {
     req.cookies = cookies;
     req.expect(200, done);
   });
+  it('发送邮件测试', function(done) {
+    var date = new Date().toLocaleString();
+    var req = request(app)
+      .post('/mails/send')
+      .type('json')
+      .send({
+        'title':'test',
+        'address':'r',
+        'content':'**********',
+        'date':date
+      })
+      .set('Accept', 'application/json');
+    req.cookies = cookies;
+    req.expect(200, done);
+  });
   it('获取邮件列表测试', function(done) {
     var req = request(app)
       .get('/mails')

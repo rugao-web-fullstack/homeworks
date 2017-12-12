@@ -17,33 +17,33 @@ Mail.prototype.sendMail = function() {
     var sql = 'SELECT id FROM mailbox WHERE address = \'' + data.address + '\';';
     con.query(sql, function(err, result) {
       debug('error:' + err);
-      // if(result.length !== 0) {
-      debug('log:' + '查询到地址');
-      var mailboxid = result[0].id;
-      debug('log:' + self.user);
-      sql = 'INSERT INTO mail (sender, receiver, title, content, date) VALUES(\'' + self.user + '\',\'' + data.address + '\',\'' + data.title + '\',\'' + data.content + '\',\'' + data.date + '\');';
-      con.query(sql, function(err) {
-        debug('error:' + err);
-        debug('log:' + '插入邮件表成功');
-        sql = 'SELECT id FROM mail WHERE title = \'' + data.title + '\'AND date = \'' + data.date + '\';';
-        con.query(sql, function(err, result) {
+      if(result.length !== 0) {
+        debug('log:' + '查询到地址');
+        var mailboxid = result[0].id;
+        debug('log:' + self.user);
+        sql = 'INSERT INTO mail (sender, receiver, title, content, date) VALUES(\'' + self.user + '\',\'' + data.address + '\',\'' + data.title + '\',\'' + data.content + '\',\'' + data.date + '\');';
+        con.query(sql, function(err) {
           debug('error:' + err);
-          debug('log:' + '查询到邮件id');
-          mailid = result[0].id;
-          sql = 'INSERT INTO receivered_mail (mail, mailbox) VALUES(\'' + mailid + '\',\'' + mailboxid + '\');';
-          con.query(sql, function(err) {
+          debug('log:' + '插入邮件表成功');
+          sql = 'SELECT id FROM mail WHERE title = \'' + data.title + '\'AND date = \'' + data.date + '\';';
+          con.query(sql, function(err, result) {
             debug('error:' + err);
-            debug('log:' + '插入收件表成功');
-            self.res.send('success');
-            con.end();
+            debug('log:' + '查询到邮件id');
+            mailid = result[0].id;
+            sql = 'INSERT INTO receivered_mail (mail, mailbox) VALUES(\'' + mailid + '\',\'' + mailboxid + '\');';
+            con.query(sql, function(err) {
+              debug('error:' + err);
+              debug('log:' + '插入收件表成功');
+              self.res.send('success');
+              con.end();
+            });
           });
         });
-      });
-      // } else {
-      //   debug('log:' + '发送失败');
-      //   self.res.send('该地址不存在');
-      //   con.end();
-      // }
+      } else {
+        debug('log:' + '发送失败');
+        self.res.send('该地址不存在');
+        con.end();
+      }
     });
   }, 'dmail');
 };
