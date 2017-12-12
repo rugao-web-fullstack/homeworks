@@ -1,6 +1,6 @@
 var debug = require('debug')('dmail');
 
-exports.cb = function (next,cb) {
+exports.cb = function (next, cb) {
   return function (err, data) {
     if (err) {
       cb(true);

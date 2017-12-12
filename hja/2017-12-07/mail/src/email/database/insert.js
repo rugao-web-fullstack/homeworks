@@ -27,13 +27,13 @@ function insert(username, password, email, cb) {
 
             return;
 
-          },cb));
+          }, cb));
 
 
-        },cb));
+        }, cb));
 
 
-      },cb));
+      }, cb));
 
     }, 'email');
 

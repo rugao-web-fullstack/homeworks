@@ -9,7 +9,7 @@ function readAll(username, cb) {
       cb(false, result);
       con.end();
       return;
-    },cb));
+    }, cb));
 
   }, 'email');
 

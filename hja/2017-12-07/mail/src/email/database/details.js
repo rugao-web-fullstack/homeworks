@@ -16,8 +16,8 @@ function details(id, cb) {
         cb(false, res);
 
         return;
-      },cb));
-    },cb));
+      }, cb));
+    }, cb));
 
   }, 'email');
 

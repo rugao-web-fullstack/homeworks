@@ -12,7 +12,7 @@ function recheck(username, cb) {
       cb(false);
       con.end();
       return;
-    },cb));
+    }, cb));
 
 
 

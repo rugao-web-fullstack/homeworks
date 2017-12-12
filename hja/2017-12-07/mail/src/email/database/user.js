@@ -11,7 +11,7 @@ UserList.addUser = function (username, password, email, cb) {
   insert(username, password, email, cbs(function () {
     cb(false);
     return;
-  },cb));
+  }, cb));
 
 
 };
@@ -31,7 +31,7 @@ UserList.recheck = function (username, cb) {
 //登录
 UserList.login = function (username, password, cb) {
 
-  logincheck(username, password, cbs(function(flag) {
+  logincheck(username, password, cbs(function (flag) {
     if (flag !== 1) {
       cb(true, flag);
       return;
@@ -39,7 +39,7 @@ UserList.login = function (username, password, cb) {
     cb(false, flag);
 
 
-  },cb));
+  }, cb));
 
 };
 exports.Users = UserList; 

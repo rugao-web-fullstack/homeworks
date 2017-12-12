@@ -20,7 +20,7 @@ function logincheck(username, password, cb) {
         }
       }
 
-    },cb));
+    }, cb));
   }, 'email');
 
 }
