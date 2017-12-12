@@ -8,7 +8,8 @@ describe('URL test', function () {
       .get('/')
       .expect('Content-Type', 'text/html; charset=utf-8')
       .expect(200)
-      .end(function(){
+      .end(function(err){
+        if (err) throw err;
         done();
       });
   });
@@ -17,7 +18,8 @@ describe('URL test', function () {
       .get('/users/register')
       .expect('Content-Type', 'text/html; charset=utf-8')
       .expect(200)
-      .end(function(){
+      .end(function(err){
+        if (err) throw err;
         done();
       });
   });
@@ -26,7 +28,8 @@ describe('URL test', function () {
       .get('/users/login')
       .expect('Content-Type', 'text/html; charset=utf-8')
       .expect(200)
-      .end(function(){
+      .end(function(err){
+        if (err) throw err;
         done();
       });
   });
@@ -35,7 +38,8 @@ describe('URL test', function () {
       .get('/users/mail')
       .expect('Content-Type', 'text/html; charset=utf-8')
       .expect(200)
-      .end(function(){
+      .end(function(err){
+        if (err) throw err;
         done();
       });
   });
@@ -44,7 +48,8 @@ describe('URL test', function () {
       .get('/users/mail/write')
       .expect('Content-Type', 'text/html; charset=utf-8')
       .expect(200)
-      .end(function(){
+      .end(function(err){
+        if (err) throw err;
         done();
       });
   });
@@ -53,7 +58,8 @@ describe('URL test', function () {
       .get('/users/mail/all')
       .expect('Content-Type', 'text/html; charset=utf-8')
       .expect(200)
-      .end(function(){
+      .end(function(err){
+        if (err) throw err;
         done();
       });
   });
