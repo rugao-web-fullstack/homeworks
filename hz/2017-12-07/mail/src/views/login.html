@@ -2,21 +2,18 @@
 <html>
 
 <head>
-    <title>登录</title>
+    <title>Login</title>
 </head>
 
 <body>
-    <h1>
-        <%=title%>
-    </h1>
-    <form>
+    <form action="/users/login" method="post">
         <label for="name">用户名：</label>
         <input type="text" id="name" name="name">
         <br>
-        <label for="password">密码：</label>
-        <input type="password" id="password" name="pwd">
+        <label for="pwd">密码：</label>
+        <input type="password" id="pwd" name="pwd">
         <br>
-        <input type="button" id="submit" value="登 录">
+        <input type="button" id="sub" value="登 录">
     </form>
 </body>
 
