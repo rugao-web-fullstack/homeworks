@@ -4,14 +4,15 @@ const app = require('../src/email/app');
 const mysql = require('mysql');
 var assert = require('assert');
 var cookies;
-var debug =require('debug')('xxx');
+var debug = require('debug')('xxx');
+var cb = require('../src/email/database/cb').cb;
 
 describe('用户未登录时', function () {
   it('进入首页', function (done) {
     request(app)
       .get('/')
       .expect(200, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         assert((res.text).indexOf('主页') !== -1);
         done();
       });
@@ -22,7 +23,7 @@ describe('用户未登录时', function () {
     request(app)
       .get('/users/login')
       .expect(200, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         assert((res.text).indexOf('登录') !== -1);
         done();
       });
@@ -32,7 +33,7 @@ describe('用户未登录时', function () {
     request(app)
       .get('/users/register')
       .expect(200, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         assert((res.text).indexOf('注册') !== -1);
         done();
       });
@@ -52,7 +53,7 @@ describe('数据库链接', function () {
     con.query('DROP DATABASE email', function (err) {
       debug(err);
       con.query('CREATE DATABASE email', function (err) {
-        if(err) throw err;
+        if (err) throw err;
         //断开
         con.end();
         done();
@@ -101,7 +102,7 @@ describe('数据库链接', function () {
       .type('form')
       .send({ action: 'register', username: 'ui1', password: '123', email: 'ui1@qq.com' })
       .expect(200, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         assert.equal('/users/login', res.body);
         done();
       });
@@ -112,7 +113,7 @@ describe('数据库链接', function () {
       .get('/api/users/ui2')
       .type('form')
       .expect(200, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         assert.equal(1, res.body);
         done();
       });
@@ -124,7 +125,7 @@ describe('数据库链接', function () {
       .type('form')
       .send({ action: 'register', username: 'ui2', password: '123', email: 'ui2@qq.com' })
       .expect(200, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         assert.equal('/users/login', res.body);
         done();
       });
@@ -135,7 +136,7 @@ describe('数据库链接', function () {
       .get('/api/users/ui1')
       .type('form')
       .expect(200, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         assert.equal(0, res.body);
         done();
       });
@@ -148,7 +149,7 @@ describe('数据库链接', function () {
       .type('form')
       .send({ action: 'login', username: 'ui1', password: '123' })
       .expect(200, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         cookies = res.headers['set-cookie'];
         assert.equal('/users/home', res.body);
         done();
@@ -162,7 +163,7 @@ describe('数据库链接', function () {
       .type('form')
       .send({ action: 'login', username: 'ui50', password: '123' })
       .expect(200, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         assert.equal(0, res.body);
         done();
       });
@@ -175,7 +176,7 @@ describe('数据库链接', function () {
       .type('form')
       .send({ action: 'login', username: 'ui1', password: '23' })
       .expect(200, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         assert.equal(1, res.body);
         done();
       });
@@ -188,8 +189,8 @@ describe('数据库链接', function () {
     req.cookies = cookies;
     req
       .expect(302, function (err, res) {
-        if(err) throw err;
-        assert((res.text).indexOf('users/home')!==-1);
+        if (err) throw err;
+        assert((res.text).indexOf('users/home') !== -1);
         done();
       });
   });
@@ -201,7 +202,7 @@ describe('数据库链接', function () {
     req.cookies = cookies;
     req
       .expect(200, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         assert((res.text).indexOf('用户主页') !== -1);
         done();
       });
@@ -212,7 +213,7 @@ describe('数据库链接', function () {
     request(app)
       .get('/users/logout')
       .expect(302, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         assert('/', res.headers.location);
         cookies = [];
         done();
@@ -226,7 +227,7 @@ describe('数据库链接', function () {
     req.cookies = cookies;
     req
       .expect(500, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         assert((res.text).indexOf('用户主页') === -1);
         done();
       });
@@ -239,7 +240,7 @@ describe('数据库链接', function () {
       .type('form')
       .send({ action: 'login', username: 'ui1', password: '123' })
       .expect(200, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         cookies = res.headers['set-cookie'];
         assert.equal('/users/home', res.body);
         done();
@@ -253,7 +254,7 @@ describe('数据库链接', function () {
     req.cookies = cookies;
     req
       .expect(200, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         assert((res.text).indexOf('用户主页') !== -1);
         done();
       });
@@ -266,7 +267,7 @@ describe('数据库链接', function () {
     req.cookies = cookies;
     req
       .expect(200, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         assert((res.text).indexOf('邮件编写服务') !== -1);
         done();
       });
@@ -278,7 +279,7 @@ describe('数据库链接', function () {
     req.cookies = cookies;
     req
       .expect(200, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         assert((res.text).indexOf('邮件查看服务') !== -1);
         done();
       });
@@ -289,8 +290,8 @@ describe('数据库链接', function () {
       .get('/mails/detail/1');
     req.cookies = cookies;
     req
-      .expect(200, function (err, res){
-        if(err) throw err;
+      .expect(200, function (err, res) {
+        if (err) throw err;
         assert((res.text).indexOf('查看详情') !== -1);
         done();
       });
@@ -303,7 +304,7 @@ describe('数据库链接', function () {
       .type('form')
       .send({ action: 'post', sender: 'ui1', receiver: 'ui2', title: 'test', body: 'xxxxxxxxxx' })
       .expect(200, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         assert.equal('/users/home', res.body);
         done();
       });
@@ -314,7 +315,7 @@ describe('数据库链接', function () {
     request(app)
       .get('/api/mails/ui2')
       .expect(200, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         assert.equal('ui2', res.body[0].receiver);
         done();
       });
@@ -325,25 +326,22 @@ describe('数据库链接', function () {
     request(app)
       .get('/api/mails/detail/1')
       .expect(200, function (err, res) {
-        if(err) throw err;
+        if (err) throw err;
         assert.equal(1, res.body[0].id);
         done();
       });
   });
 
-  // after(function (done) {
-  //   var con = mysql.createConnection({
-  //     host: process.env.MYSQL_HOST,
-  //     user: process.env.MYSQL_USERNAME,
-  //     password: process.env.MYSQL_PASSWORD
-  //   });
+  //测试回调cb
+  it('should test error', function () {
+    let func = cb(function () { }, function (err) {
+      if (err) {
+        debug('cb(true)');
+      }
+    });
+    assert.equal(undefined, func(new Error('222')));
 
-  //   con.query('DROP DATABASE email', function (err) {
-  //     if (err) throw err;
-  //     con.end();
-  //     done();
-  //   });
-  // });
+  });
 
 });
 

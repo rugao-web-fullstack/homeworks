@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-//var Mail = require('../../mov/mail');
 
 /* GET users listing. */
 router.get('/', function (req, res) {

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>main</title>
+</head>
+
+<body>
+    <a href="" id="register">注册</a>
+    <a href="" id="login">登录</a>
+   
+    <script type="text/javascript">
+       var login = document.getElementById("login");
+       var register = document.getElementById("register");
+       register.onclick = function(){
+           location.href = "user/register";
+       }
+       login.onclick = function(){
+           location.href = "user/login";
+       }
+    </script>
+</body>
+</html>
