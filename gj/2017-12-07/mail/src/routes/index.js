@@ -4,7 +4,7 @@ var debug = require('debug')('log');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  debug('log : '+next);
+  debug('log : ' + next);
   res.render('index', { title: 'Express' });
 });
 
