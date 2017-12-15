@@ -1,0 +1,12 @@
+*{
+    padding:0;
+    margin:0;
+    text-decoration: none;
+}
+.title{
+    margin:50px auto;
+    width:100%;
+    border-bottom:1px dotted #000;
+    text-align: center;
+    padding-bottom:16px;
+}

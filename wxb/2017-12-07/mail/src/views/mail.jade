@@ -1,0 +1,11 @@
+doctype html
+html
+    head
+        title Welcome
+        link(rel='stylesheet', href='/stylesheets/mail.css')
+    body
+        div.head
+            p Welcome, #{name} 请选择以下功能
+            a(href="/users/mail/write") 1. 编写邮件
+            br
+            a(href="/users/mail/all") 2. 查看邮件

@@ -1,0 +1,44 @@
+*{
+    padding:0;
+    margin:0;
+}
+.title{
+    margin:50px auto;
+    width:100%;
+    border-bottom:1px dotted #000;
+    text-align: center;
+    padding-bottom:16px;
+}
+div.center{
+    padding-top:20px;
+    width:1000px;
+    margin:20px auto;
+    border:1px solid #000;
+    box-sizing: border-box;
+    padding-left:100px;
+   
+}
+div.center form span.options{
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:30px;
+    display: inline-block;
+    width:80px;
+    height:30px;
+    text-align: left;
+}
+div.center form input[type='text']{
+    height:30px;
+    width:300px;
+   
+}
+div.center form input[type='button']{
+    height:40px;
+    width:100px;
+    margin:30px 20px 0 0;
+}
+div.center form input[type='reset']{
+    height:40px;
+    width:100px;
+    margin:30px 20px 0 0;
+}

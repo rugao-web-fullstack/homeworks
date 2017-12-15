@@ -85,14 +85,12 @@ app.post('/mail/write',function(req,res){
       }
     });
   },'emaildb');
+  
   base(function(con){
     var sql = 'insert into email(sender,receiver,title,content) values(\''+sender+'\',\''+receiver+'\',\''+title+'\',\''+content+'\')';
-    con.query(sql, function (err,result){
+    con.query(sql, function (err){
       if(err) throw err;
-      if(result==''){
-        debug('receiver is not existed');
-        return;
-      }
+      return;
     });
   },'emaildb');
   res.render('sendsucc.html');
