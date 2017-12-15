@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/home.css' />
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        h1 {
+            text-shadow: 4px 4px 6px lightcoral;
+        }
+
+        .gp {
+            margin-top: 70px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="title">尊敬的用户:
+        <%= name %> 欢迎使用邮件系统</h1>
+
+    <div class="container">
+        <div class="row text-center gp">
+            <button class="btn btn-lg col-sm-4 col-sm-offset-4 btn-primary" id='write'>编写邮件</button>
+        </div>
+        <div class="row text-center gp">
+            <button class="btn btn-lg col-sm-4 col-sm-offset-4 btn-success" id='read'>查看邮件</button>
+        </div>
+        <div class="row text-center gp">
+            <button class="btn btn-lg col-sm-4 col-sm-offset-4 btn-danger" id='logout'>退出登录</button>
+        </div>
+    </div>
+
+
+    <!-- <script src='/javascripts/jquery.min.js'></script> -->
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $('#write').click(function () {
+                location.href = '/mails/write';
+            });
+            $('#read').click(function () {
+                location.href = '/mails/read';
+            });
+            $('#logout').click(function () {
+                location.href = '/users/logout';
+            });
+        });
+
+    </script>
+</body>
+
+</html>

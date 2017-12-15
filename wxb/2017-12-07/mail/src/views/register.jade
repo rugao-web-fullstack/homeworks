@@ -1,0 +1,19 @@
+doctype html
+html
+    head
+        title Mail
+        link(rel='stylesheet', href='/stylesheets/register.css')
+    body
+        div.info
+            h1  注册
+            form(action='/users/register-add',method='POST')
+                span   请输入邮箱:
+                    input(type="text" name="mail")
+                br
+                span   请输入密码:
+                    input(type="password" name="pwd")
+                    br
+                span   确认密码 &nbsp;&nbsp;:
+                    input(type="password")
+                br
+                input(type='submit' id='submit')

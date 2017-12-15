@@ -4,6 +4,7 @@
   "description": "1. 2017-11-14 （熟悉node.js模块化机制）     a. Fibonacci 数组实现通过node.js模块输出    b. 汉诺塔移动信息通过node.js以数组形式输出",
   "main": "index.js",
   "dependencies": {
+    "async": "^2.6.0",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
     "debug": "^3.1.0",

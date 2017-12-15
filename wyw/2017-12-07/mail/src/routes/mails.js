@@ -1,15 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
-/*outer.post('/', function(req, res) {
-    res.render('mail');
-});*/
-/*
-    POST /mails
-    action=send
-*/
-/*router.post('/send', function(req, res) {
-    res.render('send');
-});*/
+router.post('/', function(req, res) {
+  res.send('api之/mails');
+});
+
+/*POST /mails
+    action=send*/
+router.post('/send', function(req, res) {
+  res.send('api之/mails/send');
+});
 
 module.exports = router;

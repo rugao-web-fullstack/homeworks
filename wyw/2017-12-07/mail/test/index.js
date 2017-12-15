@@ -13,6 +13,14 @@ describe('页面url测试', function () {
         done();
       });
   });
+  it('post /users', function (done) {
+    request(app)
+      .post('/users')
+      .expect(200, function (err, res) {
+        assert((res.text).indexOf('api之/users') !== -1);
+        done();
+      });
+  });
   it('get /mail', function (done) {
     request(app)
       .get('/mail')
@@ -21,11 +29,35 @@ describe('页面url测试', function () {
         done();
       });
   });
+  it('post /mails', function (done) {
+    request(app)
+      .post('/mails')
+      .expect(200, function (err, res) {
+        assert((res.text).indexOf('api之/mails') !== -1);
+        done();
+      });
+  });
+  it('post /mails/send', function (done) {
+    request(app)
+      .post('/mails/send')
+      .expect(200, function (err, res) {
+        assert((res.text).indexOf('api之/mails/send') !== -1);
+        done();
+      });
+  });
   it('get /user/register', function (done) {
     request(app)
       .get('/user/register')
       .expect(200, function (err, res) {
         assert((res.text).indexOf('注册') !== -1);
+        done();
+      });
+  });
+  it('post /users/register', function (done) {
+    request(app)
+      .post('/users/register')
+      .expect(200, function (err, res) {
+        assert((res.text).indexOf('api之/users/register') !== -1);
         done();
       });
   });

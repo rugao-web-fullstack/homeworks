@@ -1,0 +1,16 @@
+doctype html
+html
+    head
+        title Mail
+        link(rel='stylesheet', href='/stylesheets/register.css')
+    body
+        div.info
+            h1  登录
+            form(action='/users/login-confirm',method='POST')
+                span   请输入邮箱:
+                    input(type="text" name="mail")
+                br
+                span   请输入密码:
+                    input(type="password" name="pwd")
+                    br
+                input(type='submit' id='submit')
