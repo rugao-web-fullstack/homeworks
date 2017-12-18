@@ -4,6 +4,8 @@ var app = require('../src/app');
 var mysql = require('mysql');
 var basic = require('../src/db/basic');
 
+var cb = require('../src/operation/cb').cb;
+
 var cookies;
 
 describe('页面url测试', function () {
@@ -112,7 +114,7 @@ describe('数据库链接测试', function () {
   });
 });
 //用户api测试
-describe('POST /users', function() {
+describe('POST /users', function () {
   before(function (done) {
     // 链接数据库
     var con = mysql.createConnection({
@@ -135,7 +137,7 @@ describe('POST /users', function() {
             sql = 'CREATE TABLE receivered_mail (id INT NOT NULL AUTO_INCREMENT,mailbox int NOT NULL,mail int NOT NULL,createdAt DATETIME,PRIMARY KEY ( id ))';
             con.query(sql, function (err) {
               if (err) throw err;
-              sql = 'CREATE TABLE mail (id INT NOT NULL AUTO_INCREMENT,sender VARCHAR(20) NOT NULL, receiver VARCHAR(20) NOT NULL, title VARCHAR(20) NOT NULL, content VARCHAR(250) NOT NULL, date VARCHAR(20) NOT NULL,createdAt DATETIME,PRIMARY KEY ( id ))';
+              sql = 'CREATE TABLE mail (id INT NOT NULL AUTO_INCREMENT,sender VARCHAR(20) NOT NULL, receiver VARCHAR(20) NOT NULL, title VARCHAR(20) NOT NULL, content VARCHAR(250) NOT NULL, date VARCHAR(20) NOT NULL, state int NOT NULL DEFAULT 0,createdAt DATETIME,PRIMARY KEY ( id ))';
               con.query(sql, function (err) {
                 if (err) throw err;
                 con.end();
@@ -147,75 +149,75 @@ describe('POST /users', function() {
       });
     });
   });
-  it('注册测试', function(done) {
+  it('注册测试', function (done) {
     request(app)
       .post('/users/register')
       .type('json')
       .send({
-        'username':'root',
-        'password':'123',
-        'sub':'注册'
-      })
-      .set('Accept', 'application/json')
-      .expect(200,done);
-  });
-  it('重复注册测试', function(done) {
-    request(app)
-      .post('/users/register')
-      .type('json')
-      .send({
-        'username':'root',
-        'password':'123',
-        'sub':'注册'
+        'username': 'root',
+        'password': '123',
+        'sub': '注册'
       })
       .set('Accept', 'application/json')
       .expect(200, done);
   });
-  it('登录测试', function(done) {
+  it('重复注册测试', function (done) {
+    request(app)
+      .post('/users/register')
+      .type('json')
+      .send({
+        'username': 'root',
+        'password': '123',
+        'sub': '注册'
+      })
+      .set('Accept', 'application/json')
+      .expect(200, done);
+  });
+  it('登录测试', function (done) {
     request(app)
       .post('/users/login')
       .type('json')
       .send({
-        'username':'root',
-        'password':'123',
-        'sub':'登录'
+        'username': 'root',
+        'password': '123',
+        'sub': '登录'
       })
-      .expect(200, function(err,res){
+      .expect(200, function (err, res) {
         cookies = res.headers['set-cookie'];
         done();
       });
   });
-  it('发送邮件测试', function(done) {
+  it('发送邮件测试', function (done) {
     var date = new Date().toLocaleString();
     var req = request(app)
       .post('/mails/send')
       .type('json')
       .send({
-        'title':'test',
-        'address':'root@dmail.com',
-        'content':'**********',
-        'date':date
+        'title': 'test',
+        'address': 'root@dmail.com',
+        'content': '**********',
+        'date': date
       })
       .set('Accept', 'application/json');
     req.cookies = cookies;
     req.expect(200, done);
   });
-  it('发送邮件测试', function(done) {
+  it('发送邮件测试', function (done) {
     var date = new Date().toLocaleString();
     var req = request(app)
       .post('/mails/send')
       .type('json')
       .send({
-        'title':'test',
-        'address':'r',
-        'content':'**********',
-        'date':date
+        'title': 'test',
+        'address': 'r',
+        'content': '**********',
+        'date': date
       })
       .set('Accept', 'application/json');
     req.cookies = cookies;
     req.expect(200, done);
   });
-  it('获取邮件列表测试', function(done) {
+  it('获取邮件列表测试', function (done) {
     var req = request(app)
       .get('/mails')
       .set('Accept', 'application/json');
@@ -223,7 +225,7 @@ describe('POST /users', function() {
     req.cookies = cookies;
     req.expect(200, done);
   });
-  it('显示邮件测试', function(done) {
+  it('显示邮件测试', function (done) {
     var req = request(app)
       .post('/mails/1')
       .type('json')
@@ -232,23 +234,32 @@ describe('POST /users', function() {
         sender: 'root',
         receiver: 'root@dmail.com',
         title: 'test',
+        state: '',
         content: '**********',
         date: '2017-12-11 19:11:03',
-        createdAt: null })
+        createdAt: null
+      })
       .set('Accept', 'application/json');
     req.cookies = cookies;
     req.expect(200, done);
   });
-  it('登录失败测试', function(done) {
+  it('登录失败测试', function (done) {
     request(app)
       .post('/users/login')
       .type('json')
       .send({
-        'username':'root',
-        'password':'1234',
-        'sub':'登录'
+        'username': 'root',
+        'password': '1234',
+        'sub': '登录'
       })
       .set('Accept', 'application/json')
       .expect(200, done);
+  });
+});
+describe('回调函数测试', function () {
+  it('should test error', function () {
+    let func = cb();
+    assert(!func(new Error('Test Error')));
+    assert(!func(true));
   });
 });

@@ -3,7 +3,7 @@ var assert = require('assert');
 var app = require('../src/app');
 
 describe('页面url测试', function () {
-//用户
+  //用户
   it('get /', function (done) {
     request(app)
       .get('/')
@@ -93,5 +93,5 @@ describe('页面url测试', function () {
         done();
       });
   });
-  
+
 });

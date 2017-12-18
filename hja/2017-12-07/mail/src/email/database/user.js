@@ -1,22 +1,17 @@
 var insert = require('./insert');
 var logincheck = require('./select');
 var rechecks = require('./recheck');
-var debug = require('debug')('users');
 let UserList = {};
+var cbs = require('./cb').cb;
 
 
 
 //注册
 UserList.addUser = function (username, password, email, cb) {
-  insert(username, password, email, function (err) {
-    // if (err) {
-    //   cb(true);
-    //   return;
-    // }
-    debug(err);
+  insert(username, password, email, cbs(function () {
     cb(false);
     return;
-  });
+  }, cb));
 
 
 };
@@ -36,11 +31,7 @@ UserList.recheck = function (username, cb) {
 //登录
 UserList.login = function (username, password, cb) {
 
-  logincheck(username, password, function (err, flag) {
-    // if (err) {
-    //   cb(true);
-    //   return;
-    // }
+  logincheck(username, password, cbs(function (flag) {
     if (flag !== 1) {
       cb(true, flag);
       return;
@@ -48,7 +39,7 @@ UserList.login = function (username, password, cb) {
     cb(false, flag);
 
 
-  });
+  }, cb));
 
 };
 exports.Users = UserList; 
