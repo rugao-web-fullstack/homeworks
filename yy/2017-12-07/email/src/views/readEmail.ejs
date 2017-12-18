@@ -6,13 +6,98 @@
 			<%= title %>
 		</title>
 	</head>
+	<style>
+		.left{
+			float:left;
+			width:10%;
+		}
+		.right{
+			float:left;
+			width:80%;
+			border:1px solid gray;
+			border-radius: 10px;
+		}
+		table,th,td{
+			border-collapse: collapse;
+			border:1px solid gray;
+			text-align: center;
+		}
+		table tr th,table tr td{
+			width:20%;
+		}
+		.content{
+			width:600px;
+		}
+	</style>
 	<body>
 		<h1>查看邮件</h1>
-		<!-- <form action="/" method="get">
-			<input type="submit" value='1.写邮件'/>
-		</form>
-		<form action="/" method="get">
-			<input type="submit" value='2.查看邮件'/>
-		</form> -->
+		<div class="left">
+			<form action="/emails/read" method="get">
+				<input type="submit" value='1.收件箱'/>
+			</form>
+			<!-- <form action="/" method="get">
+				<input type="submit" value='2.发件箱'/>
+			</form> -->
+			
+		</div>
+
+		<div class="right">
+			<table>
+				<tr>
+					<th>邮件编号</th>
+					<th>发件人</th>
+					<th>标题</th>
+					<th class="content">内容</th>
+				</tr>
+				<tr>
+					<td><%= id %></td>
+					<td><%= sender %></td>
+					<td><%= emailTitle %></td>
+					<td><%= content %></td>
+				</tr>
+			</table>
+		</div>
 	</body>
+	<!-- <script src="http://code.jquery.com/jquery-latest.js"></script> -->
+	
+	<script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script>
+		// $(function(){
+		// 	var arr = [];
+		// 	$.ajax({
+		// 		type:'get',
+		// 		url:"emails.json",
+		// 		async:true,
+
+		// 		// error:function(data){
+		// 		// 	alert('服务器访问错误！');
+		// 		// 	//arr=JSON.parse(data);
+		// 		// 	console.log(data);
+		// 		// },
+		// 		success:function(data){
+		// 			console.log(data);
+		// 		console.log(1111);
+		// 		}
+		// 	})
+		// });
+		// $(function() {      // 页面加载之后调用
+        //         $.ajax({
+        //             type: "get",    
+		// 			url:"emails", 
+		// 			dataType: "json",    
+		// 			async: true,
+        //             error: function(d) { 
+        //                 alert(d); 
+        //                 console.log(d);
+		// 			},
+		// 			success:function(data){
+		// 				alert('s');
+		// 				console.log(data);
+		// 			}
+        //         });
+        //     });
+	</script>
+	<script>
+		
+	</script>
 </html>

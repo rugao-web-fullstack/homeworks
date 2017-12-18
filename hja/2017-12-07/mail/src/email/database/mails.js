@@ -1,36 +1,26 @@
 var insert = require('./insertmail');
 var readAll = require('./readAll');
 var details = require('./details');
-var debug = require('debug')('mails');
 let MailsList = {};
+var cbs = require('./cb').cb;
 
 //发送---增加
 MailsList.sendMail = function (sender, receiver, title, body, cb) {
-  insert(receiver, sender, title, body, function (err) {
-    // if (err) {
-    //   cb(true);
-    //   return;
-    // }
-    debug(err);
+  insert(receiver, sender, title, body, cbs(function () {
     cb(false);
     return;
 
-  });
+  }, cb));
 
 };
 
 
 //查看所有
 MailsList.readAll = function (username, cb) {
-  readAll(username, function (err, data) {
-    // if (err) {
-    //   cb(true);
-    //   return;
-    // }
-    debug(err);
+  readAll(username, cbs(function (data) {
     cb(false, data);
     return;
-  });
+  }, cb));
 
 
 
@@ -38,15 +28,10 @@ MailsList.readAll = function (username, cb) {
 
 //查看单独
 MailsList.detail = function (id, cb) {
-  details(id, function (err, data) {
-    // if (err) {
-    //   cb(true);
-    //   return;
-    // }
-    debug(err);
+  details(id, cbs(function (data) {
     cb(false, data);
     return;
-  });
+  }, cb));
 };
 
 
